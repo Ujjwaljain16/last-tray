@@ -106,3 +106,19 @@ def real_validation(real_staging, cfg):
     from src.validate.validate import run_validation
 
     return RealValidation(real_staging.out, run_validation(cfg, real_staging.out))
+
+
+class RealModel:
+    """Canonical model built over the shared real validation output (read-only for tests)."""
+
+    def __init__(self, out, result):
+        self.out, self.result = out, result
+        self.tables = result.tables
+        self.checks = {c.check_id: c for c in result.checks}
+
+
+@pytest.fixture(scope="session")
+def real_model(real_validation, cfg):
+    from src.model.build import run_model
+
+    return RealModel(real_validation.out, run_model(cfg, real_validation.out))

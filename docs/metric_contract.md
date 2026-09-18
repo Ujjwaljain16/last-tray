@@ -26,7 +26,7 @@ Population labels (`registered_export`, `non_registered_export`) are inherited f
 | **S2 (canonical)** | `SUM(has_session_warn = 0 AND core_ready = 1) * 1.0 / COUNT(*)` over `WHERE population = 'registered_export'` | eligible | 1699 | **1663 / 1699 = 97.88%** |
 | **W1** | none. Evidence row only | n/a | n/a | `BLOCKED / SOURCE GAP`, value NULL |
 
-`derived_selected_meal_weight_g` = `SUM(component_weight_g)` over the session's events with `is_exact_duplicate = 0`; NULL if any event weight is invalid. It is DERIVED and never labelled observed.
+`derived_selected_meal_weight_g` = `SUM(component_weight_g)` over the session's MODELLABLE events (`disposition = 'MODELLABLE'`: not an exact repeat and not quarantined); NULL if there is none or any weight is invalid. It is DERIVED, never labelled observed, and is NOT consumed quantity, food waste or actual intake. WP4's `rule_weight_sum_g` is a validation working value used only as a reconciliation control (D50).
 
 **Never used in any metric filter:** `weather_matched`, `low_observed_volume_day`, `volume_irregularity`, `has_session_warn` (except in S2), `has_event_warn`, `distinct_component_count_status`, `quality_status`. Invariant I-6: volume flags appear in no WHERE clause of any metric query.
 
@@ -38,10 +38,10 @@ SELECT session_id, population, derived_selected_meal_weight_g
 FROM fact_dining_session WHERE core_ready = 1;
 
 -- 2. which weighing events produced one session's derived weight
-SELECT event_id, scale_id, component_name_raw, component_weight_g, is_exact_duplicate
+SELECT event_id, scale_id, component_name_raw, component_weight_g, disposition
 FROM fact_weighing_event
-WHERE session_id = :sid AND population = :pop
-ORDER BY event_time_local;          -- event_id = 'source_file#source_row_number': the raw row
+WHERE session_key = :session_key       -- 'session_id|population'
+ORDER BY event_time_utc;          -- event_id = 'source_file#source_row_number': the raw row
 
 -- 3. the invariant that ties them (I-10): the two must agree
 SELECT s.session_id

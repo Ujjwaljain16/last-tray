@@ -465,3 +465,53 @@ See D23. *vs plan: NEW* · 2026-09-19. Recorded separately so the wording is not
 - **Why.** Reproducibility and stable references in reviews.
 - **Business impact.** A finding can be cited by id across runs.
 - **Residual uncertainty.** None.
+
+## D49. The model consumes only verified inputs; WP4 outputs now record their checksums
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `src/model` reads the verified staging tables and the WP4 validation outputs, nothing else, and never opens `data/raw`. It refuses to build unless each WP4 file matches the SHA-256 recorded in `validation_summary.json`, that summary records the same staging checksums as the tables present, the disposition file lists exactly the staged events, and the quarantine manifest agrees with the summary. To make this possible WP4 now writes `output_sha256` into its summary (an additive change: no rule, threshold or output value changed).
+- **Evidence.** Tests alter one byte of each WP4 file, delete the summary, point it at other staging checksums, drop an event from the dispositions, add an unknown disposition and remove a quarantine row; every case stops the model and removes stale canonical tables.
+- **Alternatives tested.** Trusting the WP4 files without a checksum (a stale or edited file would be modelled silently); recomputing WP4's decisions inside the model (would duplicate and could contradict the validation layer).
+- **Chosen approach.** Verify, then consume.
+- **Why.** The model must be a faithful consequence of what was validated.
+- **Business impact.** A number in the canonical model can be traced to a checksummed validation decision.
+- **Residual uncertainty.** A consistent forgery of a WP4 file and its recorded checksum is caught only if it changes a figure the model recomputes independently (weights, spans, counts, dispositions); tests cover that.
+
+## D50. The selected meal weight is reconstructed independently; WP4's value is only a control
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `derived_selected_meal_weight_g` is the sum of `component_weight_g` over the session's MODELLABLE events, computed from `fact_weighing_event` rows; it is NULL (never 0) if there is no modellable event or any modellable weight is invalid. It is compared with WP4's `rule_weight_sum_g` for every session. Any difference blocks the model, publishes no canonical rows, and is listed by session in `session_weight_control.csv`. A quarantined session has no canonical weight (its events stay, with their observed weights, marked QUARANTINED). The Phase 4 wording "sum over non-duplicate events" is refined to MODELLABLE events, which is the same set for every non-quarantined session.
+- **Evidence.** All 3,341 non-quarantined sessions match WP4 exactly and match an independent pandas recomputation; the four quarantined keys are EXCLUDED_QUARANTINED; a forged WP4 weight blocks the model and names exactly that session.
+- **Alternatives tested.** Copying `rule_weight_sum_g` (would make the control meaningless); summing quarantined sessions and relying on `core_ready` to filter (contradicts "quarantined data must not be treated as core-ready selected weight").
+- **Chosen approach.** Two independent computations that must agree.
+- **Why.** The central business figure should not depend on one code path.
+- **Business impact.** M1 and M2 can be computed in WP6 from a value that has already been cross-checked.
+- **Residual uncertainty.** The crossover-inclusion sensitivity scenario (WP7) must rebuild those weights from the QUARANTINED event rows, which are all preserved.
+
+## D51. Two event sets, on purpose
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Business fields (weight, distinct component counts, component rows, modellable count) use MODELLABLE events only. Timing and identity fields (first and last weighing, span, service date, tray, identification time) use every event that is not an exact repeat, so a quarantined session remains traceable in time but yields no weight and no component count. `fact_session_component` therefore holds only modellable events and has 11,925 rows.
+- **Evidence.** For all 3,341 non-quarantined sessions the two sets are identical; the difference exists only for the four quarantined keys.
+- **Alternatives tested.** Nulling all fields of a quarantined session (loses traceability); populating everything (invites use of quarantined values).
+- **Chosen approach.** Traceable, but not usable for business figures.
+- **Why.** Quarantine is a list and a flag, not a deletion, and not a licence to use the data.
+- **Business impact.** None for the headline figures.
+- **Residual uncertainty.** None.
+
+## D52. The weather join lives in the model and follows the approved hour-ending convention
+*vs plan: was deferred from WP4* · 2026-09-19
+- **Decision.** `fact_weather` is one row per station and UTC hour (1,129 rows), with each parameter's text exactly as FMI states it, NULL where FMI reports NaN, and a per-parameter status (OK, NAN_SOURCE_NULL, MISSING). A session joins the observation stamped at the next full UTC hour after its first weighing (an exact hour keeps itself), because `r_1h` covers the hour ending at its timestamp. Quarantined sessions are `NOT_ATTEMPTED_QUARANTINED`; an unmatched session stays valid; a weather grain violation or an unavailable weather table blocks `fact_weather` only (status `WEATHER_BLOCKED`), never the core model. Weather never enters `core_ready`.
+- **Evidence.** 1,697 of 1,697 core-ready sessions match; the matched hours carry NULL `r_1h` for 67 sessions and NULL `ri_10min` for 25, as in Phase 2; the join hour equals an independent pandas ceiling of the first weighing.
+- **Alternatives tested.** Flooring to the hour (Phase 2 showed it mis-assigns `r_1h`); interpolating or backfilling NaN (invents data).
+- **Chosen approach.** Join, flag, never fill.
+- **Why.** Weather is context; a weather gap must not change a business figure.
+- **Business impact.** None yet; no weather conclusion is drawn in WP5.
+- **Residual uncertainty.** The hour-ending reading of `r_1h` was verified empirically on one rainy day, not documented by FMI.
+
+## D53. The schema is code; readiness is prepared, not computed
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `src/model/schema.py` declares every table, grain, column, type, class, nullability, lineage rule and downstream use. CSV headers, the manifest and data-dictionary section 12 come from it, and a test fails on drift. Names changed from the Phase 4 plan are recorded: `component_weighing_event_count` is `modellable_event_count`; `first_weighing_at` and `last_weighing_at` are split into local and UTC columns; `session_key`, dispositions, weather join status, quarantine and severity fields were added. `core_ready` follows the approved contract (primary population, not quarantined, at least one modellable event, no ERROR finding, valid weights, parsed times; weather, WARN rules and volume flags never enter it) and equals 1,697 of 1,699 eligible sessions. The metrics M1-M5 and the warn-free rate are not computed here.
+- **Evidence.** The readiness numerator and denominator are reported as an INFO control only; `has_session_warn` and `has_event_warn` reproduce the golden 34 / 1,663 accounting.
+- **Alternatives tested.** A hand-written data dictionary (drifts); computing M5 in the model (a metric belongs to WP6).
+- **Chosen approach.** Declare once, generate the rest.
+- **Why.** Documentation that cannot drift from the code.
+- **Business impact.** A reviewer can read one table and trust it.
+- **Residual uncertainty.** None.

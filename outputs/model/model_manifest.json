@@ -1,0 +1,245 @@
+{
+  "controls": {
+    "checks": 26,
+    "fail": 0,
+    "failed_checks": [],
+    "info": 7,
+    "pass": 19,
+    "warn": 0
+  },
+  "core_status": "BUILT",
+  "field_notes": {
+    "derived_selected_meal_weight_g": "DERIVED from MODELLABLE events; not consumed quantity, not food waste, not actual intake",
+    "rule_weight_sum_g": "WP4 validation working value, used only as a reconciliation control",
+    "sessions": "Observed Valid Sessions; an observation of the export, not demand"
+  },
+  "inputs": {
+    "input_fingerprint": "3f71e643244182b4",
+    "source_snapshot_ids": {
+      "flavoria": "flavoria-1b68c194acc5",
+      "fmi_weather": "fmi-8ab7d7d344b4"
+    },
+    "staging_table_sha256": {
+      "staging_file_reconciliation.csv": "514bbd8e4f669be096a8d8e1e08785e3ae7caa22fdc320e08d638f777f5de5b0",
+      "stg_weather_observation.csv": "f6371a9e91aa695f1de9cdfcf6dc2a00156fa070f2c749cf17124cbed6e27cce",
+      "stg_weighing_event.csv": "ce95acd47ad9065d4ba81b245986f9212292d48b79cdd6b48eec19ad1a2319f2"
+    },
+    "validation_output_sha256": {
+      "event_validation_status.csv": "180ad8b295dedcbb32109998f6ee42c0a6ec0fe79043b339c127715ec168f88e",
+      "field_completeness.csv": "6e4e8522588610f60f09eb68c8acdc398203b49128cad121f508a6c60bb85f30",
+      "quarantine_manifest.csv": "f79bed6b923f457e074e7975477897aa1148a5cb012b08bc580abb51b383412b",
+      "reconciliation_summary.csv": "0d58b2da32e4d64ed2ecdcd8899ab6c0edb01d1312d32a1192b15ab64fa44ab1",
+      "service_day_volume.csv": "5df69f32dbc95746675ee912c06b298f0c2678ecb7ad05bfb600eab65ddeb817",
+      "session_validation_status.csv": "7d7df056878729f0f0177299398a48bdd0d2235203f272126077c184e6749f7d",
+      "validation_issues.csv": "bc9907009dda332c1822015a8b870802b43fad5090b1e704b5ce6c2b0cb4478e",
+      "validation_summary_by_rule.csv": "fdf17e44a7d4b857de5c1ed29f1f955f632fb6950c808457921c435b5d791e73"
+    },
+    "validation_run_id": "val-f0bbad162772"
+  },
+  "model_version": "wp5-1",
+  "semantic_chain": [
+    "OBSERVED component weighing events",
+    "DERIVED selected meal weight",
+    "UNKNOWN actual consumed quantity",
+    "SOURCE GAP actual food waste"
+  ],
+  "stage": "model",
+  "tables": {
+    "fact_daily_volume": {
+      "columns": [
+        "service_date",
+        "population",
+        "weekday",
+        "is_primary_population",
+        "sessions",
+        "quarantined_sessions",
+        "events",
+        "observed_regime",
+        "expected_regime",
+        "low_observed_volume_day",
+        "volume_irregularity",
+        "source_snapshot_id",
+        "source_files"
+      ],
+      "grain": "one service date x population",
+      "key": [
+        "service_date",
+        "population"
+      ],
+      "rows": 65,
+      "semantic_classes": {
+        "DERIVED": 11,
+        "PROVENANCE": 2
+      },
+      "sha256": "566b1c24ffe75f010c26c8f7bb08ccac47f968e2d4eddfcc2513aa79b37fa978"
+    },
+    "fact_dining_session": {
+      "columns": [
+        "session_key",
+        "session_id",
+        "population",
+        "is_primary_population",
+        "source_snapshot_id",
+        "source_files",
+        "tray_id",
+        "service_date",
+        "first_weighing_local",
+        "first_weighing_utc",
+        "last_weighing_local",
+        "last_weighing_utc",
+        "identification_time_local",
+        "identification_time_utc",
+        "session_span_s",
+        "session_duration_minutes",
+        "event_count",
+        "modellable_event_count",
+        "duplicate_excluded_event_count",
+        "quarantined_event_count",
+        "derived_selected_meal_weight_g",
+        "distinct_component_count",
+        "distinct_raw_component_count",
+        "distinct_component_count_status",
+        "identity_conflict",
+        "is_quarantined",
+        "quarantine_rule_ids",
+        "core_ready",
+        "max_validation_severity",
+        "validation_error_rule_ids",
+        "validation_warn_rule_ids",
+        "has_session_warn",
+        "has_event_warn",
+        "quality_status",
+        "weather_hour_utc",
+        "weather_fmisid",
+        "weather_join_status",
+        "weather_matched",
+        "weather_r_1h_null",
+        "weather_ri_10min_null"
+      ],
+      "grain": "one DERIVED session key (session_id, population)",
+      "key": [
+        "session_key"
+      ],
+      "rows": 3345,
+      "semantic_classes": {
+        "DERIVED": 28,
+        "OBSERVED": 2,
+        "PROVENANCE": 3,
+        "VALIDATION": 7
+      },
+      "sha256": "f067836d65c450f4c9afc48d290200695286c1cff2d1757c1c63e4159c3f3876"
+    },
+    "fact_session_component": {
+      "columns": [
+        "session_key",
+        "session_id",
+        "population",
+        "component_id_normalized",
+        "component_name_raw_variants",
+        "component_weighing_event_count",
+        "scale_ids",
+        "derived_component_weight_g",
+        "source_snapshot_id",
+        "source_row_lineage"
+      ],
+      "grain": "one distinct normalised component within one session key (MODELLABLE events only)",
+      "key": [
+        "session_key",
+        "component_id_normalized"
+      ],
+      "rows": 11925,
+      "semantic_classes": {
+        "DERIVED": 5,
+        "OBSERVED": 3,
+        "PROVENANCE": 2
+      },
+      "sha256": "ff49f7082cc85aa9425f8cbc8e20155162be4e0d1f3377f825fcc2c429a5a382"
+    },
+    "fact_weather": {
+      "columns": [
+        "fmisid",
+        "obs_time_utc",
+        "t2m_c",
+        "ws_10min_ms",
+        "r_1h_mm",
+        "ri_10min_mmh",
+        "t2m_status",
+        "ws_10min_status",
+        "r_1h_status",
+        "ri_10min_status",
+        "is_null_any",
+        "r_1h_convention",
+        "timezone_handling",
+        "source_snapshot_id",
+        "source_files",
+        "source_row_lineage"
+      ],
+      "grain": "one FMI station x UTC hour observation (one column per requested parameter)",
+      "key": [
+        "fmisid",
+        "obs_time_utc"
+      ],
+      "rows": 1129,
+      "semantic_classes": {
+        "DERIVED": 7,
+        "OBSERVED": 6,
+        "PROVENANCE": 3
+      },
+      "sha256": "d8f5194849e365850d2888ec5936cc52486dbf081cdbaa8f67e0eb75dbadc3fe"
+    },
+    "fact_weighing_event": {
+      "columns": [
+        "event_id",
+        "source_snapshot_id",
+        "raw_artifact_id",
+        "source_file",
+        "source_row_number",
+        "raw_row_sha256",
+        "population",
+        "session_id",
+        "session_key",
+        "tray_id",
+        "scale_id",
+        "station_family",
+        "component_name_raw",
+        "component_id_normalized",
+        "weight_raw",
+        "component_weight_g",
+        "weight_status",
+        "weighing_type",
+        "event_time_raw",
+        "event_time_local",
+        "event_time_utc",
+        "event_time_status",
+        "identification_time_raw",
+        "identification_time_local",
+        "identification_time_utc",
+        "identification_time_status",
+        "timezone_handling",
+        "timezone_offset_hours_applied",
+        "timezone_transformation_reason",
+        "disposition",
+        "is_modellable",
+        "is_exact_duplicate",
+        "quarantine_rule_ids",
+        "quality_status",
+        "validation_error_rule_ids",
+        "validation_warn_rule_ids",
+        "validation_info_rule_ids"
+      ],
+      "grain": "one observed component weighing event (one source data row)",
+      "key": [
+        "event_id"
+      ],
+      "rows": 12284,
+      "semantic_classes": {
+        "DERIVED": 16,
+        "OBSERVED": 9,
+        "PROVENANCE": 6,
+        "VALIDATION": 6
+      },
+      "sha256": "19479c50cedf3caa9b8364ca6c429626fa5affe5985c142481a61ee62c6e6764"
+    }
+  },
+  "weather_status": "BUILT"
+}

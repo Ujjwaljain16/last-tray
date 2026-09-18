@@ -93,6 +93,16 @@ Idempotency: tables are **rebuilt** per run from raw inputs (`DROP` + `CREATE` i
 ### 6.4 `fact_weather`
 `fmisid, obs_time_utc, t2m_c, ws_10min_ms, r_1h_mm, ri_10min_mmh, source_file, is_null_any`. Missing values stay NULL.
 
+### 6.5 Implemented canonical model (WP5)
+
+Built by `python -m src.pipeline.run --stages model` into `outputs/model/` from the verified staging and validation outputs. The
+authoritative column list is `data_dictionary.md` section 12 (generated from `src/model/schema.py`). Differences from the columns above:
+`component_weighing_event_count` is `modellable_event_count` (with `event_count`, `duplicate_excluded_event_count` and
+`quarantined_event_count` beside it); `first_weighing_at` and `last_weighing_at` are `first_weighing_local/utc` and `last_weighing_local/utc`;
+`session_key`, `disposition`, `is_quarantined`, `quarantine_rule_ids`, `max_validation_severity` and the weather join status fields are added.
+`derived_selected_meal_weight_g` sums MODELLABLE events and is NULL for a quarantined session (D50). `fact_weather` and `fact_daily_volume` are as
+above with per-parameter statuses and provenance columns.
+
 ### 7.0 Staging contract (WP3)
 
 Staging consumes only the ingestion handoff and reads raw bytes **only through the `VerifiedReader`**, which re-checks the SHA-256
@@ -126,6 +136,12 @@ Validation reads only staging tables verified against the checksums, headers and
 deletes nothing (D45); `events_in = modelled + duplicates_excluded + quarantined` is checked (C04). A missing or altered staging table
 stops the core lane (exit 4) and removes stale validation outputs; a damaged weather table blocks weather checks only (exit 6). Outputs are
 byte-identical across runs. See `validation_rules.md` "WP4 implementation" and `data_dictionary.md` section 11.
+
+### 8.2 Canonical model stage (WP5)
+
+The model reads only verified staging and verified WP4 outputs (D49), reconstructs the selected meal weight independently and compares it with
+WP4's working value (D50), and blocks with no canonical rows if any control fails. A missing or altered input stops the core lane (exit 4) and
+removes stale model files; a weather problem blocks `fact_weather` only (exit 6). Outputs are byte-identical across runs. See D49-D53.
 
 ## 9. Pipeline
 

@@ -276,5 +276,6 @@ def _write(d: Path, res: ValidationResult, inp: StagedInputs, session_rows: list
                               "observed_regime": x.observed_regime, "expected_regime": x.expected_regime or "", "low_observed_volume_day": x.low_observed_volume,
                               "volume_irregularity_day": x.volume_irregularity, "source_files": ";".join(x.source_files)} for x in days], list(DAY_COLUMNS))
     write_csv(d / COMPLETENESS_CSV, rc.field_completeness(inp.events), list(rc.COMPLETENESS_COLUMNS))
+    res.summary["output_sha256"] = {n: digest_file(d / n).sha256 for n in DETERMINISTIC_FILES if n != SUMMARY_JSON}   # lets the model stage verify what it reads
     write_json(d / SUMMARY_JSON, res.summary)
     res.hashes = {n: digest_file(d / n).sha256 for n in DETERMINISTIC_FILES}

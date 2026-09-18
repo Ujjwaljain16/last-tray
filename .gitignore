@@ -27,3 +27,7 @@ outputs/staging/stg_*.csv
 
 # Regenerable validation table (one row per staged event); the summaries and manifests next to it ARE tracked
 outputs/validation/event_validation_status.csv
+
+# Large regenerable canonical tables; the sessions, weather, volume, manifest and control files next to them ARE tracked
+outputs/model/fact_weighing_event.csv
+outputs/model/fact_session_component.csv

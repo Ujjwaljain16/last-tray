@@ -91,3 +91,18 @@ staging:
   weather_rows: 4516
   weather_distinct_hours: 1129
   weather_nan_values: 3                     # NULL, never zero
+
+# CANONICAL MODEL (WP5): integers, asserted exactly. Derived from the committed data and cross-checked against WP4 and Phase 2.
+model:
+  rows: {fact_weighing_event: 12284, fact_dining_session: 3345, fact_session_component: 11925, fact_weather: 1129, fact_daily_volume: 65}
+  session_keys: 3345
+  session_ids: 3343
+  eligible_primary_sessions: 1699           # registered-export session keys, counted before any removal
+  core_ready_sessions: 1697
+  sessions_with_derived_weight: 3341        # every non-quarantined key; the 4 quarantined keys have no canonical weight
+  quarantined_sessions_without_weight: 4
+  weight_control_matches: 3341              # canonical weight == WP4 rule_weight_sum_g
+  event_dispositions: {MODELLABLE: 12260, DUPLICATE_EXCLUDED: 2, QUARANTINED: 22}
+  weather_join: {matched_core_ready: 1697, eligible_core_ready: 1697, matched_all: 3341, not_attempted_quarantined: 4, unmatched: 0}
+  weather_null_precipitation_core_ready: {r_1h: 67, ri_10min: 25}     # Phase 2 results_c.json
+  limited_component_count_sessions_note: "distinct_component_count_status LIMITED where rule I07 applies; counted by the test, not fixed here"

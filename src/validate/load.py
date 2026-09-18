@@ -59,6 +59,8 @@ class Ev:
     timezone_handling: str
     timezone_offset_hours: int
     unmapped_cells: str
+    raw_artifact_id: str = ""                       # lineage fields added for the canonical model (WP5)
+    timezone_transformation_reason: str = ""
 
 
 @dataclass(frozen=True)
@@ -73,6 +75,7 @@ class Wx:
     value_raw: str
     value: float | None
     value_status: str
+    timezone_handling: str = ""
 
 
 @dataclass
@@ -119,12 +122,12 @@ def _event(r: dict[str, str]) -> Ev:
         r["weight_parse_status"], r["event_time_raw"], r["event_time_source_format"], _local(r["event_time_local"]),
         _utc(r["event_time_canonical_utc"]), r["event_time_status"], r["weighing_type"], r["identification_time_raw"],
         r["identification_time_source_format"], _local(r["identification_time_local"]), _utc(r["identification_time_canonical_utc"]), r["identification_time_status"], r["timezone_handling"],
-        int(r["timezone_offset_hours_applied"]), r["unmapped_cells"])
+        int(r["timezone_offset_hours_applied"]), r["unmapped_cells"], r["raw_artifact_id"], r["timezone_transformation_reason"])
 
 
 def _weather(r: dict[str, str]) -> Wx:
     return Wx(r["observation_id"], r["source_snapshot_id"], r["source_file"], r["fmisid"], r["obs_time_raw"], _utc(r["obs_time_canonical_utc"]),
-              r["parameter"], r["value_raw"], float(r["value"]) if r["value"] else None, r["value_status"])
+              r["parameter"], r["value_raw"], float(r["value"]) if r["value"] else None, r["value_status"], r["timezone_handling"])
 
 
 def load_staging(out_dir: Path) -> StagedInputs:

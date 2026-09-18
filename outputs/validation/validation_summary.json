@@ -48,6 +48,16 @@
     },
     "total": 1383
   },
+  "output_sha256": {
+    "event_validation_status.csv": "180ad8b295dedcbb32109998f6ee42c0a6ec0fe79043b339c127715ec168f88e",
+    "field_completeness.csv": "6e4e8522588610f60f09eb68c8acdc398203b49128cad121f508a6c60bb85f30",
+    "quarantine_manifest.csv": "f79bed6b923f457e074e7975477897aa1148a5cb012b08bc580abb51b383412b",
+    "reconciliation_summary.csv": "0d58b2da32e4d64ed2ecdcd8899ab6c0edb01d1312d32a1192b15ab64fa44ab1",
+    "service_day_volume.csv": "5df69f32dbc95746675ee912c06b298f0c2678ecb7ad05bfb600eab65ddeb817",
+    "session_validation_status.csv": "7d7df056878729f0f0177299398a48bdd0d2235203f272126077c184e6749f7d",
+    "validation_issues.csv": "bc9907009dda332c1822015a8b870802b43fad5090b1e704b5ce6c2b0cb4478e",
+    "validation_summary_by_rule.csv": "fdf17e44a7d4b857de5c1ed29f1f955f632fb6950c808457921c435b5d791e73"
+  },
   "quarantine": {
     "events": 22,
     "keys": [

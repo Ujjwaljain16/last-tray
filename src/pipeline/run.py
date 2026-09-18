@@ -3,17 +3,18 @@
 Normal execution is OFFLINE. This command never downloads anything: if a required raw source is missing it fails clearly
 and names the explicit retrieval command (python -m src.pipeline.fetch --source <name>).
 
-Implemented so far: configuration (WP1), ingestion / raw preservation (WP2), staging (WP3) and validation / reconciliation (WP4).
-The later stages (model, metrics, sensitivity, evidence, gates) arrive in WP5-WP8. Until then a full run stops with an explicit non-zero exit
+Implemented so far: configuration (WP1), ingestion / raw preservation (WP2), staging (WP3), validation / reconciliation (WP4)
+and the canonical model (WP5). The later stages (metrics, sensitivity, evidence, gates) arrive in WP6-WP8. Until then a full run stops with an explicit non-zero exit
 code: it must never report success for work it has not done.
 
 Exit codes
-    0  the requested stages completed (--check-config, --help, or --stages ingest|stage|validate with both lanes OK or WARNING;
+    0  the requested stages completed (--check-config, --help, or --stages ingest|stage|validate|model with both lanes OK or WARNING;
        quarantine is a finding, not a failure)
     2  configuration is missing, malformed, or would change an approved decision
     3  the implemented stages finished, but the stages after them are not implemented yet
     4  core lane FAILED: a raw source is missing, corrupt, mismatched, a timezone override is out of scope, staging could not stage it
-       faithfully, or validation is BLOCKED (a staging table is missing or altered, or a reconciliation identity broke)
+       faithfully, validation is BLOCKED (a staging table is missing or altered, or a reconciliation identity broke), or the
+       canonical model is BLOCKED (a WP4 input is missing or altered, or a control check failed)
     6  core lane usable but the context lane (weather) is BLOCKED: weather-dependent outputs cannot be produced
 """
 from __future__ import annotations
@@ -28,6 +29,7 @@ from src.ingest.ingest import run_ingestion, utc_now, write_run_record
 from src.ingest.manifest import OUT_SUBDIR as INGESTION_SUBDIR
 from src.ingest.model import ArtifactStatus, IngestionResult, LaneOutcome
 from src.stage.stage import StagingResult, run_staging
+from src.model.build import ModelResult, run_model
 from src.validate.validate import ValidationResult, run_validation
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -49,8 +51,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--config-dir", type=Path, default=DEFAULT_CONFIG_DIR, help="directory holding config/*.yml (default: ./config)")
     p.add_argument("--out", type=Path, default=REPO_ROOT / "outputs", help="directory for outputs (default: ./outputs)")
     p.add_argument("--repo-root", type=Path, default=REPO_ROOT, help="repository root containing data/raw (default: this repository)")
-    p.add_argument("--stages", choices=("ingest", "stage", "validate", "all"), default="all",
-                   help="'ingest' runs ingestion; 'stage' adds staging; 'validate' adds validation; each exits 0 on success. 'all' also reports that later stages are not implemented (default)")
+    p.add_argument("--stages", choices=("ingest", "stage", "validate", "model", "all"), default="all",
+                   help="'ingest' runs ingestion; 'stage' adds staging; 'validate' adds validation; 'model' adds the canonical model; each exits 0 on success. 'all' also reports that later stages are not implemented (default)")
     p.add_argument("--check-config", action="store_true", help="load and validate configuration, print a summary, then exit")
     return p
 
@@ -110,6 +112,18 @@ def describe_validation(res: ValidationResult) -> str:
         f"  reconciliation: {r['pass']} pass, {r['warn']} warn, {r['fail']} fail, {r['info']} info" + (f"; FAILED: {', '.join(r['failed_checks'])}" if r["fail"] else "")])
 
 
+def describe_model(res: ModelResult) -> str:
+    if res.error and not res.tables:
+        return "\n".join(["Canonical model (verified inputs only)", f"  core lane   : {res.core_status}", f"  BLOCKED: {res.error}"])
+    c = res.manifest["controls"]
+    lines = ["Canonical model (verified inputs only)", f"  core lane   : {res.core_status}", f"  weather lane: {res.weather_status}",
+             "  tables      : " + ", ".join(f"{n} {t['rows']:,}" for n, t in res.manifest["tables"].items()),
+             f"  controls    : {c['pass']} pass, {c['warn']} warn, {c['fail']} fail, {c['info']} info" + (f"; FAILED: {', '.join(c['failed_checks'])}" if c["fail"] else "")]
+    if res.error:
+        lines.append(f"  BLOCKED: {res.error}")
+    return "\n".join(lines)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
@@ -142,7 +156,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"FAILED: {exc}", file=sys.stderr)
             core_failed = True
 
-    if args.stages in ("validate", "all"):
+    if args.stages in ("validate", "model", "all"):
         # Validation reads only the staging tables it can verify. If staging failed it finds no trustworthy table, BLOCKS, and removes
         # its own stale outputs, so an earlier run's findings can never look current.
         validated = run_validation(cfg, args.out)
@@ -150,17 +164,25 @@ def main(argv: list[str] | None = None) -> int:
         core_failed = core_failed or validated.core_status == "BLOCKED"
         context_blocked = context_blocked or validated.weather_status == "BLOCKED"
 
+    if args.stages in ("model", "all"):
+        # The model reads only verified staging and verified validation outputs. If either is unusable it BLOCKS and removes its own
+        # stale tables; if a control check fails it publishes no canonical rows and writes only the control files for inspection.
+        modelled = run_model(cfg, args.out)
+        print(describe_model(modelled))
+        core_failed = core_failed or modelled.core_status == "BLOCKED"
+        context_blocked = context_blocked or modelled.weather_status == "BLOCKED"
+
     if core_failed:
-        print("FAILED: the core lane could not be verified, staged or validated, so nothing downstream may run. Stale staging and validation outputs were removed. "
+        print("FAILED: the core lane could not be verified, staged, validated or modelled, so nothing downstream may run. Stale staging, validation and model outputs were removed. "
               "If a raw source is missing, retrieve it explicitly: python -m src.pipeline.fetch --source <flavoria|weather>", file=sys.stderr)
         return EXIT_CORE_FAILED
     if context_blocked:
-        print("BLOCKED: the weather context lane could not be verified, staged or validated; weather-dependent outputs are blocked. Core outputs are unaffected.", file=sys.stderr)
+        print("BLOCKED: the weather context lane could not be verified, staged, validated or modelled; weather-dependent outputs are blocked. Core outputs are unaffected.", file=sys.stderr)
         return EXIT_CONTEXT_BLOCKED
     if args.stages != "all":
         return EXIT_OK
-    print("BLOCKED: stages after validation (model, metrics, sensitivity, evidence) are not implemented yet. "
-          "Outputs cover ingestion, staging and validation only. Use --stages validate to run the implemented stages.", file=sys.stderr)
+    print("BLOCKED: stages after the model (metrics, sensitivity, evidence) are not implemented yet. "
+          "Outputs cover ingestion, staging, validation and the canonical model only. Use --stages model to run the implemented stages.", file=sys.stderr)
     return EXIT_NOT_IMPLEMENTED
 
 

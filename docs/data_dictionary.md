@@ -58,6 +58,8 @@ XML `wfs:FeatureCollection`, one `BsWfs:BsWfsElement` per (time, parameter). Tim
 | `is_exact_duplicate` | bool | No | identical repeat of an earlier row in the same file | DERIVED |
 | `quality_status` | text | No | `VALID`, `WARN`, `INVALID` | DERIVED |
 
+> **Planned model (Phase 4).** The implemented canonical tables are specified in section 12, which governs where names or rules differ (for example `component_weighing_event_count` is now `modellable_event_count`, and the selected weight sums MODELLABLE events).
+
 ## 4. Model: `fact_dining_session` (one **derived** session per `session_id` × population; DERIVED)
 
 | Field | Type | Nullable? | Definition | Class |
@@ -197,3 +199,182 @@ and the lineage bases are in `validation_rules.md` ("WP4 implementation").
 
 Dispositions: `QUARANTINED` (session key quarantined; wins over repeat), `DUPLICATE_EXCLUDED` (an exact repeat of an earlier row of
 the same file, left out of sums), `MODELLABLE` (available to the model layer). Every staged event has exactly one.
+
+## 12. Canonical model (WP5)
+
+The canonical business-facing model, built from the verified staging tables and the verified WP4 validation outputs, and written to
+`outputs/model/`. This section is **generated from `src/model/schema.py`** (`python -m src.model.schema`) and a test fails if it drifts.
+It governs where it differs from the planned model in sections 4-6, which record the Phase 4 design.
+
+**Semantic classes.** OBSERVED: written by a source system and carried through unchanged. DERIVED: computed by this pipeline by a stated
+rule. VALIDATION: consumed unchanged from WP4 (dispositions, rule ids). PROVENANCE: says where a value came from. Two things have
+**no column anywhere**: the amount actually consumed (UNKNOWN) and food waste (SOURCE GAP).
+
+**`derived_selected_meal_weight_g` is DERIVED.** It is the sum of the weights a session's MODELLABLE weighing events recorded at the
+lunch line. It is NOT consumed quantity, NOT food waste, NOT actual intake, and nothing in the model infers waste from it. It is
+reconstructed from `fact_weighing_event` and then compared with WP4's `rule_weight_sum_g`, a validation/reconciliation working value
+that is used only as a reconciliation control and is not a canonical field (`session_weight_control.csv`).
+
+**Event dispositions** (from WP4, one per event): MODELLABLE (feeds the business fields), DUPLICATE_EXCLUDED (an exact repeat of an earlier
+row of the same file: kept as a row, left out of sums), QUARANTINED (its session key is quarantined: kept as a row, no selected weight).
+Business fields (weight, component counts, `modellable_event_count`) use MODELLABLE events only; timing and identity fields (first/last,
+span, tray) use every event that is not an exact repeat, so a quarantined session stays traceable in time.
+
+**Session key.** the session id and the population joined by a vertical bar (`session_key`). 3,345 keys, 3,343 distinct ids; `session2266` and `session3222` exist in both populations and
+are four keys, never merged.
+
+**Other files in `outputs/model/`:** `model_manifest.json` (tables, grains, columns, semantic classes, checksums, inputs, controls),
+`model_control_summary.csv` (26 controls: PASS, WARN, FAIL, INFO) and `session_weight_control.csv` (per session: canonical weight, WP4
+working value, span, counts and first weighing, each MATCH, MISMATCH or EXCLUDED_QUARANTINED). The two large tables
+(`fact_weighing_event.csv`, `fact_session_component.csv`) are regenerable and ignored by git.
+
+### fact_weighing_event
+
+**Grain:** one observed component weighing event (one source data row). **Key:** `event_id`. 37 columns.
+
+| Field | Type | Class | Null? | Meaning | Source lineage and rule | Used downstream |
+|---|---|---|---|---|---|---|
+| `event_id` | text | PROVENANCE | no | source file and 1-based data-row number, `file#row` | stg_weighing_event.event_id | every join back to staging |
+| `source_snapshot_id` | text | PROVENANCE | no | content-derived id of the raw snapshot | stg_weighing_event.source_snapshot_id | lineage only |
+| `raw_artifact_id` | text | PROVENANCE | no | raw member identity inside the snapshot | stg_weighing_event.raw_artifact_id | lineage only |
+| `source_file` | text | PROVENANCE | no | source CSV member name | stg_weighing_event.source_file | lineage only |
+| `source_row_number` | integer | PROVENANCE | no | 1-based data row within the file | stg_weighing_event.source_row_number | lineage only |
+| `raw_row_sha256` | text | PROVENANCE | no | SHA-256 of the raw row text | stg_weighing_event.raw_row_sha256 | lineage only |
+| `population` | text | DERIVED | no | registered_export or non_registered_export, from the file name; a source label, not a semantic claim | config/populations.yml prefix rule, via staging | every population split |
+| `session_id` | text | OBSERVED | no | source session identifier | stg_weighing_event.session_id | session grouping |
+| `session_key` | text | DERIVED | no | `session_id|population`; the two populations are never merged | session_id + '|' + population | session join |
+| `tray_id` | text | OBSERVED | no | source tray identifier (not a person) | stg_weighing_event.tray_id | lineage only |
+| `scale_id` | text | OBSERVED | no | source scale identifier | stg_weighing_event.scale_id | component-scale lineage |
+| `station_family` | text | DERIVED | yes | first '-' separated part of scale_id | split scale_id on '-' | lineage only |
+| `component_name_raw` | text | OBSERVED | no | component name exactly as in the source, whitespace included | stg_weighing_event.component_name_raw | raw-vs-normalised check |
+| `component_id_normalized` | text | DERIVED | yes | trim, collapse whitespace, case-fold; NULL if empty. No alias table, no fuzzy matching | stg_weighing_event.component_id_normalized | distinct component counts |
+| `weight_raw` | text | OBSERVED | no | weight text exactly as in the source | stg_weighing_event.weight_raw | lineage only |
+| `component_weight_g` | integer | OBSERVED | yes | weight in grams parsed from weight_raw; NULL if not an integer; never clipped | stg_weighing_event.component_weight_g | derived_selected_meal_weight_g |
+| `weight_status` | text | DERIVED | no | OK, NOT_INTEGER or EMPTY | stg_weighing_event.weight_parse_status | weight validity |
+| `weighing_type` | text | OBSERVED | yes | source weighting_type; NULL where the file has no such column (not applicable, not missing) | stg_weighing_event.weighing_type | lineage only |
+| `event_time_raw` | text | OBSERVED | no | weighing time exactly as written in the source | stg_weighing_event.event_time_raw | timezone provenance |
+| `event_time_local` | timestamp_local | DERIVED | yes | wall time as read (Europe/Helsinki), plus the offset only where a file-specific override applies | stg_weighing_event.event_time_local | lineage only |
+| `event_time_utc` | timestamp_utc | DERIVED | yes | canonical UTC instant via Europe/Helsinki rules; NULL if unparseable, ambiguous or nonexistent | stg_weighing_event.event_time_canonical_utc | session span, weather join |
+| `event_time_status` | text | DERIVED | no | OK, AMBIGUOUS, NONEXISTENT or UNPARSEABLE | stg_weighing_event.event_time_status | lineage only |
+| `identification_time_raw` | text | OBSERVED | no | user_identification_time as written | stg_weighing_event.identification_time_raw | lineage only |
+| `identification_time_local` | timestamp_local | DERIVED | yes | as event_time_local, for the identification time | stg_weighing_event.identification_time_local | lineage only |
+| `identification_time_utc` | timestamp_utc | DERIVED | yes | as event_time_utc, for the identification time | stg_weighing_event.identification_time_canonical_utc | lineage only |
+| `identification_time_status` | text | DERIVED | no | as event_time_status | stg_weighing_event.identification_time_status | lineage only |
+| `timezone_handling` | text | DERIVED | no | SOURCE_LOCAL_ASSUMED or NORMALISED_PLUS_3H_STRONGEST_SUPPORT (one named file only); provenance, not a conclusion | stg_weighing_event.timezone_handling | timezone provenance |
+| `timezone_offset_hours_applied` | integer | DERIVED | no | hours added by a file-specific override (0 elsewhere) | stg_weighing_event.timezone_offset_hours_applied | lineage only |
+| `timezone_transformation_reason` | text | DERIVED | no | why the handling was applied, e.g. cross-export temporal alignment | stg_weighing_event.timezone_transformation_reason | lineage only |
+| `disposition` | text | VALIDATION | no | MODELLABLE, DUPLICATE_EXCLUDED or QUARANTINED; every event has exactly one | validation event_validation_status.disposition | which events feed business fields |
+| `is_modellable` | boolean | DERIVED | no | disposition = MODELLABLE | derived from disposition | session weight and components |
+| `is_exact_duplicate` | boolean | VALIDATION | no | an exact repeat of an earlier row of the same file (rule I02) | disposition = DUPLICATE_EXCLUDED, or I02 on the row | lineage only |
+| `quarantine_rule_ids` | text | VALIDATION | yes | rule ids that quarantined the row's session key (set only when disposition is QUARANTINED) | validation session_validation_status.quarantine_rule_ids | why a row is quarantined |
+| `quality_status` | text | DERIVED | no | INVALID if the row has an ERROR finding or is quarantined, WARN if it has a WARN finding, else VALID | from validation rule ids | lineage only |
+| `validation_error_rule_ids` | text | VALIDATION | yes | `;`-joined ERROR rule ids on this row | validation event_validation_status | lineage only |
+| `validation_warn_rule_ids` | text | VALIDATION | yes | `;`-joined WARN rule ids on this row | validation event_validation_status | lineage only |
+| `validation_info_rule_ids` | text | VALIDATION | yes | `;`-joined INFO rule ids on this row | validation event_validation_status | lineage only |
+
+### fact_dining_session
+
+**Grain:** one DERIVED session key (session_id, population). **Key:** `session_key`. 40 columns.
+
+| Field | Type | Class | Null? | Meaning | Source lineage and rule | Used downstream |
+|---|---|---|---|---|---|---|
+| `session_key` | text | DERIVED | no | `session_id|population` | session_id + '|' + population | primary key |
+| `session_id` | text | OBSERVED | no | source session identifier; also present in the other population for exactly two ids | grouping key | lineage only |
+| `population` | text | DERIVED | no | source-derived label; never pooled | from the file name | lineage only |
+| `is_primary_population` | boolean | DERIVED | no | population is registered_export (the primary population) | config/populations.yml role | metric filters |
+| `source_snapshot_id` | text | PROVENANCE | no | raw snapshot the events came from | events' source_snapshot_id | lineage only |
+| `source_files` | text | PROVENANCE | no | `;`-joined source files of the session's events | distinct source_file over its events | lineage only |
+| `tray_id` | text | OBSERVED | yes | the one tray of the session; NULL if the events disagree (an I04 error) | distinct tray_id over non-repeat events | lineage only |
+| `service_date` | date | DERIVED | yes | local date of the first weighing | date part of first_weighing_local | daily volume |
+| `first_weighing_local` | timestamp_local | DERIVED | yes | local time of the earliest non-repeat event | event with the minimum UTC instant | lineage only |
+| `first_weighing_utc` | timestamp_utc | DERIVED | yes | earliest non-repeat event, UTC | min event_time_utc over non-repeat events | weather join |
+| `last_weighing_local` | timestamp_local | DERIVED | yes | local time of the latest non-repeat event | event with the maximum UTC instant | lineage only |
+| `last_weighing_utc` | timestamp_utc | DERIVED | yes | latest non-repeat event, UTC | max event_time_utc over non-repeat events | lineage only |
+| `identification_time_local` | timestamp_local | DERIVED | yes | the session's one identification time; NULL if there is not exactly one | distinct identification instants over non-repeat events | lineage only |
+| `identification_time_utc` | timestamp_utc | DERIVED | yes | as above, UTC | as above | lineage only |
+| `session_span_s` | integer | DERIVED | yes | last minus first weighing, seconds (diagnostic) | last_weighing_utc - first_weighing_utc | T05 context |
+| `session_duration_minutes` | real | DERIVED | yes | session_span_s / 60 | session_span_s / 60 | lineage only |
+| `event_count` | integer | DERIVED | no | every staged event of the key, whatever its disposition | count of events | lineage only |
+| `modellable_event_count` | integer | DERIVED | no | events with disposition MODELLABLE | count where disposition = MODELLABLE | weight and components |
+| `duplicate_excluded_event_count` | integer | DERIVED | no | events with disposition DUPLICATE_EXCLUDED | count where disposition = DUPLICATE_EXCLUDED | lineage only |
+| `quarantined_event_count` | integer | DERIVED | no | events with disposition QUARANTINED | count where disposition = QUARANTINED | lineage only |
+| `derived_selected_meal_weight_g` | integer | DERIVED | yes | DERIVED: sum of the weights the session's MODELLABLE events recorded on the line. NOT consumed quantity, NOT food waste, NOT actual intake. NULL for a quarantined session or if any modellable weight is invalid | sum(component_weight_g) over MODELLABLE events, reconstructed from fact_weighing_event | M1, M2 |
+| `distinct_component_count` | integer | DERIVED | yes | distinct component_id_normalized among MODELLABLE events; NULL when the session has none | count distinct over MODELLABLE events | M4 |
+| `distinct_raw_component_count` | integer | DERIVED | yes | distinct raw component names among MODELLABLE events (control for the normalisation property) | count distinct component_name_raw over MODELLABLE events | lineage only |
+| `distinct_component_count_status` | text | DERIVED | no | READY_WITH_LIMITATION, or LIMITED where cross-export component identity is unstable on that scale and day (rule I07) | I07 findings matched to the session's scale-days | M4 caveat |
+| `identity_conflict` | boolean | DERIVED | no | session_id occurs in both populations | session_id present under two populations | core_ready |
+| `is_quarantined` | boolean | VALIDATION | no | the session key is quarantined by WP4 | all events QUARANTINED; equals the WP4 quarantine flag | lineage only |
+| `quarantine_rule_ids` | text | VALIDATION | yes | rule ids that caused the quarantine | validation session_validation_status | lineage only |
+| `core_ready` | boolean | DERIVED | no | primary population, not quarantined, at least one modellable event, no ERROR finding, valid weights and parsed times; weather, WARN rules and volume flags never enter it | the approved WP4 readiness contract; the metric itself is WP6 | M1-M5 filter |
+| `max_validation_severity` | text | VALIDATION | no | highest severity among the session's findings: ERROR, WARN, INFO or NONE | validation session_validation_status | lineage only |
+| `validation_error_rule_ids` | text | VALIDATION | yes | `;`-joined ERROR rule ids | validation session_validation_status | lineage only |
+| `validation_warn_rule_ids` | text | VALIDATION | yes | `;`-joined WARN rule ids | validation session_validation_status | lineage only |
+| `has_session_warn` | boolean | VALIDATION | no | a session-level WARN (B04, B07, T04, T05, I06) | validation session_validation_status.session_level_warn | S2 canonical |
+| `has_event_warn` | boolean | VALIDATION | no | an event-level WARN (B02, I02) | validation session_validation_status.event_level_warn | S2 diagnostic variant |
+| `quality_status` | text | DERIVED | no | INVALID if quarantined or any ERROR finding, WARN if any WARN finding, else VALID | from validation rule ids | lineage only |
+| `weather_hour_utc` | timestamp_utc | DERIVED | yes | first weighing in UTC, ceiled to the next full hour (an exact hour keeps itself): the FMI hour-ending observation that covers the meal | ceil_hour(first_weighing_utc) | weather context |
+| `weather_fmisid` | integer | PROVENANCE | yes | FMI station of the joined observation | config weather fmisid, when matched | lineage only |
+| `weather_join_status` | text | DERIVED | no | MATCHED, UNMATCHED_NO_OBSERVATION, NOT_ATTEMPTED_QUARANTINED, NO_TIMESTAMP or WEATHER_BLOCKED | join outcome; a session without weather stays valid | lineage only |
+| `weather_matched` | boolean | DERIVED | no | a fact_weather row exists for weather_hour_utc | join_status = MATCHED | S1 |
+| `weather_r_1h_null` | boolean | DERIVED | yes | the matched hour has a NULL r_1h (source NaN); NULL when not matched | fact_weather.r_1h_status | lineage only |
+| `weather_ri_10min_null` | boolean | DERIVED | yes | the matched hour has a NULL ri_10min; NULL when not matched | fact_weather.ri_10min_status | lineage only |
+
+### fact_session_component
+
+**Grain:** one distinct normalised component within one session key (MODELLABLE events only). **Key:** `session_key, component_id_normalized`. 10 columns.
+
+| Field | Type | Class | Null? | Meaning | Source lineage and rule | Used downstream |
+|---|---|---|---|---|---|---|
+| `session_key` | text | DERIVED | no | `session_id|population` | fact_dining_session key | lineage only |
+| `session_id` | text | OBSERVED | no | source session identifier | grouping key | lineage only |
+| `population` | text | DERIVED | no | source-derived label | from the file name | lineage only |
+| `component_id_normalized` | text | DERIVED | no | trim, collapse whitespace, case-fold. No alias table; different dishes are never merged because their names look similar | from fact_weighing_event | M4 counts |
+| `component_name_raw_variants` | text | OBSERVED | no | `|`-joined distinct raw spellings seen for it in this session | distinct component_name_raw, sorted | lineage only |
+| `component_weighing_event_count` | integer | DERIVED | no | MODELLABLE events for the component (more than 1 means a repeat weighing or the same name on two scales) | count | lineage only |
+| `scale_ids` | text | OBSERVED | no | `;`-joined sorted scales used | distinct scale_id, sorted | lineage only |
+| `derived_component_weight_g` | integer | DERIVED | yes | sum of that component's event weights; NULL if any is invalid. Not a consumed quantity | sum(component_weight_g) | lineage only |
+| `source_snapshot_id` | text | PROVENANCE | no | raw snapshot | events' source_snapshot_id | lineage only |
+| `source_row_lineage` | text | PROVENANCE | no | `;`-joined event ids (`file#row`) that make up the row | event ids, sorted | lineage only |
+
+### fact_weather
+
+**Grain:** one FMI station x UTC hour observation (one column per requested parameter). **Key:** `fmisid, obs_time_utc`. 16 columns.
+
+| Field | Type | Class | Null? | Meaning | Source lineage and rule | Used downstream |
+|---|---|---|---|---|---|---|
+| `fmisid` | integer | OBSERVED | no | FMI station identifier | stg_weather_observation.fmisid | join |
+| `obs_time_utc` | timestamp_utc | OBSERVED | no | observation time as stated by FMI (UTC) | stg_weather_observation.obs_time_canonical_utc | join |
+| `t2m_c` | real | OBSERVED | yes | air temperature at 2 m, degrees C, exactly as FMI states it; NULL when FMI reports NaN | stg value_raw for parameter t2m | context only |
+| `ws_10min_ms` | real | OBSERVED | yes | 10-minute mean wind speed, m/s; NULL when NaN | parameter ws_10min | context only |
+| `r_1h_mm` | real | OBSERVED | yes | precipitation over the HOUR ENDING at obs_time_utc, mm; NULL when NaN, never 0 | parameter r_1h | context only |
+| `ri_10min_mmh` | real | OBSERVED | yes | 10-minute precipitation intensity, mm/h; NULL when NaN, never 0 | parameter ri_10min | context only |
+| `t2m_status` | text | DERIVED | no | OK, NAN_SOURCE_NULL or MISSING (no row for that hour) | stg value_status | lineage only |
+| `ws_10min_status` | text | DERIVED | no | as t2m_status | stg value_status | lineage only |
+| `r_1h_status` | text | DERIVED | no | as t2m_status | stg value_status | lineage only |
+| `ri_10min_status` | text | DERIVED | no | as t2m_status | stg value_status | lineage only |
+| `is_null_any` | boolean | DERIVED | no | any of the four parameters is not OK | any status != OK | lineage only |
+| `r_1h_convention` | text | DERIVED | no | states the approved reading of r_1h (hour ending at the timestamp) | config/sources.yml weather r_1h_convention | lineage only |
+| `timezone_handling` | text | DERIVED | no | SOURCE_UTC_STATED: FMI states UTC | stg_weather_observation.timezone_handling | lineage only |
+| `source_snapshot_id` | text | PROVENANCE | no | raw weather snapshot | stg_weather_observation.source_snapshot_id | lineage only |
+| `source_files` | text | PROVENANCE | no | response file(s) the hour came from | distinct source_file | lineage only |
+| `source_row_lineage` | text | PROVENANCE | no | `;`-joined observation ids (`file#element`) | observation ids, sorted | lineage only |
+
+### fact_daily_volume
+
+**Grain:** one service date x population. **Key:** `service_date, population`. 13 columns.
+
+| Field | Type | Class | Null? | Meaning | Source lineage and rule | Used downstream |
+|---|---|---|---|---|---|---|
+| `service_date` | date | DERIVED | no | local service date | service_date of the sessions | flags |
+| `population` | text | DERIVED | no | source-derived label; never pooled | session population | lineage only |
+| `weekday` | text | DERIVED | no | English weekday name | from service_date | lineage only |
+| `is_primary_population` | boolean | DERIVED | no | population is registered_export | config role | lineage only |
+| `sessions` | integer | DERIVED | no | Observed Valid Sessions: session keys with a modellable event that are not quarantined. For the registered-export population this is M3's basis. It is an observation of the export, NOT demand | count of fact_dining_session rows | M3 |
+| `quarantined_sessions` | integer | DERIVED | no | quarantined session keys whose first weighing falls on the day | count | lineage only |
+| `events` | integer | DERIVED | no | modellable events of those sessions | sum modellable_event_count | lineage only |
+| `observed_regime` | text | DERIVED | no | high if sessions >= 30 else low | config thresholds volume.high_regime_min_sessions | lineage only |
+| `expected_regime` | text | DERIVED | yes | the weekday's baseline regime (Mon-Wed high, Thu-Fri low; baseline 2020-10-05..30); registered-export only | config thresholds volume.expected_regime_by_weekday | lineage only |
+| `low_observed_volume_day` | boolean | DERIVED | no | C02a: sessions < 30; registered-export only; FLAG ONLY | rule C02a | lineage only |
+| `volume_irregularity` | boolean | DERIVED | no | C02b: observed regime differs from the weekday baseline; registered-export only; FLAG ONLY; not a data error, never excluded | rule C02b | lineage only |
+| `source_snapshot_id` | text | PROVENANCE | no | raw snapshot | sessions' source_snapshot_id | lineage only |
+| `source_files` | text | PROVENANCE | no | `;`-joined source files of the day's sessions | distinct source_files | lineage only |
