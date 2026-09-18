@@ -1,0 +1,152 @@
+{
+  "core_status": "PASSED_WITH_QUARANTINE",
+  "events": {
+    "by_population": {
+      "non_registered_export": 3912,
+      "registered_export": 8372
+    },
+    "dispositions": {
+      "DUPLICATE_EXCLUDED": 2,
+      "MODELLABLE": 12260,
+      "QUARANTINED": 22
+    },
+    "exact_repeats": 2,
+    "staged": 12284
+  },
+  "input_fingerprint": "3f71e643244182b4",
+  "issues": {
+    "by_handling": {
+      "FLAG": 1377,
+      "KEEP_FIRST": 2,
+      "QUARANTINE": 4
+    },
+    "by_rule": {
+      "B02": 6,
+      "B03": 512,
+      "B04": 17,
+      "B05": 222,
+      "B07": 485,
+      "C01": 1,
+      "C02a": 16,
+      "C02b": 6,
+      "C03": 1,
+      "I01": 4,
+      "I02": 2,
+      "I06": 2,
+      "I07": 86,
+      "S03": 7,
+      "T04": 3,
+      "T05": 7,
+      "T07": 1,
+      "T08": 2,
+      "X03": 3
+    },
+    "by_severity": {
+      "ERROR": 4,
+      "INFO": 849,
+      "WARN": 530
+    },
+    "total": 1383
+  },
+  "quarantine": {
+    "events": 22,
+    "keys": [
+      "session2266|non_registered_export",
+      "session2266|registered_export",
+      "session3222|non_registered_export",
+      "session3222|registered_export"
+    ],
+    "note": "kept in staging and every validation table; excluded from the primary population; nothing is deleted",
+    "rules": [
+      "I01"
+    ],
+    "session_ids": [
+      "session2266",
+      "session3222"
+    ],
+    "session_keys": 4
+  },
+  "reconciliation": {
+    "checks": 46,
+    "fail": 0,
+    "failed_checks": [],
+    "info": 11,
+    "pass": 35,
+    "warn": 0
+  },
+  "run_id": "val-f0bbad162772",
+  "semantic_chain": [
+    "OBSERVED component weighing events",
+    "DERIVED selected meal weight",
+    "UNKNOWN actual consumed quantity",
+    "SOURCE GAP actual food waste"
+  ],
+  "session_level_warn_accounting": {
+    "eligible_primary_session_keys": 1699,
+    "event_level_only_warn_session_ids": [
+      "session1116",
+      "session1274",
+      "session320"
+    ],
+    "event_level_warn_rules": [
+      "B02",
+      "I02"
+    ],
+    "no_session_level_warn": 1663,
+    "note": "validation-level reconciliation only; the metric (warn-free rate) is computed in the metric layer (WP6)",
+    "quarantined": 2,
+    "session_level_warn_rules": [
+      "B04",
+      "B07",
+      "T04",
+      "T05",
+      "I06"
+    ],
+    "with_session_level_warn": 34
+  },
+  "sessions": {
+    "by_population": {
+      "non_registered_export": 1646,
+      "registered_export": 1699
+    },
+    "session_ids": 3343,
+    "session_ids_in_both_populations": [
+      "session2266",
+      "session3222"
+    ],
+    "session_keys": 3345
+  },
+  "source_gaps": {
+    "waste": "BLOCKED: no source of measured food waste exists in the retrieved data; nothing is inferred from any weight (rule X06)"
+  },
+  "source_snapshot_ids": {
+    "flavoria": "flavoria-1b68c194acc5",
+    "fmi_weather": "fmi-8ab7d7d344b4"
+  },
+  "stage": "validation",
+  "staging_table_sha256": {
+    "staging_file_reconciliation.csv": "514bbd8e4f669be096a8d8e1e08785e3ae7caa22fdc320e08d638f777f5de5b0",
+    "stg_weather_observation.csv": "f6371a9e91aa695f1de9cdfcf6dc2a00156fa070f2c749cf17124cbed6e27cce",
+    "stg_weighing_event.csv": "ce95acd47ad9065d4ba81b245986f9212292d48b79cdd6b48eec19ad1a2319f2"
+  },
+  "thresholds_approved_on": "2026-09-19",
+  "thresholds_statement": "Diagnostic validation thresholds derived from the observed structure of this dataset. They are not claims of physical impossibility or universal abnormality. A flagged record is not evidence of error.",
+  "volume": {
+    "low_observed_volume_days": 16,
+    "note": "flag only: no day is excluded; M3 is Observed Valid Sessions — Registered-Export Population, not demand",
+    "primary_service_days": 35,
+    "volume_irregularity_days": [
+      "2020-11-02",
+      "2020-11-06",
+      "2020-11-16",
+      "2020-11-17",
+      "2020-11-18",
+      "2020-11-20"
+    ]
+  },
+  "weather": {
+    "error": null,
+    "status": "PASSED"
+  },
+  "weather_status": "PASSED"
+}

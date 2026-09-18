@@ -102,4 +102,5 @@ outputs/     validation/  reconciliation/  metrics/  evidence/  run_manifest.jso
 | 1 Scaffold | **done** (see checkpoint report): config, typed loader, vocabulary, CLI, golden values, 73 tests |
 | 2 Ingest | **done** (see WP2 checkpoint report) |
 | 3 Stage | **done** (see WP3 checkpoint report) |
-| 4-10 | not started |
+| 4 Validate | **done** (see WP4 checkpoint report) |
+| 5-10 | not started |

@@ -59,12 +59,24 @@ def test_stages_stage_runs_ingestion_then_staging_and_reports_the_counts(tmp_pat
     assert (out / "staging" / "stg_weighing_event.csv").is_file() and (out / "staging" / "staging_summary.json").is_file()
 
 
+def test_stages_validate_runs_validation_and_reports_the_quarantine(tmp_path):
+    out = tmp_path / "out"
+    r = run("--stages", "validate", "--out", str(out))
+    assert r.returncode == 0, r.stderr
+    assert "Validation (verified staging only)" in r.stdout and "PASSED_WITH_QUARANTINE" in r.stdout
+    assert "findings    : 1,383 (ERROR 4, WARN 530, INFO 849)" in r.stdout
+    assert "4 session keys (session2266, session3222), 22 events; kept, listed, never deleted" in r.stdout
+    assert "35 pass, 0 warn, 0 fail, 11 info" in r.stdout
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation"}
+    assert (out / "validation" / "validation_issues.csv").is_file() and (out / "validation" / "quarantine_manifest.csv").is_file()
+
+
 def test_full_run_is_honest_that_later_stages_do_not_exist_yet(tmp_path):
     out = tmp_path / "out"
     r = run("--out", str(out))
     assert r.returncode == 3, "a run that cannot complete every stage must not exit 0"
-    assert "not implemented yet" in r.stderr and "Outputs cover ingestion and staging only" in r.stderr
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging"}, "no validation, model, metrics or evidence files may appear before those stages exist"
+    assert "not implemented yet" in r.stderr and "Outputs cover ingestion, staging and validation only" in r.stderr
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation"}, "no model, metrics or evidence files may appear before those stages exist"
 
 
 def test_missing_core_source_exits_4_names_the_fetch_command_and_downloads_nothing(tmp_path):
@@ -133,3 +145,23 @@ def test_a_weather_failure_removes_only_the_stale_weather_table(tmp_path):
     (root / "data" / "raw" / "weather" / "fmi_100949_20201012_20201018.xml").unlink()
     assert run("--stages", "stage", "--repo-root", str(root), "--out", str(out)).returncode == 6
     assert (out / "staging" / "stg_weighing_event.csv").is_file() and not (out / "staging" / "stg_weather_observation.csv").exists()
+
+
+def test_a_core_failure_removes_stale_validation_outputs_and_exits_4(tmp_path):
+    root = fake_repo(tmp_path)
+    out = tmp_path / "out"
+    assert run("--stages", "validate", "--repo-root", str(root), "--out", str(out)).returncode == 0
+    assert (out / "validation" / "validation_issues.csv").is_file()
+    (root / "data" / "raw" / "flavoria" / "dataset_csv.tar").unlink()
+    r = run("--stages", "validate", "--repo-root", str(root), "--out", str(out))
+    assert r.returncode == 4 and "BLOCKED" in r.stdout
+    assert not (out / "validation" / "validation_issues.csv").exists() and not (out / "validation" / "quarantine_manifest.csv").exists(), "a stale finding must not survive"
+    assert not (out / "staging" / "stg_weighing_event.csv").exists()
+
+
+def test_a_weather_problem_exits_6_but_core_validation_still_runs(tmp_path):
+    root = fake_repo(tmp_path, drop=("data/raw/weather/fmi_100949_20201012_20201018.xml",))
+    out = tmp_path / "out"
+    r = run("--stages", "validate", "--repo-root", str(root), "--out", str(out))
+    assert r.returncode == 6 and "weather lane: BLOCKED" in r.stdout and "core lane   : PASSED_WITH_QUARANTINE" in r.stdout
+    assert (out / "validation" / "validation_issues.csv").is_file()

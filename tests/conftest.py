@@ -90,3 +90,19 @@ def real_staging(tmp_path_factory, cfg):
     result = run_staging(cfg, VerifiedReader(REPO, handoff), out)
     read = lambda n: pd.read_csv(out / "staging" / n, dtype=str, keep_default_na=False)      # every cell as text: no float surprises
     return RealStaging(out, result, handoff, read("stg_weighing_event.csv"), read("stg_weather_observation.csv"))
+
+
+class RealValidation:
+    """Validation run over the shared real staging output (read-only for tests; tests that damage things copy `out` first)."""
+
+    def __init__(self, out, result):
+        self.out, self.result = out, result
+        self.issues = result.issues
+        self.checks = {c.check_id: c for c in result.checks}
+
+
+@pytest.fixture(scope="session")
+def real_validation(real_staging, cfg):
+    from src.validate.validate import run_validation
+
+    return RealValidation(real_staging.out, run_validation(cfg, real_staging.out))

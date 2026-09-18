@@ -1,0 +1,104 @@
+{
+  "context_outcome": "OK",
+  "core_outcome": "OK",
+  "events": {
+    "by_population": {
+      "non_registered_export": 3912,
+      "registered_export": 8372
+    },
+    "by_timezone_handling": {
+      "NORMALISED_PLUS_3H_STRONGEST_SUPPORT": 1931,
+      "SOURCE_LOCAL_ASSUMED": 10353
+    },
+    "distinct_session_ids": 3343,
+    "distinct_session_keys": 3345,
+    "event_time_status": {
+      "OK": 12284
+    },
+    "exact_duplicate_raw_rows_within_file": 2,
+    "identification_time_status": {
+      "OK": 12284
+    },
+    "row_parse_status": {
+      "OK": 12284
+    },
+    "rows": 12284,
+    "rows_with_component_name_edge_whitespace": 398,
+    "rows_with_unmapped_cells": 0,
+    "rows_with_weighing_type": 5294,
+    "schema_variant": {
+      "V7_without_weighting_type": 6990,
+      "V8_with_weighting_type": 5294
+    },
+    "session_ids_present_in_both_populations": [
+      "session2266",
+      "session3222"
+    ],
+    "weight_parse_status": {
+      "OK": 12284
+    }
+  },
+  "input_fingerprint": "3f71e643244182b4",
+  "messages": [],
+  "output_sha256": {
+    "staging_file_reconciliation.csv": "514bbd8e4f669be096a8d8e1e08785e3ae7caa22fdc320e08d638f777f5de5b0",
+    "stg_weather_observation.csv": "f6371a9e91aa695f1de9cdfcf6dc2a00156fa070f2c749cf17124cbed6e27cce",
+    "stg_weighing_event.csv": "ce95acd47ad9065d4ba81b245986f9212292d48b79cdd6b48eec19ad1a2319f2"
+  },
+  "source_snapshot_ids": {
+    "flavoria": "flavoria-1b68c194acc5",
+    "fmi_weather": "fmi-8ab7d7d344b4"
+  },
+  "stage": "staging",
+  "transformations": [
+    {
+      "field": "event_time_local / identification_time_local",
+      "reason": "cross-export temporal alignment for the one suspect export; otherwise none",
+      "rule": "wall time as written, plus the file-specific offset when (and only when) an override applies"
+    },
+    {
+      "field": "*_canonical_utc",
+      "reason": "the study period crosses the 2020-10-25 clock change; canonical instants must be comparable across files and with FMI (UTC)",
+      "rule": "Europe/Helsinki wall time converted with real zoneinfo rules; ambiguous or nonexistent local times give NULL and a status"
+    },
+    {
+      "field": "component_id_normalized",
+      "reason": "string-level identity only; cross-export names mix language variants with different dishes",
+      "rule": "trim, collapse whitespace, casefold; NULL if empty. No alias table"
+    },
+    {
+      "field": "component_weight_g",
+      "reason": "typed value beside the verbatim weight_raw; no clipping, no judgement",
+      "rule": "integer parse of weight_of_a_component; NULL if not an integer"
+    },
+    {
+      "field": "scale_line / scale_side / scale_kind / scale_position",
+      "reason": "structure inferred from names; the verbatim scale_id is kept",
+      "rule": "split scale_identifier on '-'; NULL for unparseable parts"
+    },
+    {
+      "field": "session_key",
+      "reason": "the same session_id occurs in both populations; they are never merged",
+      "rule": "session_id | population"
+    },
+    {
+      "field": "weighing_type",
+      "reason": "7 of 11 files lack the column (schema drift)",
+      "rule": "NULL where the column is absent from the file"
+    }
+  ],
+  "weather": {
+    "distinct_hours": 1129,
+    "parameters": [
+      "r_1h",
+      "ri_10min",
+      "t2m",
+      "ws_10min"
+    ],
+    "rows": 4516,
+    "value_status": {
+      "NAN_SOURCE_NULL": 3,
+      "OK": 4513
+    }
+  }
+}

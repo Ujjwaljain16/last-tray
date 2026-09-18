@@ -177,3 +177,23 @@ date range that reproduces the raw time read as UTC.
 
 `staging_file_reconciliation.csv` (per member: rows verified at ingestion vs staged, population, zone handling, status counts) and
 `staging_summary.json` (counts, statuses, declared transformations, output checksums).
+
+
+## 11. Validation tables (WP4)
+
+Written to `outputs/validation/` from the verified staging tables. They are evidence about staging: they add findings, dispositions and
+reconciliation, and they change no staged value. Field meanings for the issue table, the severity / handling / quarantine distinction
+and the lineage bases are in `validation_rules.md` ("WP4 implementation").
+
+| Table | Grain | Key fields |
+|---|---|---|
+| `validation_issues` | one finding on one entity | `validation_issue_id` (content-derived), `run_id`, `rule_id`, `severity`, `handling`, `quarantine`, `entity_type`, `entity_id`, `session_key`, `event_id`, `lineage_basis`, `source_row_lineage` |
+| `event_validation_status` | one staged event | `event_id`, `disposition` (`MODELLABLE`, `DUPLICATE_EXCLUDED`, `QUARANTINED`), rule ids by severity |
+| `session_validation_status` | one `(session_id, population)` key | counts, `service_date`, `span_s`, `rule_weight_sum_g` (validation working value; the canonical `derived_selected_meal_weight_g` is produced in WP5), `quarantined`, `session_level_warn`, `event_level_warn`, day flags |
+| `quarantine_manifest` | one quarantined session key or event | `quarantine_entity_type`, `entity_id`, `quarantine_rule_ids` |
+| `reconciliation_summary` | one check | `check_id`, `status` (PASS, WARN, FAIL, INFO), `expected`, `observed`, `basis` |
+| `service_day_volume` | one population and service date | `sessions`, `observed_regime`, `expected_regime`, `low_observed_volume_day`, `volume_irregularity_day` (registered-export only) |
+| `field_completeness` | one field | `empty_rows` (true missingness), `not_applicable_rows` (column absent from the source file), `malformed_rows` |
+
+Dispositions: `QUARANTINED` (session key quarantined; wins over repeat), `DUPLICATE_EXCLUDED` (an exact repeat of an earlier row of
+the same file, left out of sums), `MODELLABLE` (available to the model layer). Every staged event has exactly one.

@@ -1,0 +1,9 @@
+field,rows,not_applicable_rows,empty_rows,malformed_rows,note
+session_id,12284,0,0,0,required
+tray_id,12284,0,0,0,required
+scale_id,12284,0,0,0,required
+component_name,12284,0,0,0,required
+weight_of_a_component,12284,0,0,0,required; malformed = not an integer
+weighing_event_time,12284,0,0,0,"required; malformed = unparseable, ambiguous or nonexistent local time"
+user_identification_time,12284,0,0,0,"required; malformed = unparseable, ambiguous or nonexistent local time"
+weighting_type,12284,6990,0,0,"optional column; not applicable where the source file has no such column (schema drift), which is not missing data"

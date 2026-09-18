@@ -416,3 +416,52 @@ See D23. *vs plan: NEW* · 2026-09-19. Recorded separately so the wording is not
 - **Business impact.** A small, reviewable repository.
 - **Residual uncertainty.** None.
 
+## D44. Validation reads only staging tables it can verify
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `src/validate` consumes the staging tables through one loader that first checks the staging summary (core lane OK), then each table's SHA-256, header and row count against what staging recorded. A missing, altered or truncated table stops the core lane (exit 4) and deletes the validation outputs from any earlier run. A damaged weather table blocks the weather checks only. No validation module imports a raw reader, an archive or a network library, and none names `data/raw`.
+- **Evidence.** Tests alter one byte, truncate the table, drop the last row and re-sign the summary, delete the summary, and mark staging FAILED; every case stops validation. An AST test bans the imports and a spy test shows every file opened is under `staging/`.
+- **Alternatives tested.** Re-reading raw bytes through the verified reader (breaks the stage boundary); trusting the CSVs without a checksum (a stale or edited table would validate silently).
+- **Chosen approach.** Verify, then load typed rows; never repair.
+- **Why.** Validation is evidence about staging. Evidence built on an unverified table is not evidence.
+- **Business impact.** A reviewer can trust that a finding describes the staged data that was checksummed.
+- **Residual uncertainty.** The checksum proves the table is what staging wrote, not that staging was right; WP3 tests cover that.
+
+## D45. Quarantine is a list and a flag at session-key grain; nothing is deleted
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Only ERROR rules whose handling is QUARANTINE (S05, S06, S07, B01, T01, T03, I01, I04) quarantine. The unit is the `(session_id, population)` key, because `core_ready` is defined per session: an ERROR on any event quarantines its whole session key. Every staged event receives exactly one disposition (`QUARANTINED`, `DUPLICATE_EXCLUDED`, `MODELLABLE`), quarantined rows are listed one by one in `quarantine_manifest.csv`, and `events_in = modelled + duplicates_excluded + quarantined` is checked (rule C04, ERROR, BLOCK).
+- **Evidence.** The real data has four ERROR findings (I01 on `session2266` and `session3222`, both populations), 22 quarantined events, 2 excluded repeats and 12,260 modellable events, which sum to 12,284. A test breaks the partition and confirms C04 and a BLOCKED core lane.
+- **Alternatives tested.** Quarantining single events (a session with one bad weight would still be summed into a wrong meal weight); dropping quarantined rows from the tables (violates "never silently delete").
+- **Chosen approach.** Flag, list, exclude from the primary population later, keep everywhere.
+- **Why.** The approved decision keeps both crossover versions and picks neither.
+- **Business impact.** M5's numerator can exclude exactly the quarantined keys, and a reviewer can find every row involved.
+- **Residual uncertainty.** Event-level quarantine rules never fired on real data, so their session-level effect is proven on synthetic rows only.
+
+## D46. The rule catalogue takes severity and handling from configuration; new rule ids are additive
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `src/validate/model.py` holds one catalogue. For rules configured in `config/thresholds.yml` (B02, B03, B07, T03, T05, T07, C02a, C02b) severity and handling come from the configuration. Approved rule ids are unchanged. Added ids: C04 (already specified), X07 (weather station-hour-parameter grain, ERROR, BLOCK the weather lane), X08 (a weather hour lacks a parameter, WARN). One rule, I06, legitimately has two severities (identical versions are INFO, disagreement is WARN), so an issue may carry a severity override; no other rule does.
+- **Evidence.** A test changes B02 to ERROR/QUARANTINE in a copy of the configuration and the output follows; another proves only ERROR rules ever quarantine and B06 does not exist.
+- **Alternatives tested.** Hard-coding severities in the rules (configuration and code could drift); renaming the Phase 2 rule C02 (the specification already splits it into C02a and C02b).
+- **Chosen approach.** Configuration is the single source; the catalogue adds only the consequence text.
+- **Why.** Thresholds are diagnostic and approved as configuration, so they must stay reviewable there.
+- **Business impact.** No threshold can be silently changed in code.
+- **Residual uncertainty.** None.
+
+## D47. Reconciliation has four statuses, and partial weather coverage warns rather than blocks
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `reconciliation_summary.csv` rows are PASS (expectation held), WARN (a documented shortfall that does not block, e.g. weather hours missing), FAIL (an expectation broke; the affected lane blocks) or INFO (a fact, no expectation). Expectations come from the pins in `config/sources.yml` or from identities that hold by construction; the golden values are compared by tests only.
+- **Evidence.** 46 checks on the real data: 35 PASS, 0 WARN, 0 FAIL, 11 INFO. A weather table missing one hour produces X01 and WARN; an empty one FAILS.
+- **Alternatives tested.** Treating any weather shortfall as a block (contradicts X01, "weather outputs BLOCKED if empty").
+- **Chosen approach.** Match the approved severity of each rule.
+- **Why.** Weather is context, never a reason to stop the core lane.
+- **Business impact.** A weather gap cannot hide a core result or stop it.
+- **Residual uncertainty.** None.
+
+## D48. Output tracking and identity for validation
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Issue ids are content-derived (`vi-` plus a hash of rule, entity type and entity id) and must be unique; `run_id` is derived from the staging fingerprint, the table checksums and the rule catalogue, so outputs contain no wall-clock time and are byte-identical across runs, hash seeds and working directories. The 1.8 MB `event_validation_status.csv` is ignored by git; the issues, summaries, manifests and day/session tables are tracked. The Phase 2 exploration `validation_issues.csv` and `validation_summary_by_rule.csv` are replaced by the production files; their frozen copies stay in `tests/golden/`.
+- **Evidence.** Two processes with different `PYTHONHASHSEED` values and directories write identical bytes for all nine files.
+- **Alternatives tested.** Sequential issue numbers (an added finding renumbers all later ones); a wall-clock run time (breaks byte-identical reruns).
+- **Chosen approach.** Identity from content.
+- **Why.** Reproducibility and stable references in reviews.
+- **Business impact.** A finding can be cited by id across runs.
+- **Residual uncertainty.** None.

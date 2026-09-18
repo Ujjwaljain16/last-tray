@@ -119,6 +119,14 @@ Rule taxonomy and full definitions in `docs/validation_rules.md`. Severities: `I
 
 `core_ready` = registered-export population, no `ERROR` on the session or any of its events, no identity conflict, all weights > 0, at least one event, timestamps parsed. Thresholds live in `config/thresholds.yml` (approved values and evidence: `docs/phase2_validation_findings.md`). M5 = `core_ready` sessions / all registered-export session IDs in the source (**1,699, fixed before any removal**); the warn-free rate (no session-level WARN, same denominator; baseline 1,663 / 1,699 = 97.88%) is reported beside it. All thresholds are **diagnostic validation thresholds derived from observed data structure, approved 2026-09-19, not claims of physical impossibility**. Volume flags are flag-only and appear in no metric filter.
 
+### 8.1 Validation stage (WP4)
+
+Validation reads only staging tables verified against the checksums, headers and row counts staging recorded (D44). It never opens
+`data/raw`. Findings carry a stable schema and row lineage; quarantine is a flag plus a manifest at `(session_id, population)` grain and
+deletes nothing (D45); `events_in = modelled + duplicates_excluded + quarantined` is checked (C04). A missing or altered staging table
+stops the core lane (exit 4) and removes stale validation outputs; a damaged weather table blocks weather checks only (exit 6). Outputs are
+byte-identical across runs. See `validation_rules.md` "WP4 implementation" and `data_dictionary.md` section 11.
+
 ## 9. Pipeline
 
 `python -m src.pipeline.run [--stages ingest|all] [--out outputs]` : **always offline**. It never downloads. If a raw source is missing it fails and names the explicit retrieval command.

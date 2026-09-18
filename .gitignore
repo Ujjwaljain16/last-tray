@@ -24,3 +24,6 @@ outputs/staging/stg_*.csv
 
 # NOTE: data/raw/ is committed on purpose. It is small (about 4 MB), immutable, and lets the pipeline run
 # fully offline. Do not ignore it. Refreshed snapshots (data/raw/*/refresh-*/) are untracked until adopted deliberately.
+
+# Regenerable validation table (one row per staged event); the summaries and manifests next to it ARE tracked
+outputs/validation/event_validation_status.csv

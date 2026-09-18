@@ -1,0 +1,47 @@
+check_id,area,description,expected,observed,status,basis
+E01,events,staged events equal the pinned total,12284,12284,PASS,pin: config/sources.yml
+E02:non_registered_export,events,events in non_registered_export equal the sum of its pinned members,3912,3912,PASS,pin: config/sources.yml
+E02:registered_export,events,events in registered_export equal the sum of its pinned members,8372,8372,PASS,pin: config/sources.yml
+E03:non_registered_2020-10-05_2020-10-18.csv,events,staged rows equal the pinned member row count,1313,1313,PASS,pin: config/sources.yml
+E03:non_registered_2020-10-19_2020-10-25.csv,events,staged rows equal the pinned member row count,698,698,PASS,pin: config/sources.yml
+E03:non_registered_2020-10-25_2020-10-31.csv,events,staged rows equal the pinned member row count,721,721,PASS,pin: config/sources.yml
+E03:non_registered_2020-11-02_2020-11-08.csv,events,staged rows equal the pinned member row count,600,600,PASS,pin: config/sources.yml
+E03:non_registered_2020-11-09_2020-11-15.csv,events,staged rows equal the pinned member row count,580,580,PASS,pin: config/sources.yml
+E03:registered_2020-10-19_2020-10-25.csv,events,staged rows equal the pinned member row count,1352,1352,PASS,pin: config/sources.yml
+E03:registered_2020-10-25_2020-10-31.csv,events,staged rows equal the pinned member row count,1396,1396,PASS,pin: config/sources.yml
+E03:registered_2020-11-02_2020-11-08.csv,events,staged rows equal the pinned member row count,1526,1526,PASS,pin: config/sources.yml
+E03:registered_2020-11-09_2020-11-15.csv,events,staged rows equal the pinned member row count,1305,1305,PASS,pin: config/sources.yml
+E03:registered_2020-11-16_2020-11-20.csv,events,staged rows equal the pinned member row count,862,862,PASS,pin: config/sources.yml
+E03:registered_2020_10_05-2020_10_18.csv,events,staged rows equal the pinned member row count,1931,1931,PASS,pin: config/sources.yml
+E04,events,staging_file_reconciliation agrees with the staged event table for every file,"{'non_registered_2020-10-05_2020-10-18.csv': 1313, 'non_registered_2020-10-19_2020-10-25.csv': 698, 'non_registered_2020-10-25_2020-10-31.csv': 721, 'non_registered_2020-11-02_2020-11-08.csv': 600, 'non_registered_2020-11-09_2020-11-15.csv': 580, 'registered_2020-10-19_2020-10-25.csv': 1352, 'registered_2020-10-25_2020-10-31.csv': 1396, 'registered_2020-11-02_2020-11-08.csv': 1526, 'registered_2020-11-09_2020-11-15.csv': 1305, 'registered_2020-11-16_2020-11-20.csv': 862, 'registered_2020_10_05-2020_10_18.csv': 1931}","{'non_registered_2020-10-05_2020-10-18.csv': 1313, 'non_registered_2020-10-19_2020-10-25.csv': 698, 'non_registered_2020-10-25_2020-10-31.csv': 721, 'non_registered_2020-11-02_2020-11-08.csv': 600, 'non_registered_2020-11-09_2020-11-15.csv': 580, 'registered_2020-10-19_2020-10-25.csv': 1352, 'registered_2020-10-25_2020-10-31.csv': 1396, 'registered_2020-11-02_2020-11-08.csv': 1526, 'registered_2020-11-09_2020-11-15.csv': 1305, 'registered_2020-11-16_2020-11-20.csv': 862, 'registered_2020_10_05-2020_10_18.csv': 1931}",PASS,staging output
+E05,events,events_in = modelled + duplicates_excluded + quarantined (rule C04),12284,12284,PASS,identity
+E06,events,event dispositions,,DUPLICATE_EXCLUDED=2;MODELLABLE=12260;QUARANTINED=22,INFO,reported
+S01,sessions,distinct session_id equals the pinned count,3343,3343,PASS,pin: config/sources.yml
+S02,sessions,"session keys = session ids + ids present in both populations (why 3,345 differs from 3,343)",3345,3345,PASS,identity
+S03,sessions,session_ids present in both populations (crossover),,"session2266,session3222",INFO,reported
+S04,sessions,every crossover session key is quarantined (rule I01),"['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']","['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']",PASS,approved decision
+S05,sessions,every staged event belongs to exactly one session key,12284,12284,PASS,identity
+S06,sessions,session keys with more than one identification value (approved Phase 2 correction: 0),0,0,PASS,approved Phase 2 finding
+S07,sessions,the same count if populations were pooled by session_id alone (a pooling artefact; keys are never pooled): canonical instants | raw wall-clock,,2 | 2,INFO,reported
+F01,structure,row_parse_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
+F02,structure,weight_parse_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
+F03,structure,event_time_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
+F04,structure,identification_time_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
+N01,components,"within every session, distinct raw component names equal distinct normalised names (Phase 2 conclusion; observed = sessions that differ)",[],[],PASS,approved Phase 2 finding
+N02,components,"distinct component names across the data: raw | normalised (trim, whitespace collapse, casefold; no alias table)",,246 | 245,INFO,reported
+Z01,timezone,"rows carrying a timezone override equal the rows of the configured override file(s), and no others",1931,1931,PASS,config/timezone_overrides.yml
+Z02,timezone,no row outside the configured override file carries an override,0,0,PASS,approved decision
+Z03,timezone,rule T10 findings,0,0,PASS,approved decision
+Z04,timezone,"rows by timezone_handling (provenance labels, not conclusions)",,NORMALISED_PLUS_3H_STRONGEST_SUPPORT=1931;SOURCE_LOCAL_ASSUMED=10353,INFO,reported
+Z05,timezone,local -> UTC -> local round-trip failures across 24568 timestamps (DST-aware),0,0,PASS,identity
+Z06,timezone,"rows whose event time is ambiguous or nonexistent locally (NULL, never guessed)",,0,INFO,reported
+D01,duplicates,exact repeat rows within a file equal the count staging recorded,2,2,PASS,staging summary
+D02,duplicates,"sessions with the same scale weighed repeatedly (additive scoops, all counted; retired rule B06 is not revived)",,222,INFO,reported
+D03,duplicates,"natural-key (session, time, scale, weight, name) duplicate groups: total | within one population | across populations",,7 | 2 | 5,INFO,reported
+K01,weather,weather observations equal the pinned element count,4516,4516,PASS,pin: config/sources.yml
+K02,weather,distinct hours equal the expected hourly coverage (partial coverage is flagged by X01; only an empty table blocks),1129,1129,PASS,config/sources.yml window
+K03,weather,station-hour-parameter grain findings (X07),0,0,PASS,identity
+K04,weather,"observations by value_status (NaN is NULL, never zero)",,NAN_SOURCE_NULL=3;OK=4513,INFO,reported
+K05,weather,station and parameters,,"FMISID 100949; r_1h,ri_10min,t2m,ws_10min",INFO,reported
+V01,volume,the weekday regimes derived from the baseline weeks equal the configured expected regimes,"{'Monday': 'high', 'Tuesday': 'high', 'Wednesday': 'high', 'Thursday': 'low', 'Friday': 'low'}","{'Friday': 'low', 'Monday': 'high', 'Thursday': 'low', 'Tuesday': 'high', 'Wednesday': 'high'}",PASS,config/thresholds.yml volume
+V02,volume,primary-population service days | low observed volume days | volume irregularity days (flag only; never excluded),,35 | 16 | 6,INFO,reported
