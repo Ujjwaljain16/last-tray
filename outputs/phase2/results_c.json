@@ -1,0 +1,17 @@
+{
+ "names_oct": {
+  "disjoint": 86,
+  "adjacent_day_hits": {}
+ },
+ "weather": {
+  "sessions": 1697,
+  "matched_ceil": 1697,
+  "r1h_null_sessions": 67,
+  "ri10_null_sessions": 25,
+  "distinct_weather_hours": 109,
+  "dst_days": [
+   "2020-10-26"
+  ],
+  "override_sessions": 385
+ }
+}

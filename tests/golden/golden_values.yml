@@ -1,0 +1,76 @@
+# GOLDEN VALUES: the test authority for the pipeline. Baseline from the Phase 2 research run
+# (research/phase2/), reproduced by hash-stable scripts. The production pipeline must reproduce every figure here.
+# A difference is investigated and documented, never tolerated or silently patched.
+#
+# Fixtures next to this file (phase2_*.csv) are copies of the Phase 2 outputs, kept so the production pipeline can
+# overwrite outputs/validation/ without losing the reference.
+
+counts:
+  raw_event_rows: 12284
+  raw_files: 11
+  session_ids: 3343
+  session_population_rows: 3345            # (session_id, population); 2 IDs appear in both populations
+  eligible_registered_export_session_ids: 1699   # M5 / warn-free denominator, fixed BEFORE any removal
+  canonical_sessions: 1697
+  quarantined_crossover_sessions: 2
+  crossover_session_ids: [session2266, session3222]
+  non_registered_export_sessions_excluding_crossover: 1644
+  exact_duplicate_rows: 2
+  weather_hours: 1129
+  canonical_sessions_weather_matched: 1697   # Phase 2 dry run, hour-ending rule
+
+metrics:
+  M1_median_derived_selected_meal_weight_g: 499.0
+  M2_p90_derived_selected_meal_weight_g: 1039.6
+  M3_observed_valid_sessions_registered_export: 1697
+  M4_median_distinct_normalized_components: 5
+  M5_core_measurement_readiness:
+    numerator: 1697
+    denominator: 1699
+    percent: 99.88
+
+supporting:
+  # CANONICAL warn-free rate (review decision): no SESSION-level WARN, over the fixed eligible denominator.
+  warn_free_rate:
+    definition: "eligible registered-export sessions with no session-level WARN (B04, B07, T04, T05, I06)"
+    numerator: 1663
+    denominator: 1699
+    percent: 97.88
+  # Reconciliation to the event-level variant. Reported as a diagnostic only; it does NOT replace the figure above.
+  warn_free_reconciliation:
+    eligible: 1699
+    quarantined_crossover: 2
+    with_session_level_warn: 34
+    no_session_level_warn: 1663                     # 1699 = 1663 + 34 + 2
+    event_level_only_warn_sessions: [session320, session1116, session1274]   # B02 (2 sessions) and I02 (1 session)
+    no_warn_incl_event_level: 1660                  # 1663 - 3
+    percent_incl_event_level: 97.70
+    reason: "B02 (event >= 1,500 g) and I02 (exact duplicate row) are WARN rules that attach to events. Counting them removes 3 further sessions."
+  volume_irregularity_days: [2020-11-02, 2020-11-06, 2020-11-16, 2020-11-17, 2020-11-18, 2020-11-20]
+  low_observed_volume_days: 16
+  service_days_registered_export: 35
+  service_days_non_registered_export: 30
+
+validation:
+  total_issues: 1278
+  errors: 4               # I01 x 4 (two sessions x two populations)
+  by_rule_population_fixture: phase2_validation_summary_by_rule.csv
+
+sensitivity:
+  scenarios: 25
+  fixture: phase2_sensitivity_analysis.csv
+  baseline_m1_range_g: [493.0, 505.0]
+  m4_all_scenarios: 5
+  tz0_no_shift: {sessions_failing_t03: 303, m5_percent: 82.05, m2_delta_g: -50.5}
+  tz1_plus_1h: {sessions_failing_t03: 103, m5_percent: 93.82}
+  crossover_inclusion: {m1_delta_g: 0.0, m2_delta_g: 2.8, m5_percent_invalid_reason: "100% only because the quarantine is lifted"}
+  removal_2097g_session: {m1_delta_g: 0.0, m2_delta_g: -1.6}
+  first_two_weeks_excluded: {m2_delta_g: -62.6}
+  irregular_days_excluded: {m2_delta_g: 26.4}
+
+tolerances:
+  counts: exact
+  M1: exact
+  M2_abs: 0.05           # published to one decimal
+  percent_abs: 0.005     # published to two decimals
+  delta_g_abs: 0.05

@@ -1,0 +1,8 @@
+# Runtime and test dependencies. Ranges include the versions the Phase 2 research and WP1 were verified with.
+pandas>=2.2,<3        # verified 2.2.0
+requests>=2.31,<3     # verified 2.33.0
+PyYAML>=6.0,<7        # verified 6.0.2
+tzdata>=2024.1        # zoneinfo data on Windows; verified 2025.2
+matplotlib>=3.8,<4    # diagrams and charts; verified 3.10.7
+pytest>=8.0,<9        # verified 8.4.2
+scipy>=1.11,<2        # research/phase2 only (rank correlation); not used by src/

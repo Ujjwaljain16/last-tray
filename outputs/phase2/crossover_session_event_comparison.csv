@@ -1,0 +1,12 @@
+session_id,scale,weight_equal,name_equal_exact,name_equal_casefold,name_registered_export,name_non_registered_export,dt_s(non_reg - reg),scale_id,weight_g
+session2266,True,True,True,True,American salad,American salad,0.0,vege2-salaatti1,55
+session2266,True,True,True,True,Grated carrot,Grated carrot,0.0,vege2-salaatti2,80
+session2266,True,True,True,True,Papu,Papu,0.0,vege2-salaatti3,64
+session2266,True,True,True,True,Beetroot,Beetroot,0.0,vege2-salaatti4,70
+session2266,True,True,True,True,vegan Stir fry,vegan Stir fry,0.0,vege2-lammin2,192
+session3222,True,True,True,True,American salad,American salad,10800.0,koti2-vasen-salaatti1,623
+session3222,True,True,True,True,American salad,American salad,10800.0,koti2-vasen-salaatti1,6
+session3222,True,True,False,False,Punakaali,Marinoitu kaalisalaatti,10800.0,koti2-vasen-salaatti2,33
+session3222,True,True,False,False,Paahdettuja kasviksia,Parsakaali-kukkakaali,10800.0,koti2-vasen-salaatti3,68
+session3222,True,True,True,True,Rice,Rice,10800.0,koti2-vasen-lammin5,227
+session3222,True,True,False,True,Chili Con Carne,Chili con carne,10800.0,koti2-vasen-lammin6,410

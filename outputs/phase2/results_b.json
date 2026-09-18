@@ -1,0 +1,113 @@
+{
+ "b05": {
+  "events_involved": 512,
+  "sessions": 222,
+  "pairs": 259,
+  "gap_p50": 11.0,
+  "gap_p90": 24.0
+ },
+ "span": {
+  "spans_gt_600": 7,
+  "gap_p99": 67.0,
+  "gap_p999": 218.31200000000536,
+  "reg_span_p99": 155.35999999999967,
+  "reg_span_p999": 2640.1200000000135,
+  "reg_span_max": 2772.0
+ },
+ "names": {
+  "raw_distinct": 246,
+  "norm_distinct": 245,
+  "variant_groups": 1,
+  "multi_scale_names": 183,
+  "scaleday_multi_name_share": 0.02687843616371411,
+  "cross_export_cells": 682,
+  "cross_export_identical": 575,
+  "cross_export_disjoint": 86,
+  "jaccard_mean": 0.858260019550342
+ },
+ "volume": {
+  "reg_median_pre_nov16": 63.0,
+  "reg_min_pre": 2,
+  "reg_max_pre": 107,
+  "baseline_ratio_min": 0.19858156028368795,
+  "baseline_ratio_max": 7.545454545454546,
+  "nov": [
+   {
+    "service_date": "2020-11-16",
+    "sessions": "22.0",
+    "weekday": "Monday",
+    "weekday_median_before": "70.5",
+    "ratio": "0.31",
+    "robust_z": "-2.4"
+   },
+   {
+    "service_date": "2020-11-17",
+    "sessions": "19.0",
+    "weekday": "Tuesday",
+    "weekday_median_before": "90.5",
+    "ratio": "0.21",
+    "robust_z": "-2.7"
+   },
+   {
+    "service_date": "2020-11-18",
+    "sessions": "18.0",
+    "weekday": "Wednesday",
+    "weekday_median_before": "70.5",
+    "ratio": "0.26",
+    "robust_z": "-2.6"
+   },
+   {
+    "service_date": "2020-11-19",
+    "sessions": "12.0",
+    "weekday": "Thursday",
+    "weekday_median_before": "8.0",
+    "ratio": "1.5",
+    "robust_z": "1.7"
+   },
+   {
+    "service_date": "2020-11-20",
+    "sessions": "96.0",
+    "weekday": "Friday",
+    "weekday_median_before": "11.0",
+    "ratio": "8.73",
+    "robust_z": "26.7"
+   }
+  ]
+ },
+ "nov": {
+  "nov20_sessions": 96
+ },
+ "outlier": {
+  "weight": 2097,
+  "session": "session2104",
+  "session_total": 2307,
+  "events_ge_1500": 6,
+  "scale_p99": 1226.8799999999992,
+  "scale_max_other": 1396.0
+ },
+ "single": {
+  "n": 17,
+  "in_nov16_20": 2,
+  "median_w": 127.0,
+  "le3g": 2
+ },
+ "thresholds": {
+  "event_weight_p50": 66.0,
+  "event_weight_p90": 260.10000000000036,
+  "event_weight_p95": 374.0499999999993,
+  "event_weight_p99": 828.0999999999985,
+  "event_weight_p99.5": 996.0749999999989,
+  "event_weight_p99.9": 1251.8460000000086,
+  "session_weight_p0.5": 55.88,
+  "session_weight_p1": 89.92,
+  "session_weight_p5": 264.40000000000003,
+  "session_weight_p95": 1290.1999999999998,
+  "session_weight_p99": 1879.2399999999998,
+  "session_weight_p99.5": 2156.4399999999996,
+  "session_weight_p99.9": 2916.7680000000146,
+  "events_le3g_pct": 1.1842105263157896,
+  "events_le1g_pct": 0.3229665071770335,
+  "events_ge1500": 3,
+  "events_gt1000_pct": 0.5023923444976076
+ }
+}

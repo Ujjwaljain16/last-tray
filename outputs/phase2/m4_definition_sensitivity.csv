@@ -1,0 +1,5 @@
+definition,registered_median,registered_mean,sessions_differing_from_chosen,pct_sessions_differing
+distinct normalised names (chosen),5.0,4.753,0,0.0
+distinct raw names,5.0,4.753,0,0.0
+distinct scales,5.0,4.78,45,2.65
+weighing events,5.0,4.926,254,14.97

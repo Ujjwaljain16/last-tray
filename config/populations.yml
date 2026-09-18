@@ -1,0 +1,31 @@
+# Population labels are INHERITED FROM SOURCE FILENAMES. The public source documentation does not define what
+# "registered" and "non-registered" mean, so they are used only as labels. They are never interpreted as
+# customer-registration status. (docs/population_decision.md, decision_log D5)
+
+statement: >-
+  These labels are inherited from source filenames. The public documentation reviewed for this project does not
+  define their business meaning. They are population labels only, not customer-registration status.
+
+populations:
+  registered_export:
+    display_name: registered-export population
+    filename_prefix: registered_
+    role: primary            # feeds the KPIs
+  non_registered_export:
+    display_name: non-registered-export population
+    filename_prefix: non_registered_
+    role: diagnostic         # source-quality population; never a KPI source
+
+# The two populations are never pooled. Session key is (session_id, population).
+never_pooled: true
+
+# Wording that would assert a meaning the source does not establish. Checked against config and src/ by tests.
+forbidden_phrases:
+  - registered diners
+  - registered customers
+  - registered users
+  - registered meals
+
+# Crossover sessions (a session_id present in BOTH populations) are DETECTED from the data by rule I01 and quarantined.
+# They are deliberately not listed here: a hard-coded list could hide a new one. The two known today are asserted
+# in tests/golden/golden_values.yml.

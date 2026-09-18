@@ -1,0 +1,302 @@
+{
+  "context": {
+    "chunks": [
+      {
+        "artifact_id": "fmi-8ab7d7d344b4/fmi_100949_20201005_20201011.xml",
+        "file": "fmi_100949_20201005_20201011.xml",
+        "path": "data/raw/weather/fmi_100949_20201005_20201011.xml",
+        "sha256": "20d267f18b97dd7ee8a7d3e6999134989e1741da8df8f364fee10a95d40e346a",
+        "source_url": "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::simple&fmisid=100949&starttime=2020-10-05T00:00:00Z&endtime=2020-10-11T23:00:00Z&timestep=60&parameters=t2m,ws_10min,r_1h,ri_10min"
+      },
+      {
+        "artifact_id": "fmi-8ab7d7d344b4/fmi_100949_20201012_20201018.xml",
+        "file": "fmi_100949_20201012_20201018.xml",
+        "path": "data/raw/weather/fmi_100949_20201012_20201018.xml",
+        "sha256": "2ea81634d9a29831d444ec61c3c3fbec936d3518e260c4ac4eadb0c330b74519",
+        "source_url": "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::simple&fmisid=100949&starttime=2020-10-12T00:00:00Z&endtime=2020-10-18T23:00:00Z&timestep=60&parameters=t2m,ws_10min,r_1h,ri_10min"
+      },
+      {
+        "artifact_id": "fmi-8ab7d7d344b4/fmi_100949_20201019_20201025.xml",
+        "file": "fmi_100949_20201019_20201025.xml",
+        "path": "data/raw/weather/fmi_100949_20201019_20201025.xml",
+        "sha256": "25ea3dd894df0ab53a12491533710a5f8f0c41826ff9f74033c05e67368a9712",
+        "source_url": "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::simple&fmisid=100949&starttime=2020-10-19T00:00:00Z&endtime=2020-10-25T23:00:00Z&timestep=60&parameters=t2m,ws_10min,r_1h,ri_10min"
+      },
+      {
+        "artifact_id": "fmi-8ab7d7d344b4/fmi_100949_20201026_20201101.xml",
+        "file": "fmi_100949_20201026_20201101.xml",
+        "path": "data/raw/weather/fmi_100949_20201026_20201101.xml",
+        "sha256": "23df3c938695d0591a20e28871ee4e4180119b63a2ecf3e911c33a79e53f44a2",
+        "source_url": "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::simple&fmisid=100949&starttime=2020-10-26T00:00:00Z&endtime=2020-11-01T23:00:00Z&timestep=60&parameters=t2m,ws_10min,r_1h,ri_10min"
+      },
+      {
+        "artifact_id": "fmi-8ab7d7d344b4/fmi_100949_20201102_20201108.xml",
+        "file": "fmi_100949_20201102_20201108.xml",
+        "path": "data/raw/weather/fmi_100949_20201102_20201108.xml",
+        "sha256": "23be71cfde2dc550a75badecf2a2c99fa010e6f45098469142906eb01b98d71f",
+        "source_url": "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::simple&fmisid=100949&starttime=2020-11-02T00:00:00Z&endtime=2020-11-08T23:00:00Z&timestep=60&parameters=t2m,ws_10min,r_1h,ri_10min"
+      },
+      {
+        "artifact_id": "fmi-8ab7d7d344b4/fmi_100949_20201109_20201115.xml",
+        "file": "fmi_100949_20201109_20201115.xml",
+        "path": "data/raw/weather/fmi_100949_20201109_20201115.xml",
+        "sha256": "6fbd347358e42e3fef087c3541970c85fde554057f94e62b9a4d84905ddc7772",
+        "source_url": "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::simple&fmisid=100949&starttime=2020-11-09T00:00:00Z&endtime=2020-11-15T23:00:00Z&timestep=60&parameters=t2m,ws_10min,r_1h,ri_10min"
+      },
+      {
+        "artifact_id": "fmi-8ab7d7d344b4/fmi_100949_20201116_20201121.xml",
+        "file": "fmi_100949_20201116_20201121.xml",
+        "path": "data/raw/weather/fmi_100949_20201116_20201121.xml",
+        "sha256": "6b1f778dfc4fceae9ad27d4699e33c813632fadc803f90f1fd4e9e7af2118e42",
+        "source_url": "https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=getFeature&storedquery_id=fmi::observations::weather::simple&fmisid=100949&starttime=2020-11-16T00:00:00Z&endtime=2020-11-21T00:00:00Z&timestep=60&parameters=t2m,ws_10min,r_1h,ri_10min"
+      }
+    ],
+    "expected_hours": 1129,
+    "fmisid": 100949,
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "outcome": "OK",
+    "r_1h_convention": "hour_ending",
+    "ready": true,
+    "source": "fmi_weather",
+    "source_snapshot_id": "fmi-8ab7d7d344b4",
+    "source_url": "https://opendata.fmi.fi/wfs"
+  },
+  "core": {
+    "archive": {
+      "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar",
+      "path": "data/raw/flavoria/dataset_csv.tar",
+      "retrieved_on": "2026-09-18",
+      "sha256": "7f7e46f0a50683b61f8dde67b097ed8f4130a9503866f045cc4f40eee2c0207d",
+      "size_bytes": 1277440
+    },
+    "attribution": "Sarapisto, T., Koivunen, L., Mäkilä, T., Klami, A., Ojansivu, P. FlavoriaFoodWeight1700 (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.5850856. CC BY 4.0.",
+    "license": "CC-BY-4.0",
+    "members": [
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::non_registered_2020-10-05_2020-10-18.csv",
+        "file": "non_registered_2020-10-05_2020-10-18.csv",
+        "population": "non_registered_export",
+        "rows": 1313,
+        "schema_fingerprint": "9f7134920adb7fef618c3f5b818742069c306d9b24c72b911f47c7edd9a81c60",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V8_with_weighting_type",
+        "sha256": "b8132640bc606a2b51fbe622536fd147b8486ae393e6796e629b6a7872be6056",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::non_registered_2020-10-19_2020-10-25.csv",
+        "file": "non_registered_2020-10-19_2020-10-25.csv",
+        "population": "non_registered_export",
+        "rows": 698,
+        "schema_fingerprint": "9f7134920adb7fef618c3f5b818742069c306d9b24c72b911f47c7edd9a81c60",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V8_with_weighting_type",
+        "sha256": "f4b29b301e88ad7221519c4a20f538871dfcd5fb6b9236a33d8e90c41b78ad29",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::non_registered_2020-10-25_2020-10-31.csv",
+        "file": "non_registered_2020-10-25_2020-10-31.csv",
+        "population": "non_registered_export",
+        "rows": 721,
+        "schema_fingerprint": "703d3aa979f18b98180cabdc8d075834cb7b61ef6b1bb89d654641545993a33b",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V7_without_weighting_type",
+        "sha256": "fddb0dae7109e0dcb7007eca06d0ee048a3ec13a7356227eff5dba7ecae3873c",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::non_registered_2020-11-02_2020-11-08.csv",
+        "file": "non_registered_2020-11-02_2020-11-08.csv",
+        "population": "non_registered_export",
+        "rows": 600,
+        "schema_fingerprint": "703d3aa979f18b98180cabdc8d075834cb7b61ef6b1bb89d654641545993a33b",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V7_without_weighting_type",
+        "sha256": "7902cba6812f04f6be2ea161faded9756784b80b23bb85f98e6e7e7de8c96b13",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::non_registered_2020-11-09_2020-11-15.csv",
+        "file": "non_registered_2020-11-09_2020-11-15.csv",
+        "population": "non_registered_export",
+        "rows": 580,
+        "schema_fingerprint": "703d3aa979f18b98180cabdc8d075834cb7b61ef6b1bb89d654641545993a33b",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V7_without_weighting_type",
+        "sha256": "3c122adad7e5a81c39a3437262c53b796832e3f34cfdc0837ca6592ecc76ba99",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::registered_2020-10-19_2020-10-25.csv",
+        "file": "registered_2020-10-19_2020-10-25.csv",
+        "population": "registered_export",
+        "rows": 1352,
+        "schema_fingerprint": "9f7134920adb7fef618c3f5b818742069c306d9b24c72b911f47c7edd9a81c60",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V8_with_weighting_type",
+        "sha256": "53ab99bd9fb8574448444908360dbbfcb52acc7e039e429930c1a85445f04d41",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::registered_2020-10-25_2020-10-31.csv",
+        "file": "registered_2020-10-25_2020-10-31.csv",
+        "population": "registered_export",
+        "rows": 1396,
+        "schema_fingerprint": "703d3aa979f18b98180cabdc8d075834cb7b61ef6b1bb89d654641545993a33b",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V7_without_weighting_type",
+        "sha256": "038216ba25cc78fc6af89a6a84e6a731a0b745773dafd66e3684fe4ec42b7e7d",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::registered_2020-11-02_2020-11-08.csv",
+        "file": "registered_2020-11-02_2020-11-08.csv",
+        "population": "registered_export",
+        "rows": 1526,
+        "schema_fingerprint": "703d3aa979f18b98180cabdc8d075834cb7b61ef6b1bb89d654641545993a33b",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V7_without_weighting_type",
+        "sha256": "a4ef75e53ede43d5c70921b643ab99e1912bcf82f1e0c8d833f81a2dc7688154",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::registered_2020-11-09_2020-11-15.csv",
+        "file": "registered_2020-11-09_2020-11-15.csv",
+        "population": "registered_export",
+        "rows": 1305,
+        "schema_fingerprint": "703d3aa979f18b98180cabdc8d075834cb7b61ef6b1bb89d654641545993a33b",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V7_without_weighting_type",
+        "sha256": "467ccab0e3930068bef36650e9562f43b91f22138229ecf126eacff55e70b501",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::registered_2020-11-16_2020-11-20.csv",
+        "file": "registered_2020-11-16_2020-11-20.csv",
+        "population": "registered_export",
+        "rows": 862,
+        "schema_fingerprint": "703d3aa979f18b98180cabdc8d075834cb7b61ef6b1bb89d654641545993a33b",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V7_without_weighting_type",
+        "sha256": "b05454dedfc8accab0a980b2551a968fd093c5da17f2c483e55aa3cb9777d4a2",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "SOURCE_LOCAL_ASSUMED",
+          "offset_hours": 0,
+          "scope": "none",
+          "source_confirmed": false
+        }
+      },
+      {
+        "artifact_id": "flavoria-1b68c194acc5/dataset_csv.tar::registered_2020_10_05-2020_10_18.csv",
+        "file": "registered_2020_10_05-2020_10_18.csv",
+        "population": "registered_export",
+        "rows": 1931,
+        "schema_fingerprint": "9f7134920adb7fef618c3f5b818742069c306d9b24c72b911f47c7edd9a81c60",
+        "schema_status": "KNOWN_VARIANT",
+        "schema_variant": "V8_with_weighting_type",
+        "sha256": "be5c8513eaac522cb4a396fc842094024733de4511498fe1e7d1c903348954b4",
+        "source_snapshot_id": "flavoria-1b68c194acc5",
+        "status": "VERIFIED",
+        "timezone": {
+          "assumed_zone_for_unshifted_times": "Europe/Helsinki",
+          "normalization": "NORMALISED_PLUS_3H_STRONGEST_SUPPORT",
+          "offset_hours": 3,
+          "scope": "file_specific",
+          "source_confirmed": false
+        }
+      }
+    ],
+    "outcome": "OK",
+    "ready": true,
+    "required_columns": [
+      "session_id",
+      "weighing_event_time",
+      "scale_identifier",
+      "weight_of_a_component",
+      "component_name",
+      "tray_id",
+      "user_identification_time"
+    ],
+    "source": "flavoria",
+    "source_snapshot_id": "flavoria-1b68c194acc5",
+    "source_url": "https://zenodo.org/api/records/5850856/files/dataset_csv.tar/content"
+  },
+  "input_fingerprint": "3f71e643244182b4"
+}

@@ -1,0 +1,3 @@
+source_snapshot_id,source_name,lane,source_url,version,license,retrieved_on,retrieval_method,artifact_count,snapshot_sha256,status
+flavoria-1b68c194acc5,flavoria,core,https://zenodo.org/records/5850856,v1.0.0 (DOI 10.5281/zenodo.5850856),CC-BY-4.0,2026-09-18,"explicit HTTP GET of the Zenodo API file endpoint (single request, no authentication)",12,1b68c194acc55e61d35c21d2cdffab81570c47cae2c13267b7df5ebeabbeca28,VERIFIED
+fmi-8ab7d7d344b4,fmi_weather,context,https://opendata.fmi.fi/wfs,FMISID 100949; simple observations; r_1h = hour_ending,CC-BY-4.0,2026-09-18,"explicit HTTP GET of the FMI WFS stored query, 7 chunked requests, no authentication",7,8ab7d7d344b4610292732d755f07c54faa62a120d7d65e620ea90c1967b648ce,VERIFIED

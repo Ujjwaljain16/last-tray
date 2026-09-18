@@ -1,0 +1,82 @@
+{
+  "artifact_status_counts": {
+    "VERIFIED": 21
+  },
+  "context_outcome": "OK",
+  "core_outcome": "OK",
+  "input_fingerprint": "3f71e643244182b4",
+  "messages": [
+    {
+      "code": "X03",
+      "level": "INFO",
+      "text": "3 NaN weather value(s) preserved as NULL (never zero)"
+    }
+  ],
+  "raw_unchanged_during_run": true,
+  "ready_for_staging": true,
+  "schema_status_counts": {
+    "KNOWN_VARIANT": 11
+  },
+  "snapshots": [
+    {
+      "lane": "core",
+      "snapshot_sha256": "1b68c194acc55e61d35c21d2cdffab81570c47cae2c13267b7df5ebeabbeca28",
+      "source": "flavoria",
+      "source_snapshot_id": "flavoria-1b68c194acc5",
+      "status": "VERIFIED"
+    },
+    {
+      "lane": "context",
+      "snapshot_sha256": "8ab7d7d344b4610292732d755f07c54faa62a120d7d65e620ea90c1967b648ce",
+      "source": "fmi_weather",
+      "source_snapshot_id": "fmi-8ab7d7d344b4",
+      "status": "VERIFIED"
+    }
+  ],
+  "stage": "ingestion",
+  "steps": [
+    {
+      "status": "OK",
+      "step": "source discovery"
+    },
+    {
+      "status": "OK",
+      "step": "source snapshot identity"
+    },
+    {
+      "status": "OK",
+      "step": "checksum verification"
+    },
+    {
+      "status": "OK",
+      "step": "schema fingerprint"
+    },
+    {
+      "status": "OK",
+      "step": "timezone override scope (T10)"
+    },
+    {
+      "status": "OK",
+      "step": "raw preservation"
+    },
+    {
+      "status": "OK",
+      "step": "ingestion manifest"
+    },
+    {
+      "status": "READY",
+      "step": "staging handoff"
+    }
+  ],
+  "timezone_override_scope": [
+    {
+      "filename": "registered_2020_10_05-2020_10_18.csv",
+      "first_event_date": "2020-10-05",
+      "last_event_date": "2020-10-16",
+      "normalised_median_first_hour": 10.543,
+      "raw_median_first_hour": 7.543,
+      "reasons": [],
+      "status": "VALID"
+    }
+  ]
+}

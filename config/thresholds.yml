@@ -1,0 +1,89 @@
+# Approved 2026-09-19 (Phase 2 review). Values and rationale: docs/phase2_validation_findings.md section 3,
+# docs/validation_rules.md, docs/decision_log.md D23/D29.
+#
+# THESE ARE DIAGNOSTIC VALIDATION THRESHOLDS derived from the observed structure of this dataset.
+# They are NOT claims of physical impossibility or universal abnormality. A flagged record is not evidence of
+# error, and a WARN or INFO flag never removes a record from the KPI population: only ERROR-level rules do.
+
+statement: >-
+  Diagnostic validation thresholds derived from the observed structure of this dataset. They are not claims of
+  physical impossibility or universal abnormality. A flagged record is not evidence of error.
+approved_on: 2026-09-19
+
+rules:
+  B02:
+    description: Large event weight
+    parameter: event_weight_g
+    operator: ">="
+    value: 1500
+    severity: WARN
+    handling: FLAG
+    rationale: "Just above the hot-scale P99.9 (1,449 g); flags 6 events. Not a physical limit."
+  B03:
+    description: Trace event weight
+    parameter: event_weight_g
+    operator: "<="
+    value: 3
+    severity: INFO
+    handling: FLAG
+    rationale: "1.18% of registered-export events; informational."
+  B07:
+    description: Derived session weight outside range
+    parameter: derived_selected_meal_weight_g
+    low: 50
+    high: 2200
+    severity: WARN
+    handling: FLAG
+    rationale: "P0.5 = 56 g and P99.5 = 2,156 g in the registered-export population. Means: investigate."
+  T05:
+    description: Session span
+    parameter: session_span_s
+    operator: ">"
+    value: 600
+    severity: WARN
+    handling: FLAG
+    rationale: "Registered-export spans jump from 545 s to 1,783 s; 600 s sits in that natural gap."
+  T03:
+    description: Event inside service hours (local time, after the timezone rule)
+    parameter: event_hour_local
+    low: 9          # inclusive
+    high: 15        # exclusive
+    severity: ERROR
+    handling: QUARANTINE
+    rationale: "Observed local range 10:13-14:43; zero violations after the +3h rule."
+  T07:
+    description: File timezone consistency (median first-event hour per file)
+    parameter: median_first_event_hour_local
+    low: 10.0       # inclusive
+    high: 11.0      # exclusive
+    severity: WARN
+    handling: FLAG
+    rationale: "Ten files sit at 10.48-10.58; the suspect file at 7.54 (raw)."
+  C02a:
+    description: Low observed volume day (registered-export population)
+    parameter: sessions_per_day
+    operator: "<"
+    value: 30
+    severity: INFO
+    handling: FLAG
+    rationale: "Daily counts have a gap between 22 and 41."
+  C02b:
+    description: Volume irregularity (observed regime differs from the weekday's baseline regime)
+    severity: WARN
+    handling: FLAG
+    rationale: "Baseline weeks 2020-10-05..30 separate perfectly: Mon-Wed >= 41, Thu-Fri <= 12. A 4-week hypothesis; days are flagged, never excluded."
+
+volume:
+  high_regime_min_sessions: 30
+  baseline_window: {start: 2020-10-05, end: 2020-10-30}
+  expected_regime_by_weekday:
+    Monday: high
+    Tuesday: high
+    Wednesday: high
+    Thursday: low
+    Friday: low
+  flag_only: true     # invariant I-6: volume flags never appear in any metric filter
+
+# Fixed by the metric contract; changing these changes the meaning of M5.
+readiness:
+  eligible_denominator: registered_export_session_ids_in_source   # counted BEFORE any removal or quarantine

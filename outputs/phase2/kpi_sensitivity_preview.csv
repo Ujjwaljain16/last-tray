@@ -1,0 +1,9 @@
+scenario,sessions,M1_median_g,M2_p90_g,M4_median_components,M1_delta_g,M2_delta_g
+"PRIMARY: registered-export, crossover quarantined",1697,499.0,1039.6,5.0,0.0,0.0
+exclude any session with a WARN rule,1663,500.0,1015.8,5.0,1.0,-23.8
+exclude the +3h-normalised file (timezone independence),1312,505.0,977.0,5.0,6.0,-62.6
+exclude volume-irregularity days,1445,505.0,1066.0,5.0,6.0,26.4
+exclude Nov 16-20,1530,499.5,1052.1,5.0,0.5,12.5
+exclude single-event sessions,1680,501.0,1044.2,5.0,2.0,4.6
+"exclude the 2,097 g session",1696,499.0,1038.0,5.0,0.0,-1.6
+include the 2 crossover sessions (unquarantined),1699,499.0,1042.4,5.0,0.0,2.8

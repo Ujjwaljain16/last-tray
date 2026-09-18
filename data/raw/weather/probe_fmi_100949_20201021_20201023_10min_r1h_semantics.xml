@@ -1,0 +1,4097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection
+  timeStamp="2026-09-18T18:14:02Z"
+  numberReturned="314"
+  numberMatched="314"
+      xmlns:wfs="http://www.opengis.net/wfs/2.0"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:BsWfs="http://xml.fmi.fi/schema/wfs/2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd
+                        http://xml.fmi.fi/schema/wfs/2.0 https://xml.fmi.fi/schema/wfs/2.0/fmi_wfs_simplefeature.xsd"
+>
+  	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.1.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.1.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.1.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.1.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.2.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.2.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.2.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.2.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.3.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.3.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.3.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.3.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.4.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.4.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.4.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.4.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.5.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.5.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.5.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.5.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.6.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.6.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.6.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.6.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-21T23:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.7.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.7.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.7.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.7.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.8.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.8.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.8</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.8.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.8.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.9.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.9.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.9.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.9.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.10.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.10.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.10.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.10.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.11.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.11.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.11.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.11.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.12.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.12.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.12.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.12.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T00:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.13.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.13.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.13.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.13.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.14.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.14.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.14.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.14.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.15.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.15.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.15.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.15.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.16.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.16.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.16.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.16.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.17.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.17.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.17.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.17.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.18.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.18.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.18.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.18.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T01:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.19.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.19.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.19.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.19.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.20.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.20.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.20.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.20.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.21.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.21.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.21.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.21.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.22.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.22.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.22.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.22.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.23.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.23.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.23.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.23.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.24.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.24.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.24.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.24.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T02:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.25.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.25.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.25.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.25.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.26.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.26.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.26.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.26.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.27.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.27.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.27.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.27.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.28.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.28.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.28.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.28.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.29.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.29.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.29.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.29.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.30.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.30.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.30.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.30.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T03:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.31.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.31.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.31.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.31.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.32.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.32.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.32.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.32.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.33.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.33.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.33.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.33.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.34.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.34.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.34.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.34.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.35.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.35.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.35.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.35.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.36.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.36.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.36.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.36.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T04:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.37.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.37.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.37.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.37.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.38.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.38.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.38.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.38.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.39.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.39.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.39.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.39.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.40.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.40.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.40.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.40.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.41.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.41.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.41.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.41.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.42.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.42.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.42.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.42.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T05:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.43.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.43.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.43.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.43.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.44.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.44.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.44.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.44.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.45.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.45.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.45.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.45.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.46.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.46.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.6</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.46.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.46.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.47.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.47.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.47.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.47.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.48.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.48.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.5</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.48.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.48.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T06:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.49.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.49.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.49.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.49.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.8</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.50.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.50.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.50.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.50.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.51.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.51.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.51.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.51.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.52.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.52.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.52.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.52.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.53.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.53.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.53.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.53.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.54.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.54.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.54.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.54.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T07:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.55.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.55.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.55.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.55.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.56.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.56.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.56.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.56.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.57.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.57.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.57.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.57.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.58.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.58.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.58.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.58.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.59.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.59.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>3.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.59.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.59.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.60.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.60.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.8</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.60.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.60.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T08:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.61.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.61.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.9</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.61.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.61.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.5</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.62.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.62.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.62.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.62.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.63.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.63.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.63.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.63.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.64.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.64.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.64.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.64.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.65.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.65.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.65.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.65.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.66.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.66.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.66.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.66.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T09:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.67.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.67.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.8</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.67.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.67.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.68.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.68.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.68.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.68.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.69.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.69.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.69.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.69.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.70.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.70.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.70.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.70.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.71.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.71.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.71.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.71.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.72.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.72.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.72.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.72.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T10:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.73.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.73.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.73.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.73.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.74.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.74.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.74.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.74.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.75.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.75.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.6</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.75.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.75.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.76.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.76.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.76.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.76.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.77.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.77.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.77.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.77.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.78.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.78.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.78.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.78.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T11:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.79.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.79.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.79.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.79.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.5</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.80.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.80.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.8</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.80.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.80.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.81.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.81.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.81.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.81.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.82.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.82.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.82.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.82.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.83.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.83.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.83.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.83.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.84.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.84.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.84.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.84.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T12:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.85.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.85.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.85.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.85.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.86.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.86.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.6</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.86.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.86.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.87.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.87.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.87.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.87.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.88.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.88.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.88.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.88.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.89.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.89.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.89.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.89.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.90.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.90.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.90.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.90.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T13:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.91.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.91.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.91.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.91.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.9</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.92.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.92.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.92.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.92.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.93.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.93.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.93.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.93.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.94.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.94.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.94.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.94.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.95.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.95.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.95.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.95.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.96.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.96.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.96.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.96.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T14:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.97.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.97.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.97.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.97.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.98.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.98.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.98.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.98.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.99.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.99.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.99.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.99.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.100.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.100.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.100.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.100.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.101.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.101.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.101.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.101.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.102.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.102.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.102.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.102.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T15:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.103.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.103.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.103.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.103.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.104.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.104.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.104.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.104.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.105.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.105.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.105.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.105.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.106.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.106.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.106.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.106.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.107.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.107.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.107.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.107.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.108.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.108.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.108.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.108.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T16:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.109.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.109.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.109.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.109.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.110.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.110.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.110.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.110.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.111.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.111.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.111.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.111.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.112.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.112.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.112.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.112.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.113.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.113.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.113.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.113.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.114.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.114.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.114.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.114.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T17:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.115.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.115.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.115.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.115.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.116.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.116.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.116.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.116.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.117.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.117.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.117.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.117.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.118.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.118.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.118.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.118.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.119.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.119.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.119.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.119.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.120.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.120.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.120.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.120.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T18:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.121.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.121.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.121.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.121.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.122.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.122.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.122.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.122.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.123.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.123.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.123.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.123.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.124.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.124.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.124.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.124.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.125.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.125.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.125.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.125.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.126.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.126.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.126.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.126.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T19:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.127.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.127.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.127.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.127.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.128.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.128.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.128.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.128.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.129.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.129.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.129.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.129.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.130.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.130.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.130.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.130.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.131.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.131.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.131.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.131.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.132.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.132.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.132.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.132.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T20:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.133.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.133.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.133.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.133.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.134.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.134.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.134.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.134.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.135.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.135.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.135.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.135.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.136.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.136.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.136.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.136.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.137.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.137.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.137.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.137.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.138.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.138.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.6</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.138.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.138.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T21:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.139.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.139.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.139.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.139.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.140.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.140.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.8</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.140.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.140.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.141.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.141.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>5.5</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.141.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.141.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.142.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.142.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.9</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.142.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.142.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.143.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.143.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.143.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.143.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.144.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.144.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.144.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.144.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T22:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.145.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.145.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.4</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.145.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.145.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.6</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.146.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.146.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.146.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.146.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.147.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.147.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.7</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.147.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.147.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.148.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.148.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.148.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.148.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.149.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.149.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.149.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.149.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.150.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.150.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.5</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.150.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.150.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-22T23:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.151.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.151.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.151.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.151.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.152.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.152.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>4.5</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.152.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.152.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:10:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.153.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.153.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>2.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.153.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.153.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:20:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.154.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.154.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.1</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.154.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.154.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:30:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.155.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.155.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.155.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.155.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:40:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.156.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.156.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.0</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.156.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.156.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T00:50:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>NaN</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.157.1">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.157.1" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T01:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>ri_10min</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>0.3</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+	<wfs:member>
+            <BsWfs:BsWfsElement gml:id="BsWfsElement.1.157.2">
+                <BsWfs:Location>
+                    <gml:Point gml:id="BsWfsElementP.1.157.2" srsDimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/4258">
+                        <gml:pos>60.45439 22.17870 </gml:pos>
+                    </gml:Point>
+                </BsWfs:Location>
+                <BsWfs:Time>2020-10-23T01:00:00Z</BsWfs:Time>
+                <BsWfs:ParameterName>r_1h</BsWfs:ParameterName>
+                <BsWfs:ParameterValue>1.2</BsWfs:ParameterValue>
+            </BsWfs:BsWfsElement>
+	</wfs:member>
+	
+
+</wfs:FeatureCollection>

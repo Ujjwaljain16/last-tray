@@ -1,0 +1,38 @@
+# Per-file timezone registry. Default for every file NOT listed here: naive wall time is Europe/Helsinki.
+#
+# DECISION (docs/timezone_decision.md, decision_log D4/D36):
+#   A +3 hour normalization is the strongest-supported engineering decision based on cross-export temporal
+#   consistency checks; the original source does not explicitly confirm the timezone metadata.
+#
+# This is a FILE-SPECIFIC, evidence-backed normalization. It is NOT a general statement about any timezone, it is
+# NOT source-confirmed, and it must never be applied to any other file. Its scope is enforced (rule T10): the
+# override is valid only for the named file, only for the event-date range below, and only while the data still
+# shows the shift it was made to correct.
+#
+# Evidence: exact 10,800 s cross-export difference for the shared session3222; hour-of-day distance to the
+# other registered-export files 1.994 (no shift), 0.046 (+3h), about 1.03 (+2h and +4h).
+# NOT evidence: the tray-collision test (0 collisions at every offset) was uninformative and must not be cited.
+
+default:
+  assume: Europe/Helsinki
+  label: SOURCE_LOCAL_ASSUMED
+
+overrides:
+  registered_2020_10_05-2020_10_18.csv:
+    scope: file_specific
+    offset_hours: 3
+    label: NORMALISED_PLUS_3H_STRONGEST_SUPPORT
+    applies_to_columns: [weighing_event_time, user_identification_time]
+    source_confirmed: false
+    # T10: the override is valid only if ALL of these hold, otherwise ingestion FAILS (the normalization is no longer supported):
+    valid_for:
+      first_event_date: 2020-10-05         # earliest raw event date the override was validated on
+      last_event_date: 2020-10-16          # latest raw event date the override was validated on
+      raw_median_first_event_hour_band: [7.0, 8.5]   # the shift must still be visible in the raw times
+      # after applying the offset the median first-event hour must fall inside thresholds.yml T07 band [10, 11)
+    residual_uncertainty: "1-hour resolution scan cannot separate +3h from +3h +/- 30 min; KPIs cannot distinguish +2h/+3h/+4h; source owner has not confirmed (Q3)."
+    evidence_ref: docs/timezone_decision.md
+
+statement: >-
+  A +3 hour normalization is the strongest-supported engineering decision based on cross-export temporal
+  consistency checks; the original source does not explicitly confirm the timezone metadata.

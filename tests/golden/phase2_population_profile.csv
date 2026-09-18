@@ -1,0 +1,18 @@
+,non_registered_export,registered_export,note
+sessions,1644.0,1697.0,crossover sessions excluded from both
+events,3900.0,8360.0,crossover sessions excluded from both
+events_per_session_mean,2.372,4.926,crossover sessions excluded from both
+events_per_session_median,2.0,5.0,crossover sessions excluded from both
+single_event_sessions,620.0,17.0,crossover sessions excluded from both
+single_event_pct,37.713,1.002,crossover sessions excluded from both
+with_hot_scale_pct,74.939,97.171,crossover sessions excluded from both
+weight_p10,4.0,314.0,crossover sessions excluded from both
+weight_median,192.0,499.0,crossover sessions excluded from both
+weight_p90,855.4,1039.6,crossover sessions excluded from both
+weight_max,2640.0,3427.0,crossover sessions excluded from both
+under_50g_pct,28.406,0.412,crossover sessions excluded from both
+distinct_components_median,2.0,5.0,crossover sessions excluded from both
+span_s_median,24.0,71.0,crossover sessions excluded from both
+span_s_p99,122.14,155.36,crossover sessions excluded from both
+service_days,30.0,35.0,crossover sessions excluded from both
+trays,616.0,595.0,crossover sessions excluded from both

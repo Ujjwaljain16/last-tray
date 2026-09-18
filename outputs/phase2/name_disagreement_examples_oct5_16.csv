@@ -1,0 +1,9 @@
+scale_identifier,service_date,override_day,registered_export_names,non_registered_export_names
+koti2-oikea-lammin1,2020-10-15,True,dill potatoes,peruna
+koti2-oikea-lammin2,2020-10-14,True,lohkoperunoita,baked potato
+koti2-oikea-lammin4,2020-10-09,True,lohkoperunoita,baked potato
+koti2-oikea-lammin5,2020-10-06,True,kalkkunaa bbq kastikkeessa,kalkkunaa herkkusienikastikkeessa
+koti2-oikea-lammin6,2020-10-06,True,kalkkunaa bbq kastikkeessa,kalkkunaa herkkusienikastikkeessa
+koti2-oikea-salaatti2,2020-10-05,True,porkkana,porkkana-lantturaaste
+koti2-oikea-salaatti2,2020-10-06,True,kaali-porkkanaraaste; porkkana,grated cabbage; porkkana-lantturaaste
+koti2-oikea-salaatti2,2020-10-07,True,kaali-porkkanaraaste,grated cabbage

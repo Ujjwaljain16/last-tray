@@ -1,0 +1,45 @@
+LAST TRAY (Flavoria DiningOps Truth)
+====================================
+
+This is a simulated educational engagement (Forward Deployed Engineering data foundations assignment). The client scenario
+is invented. The data are real and public. This project is not affiliated with, and is not endorsed by, the University of
+Turku, the University of Helsinki, Flavoria, Sodexo, or the Finnish Meteorological Institute.
+
+THIRD-PARTY DATA
+----------------
+
+1. FlavoriaFoodWeight1700
+   Sarapisto, T., Koivunen, L., Mäkilä, T., Klami, A., Ojansivu, P. (2022).
+   FlavoriaFoodWeight1700: Automated Lunch Line Meal Pictures with Automatic Measurement of Weight and Contents (v1.0.0).
+   Zenodo. https://doi.org/10.5281/zenodo.5850856
+   Source: https://zenodo.org/records/5850856
+   Licence: Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/
+   Retrieved: 2026-09-18 (file dataset_csv.tar, SHA-256 7f7e46f0a50683b61f8dde67b097ed8f4130a9503866f045cc4f40eee2c0207d).
+   Changes: none to the provider's files. They are committed unmodified under data/raw/flavoria/. Sessions, derived weights,
+   metrics and all other analysis in this repository are our own derived work and are not published by the data providers.
+
+2. Finnish Meteorological Institute open data
+   Weather observations for Turku Artukainen (FMISID 100949), from the FMI open data web feature service
+   https://opendata.fmi.fi/wfs
+   Licence: Creative Commons Attribution 4.0 International (CC BY 4.0). Verified on the official FMI licence page
+   https://en.ilmatieteenlaitos.fi/open-data-licence on 2026-09-19; licence text https://creativecommons.org/licenses/by/4.0/
+   Retrieved: 2026-09-18.
+   Changes: none to the retrieved XML, committed unmodified under data/raw/weather/.
+   Attribution statement (our wording; the FMI licence page does not prescribe wording):
+   "Source: Finnish Meteorological Institute open data, licensed under CC BY 4.0."
+
+3. Flavoria Research Infrastructure Data Catalog (documentation only)
+   https://flavoriadatacatalog.tt.utu.fi/
+   Used as source-definition evidence. No data is taken from it. The pages state no licence or terms; only short factual
+   phrases are quoted, with links.
+
+PROVENANCE
+----------
+
+Exact URLs, versions, retrieval dates, checksums and snapshot identifiers: docs/data_provenance.md and config/sources.yml.
+
+CODE
+----
+
+The licence for this project's own code has not been decided. It will be chosen in the final licence, secrets and raw-data
+audit, before any public repository is created.
