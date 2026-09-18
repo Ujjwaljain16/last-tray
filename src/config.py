@@ -305,8 +305,8 @@ def load_timezone(path: Path) -> TimezoneConfig:
     for fname, o in (d.get("overrides") or {}).items():
         where = f"{name}: override {fname}"
         label = _enum(TimezoneNormalization, _need(o, "label", where), where)
-        if label is TimezoneNormalization.SOURCE_LOCAL_ASSUMED:
-            raise ConfigError(f"{where}: an override must carry the NORMALISED_* label")
+        if label is not TimezoneNormalization.NORMALISED_PLUS_3H_STRONGEST_SUPPORT:
+            raise ConfigError(f"{where}: an override must carry the NORMALISED_PLUS_3H_STRONGEST_SUPPORT label")
         if o.get("source_confirmed") is not False:
             raise ConfigError(
                 f"{where}: source_confirmed must be false. The +3h normalisation is an evidence-backed engineering decision; "
@@ -330,9 +330,12 @@ def load_timezone(path: Path) -> TimezoneConfig:
             residual_uncertainty=str(_need(o, "residual_uncertainty", where)),
             valid_for=OverrideScope(first_d, last_d, (float(band[0]), float(band[1]))),
         )
+    default_label = _enum(TimezoneNormalization, _need(default, "label", f"{name}: default"), f"{name}: default")
+    if default_label is not TimezoneNormalization.SOURCE_LOCAL_ASSUMED:
+        raise ConfigError(f"{name}: the default treatment must be SOURCE_LOCAL_ASSUMED: no zone is stated by the source")
     return TimezoneConfig(
         default_assume=str(_need(default, "assume", f"{name}: default")),
-        default_label=_enum(TimezoneNormalization, _need(default, "label", f"{name}: default"), f"{name}: default"),
+        default_label=default_label,
         overrides=overrides,
         statement=str(_need(d, "statement", name)).strip(),
     )

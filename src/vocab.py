@@ -67,9 +67,42 @@ class SemanticClass(str, Enum):
     SOURCE_GAP = "SOURCE_GAP"
 
 
-class TimezoneNormalization(str, Enum):
-    SOURCE_LOCAL_ASSUMED = "SOURCE_LOCAL_ASSUMED"
-    NORMALISED_PLUS_3H_STRONGEST_SUPPORT = "NORMALISED_PLUS_3H_STRONGEST_SUPPORT"
+class TimezoneHandling(str, Enum):
+    """How a timestamp's zone was treated. Recorded on every staged timestamp; never dropped."""
+
+    SOURCE_LOCAL_ASSUMED = "SOURCE_LOCAL_ASSUMED"          # source states no zone; read as Europe/Helsinki local time (an assumption)
+    NORMALISED_PLUS_3H_STRONGEST_SUPPORT = "NORMALISED_PLUS_3H_STRONGEST_SUPPORT"   # file-specific, evidence-backed, NOT source-confirmed
+    SOURCE_UTC_STATED = "SOURCE_UTC_STATED"                # the source states UTC (FMI 'Z' timestamps)
+
+
+TimezoneNormalization = TimezoneHandling    # name used by configuration and ingestion
+
+
+class LocalTimeStatus(str, Enum):
+    """Result of reading a wall-clock time in a zone with daylight saving. Ambiguous and nonexistent times are never guessed."""
+
+    OK = "OK"
+    AMBIGUOUS = "AMBIGUOUS"          # the local time occurs twice (clocks go back)
+    NONEXISTENT = "NONEXISTENT"      # the local time never occurs (clocks go forward)
+    UNPARSEABLE = "UNPARSEABLE"
+
+
+class WeightParseStatus(str, Enum):
+    OK = "OK"
+    NOT_INTEGER = "NOT_INTEGER"
+    EMPTY = "EMPTY"
+
+
+class RowParseStatus(str, Enum):
+    OK = "OK"
+    SHORT_ROW = "SHORT_ROW"          # fewer cells than the required columns need
+    EXTRA_CELLS = "EXTRA_CELLS"      # more cells than the header, or data under a blank header column
+
+
+class ValueStatus(str, Enum):
+    OK = "OK"
+    NAN_SOURCE_NULL = "NAN_SOURCE_NULL"    # the source reports NaN: stored as NULL, never zero
+    UNPARSEABLE = "UNPARSEABLE"
 
 
 class ComponentCountStatus(str, Enum):

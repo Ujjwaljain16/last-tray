@@ -366,3 +366,53 @@ See D23. *vs plan: NEW* · 2026-09-19. Recorded separately so the wording is not
 - **Business impact.** Fewer false alarms and no rounding workarounds.
 - **Residual uncertainty.** None.
 
+## D39. All staging reads go through the verified reader
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Staging obtains raw bytes only from `VerifiedReader`, which re-checks the SHA-256 recorded at ingestion on every read. No downstream stage opens `data/raw`. A failed verification stops that source's staging path.
+- **Evidence.** A raw file can change between ingestion and staging; without a re-check, staging would consume unverified bytes.
+- **Alternatives tested.** Staging reading raw by path after an upfront check (a time-of-check to time-of-use gap); trusting the handoff alone (a forged or stale handoff could not be detected).
+- **Chosen approach.** One reader interface; static tests forbid file-access and network imports in the staging package; a fake reader proves it is the only input; failure removes stale outputs and reads no further members.
+- **Why.** Verified data should be the only data that can reach a table.
+- **Business impact.** A tampered or corrupted source can never silently produce a staging table that looks current.
+- **Residual uncertainty.** The reader trusts the handoff's recorded hashes; the handoff file itself is not signed.
+
+## D40. Timestamps keep raw text, a canonical UTC instant, and how the zone was handled
+*vs plan: CHANGED (Phase 2 stored only a normalised local time)* · 2026-09-19
+- **Decision.** Every staged timestamp carries `*_raw`, `*_local`, `*_canonical_utc`, a status, and `timezone_handling` with a `timezone_transformation_reason`. Source-local files are converted with Europe/Helsinki zoneinfo rules; ambiguous and nonexistent local times are NULL, never guessed. The +3h is file-specific and `NORMALISED_PLUS_3H_STRONGEST_SUPPORT`; UTC+3 is never a general Helsinki assumption. Renamed `timezone_normalization` to `timezone_handling`.
+- **Evidence.** The study crosses the 2020-10-25 clock change: the same wall time maps to a different UTC hour before and after (offsets +3 h then +2 h). All 12,284 canonical timestamps equal an independent pandas computation; zero events fall in an ambiguous or nonexistent hour.
+- **Alternatives tested.** A fixed +3h for all files (wrong after the change); dropping the raw text (unrecoverable normalization); guessing the fold for the repeated hour (fabricates a fact).
+- **Chosen approach.** As stated.
+- **Why.** Raw text preserves evidence; canonical UTC makes files and FMI comparable; the handling label keeps the assumption visible.
+- **Business impact.** Weather joins and time-of-day analysis rest on explicit, reproducible instants.
+- **Residual uncertainty.** The source-local zone remains an assumption; the override is not source-confirmed (Q3).
+
+## D41. Staging preserves and normalises; it does not judge
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Every source row is staged: duplicates, zero or huge weights, unparseable timestamps and ragged rows are kept as found and marked with statuses. Deduplication, quarantine and thresholds belong to validation (WP4).
+- **Evidence.** The 2,097 g event, the two exact duplicate rows and 398 edge-whitespace names are all present and counted in staging; a `weighting_type` defect (0 rows read instead of 5,294) was caught by reading the summary, not by an assumption.
+- **Alternatives tested.** Filtering at staging (would hide evidence and make validation counts unreproducible).
+- **Chosen approach.** Keep everything; typed columns sit beside raw text.
+- **Why.** Validation is evidence, not cleaning.
+- **Business impact.** The Phase 2 issue counts can be reproduced from staging.
+- **Residual uncertainty.** None.
+
+## D42. The first commit is validated from a clean checkout, and raw data is stored byte-exact
+*vs plan: NEW* · 2026-09-19
+- **Decision.** The baseline was committed only after a secrets, privacy and scratch-file audit. A `.gitattributes` marks `data/raw/**` as binary and stores other text with LF.
+- **Evidence.** The audit found two pickles, a scratch log, one personal path and two `.gitignore` inline comments that silently matched nothing. A fresh clone with `core.autocrlf` on then grew every weather XML by 6-8 KB, and the pipeline correctly reported SIZE_MISMATCH and blocked the weather lane; after the fix a clean clone verified all 21 artifacts with the identical input fingerprint and 216 tests passed.
+- **Alternatives tested.** Trusting the working tree; normalising line endings in raw files (would invalidate the pins).
+- **Chosen approach.** Fix in a new commit rather than rewrite history.
+- **Why.** Reproducibility must survive a checkout on another machine.
+- **Business impact.** A reviewer on Windows gets the same result as on any other system.
+- **Residual uncertainty.** The original backup folder still exists and should be deleted by its owner.
+
+## D43. Output tracking policy for staging
+*vs plan: NEW* · 2026-09-19
+- **Decision.** The large regenerable staging tables (`outputs/staging/stg_*.csv`, about 10 MB) are ignored by git; `staging_summary.json` and `staging_file_reconciliation.csv` are tracked. The summary records output checksums, so a reviewer can verify a regenerated table against it.
+- **Evidence.** The events table is about 9 MB and fully reproducible from committed raw data.
+- **Alternatives tested.** Committing the tables (repository bloat); committing nothing (no reviewable evidence).
+- **Chosen approach.** Track the small, reviewable artefacts; ignore the large regenerable ones.
+- **Why.** The repository should hold evidence, not build products.
+- **Business impact.** A small, reviewable repository.
+- **Residual uncertainty.** None.
+

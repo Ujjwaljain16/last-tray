@@ -43,11 +43,18 @@ CREATE TABLE fact_weighing_event (
   component_name_raw         TEXT NOT NULL,
   component_id_normalized    TEXT NOT NULL,              -- trim, collapse whitespace, casefold; no alias table
   component_weight_g         INTEGER NOT NULL,           -- OBSERVED, source weight_of_a_component, unchanged
-  source_time_raw            TEXT NOT NULL,              -- verbatim
-  event_time_local           TEXT NOT NULL,              -- Europe/Helsinki, ISO 8601
-  timezone_normalization     TEXT NOT NULL CHECK (timezone_normalization IN
+  event_time_raw             TEXT NOT NULL,              -- verbatim source text: NEVER overwritten
+  event_time_local           TEXT,                       -- wall time after any file-specific normalization (naive, ISO 8601)
+  event_time_canonical_utc   TEXT,                       -- canonical instant; NULL when the local time is ambiguous or nonexistent
+  event_time_status          TEXT NOT NULL CHECK (event_time_status IN ('OK','AMBIGUOUS','NONEXISTENT','UNPARSEABLE')),
+  identification_time_raw    TEXT NOT NULL,
+  identification_time_local  TEXT,
+  identification_time_canonical_utc TEXT,
+  identification_time_status TEXT NOT NULL CHECK (identification_time_status IN ('OK','AMBIGUOUS','NONEXISTENT','UNPARSEABLE')),
+  timezone_handling          TEXT NOT NULL CHECK (timezone_handling IN
                              ('SOURCE_LOCAL_ASSUMED','NORMALISED_PLUS_3H_STRONGEST_SUPPORT')),
-  identification_time_local  TEXT NOT NULL,
+  timezone_offset_hours_applied INTEGER NOT NULL,        -- 0, or 3 for the one file-specific override
+  timezone_transformation_reason TEXT NOT NULL,          -- e.g. 'cross-export temporal alignment ...'
   weighing_type              TEXT,                       -- NULL where the column is absent (7 of 11 files)
   is_exact_duplicate         INTEGER NOT NULL DEFAULT 0,
   quality_status             TEXT NOT NULL CHECK (quality_status IN ('VALID','WARN','INVALID')),
@@ -180,12 +187,14 @@ CREATE TABLE pipeline_run (run_id TEXT PRIMARY KEY, started_at TEXT NOT NULL, fi
 | I-5 | no column, view or metric named or computed as waste or consumption, other than the `BLOCKED` evidence row | semantic layers |
 | I-6 | `volume_irregularity` and `low_observed_volume_day` appear in no WHERE clause of any metric query | flag-only rule |
 | I-7 | M5 denominator = count of registered-export session IDs in the source, computed **before** any removal | denominator rule |
-| I-8 | `timezone_normalization` is non-null on every event and is `NORMALISED_PLUS_3H_STRONGEST_SUPPORT` exactly for the override file | timezone honesty |
+| I-8 | `timezone_handling` is non-null on every event; `NORMALISED_PLUS_3H_STRONGEST_SUPPORT` and offset 3 apply to exactly the one override file, every other file is `SOURCE_LOCAL_ASSUMED` with offset 0; `event_time_raw` equals the source text | timezone honesty |
 | I-9 | rerun on unchanged inputs: identical row counts and SHA-256 of every output CSV | idempotency |
 | I-10 | `derived_selected_meal_weight_g` = sum of `component_weight_g` over non-duplicate events of the session | derivation rule |
 | I-11 | every source-derived row carries a `source_snapshot_id` present in `source_snapshot`, and its `raw_artifact_id` exists in `raw_file_manifest` | provenance: snapshot, artifact, checksum, URL, retrieval metadata |
 | I-12 | a run leaves `data/raw/` byte- and mtime-identical (`raw_unchanged_during_run = true`) | immutable raw preservation |
 | I-13 | ingestion outputs contain no wall-clock value; two runs on identical inputs give identical SHA-256 for every deterministic ingestion file | determinism |
+| I-14 | canonical UTC is reproducible: every staged canonical timestamp equals an independent computation (Europe/Helsinki zoneinfo rules for source-local files; the raw time read as UTC for the override file); ambiguous and nonexistent local times are NULL, never guessed | timestamp integrity |
+| I-15 | staging reads raw bytes only through the verified reader, and a failed verification stops that source's staging path with stale outputs removed | raw access discipline |
 
 ## 4. Baseline "golden values" (the pipeline must reproduce these)
 

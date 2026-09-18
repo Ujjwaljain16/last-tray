@@ -74,3 +74,20 @@ tolerances:
   M2_abs: 0.05           # published to one decimal
   percent_abs: 0.005     # published to two decimals
   delta_g_abs: 0.05
+
+# STAGING (WP3): expectations for the verified raw -> staging layer. Integers only; asserted exactly.
+staging:
+  events_rows: 12284
+  events_by_population: {registered_export: 8372, non_registered_export: 3912}
+  distinct_session_ids: 3343
+  distinct_session_keys: 3345            # (session_id, population): the two populations are never merged
+  session_ids_in_both_populations: [session2266, session3222]
+  exact_duplicate_raw_rows_within_file: 2   # staged as found, not removed
+  timezone_handling: {NORMALISED_PLUS_3H_STRONGEST_SUPPORT: 1931, SOURCE_LOCAL_ASSUMED: 10353}
+  rows_with_local_time_status_not_ok: 0     # no event falls in the 2020-10-25 ambiguous hour
+  rows_with_weighing_type: 5294             # the column exists in 4 of 11 files; 6,990 rows have NULL
+  rows_with_component_name_edge_whitespace: 398
+  events_at_or_above_1500g: 6               # staged, not judged
+  weather_rows: 4516
+  weather_distinct_hours: 1129
+  weather_nan_values: 3                     # NULL, never zero

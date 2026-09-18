@@ -4,15 +4,19 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from src.vocab import (ComponentCountStatus, EvidenceStatus, Handling, Population, QualityStatus, SemanticClass,
-                       Severity, StageOutcome, TimezoneNormalization, values)
+from src.vocab import (ComponentCountStatus, EvidenceStatus, Handling, LocalTimeStatus, Population, QualityStatus, RowParseStatus,
+                       SemanticClass, Severity, StageOutcome, TimezoneHandling, ValueStatus, WeightParseStatus, values)
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
 
 # field name in docs/data_dictionary.md section 9  ->  enum in src/vocab.py
 DOCUMENTED = {
     "population": Population,
-    "timezone_normalization": TimezoneNormalization,
+    "timezone_handling": TimezoneHandling,
+    "local_time_status": LocalTimeStatus,
+    "weight_parse_status": WeightParseStatus,
+    "row_parse_status": RowParseStatus,
+    "value_status": ValueStatus,
     "quality_status": QualityStatus,
     "distinct_component_count_status": ComponentCountStatus,
     "severity": Severity,
@@ -50,3 +54,13 @@ def test_population_codes_are_source_derived_labels():
 
 def test_severity_ladder():
     assert [s.value for s in Severity] == ["INFO", "WARN", "ERROR"]
+
+
+def test_timezone_handling_has_no_general_utc_plus_three_value():
+    """The +3h is a file-specific, evidence-backed normalization. No enum value asserts a general Helsinki offset."""
+    assert values(TimezoneHandling) == {"SOURCE_LOCAL_ASSUMED", "NORMALISED_PLUS_3H_STRONGEST_SUPPORT", "SOURCE_UTC_STATED"}
+    assert not [v for v in values(TimezoneHandling) if "HELSINKI" in v or "UTC_PLUS" in v]
+
+
+def test_ambiguous_and_nonexistent_local_times_are_first_class_statuses():
+    assert {"AMBIGUOUS", "NONEXISTENT"} <= values(LocalTimeStatus)

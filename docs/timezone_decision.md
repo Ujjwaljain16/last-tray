@@ -36,9 +36,9 @@ H1: `registered_2020_10_05-2020_10_18.csv` (registered-export population) is rec
 
 ## 5. Decision
 
-- Parse every timestamp as a naive wall-clock time first, and **store the raw string untouched** (`source_time_raw`).
+- Parse every timestamp as a naive wall-clock time first, and **store the raw string untouched** (`event_time_raw`).
 - A **file-specific override in configuration** (`config/timezone_overrides.yml`, `scope: file_specific`, `source_confirmed: false`) names `registered_2020_10_05-2020_10_18.csv` and applies +3 hours to `weighing_event_time` and `user_identification_time`. Every other file defaults to `Europe/Helsinki` local time as an assumption. The offset is fixed: no DST-aware conversion is implied for times we cannot verify.
-- `event_time_local` is Europe/Helsinki. `timezone_normalization` on every event row is one of `SOURCE_LOCAL_ASSUMED` or `NORMALISED_PLUS_3H_STRONGEST_SUPPORT`. The label never disappears from the model, and no output describes the timezone as "confirmed".
+- `event_time_local` is Europe/Helsinki. `timezone_handling` on every event row is one of `SOURCE_LOCAL_ASSUMED` or `NORMALISED_PLUS_3H_STRONGEST_SUPPORT`. The label never disappears from the model, and no output describes the timezone as "confirmed".
 - A **cross-check rule (T07)** runs on every file: if a file's median first-event hour lies outside the 10:00-11:00 local band and no override is registered, the file is flagged `WARNING` (`timezone_suspect`) rather than silently converted. This is how we found it, and it will catch the next one.
 - The override is applied in transformation, never in the raw layer.
 
@@ -58,6 +58,16 @@ downstream may run:
 
 Why this matters: if a corrected file were ever delivered under the same name, applying +3h would silently push genuine local times
 to about 13:30. The scope check turns that silent error into a loud failure. Tests: `tests/test_tz_scope_and_handoff.py`.
+
+## 5b. How staging applies it (WP3)
+
+- Every staged timestamp keeps `*_raw` (verbatim), `*_canonical_utc` and `timezone_handling`, plus `timezone_transformation_reason`
+  (for this file: "cross-export temporal alignment (file-specific, evidence-backed; not source-confirmed)").
+- Files without an override are `SOURCE_LOCAL_ASSUMED` and are converted with Europe/Helsinki zoneinfo rules, so the +3 h before
+  2020-10-25 and +2 h after it are respected. **UTC+3 is not a general Helsinki assumption anywhere in the pipeline.**
+- The override is applied only if the configuration names the exact filename **and** the ingestion handoff says the same. Any
+  disagreement, in either direction, stops staging of the source.
+- Canonical UTC was checked against an independent pandas computation for all 12,284 rows (both time columns).
 
 ## 6. Impact analysis: what does a wrong decision break?
 

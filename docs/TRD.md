@@ -74,7 +74,7 @@ Relationships: `fact_weighing_event.(session_id, population) → fact_dining_ses
 Idempotency: tables are **rebuilt** per run from raw inputs (`DROP` + `CREATE` inside one transaction), keyed by content, never appended. `pipeline_run` is the only table that grows; it is excluded from output comparisons.
 
 ### 6.1 `fact_weighing_event` columns
-`event_id, source_file, source_row_number, population, session_id, tray_id, scale_id, station_family, component_name_raw, component_id_normalized, component_weight_g, source_time_raw, event_time_local, timezone_normalization, identification_time_local, weighing_type, is_exact_duplicate, quality_status`
+`event_id, source_file, source_row_number, population, session_id, tray_id, scale_id, station_family, component_name_raw, component_id_normalized, component_weight_g, source_time_raw, event_time_local, timezone_handling, identification_time_local, weighing_type, is_exact_duplicate, quality_status`
 
 `component_weight_g` is the source's `weight_of_a_component`, unchanged. `population` takes `registered_export` or `non_registered_export`.
 
@@ -93,10 +93,18 @@ Idempotency: tables are **rebuilt** per run from raw inputs (`DROP` + `CREATE` i
 ### 6.4 `fact_weather`
 `fmisid, obs_time_utc, t2m_c, ws_10min_ms, r_1h_mm, ri_10min_mmh, source_file, is_null_any`. Missing values stay NULL.
 
+### 7.0 Staging contract (WP3)
+
+Staging consumes only the ingestion handoff and reads raw bytes **only through the `VerifiedReader`**, which re-checks the SHA-256
+recorded at ingestion on every read. No downstream stage opens `data/raw`, and a failed verification stops that source's staging path
+(no partial table, and any stale one is deleted). Core (Flavoria) failure fails the run; weather failure blocks weather outputs only.
+Timestamps keep `*_raw`, `*_canonical_utc` and `timezone_handling`; the file-specific +3h is applied only when the configuration and the
+handoff both name that exact file. See `data_dictionary.md` section 10.
+
 ## 7. Transformation rules (exact)
 
-1. **Parse** by header **name** (never position), with the dash or dot format decided **per column per file** (one file has dotted identification times and dashed weighing times); retain `source_time_raw`. **Sort events by parsed time; never rely on row order** (files are out of order; one lists each session newest-first).
-2. **Timezone**: naive wall time interpreted as `Europe/Helsinki`, unless `config/timezone_overrides.yml` names the file (currently: `registered_2020_10_05-2020_10_18.csv: UTC`). Record `timezone_normalization`. The +3h normalisation is the strongest-supported decision from cross-export evidence; the source does not confirm the timezone. Detail in `docs/timezone_decision.md`.
+1. **Parse** by header **name** (never position), with the dash or dot format decided **per column per file** (one file has dotted identification times and dashed weighing times); retain `event_time_raw`. **Sort events by parsed time; never rely on row order** (files are out of order; one lists each session newest-first).
+2. **Timezone**: naive wall time interpreted as `Europe/Helsinki`, unless `config/timezone_overrides.yml` names the file (currently: `registered_2020_10_05-2020_10_18.csv: UTC`). Record `timezone_handling`. The +3h normalisation is the strongest-supported decision from cross-export evidence; the source does not confirm the timezone. Detail in `docs/timezone_decision.md`.
 3. **Population** = `registered_export` or `non_registered_export` from the file name prefix (config-driven). These labels are inherited from filenames and are not interpreted as customer-registration status. Never pooled.
 4. **Exact duplicates** (all source columns equal within one file): mark `is_exact_duplicate`, keep the first, exclude the rest from sums, log as `I02`.
 5. **Identity conflict**: any `session_id` present in both populations gets `identity_conflict = true` and is excluded from primary metrics (`I01`).
@@ -124,7 +132,7 @@ Rule taxonomy and full definitions in `docs/validation_rules.md`. Severities: `I
 | 3 | Raw preservation check, ingestion manifest, staging handoff | raw tree byte/mtime identical; `source_snapshot.csv`, `raw_artifact_manifest.csv`, `staging_handoff.json` | `FAILED` if raw changed |
 | 4 | Profiling | `profile_summary.csv` | `WARNING` |
 | 5 | Validation | `validation_issues.csv` | records issues; structural = `BLOCKED` |
-| 6 | Transformation | staging tables | `FAILED` |
+| 6 | Staging (WP3): verified raw to staging tables; canonical timestamps; field normalization | staging tables | `FAILED` |
 | 7 | External enrichment | `fact_weather` | `RECOVERED` (retry) / `WARNING` (partial) / `BLOCKED` for weather-dependent outputs only |
 | 8 | Reconciliation | `reconciliation_summary.csv` | `WARNING` |
 | 9 | Model build | SQLite | `FAILED` |

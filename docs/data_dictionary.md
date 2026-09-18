@@ -11,7 +11,7 @@ Written after inspecting the real files. Columns in the raw section are exactly 
 | Field | Description | Source | Original meaning | Type | Nullable? | Grain | Allowed values | Quality concerns | Transformation | Final model field |
 |---|---|---|---|---|---|---|---|---|---|---|
 | `session_id` | Identifier grouping events of one tray pass | CSV | `session<N>`, N = 0..3342, contiguous | string | No (0 empty) | event → session | `session\d+` | Appears in both exports for 2 IDs (`session2266`, `session3222`) | none; kept verbatim | `fact_weighing_event.session_id` |
-| `weighing_event_time` | When the scale recorded this component | CSV | wall-clock time, **no timezone stated** | string | No | event | `YYYY-MM-DD HH:MM:SS` (10,353 rows) or `YYYY.MM.DD HH:MM:SS` (1,931 rows) | One file (the dotted one) is 3 h behind the others (+3h is the strongest-supported normalisation, not source-confirmed); row order is not chronological in any file; 7 sessions span more than 10 min | raw kept as `source_time_raw`; parsed; converted to Europe/Helsinki using per-file registry | `event_time_local`, `source_time_raw`, `timezone_normalization` |
+| `weighing_event_time` | When the scale recorded this component | CSV | wall-clock time, **no timezone stated** | string | No | event | `YYYY-MM-DD HH:MM:SS` (10,353 rows) or `YYYY.MM.DD HH:MM:SS` (1,931 rows) | One file (the dotted one) is 3 h behind the others (+3h is the strongest-supported normalisation, not source-confirmed); row order is not chronological in any file; 7 sessions span more than 10 min | raw kept as `event_time_raw`; parsed; converted to Europe/Helsinki using per-file registry | `event_time_local`, `event_time_raw`, `timezone_handling` |
 | `weighting_type` (sic) | Kind of weighing | CSV | only value observed: `line` | string | **Column absent in 7 of 11 files**; 6,990 rows have no such column | event | `line` | Schema drift; spelling in source is `weighting_type` | if absent, NULL and INFO issue S03 | `weighing_type` |
 | `scale_identifier` | Physical scale at a serving station | CSV | `<line>-<side>-<kind><n>`, e.g. `koti2-vasen-salaatti3` | string | No | event | 30 distinct values; lines `koti2`, `vege2`; kinds `salaatti` (cold) / `lammin` (hot) | Stable key; parsing structure inferred from names | split into parts | `scale_id`, `dim_scale.{station_family, side, kind, position}` |
 | `weight_of_a_component` | Grams of one component when placed | CSV | grams, integer | integer | No (0 non-numeric) | event | 1..2097 observed; 0 and negative: none | 139 events = 1 g, 513 ≤ 3 g; 6 events ≥ 1,500 g; one 2,097 g | cast to integer; **no clipping** | `component_weight_g` (OBSERVED) |
@@ -46,10 +46,14 @@ XML `wfs:FeatureCollection`, one `BsWfs:BsWfsElement` per (time, parameter). Tim
 | `component_name_raw` | text | No | verbatim | OBSERVED |
 | `component_id_normalized` | text | No | trimmed, whitespace-collapsed, case-folded | DERIVED |
 | `component_weight_g` | integer | No | grams recorded by the scale | **OBSERVED** |
-| `source_time_raw` | text | No | verbatim source string | OBSERVED |
-| `event_time_local` | timestamp | No | Europe/Helsinki wall time | DERIVED |
-| `timezone_normalization` | text | No | `SOURCE_LOCAL_ASSUMED` or `NORMALISED_PLUS_3H_STRONGEST_SUPPORT` | DERIVED |
-| `identification_time_local` | timestamp | No | as above | DERIVED |
+| `event_time_raw` | text | No | verbatim source text; never overwritten | OBSERVED |
+| `event_time_local` | text | Yes | wall time after any file-specific normalization (naive ISO 8601); NULL if unparseable | DERIVED |
+| `event_time_canonical_utc` | text | Yes | canonical instant (ISO 8601 `Z`); NULL when the local time is ambiguous, nonexistent or unparseable | DERIVED |
+| `event_time_status` | text | No | `OK`, `AMBIGUOUS`, `NONEXISTENT`, `UNPARSEABLE` | DERIVED |
+| `timezone_handling` | text | No | `SOURCE_LOCAL_ASSUMED`, or `NORMALISED_PLUS_3H_STRONGEST_SUPPORT` for the one file-specific override (not source-confirmed) | DERIVED |
+| `timezone_offset_hours_applied` | int | No | 0, or 3 for the override file | DERIVED |
+| `timezone_transformation_reason` | text | No | why the treatment was applied, e.g. `cross-export temporal alignment (file-specific, evidence-backed; not source-confirmed)` | DERIVED |
+| `identification_time_raw`, `identification_time_local`, `identification_time_canonical_utc`, `identification_time_status` | text | as above | the same three-part treatment for the identification time | DERIVED |
 | `weighing_type` | text | Yes | `line` or NULL | OBSERVED |
 | `is_exact_duplicate` | bool | No | identical repeat of an earlier row in the same file | DERIVED |
 | `quality_status` | text | No | `VALID`, `WARN`, `INVALID` | DERIVED |
@@ -123,10 +127,53 @@ XML `wfs:FeatureCollection`, one `BsWfs:BsWfsElement` per (time, parameter). Tim
 | Field | Values |
 |---|---|
 | `population` | `registered_export`, `non_registered_export` |
-| `timezone_normalization` | `SOURCE_LOCAL_ASSUMED`, `NORMALISED_PLUS_3H_STRONGEST_SUPPORT` |
+| `timezone_handling` | `SOURCE_LOCAL_ASSUMED`, `NORMALISED_PLUS_3H_STRONGEST_SUPPORT`, `SOURCE_UTC_STATED` |
+| `local_time_status` | `OK`, `AMBIGUOUS`, `NONEXISTENT`, `UNPARSEABLE` |
+| `weight_parse_status` | `OK`, `NOT_INTEGER`, `EMPTY` |
+| `row_parse_status` | `OK`, `SHORT_ROW`, `EXTRA_CELLS` |
+| `value_status` | `OK`, `NAN_SOURCE_NULL`, `UNPARSEABLE` |
 | `quality_status` | `VALID`, `WARN`, `INVALID` |
 | `distinct_component_count_status` | `READY_WITH_LIMITATION`, `LIMITED` |
 | `severity` | `INFO`, `WARN`, `ERROR` |
 | `handling` | `FLAG`, `QUARANTINE`, `BLOCK`, `KEEP_FIRST` |
 | evidence status | `READY`, `READY_WITH_LIMITATION`, `BLOCKED` |
 | pipeline outcome | `RECOVERED`, `WARNING`, `FAILED`, `BLOCKED` |
+
+## 10. Staging tables (WP3)
+
+Staging sits between the verified raw files and the canonical model. It **preserves and normalises; it does not judge**: every source
+row is kept (duplicates, odd weights, odd timestamps), raw text is stored beside every normalised value, and every row carries its
+lineage. Written to `outputs/staging/` (tables are regenerable and ignored by git; the summary and reconciliation are tracked).
+
+### 10.1 `stg_weighing_event` (grain: one source data row = one component weighing event)
+
+| Field group | Fields | Notes |
+|---|---|---|
+| Identity and lineage | `event_id` (`source_file#source_row_number`), `source_snapshot_id`, `raw_artifact_id`, `source_file`, `source_row_number`, `raw_row_sha256`, `schema_variant`, `schema_fingerprint` | row number counts non-blank data rows, 1-based; `raw_row_sha256` is over the raw cells |
+| Population | `population`, `session_id`, `session_key` (`session_id\|population`) | the two populations are never merged |
+| Keys | `tray_id`, `scale_id` | verbatim |
+| Scale structure | `scale_line`, `scale_side`, `scale_kind`, `scale_position` | inferred from the name; NULL where unparseable |
+| Component | `component_name_raw`, `component_id_normalized`, `component_name_had_edge_whitespace` | trim, collapse whitespace, casefold; **no alias table** |
+| Weight | `weight_raw`, `component_weight_g`, `weight_parse_status`, `weighing_type` | `weighing_type` is read from the source column `weighting_type` (sic); NULL where the column is absent |
+| Event time | `event_time_raw`, `event_time_source_format`, `event_time_local`, `event_time_canonical_utc`, `event_time_status` | see below |
+| Identification time | `identification_time_raw`, `identification_time_source_format`, `identification_time_local`, `identification_time_canonical_utc`, `identification_time_status` | same treatment |
+| Zone handling | `timezone_handling`, `timezone_offset_hours_applied`, `timezone_transformation_reason` | |
+| Drift | `row_parse_status`, `unmapped_cells` | extra columns and cells beyond the header are preserved as JSON |
+
+**Timestamp model.** `*_raw` is the text exactly as written and is never overwritten. `*_canonical_utc` is a UTC instant. For
+`SOURCE_LOCAL_ASSUMED` rows the wall time is read as Europe/Helsinki local time using real zoneinfo rules (the study period crosses the
+2020-10-25 clock change, so the offset is +3 h before it and +2 h after). A wall time that occurs twice or never is `AMBIGUOUS` or
+`NONEXISTENT`, and its canonical UTC is NULL: it is never guessed. For the one override file the raw time is first shifted by +3 h
+(`cross-export temporal alignment`, file-specific, not source-confirmed) and then converted by the same path; within the validated
+date range that reproduces the raw time read as UTC.
+
+### 10.2 `stg_weather_observation` (grain: one FMI observation element = one (time, parameter) in one response file)
+
+`observation_id`, `source_snapshot_id`, `raw_artifact_id`, `source_file`, `element_index`, `fmisid`, `obs_time_raw`, `obs_time_canonical_utc`,
+`timezone_handling` (`SOURCE_UTC_STATED`), `parameter`, `value_raw`, `value`, `value_status`. NaN is stored as NULL with status
+`NAN_SOURCE_NULL`, never zero.
+
+### 10.3 Other staging outputs
+
+`staging_file_reconciliation.csv` (per member: rows verified at ingestion vs staged, population, zone handling, status counts) and
+`staging_summary.json` (counts, statuses, declared transformations, output checksums).

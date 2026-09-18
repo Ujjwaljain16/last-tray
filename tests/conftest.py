@@ -67,3 +67,26 @@ def no_network(monkeypatch):
     monkeypatch.setattr(socket.socket, "connect", refuse)
     monkeypatch.setattr(socket, "create_connection", refuse)
     monkeypatch.setattr(socket, "getaddrinfo", refuse)
+
+
+class RealStaging:
+    """One real ingestion + staging run over the committed data, shared by many tests (read-only)."""
+
+    def __init__(self, out, result, handoff, events, weather):
+        self.out, self.result, self.handoff, self.events, self.weather = out, result, handoff, events, weather
+
+
+@pytest.fixture(scope="session")
+def real_staging(tmp_path_factory, cfg):
+    import pandas as pd
+
+    from src.ingest.handoff import VerifiedReader, load_handoff
+    from src.ingest.ingest import run_ingestion
+    from src.stage.stage import run_staging
+
+    out = tmp_path_factory.mktemp("real_staging")
+    run_ingestion(cfg, REPO, out)
+    handoff = load_handoff(out / "ingestion" / "staging_handoff.json")
+    result = run_staging(cfg, VerifiedReader(REPO, handoff), out)
+    read = lambda n: pd.read_csv(out / "staging" / n, dtype=str, keep_default_na=False)      # every cell as text: no float surprises
+    return RealStaging(out, result, handoff, read("stg_weighing_event.csv"), read("stg_weather_observation.csv"))

@@ -49,12 +49,22 @@ def test_stages_ingest_succeeds_offline_and_writes_only_ingestion_outputs(tmp_pa
     assert (out / "ingestion" / "staging_handoff.json").is_file()
 
 
+def test_stages_stage_runs_ingestion_then_staging_and_reports_the_counts(tmp_path):
+    out = tmp_path / "out"
+    r = run("--stages", "stage", "--out", str(out))
+    assert r.returncode == 0, r.stderr
+    assert "Staging (verified reads only)" in r.stdout and "events staged: 12,284" in r.stdout and "weather observations staged: 4,516" in r.stdout
+    assert "3,343 ids / 3,345 (session_id, population) keys" in r.stdout
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging"}
+    assert (out / "staging" / "stg_weighing_event.csv").is_file() and (out / "staging" / "staging_summary.json").is_file()
+
+
 def test_full_run_is_honest_that_later_stages_do_not_exist_yet(tmp_path):
     out = tmp_path / "out"
     r = run("--out", str(out))
     assert r.returncode == 3, "a run that cannot complete every stage must not exit 0"
-    assert "not implemented yet" in r.stderr and "Outputs cover ingestion only" in r.stderr
-    assert {p.name for p in out.iterdir()} == {"ingestion"}, "no metrics, model or evidence files may appear before those stages exist"
+    assert "not implemented yet" in r.stderr and "Outputs cover ingestion and staging only" in r.stderr
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging"}, "no validation, model, metrics or evidence files may appear before those stages exist"
 
 
 def test_missing_core_source_exits_4_names_the_fetch_command_and_downloads_nothing(tmp_path):
@@ -94,3 +104,32 @@ def test_fetch_command_exists_and_documents_that_it_is_the_only_network_command(
     r = run("--help", module="src.pipeline.fetch")
     assert r.returncode == 0 and "--source" in r.stdout and "--refresh" in r.stdout and "--print-pins" in r.stdout
     assert "Never edits pins" in r.stdout
+
+
+def test_a_core_failure_removes_stale_staging_tables_and_exits_4(tmp_path):
+    root = fake_repo(tmp_path)
+    out = tmp_path / "out"
+    assert run("--stages", "stage", "--repo-root", str(root), "--out", str(out)).returncode == 0
+    assert (out / "staging" / "stg_weighing_event.csv").is_file()
+    (root / "data" / "raw" / "flavoria" / "dataset_csv.tar").unlink()
+    r = run("--stages", "stage", "--repo-root", str(root), "--out", str(out))
+    assert r.returncode == 4
+    assert not (out / "staging" / "stg_weighing_event.csv").exists(), "a stale staging table must not survive a failed run"
+
+
+def test_a_weather_problem_never_stops_core_staging(tmp_path):
+    root = fake_repo(tmp_path, drop=("data/raw/weather/fmi_100949_20201012_20201018.xml",))
+    out = tmp_path / "out"
+    r = run("--stages", "stage", "--repo-root", str(root), "--out", str(out))
+    assert r.returncode == 6 and "Core outputs are unaffected" in r.stderr
+    assert (out / "staging" / "stg_weighing_event.csv").is_file(), "core staging must be produced even though weather is blocked"
+    assert not (out / "staging" / "stg_weather_observation.csv").exists()
+
+
+def test_a_weather_failure_removes_only_the_stale_weather_table(tmp_path):
+    root = fake_repo(tmp_path)
+    out = tmp_path / "out"
+    assert run("--stages", "stage", "--repo-root", str(root), "--out", str(out)).returncode == 0
+    (root / "data" / "raw" / "weather" / "fmi_100949_20201012_20201018.xml").unlink()
+    assert run("--stages", "stage", "--repo-root", str(root), "--out", str(out)).returncode == 6
+    assert (out / "staging" / "stg_weighing_event.csv").is_file() and not (out / "staging" / "stg_weather_observation.csv").exists()
