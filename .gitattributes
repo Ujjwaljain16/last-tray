@@ -1,0 +1,9 @@
+# Text files are stored and checked out with LF on every operating system, so outputs and hashes are identical everywhere.
+* text=auto eol=lf
+
+# Raw source artifacts are byte-exact and pinned by SHA-256 (config/sources.yml). NEVER normalise their line endings.
+data/raw/** -text -diff
+
+# Binary files
+*.png binary
+*.tar binary
