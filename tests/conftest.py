@@ -122,3 +122,19 @@ def real_model(real_validation, cfg):
     from src.model.build import run_model
 
     return RealModel(real_validation.out, run_model(cfg, real_validation.out))
+
+
+class RealMetrics:
+    """Metrics computed over the shared real canonical model (read-only for tests)."""
+
+    def __init__(self, out, result):
+        self.out, self.result = out, result
+        self.rows = {r["metric_id"]: r for r in result.rows}
+        self.checks = {c.check_id: c for c in result.checks}
+
+
+@pytest.fixture(scope="session")
+def real_metrics(real_model, cfg):
+    from src.metrics.evaluate import run_metrics
+
+    return RealMetrics(real_model.out, run_metrics(cfg, real_model.out))

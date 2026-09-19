@@ -104,4 +104,5 @@ outputs/     validation/  reconciliation/  metrics/  evidence/  run_manifest.jso
 | 3 Stage | **done** (see WP3 checkpoint report) |
 | 4 Validate | **done** (see WP4 checkpoint report) |
 | 5 Model | **done** (see WP5 checkpoint report) |
-| 6-10 | not started |
+| 6 Metrics | **done** (see WP6 checkpoint report) |
+| 7-10 | not started |

@@ -103,3 +103,56 @@ WHERE s.derived_selected_meal_weight_g <> e.w;      -- must return no rows
 ## 7. Sensitivity contract
 
 `outputs/validation/sensitivity_analysis.csv`: 25 scenarios. The baseline row (S00) must equal the rows above. Scenarios S20-S22 (volume) are **analysis only**: they measure the effect of excluding days that the pipeline never excludes. The timezone is **not** selected by the KPIs: TZ2, TZ3 and TZ4 are identical on every KPI, so cross-export evidence, not KPI sensitivity, selects +3h.
+
+## 8. WP6 implementation (metrics and evidence)
+
+Implemented in `src/metrics/` and run by `python -m src.pipeline.run --stages metrics`. Outputs in `outputs/metrics/`: `metrics.csv`,
+`metric_evidence.csv`, `metric_summary.json`, `metric_contracts.json` (each contract with its computed value, tolerance and pass/fail),
+`metric_controls.csv` and `metrics_report.md`. Computation (`compute.py`), contracts (`contracts.py`) and presentation (`evaluate.py`)
+are separate files. The metrics read only the canonical model tables, verified against the model manifest (D54); they never read staging or raw files.
+
+### Populations (a metric always names one; there is no default)
+
+| | Name | Definition | Sessions |
+|---|---|---|---:|
+| A | `all_observed_sessions` | every `(session_id, population)` key, whatever its status | 3,345 |
+| B | `non_quarantined_modelled_sessions` | not quarantined and at least one modellable event | 3,341 |
+| C | `eligible_registered_export_sessions` | every registered-export session key, counted before any quarantine (M5's fixed denominator) | 1,699 |
+| D | `core_ready_registered_export_sessions` | C that meets the core readiness criteria: the approved measurement population | 1,697 |
+| E | `non_registered_export_sessions` | the other export; diagnostic; never pooled with C or D | 1,646 |
+
+M1-M4 use D. M5, S1, S2 and S2D use C as the denominator (M5's numerator is D). No headline metric uses A, B or E.
+
+### Results
+
+| ID | Metric | Value | Population | Numerator / denominator | Approved (tolerance) |
+|---|---|---|---|---|---|
+| M1 | Median Derived Selected Meal Weight | 499 g | D | n = 1,697 | 499.0 (exact) |
+| M2 | P90 Derived Selected Meal Weight | 1,039.6 g | D | n = 1,697 | 1,039.6 (0.05) |
+| M3 | Observed Valid Sessions — Registered-Export Population | 1,697 | D | count | 1,697 (exact) |
+| M4 | Median Distinct Normalized Components per Session | 5 | D | n = 1,697 | 5 (exact) |
+| M5 | Core Measurement Readiness | 99.88% | D over C | 1,697 / 1,699 | 99.88 (0.005) |
+| S1 | Weather Context Coverage | 99.88% | C | 1,697 / 1,699 | 99.88 (0.005), see below |
+| S2 | Warn-Free Rate | 97.88% | C | 1,663 / 1,699 | 97.88 (0.005) |
+| S2D | Warn-Free Rate incl. event-level warnings (diagnostic) | 97.70% | C | 1,660 / 1,699 | 97.70 (0.005) |
+| W1 | Direct Food Waste Measurement | BLOCKED / SOURCE GAP | n/a | none | no value |
+
+**Percentile method.** M2 is linear interpolation at position `(n - 1) * 0.90` of the sorted weights: the numpy/pandas default, R type 7, and
+equal to `statistics.quantiles(..., n=10, method="inclusive")[8]`, which a control checks. It is not nearest-rank.
+
+**M5 and S2 measure different things.** M5 is a readiness ratio: core-ready over eligible, where the 2 missing sessions are the quarantined crossover
+sessions. S2 additionally leaves out the 34 core-ready sessions that carry a session-level WARN (B04, B07, T04, T05, I06), which stay in every KPI
+(1,663 + 34 + 2 = 1,699). S2D also counts event-level WARNs (B02, I02; three more sessions) and never replaces S2. Neither is a measure of accuracy.
+
+**S1 and the quarantined sessions (differs from the Phase 2 expectation).** The definition above fixes S1's denominator at 1,699 and the Phase 2 dry run
+expected all 1,699 to match, on the assumption that the pipeline would also join the two quarantined sessions. The canonical model deliberately does not
+join quarantined sessions (`weather_join_status = NOT_ATTEMPTED_QUARANTINED`, D52). S1 is therefore 1,697 / 1,699 = 99.88%: the same numerator as the
+Phase 2 dry run (1,697 core-ready sessions matched, 1,697 of 1,697), and the two "unmatched" sessions are not-attempted, not missing weather. Precipitation
+NULLs at the matched hours: 67 sessions for `r_1h`, 25 for `ri_10min`.
+
+**W1.** The Flavoria system documents lunch-line waste measurement keyed on tray; the public data reachable here has no such records. Status BLOCKED / SOURCE GAP, value
+empty, no formula, no estimate, no proxy. The configuration refuses to load if the waste source is not BLOCKED, and the metric layer refuses any row that
+is about waste, consumption, leftovers or intake other than the blocked W1.
+
+**Failure policy.** A metric that misses its approved value or tolerance (or whose approved numerator or fixed denominator differs) is reported FAILED with the
+exact difference, the stage exits 4, and the formula is never adjusted. Missing or altered canonical inputs BLOCK the stage and remove stale metric files.

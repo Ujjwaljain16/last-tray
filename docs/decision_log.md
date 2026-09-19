@@ -515,3 +515,53 @@ See D23. *vs plan: NEW* · 2026-09-19. Recorded separately so the wording is not
 - **Why.** Documentation that cannot drift from the code.
 - **Business impact.** A reviewer can read one table and trust it.
 - **Residual uncertainty.** None.
+
+## D54. Metrics read only verified canonical tables; computation, contract and presentation are separate
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `src/metrics` reads the canonical model tables and nothing else (never staging or raw files). It trusts a table only if it matches the SHA-256, header and row count in the model manifest, the manifest reports a BUILT core lane with no failed control, and the model was built on the validation run on disk. `compute.py` holds pure calculations, `contracts.py` holds the definition, population, formula, exclusions, interpretation and limitation of every metric as data, and `evaluate.py` joins them, judges each result and writes the files. Interpretation text is never inside a calculation.
+- **Evidence.** Tests alter or delete each canonical table, the manifest and the validation run id; every case blocks the stage and removes stale metric files. A static check and a runtime file-open spy show WP6 reads only `model/` and the validation summary. A forged session weight with a valid re-signed checksum is caught by the event-level control MC07 (one forged weight can leave the median and P90 within tolerance, so the controls matter).
+- **Alternatives tested.** Recomputing weights from staging (WP5 owns the derived field); mixing wording into the calculations (would let presentation change a number).
+- **Chosen approach.** Verify, compute, judge, present.
+- **Why.** A reviewer must be able to audit a number without reading prose, and read prose without trusting arithmetic.
+- **Business impact.** Every reported value has a contract, a population and a lineage.
+- **Residual uncertainty.** None.
+
+## D55. Named populations; no implicit choice; ratio metrics have fixed, checked denominators
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Five named populations (A all observed, B non-quarantined modelled, C eligible registered-export, D core-ready registered-export, E non-registered-export). Every computation takes its population as an explicit argument (no default) and the contract names the one it must use; a result on another population is judged FAILED. M5, S1, S2 and S2D also carry approved numerators and the fixed denominator 1,699, so a shrunk denominator fails even if it yields a plausible percentage.
+- **Evidence.** Negative tests attempt to pool populations, take M5's denominator after removal (100%), drop the quarantined sessions from eligibility, and relabel the event-level variant as S2; each is rejected.
+- **Alternatives tested.** A single "canonical sessions" filter (hides which denominator a ratio uses).
+- **Chosen approach.** Explicit populations, judged against the contract.
+- **Why.** The most common way to inflate a readiness figure is to shrink its denominator.
+- **Business impact.** M5 cannot be made to look better without failing its own contract.
+- **Residual uncertainty.** None.
+
+## D56. S1 follows its contract on the fixed 1,699 and reports the quarantine effect
+*vs plan: differs from the Phase 2 expectation* · 2026-09-19
+- **Decision.** S1 = eligible registered-export sessions with a joined weather observation over 1,699. The model does not join quarantined sessions (D52), so S1 is 1,697 / 1,699 = 99.88%, not the 1,699 / 1,699 the Phase 2 note expected. The approved numerator (1,697 matched core-ready sessions) is reproduced; the difference is the two quarantined sessions, reported as NOT_ATTEMPTED_QUARANTINED. Coverage among core-ready sessions is 1,697 of 1,697.
+- **Evidence.** `metric_controls.csv` MC22 lists the join statuses (MATCHED 1,697, NOT_ATTEMPTED_QUARANTINED 2).
+- **Alternatives tested.** Joining the quarantined sessions in WP6 (would silently change the WP5 model); shrinking S1's denominator to 1,697 (contradicts the fixed-denominator rule).
+- **Chosen approach.** Keep the contract denominator, keep the WP5 behaviour, disclose the difference.
+- **Why.** Neither an earlier expectation nor a percentage should override an approved rule or a model decision.
+- **Business impact.** None: S1 is context and never enters M1-M5.
+- **Residual uncertainty.** S1 equals M5 numerically because both are 1,697 / 1,699; they measure different things.
+
+## D57. A metric that misses its approved value fails; it is never recalibrated
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Each contract stores its approved value and tolerance (from the Phase 2 baseline and the golden values). A miss, a wrong population, or a wrong approved count makes the metric FAILED with the exact difference; the stage exits 4 and the outputs are still written so the discrepancy is visible. There is one statistical method per metric, documented in the contract (median; linear-interpolation P90).
+- **Evidence.** All approved values reproduce: M1 499, M2 1,039.6, M3 1,697, M4 5, M5 99.88%, S2 97.88%, S2D 97.70%; independent standard-library median and percentile agree.
+- **Alternatives tested.** Tuning a formula until a value matches (rejected by policy).
+- **Chosen approach.** Report the difference and stop.
+- **Why.** A number forced to agree proves nothing.
+- **Business impact.** Every figure is either the approved one or visibly flagged.
+- **Residual uncertainty.** None.
+
+## D58. A small evidence table, a blocked W1 row, and language limits
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `metric_evidence.csv` has ten rows: M1-M5, S1, S2, the blocked W1, and two context rows (quarantined session keys; observed volume regime flags), each with "What it tells us" and "What it does NOT tell us". W1 is emitted from the configured source gap with no value. Daily volume is described as "the observed volume regime differs from the weekday baseline", never as demand or as a data error; weather is coverage only. Output text is checked for affirmative use of customers, diners, visits, transactions, savings, and consumption or waste claims.
+- **Evidence.** Tests check the evidence table, the W1 row, the absence of any waste, consumption or intake metric or column, and the absence of causal wording.
+- **Alternatives tested.** One row per validation finding (noise); omitting W1 (hides the source gap).
+- **Chosen approach.** Few numbers, each with its limits.
+- **Why.** The assignment asks for evidence, not metric volume.
+- **Business impact.** The final README can reuse the table as it stands.
+- **Residual uncertainty.** None.

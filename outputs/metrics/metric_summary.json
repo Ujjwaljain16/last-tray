@@ -1,0 +1,199 @@
+{
+  "controls": {
+    "checks": 24,
+    "fail": 0,
+    "failed_checks": [],
+    "info": 6,
+    "pass": 18
+  },
+  "core_status": "PASSED",
+  "failed_metrics": [],
+  "metrics": {
+    "M1": {
+      "denominator": null,
+      "display": "499 g",
+      "numerator": null,
+      "population": "core_ready_registered_export_sessions",
+      "status": "PASS",
+      "value": 499.0
+    },
+    "M2": {
+      "denominator": null,
+      "display": "1,039.6 g",
+      "numerator": null,
+      "population": "core_ready_registered_export_sessions",
+      "status": "PASS",
+      "value": 1039.6
+    },
+    "M3": {
+      "denominator": null,
+      "display": "1,697 sessions",
+      "numerator": null,
+      "population": "core_ready_registered_export_sessions",
+      "status": "PASS",
+      "value": 1697
+    },
+    "M4": {
+      "denominator": null,
+      "display": "5 components",
+      "numerator": null,
+      "population": "core_ready_registered_export_sessions",
+      "status": "PASS",
+      "value": 5.0
+    },
+    "M5": {
+      "denominator": 1699,
+      "display": "99.88%",
+      "numerator": 1697,
+      "population": "eligible_registered_export_sessions",
+      "status": "PASS",
+      "value": 99.882284
+    },
+    "S1": {
+      "denominator": 1699,
+      "display": "99.88%",
+      "numerator": 1697,
+      "population": "eligible_registered_export_sessions",
+      "status": "PASS",
+      "value": 99.882284
+    },
+    "S2": {
+      "denominator": 1699,
+      "display": "97.88%",
+      "numerator": 1663,
+      "population": "eligible_registered_export_sessions",
+      "status": "PASS",
+      "value": 97.881107
+    },
+    "S2D": {
+      "denominator": 1699,
+      "display": "97.70%",
+      "numerator": 1660,
+      "population": "eligible_registered_export_sessions",
+      "status": "PASS",
+      "value": 97.704532
+    },
+    "W1": {
+      "denominator": null,
+      "display": "BLOCKED / SOURCE GAP",
+      "numerator": null,
+      "population": "n/a",
+      "status": "BLOCKED",
+      "value": null
+    }
+  },
+  "model_manifest_inputs": {
+    "input_fingerprint": "3f71e643244182b4",
+    "source_snapshot_ids": {
+      "flavoria": "flavoria-1b68c194acc5",
+      "fmi_weather": "fmi-8ab7d7d344b4"
+    },
+    "staging_table_sha256": {
+      "staging_file_reconciliation.csv": "514bbd8e4f669be096a8d8e1e08785e3ae7caa22fdc320e08d638f777f5de5b0",
+      "stg_weather_observation.csv": "f6371a9e91aa695f1de9cdfcf6dc2a00156fa070f2c749cf17124cbed6e27cce",
+      "stg_weighing_event.csv": "ce95acd47ad9065d4ba81b245986f9212292d48b79cdd6b48eec19ad1a2319f2"
+    },
+    "validation_output_sha256": {
+      "event_validation_status.csv": "180ad8b295dedcbb32109998f6ee42c0a6ec0fe79043b339c127715ec168f88e",
+      "field_completeness.csv": "6e4e8522588610f60f09eb68c8acdc398203b49128cad121f508a6c60bb85f30",
+      "quarantine_manifest.csv": "f79bed6b923f457e074e7975477897aa1148a5cb012b08bc580abb51b383412b",
+      "reconciliation_summary.csv": "0d58b2da32e4d64ed2ecdcd8899ab6c0edb01d1312d32a1192b15ab64fa44ab1",
+      "service_day_volume.csv": "5df69f32dbc95746675ee912c06b298f0c2678ecb7ad05bfb600eab65ddeb817",
+      "session_validation_status.csv": "7d7df056878729f0f0177299398a48bdd0d2235203f272126077c184e6749f7d",
+      "validation_issues.csv": "bc9907009dda332c1822015a8b870802b43fad5090b1e704b5ce6c2b0cb4478e",
+      "validation_summary_by_rule.csv": "fdf17e44a7d4b857de5c1ed29f1f955f632fb6950c808457921c435b5d791e73"
+    },
+    "validation_run_id": "val-f0bbad162772"
+  },
+  "percentile_method": "linear interpolation at position (n - 1) * q (numpy/pandas default, R type 7)",
+  "populations": {
+    "all_observed_sessions": {
+      "letter": "A",
+      "sessions": 3345
+    },
+    "core_ready_registered_export_sessions": {
+      "letter": "D",
+      "sessions": 1697
+    },
+    "eligible_registered_export_sessions": {
+      "letter": "C",
+      "sessions": 1699
+    },
+    "non_quarantined_modelled_sessions": {
+      "letter": "B",
+      "sessions": 3341
+    },
+    "non_registered_export_sessions": {
+      "letter": "E",
+      "sessions": 1646
+    }
+  },
+  "problems": {},
+  "semantic_chain": [
+    "OBSERVED component weighing events",
+    "DERIVED selected meal weight",
+    "UNKNOWN actual consumed quantity",
+    "SOURCE GAP actual food waste"
+  ],
+  "source_snapshot_id": "flavoria-1b68c194acc5",
+  "stage": "metrics",
+  "supporting_detail": {
+    "M1_min_max": [
+      3,
+      3427
+    ],
+    "M3_by_service_date": {
+      "2020-10-05": 41,
+      "2020-10-06": 51,
+      "2020-10-07": 65,
+      "2020-10-08": 9,
+      "2020-10-09": 4,
+      "2020-10-12": 61,
+      "2020-10-13": 75,
+      "2020-10-14": 71,
+      "2020-10-15": 2,
+      "2020-10-16": 6,
+      "2020-10-19": 86,
+      "2020-10-20": 87,
+      "2020-10-21": 70,
+      "2020-10-22": 5,
+      "2020-10-23": 10,
+      "2020-10-26": 88,
+      "2020-10-27": 100,
+      "2020-10-28": 88,
+      "2020-10-29": 7,
+      "2020-10-30": 12,
+      "2020-11-02": 14,
+      "2020-11-03": 95,
+      "2020-11-04": 107,
+      "2020-11-05": 18,
+      "2020-11-06": 83,
+      "2020-11-09": 80,
+      "2020-11-10": 94,
+      "2020-11-11": 69,
+      "2020-11-12": 18,
+      "2020-11-13": 14,
+      "2020-11-16": 22,
+      "2020-11-17": 19,
+      "2020-11-18": 18,
+      "2020-11-19": 12,
+      "2020-11-20": 96
+    },
+    "M4_distribution": {
+      "1": 17,
+      "2": 38,
+      "3": 177,
+      "4": 424,
+      "5": 579,
+      "6": 384,
+      "7": 77,
+      "8": 1
+    },
+    "S1_join_status": {
+      "MATCHED": 1697,
+      "NOT_ATTEMPTED_QUARANTINED": 2
+    }
+  },
+  "waste": "W1 BLOCKED / SOURCE GAP: no direct waste records are available; nothing is estimated from any weight or other proxy",
+  "weather_status": "PASSED"
+}

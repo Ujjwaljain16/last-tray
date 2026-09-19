@@ -378,3 +378,19 @@ working value, span, counts and first weighing, each MATCH, MISMATCH or EXCLUDED
 | `volume_irregularity` | boolean | DERIVED | no | C02b: observed regime differs from the weekday baseline; registered-export only; FLAG ONLY; not a data error, never excluded | rule C02b | lineage only |
 | `source_snapshot_id` | text | PROVENANCE | no | raw snapshot | sessions' source_snapshot_id | lineage only |
 | `source_files` | text | PROVENANCE | no | `;`-joined source files of the day's sessions | distinct source_files | lineage only |
+
+
+## 13. Metric outputs (WP6)
+
+Written to `outputs/metrics/` from the canonical model (all tracked; small). Contract, computation and presentation are separate (see `metric_contract.md` section 8).
+
+| File | Grain | Content |
+|---|---|---|
+| `metrics.csv` | one metric | the metric id, name, role, value, display value, unit, population and its definition, grain, numerator, denominator, n used, n excluded against the fixed eligible population (1,699), formula, source tables, source snapshot, approved value, tolerance, status, evidence status, interpretation and limitation |
+| `metric_evidence.csv` | one evidence row | Metric, Value, Population, Grain, What it tells us, What it does NOT tell us, records used, records excluded, evidence status |
+| `metric_contracts.json` | one metric contract | every contract field plus the computed value, numerator, denominator, pass/fail and any problems |
+| `metric_summary.json` | run | values, populations, controls, supporting detail (M3 by service date, M4 distribution), semantic chain, waste status |
+| `metric_controls.csv` | one control | 24 cross-checks (PASS / FAIL / INFO): populations, weights against the event fact, independent statistics, components, volume, readiness accounting, weather, semantics |
+| `metrics_report.md` | report | the evidence table, results, populations, why M5 and S2 differ, the W1 statement |
+
+`status` is PASS, FAIL or BLOCKED. `evidence_status` is READY_WITH_LIMITATION or BLOCKED. `value` is empty for W1; there is no waste, consumption, leftover or intake column anywhere.

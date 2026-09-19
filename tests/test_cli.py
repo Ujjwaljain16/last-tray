@@ -75,8 +75,8 @@ def test_full_run_is_honest_that_later_stages_do_not_exist_yet(tmp_path):
     out = tmp_path / "out"
     r = run("--out", str(out))
     assert r.returncode == 3, "a run that cannot complete every stage must not exit 0"
-    assert "not implemented yet" in r.stderr and "Outputs cover ingestion, staging, validation and the canonical model only" in r.stderr
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model"}, "no metrics, sensitivity or evidence files may appear before those stages exist"
+    assert "not implemented yet" in r.stderr and "Outputs cover ingestion, staging, validation, the canonical model and the metrics only" in r.stderr
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics"}, "no sensitivity or final evidence files may appear before those stages exist"
 
 
 def test_missing_core_source_exits_4_names_the_fetch_command_and_downloads_nothing(tmp_path):
@@ -195,3 +195,33 @@ def test_a_weather_problem_exits_6_but_the_core_model_is_still_built(tmp_path):
     r = run("--stages", "model", "--repo-root", str(root), "--out", str(out))
     assert r.returncode == 6 and "core lane   : BUILT" in r.stdout and "weather lane: BLOCKED" in r.stdout
     assert (out / "model" / "fact_dining_session.csv").is_file() and not (out / "model" / "fact_weather.csv").exists()
+
+
+def test_stages_metrics_computes_the_approved_metrics_and_blocks_waste(tmp_path):
+    out = tmp_path / "out"
+    r = run("--stages", "metrics", "--out", str(out))
+    assert r.returncode == 0, r.stderr
+    assert "Metrics (canonical model only)" in r.stdout and "core lane   : PASSED" in r.stdout
+    for line in ("M1  499 g", "M2  1,039.6 g", "M3  1,697 sessions", "M4  5 components", "M5  99.88%", "S2  97.88%", "W1  BLOCKED / SOURCE GAP"):
+        assert line in r.stdout, line
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics"}
+    assert (out / "metrics" / "metrics.csv").is_file() and (out / "metrics" / "metric_evidence.csv").is_file()
+
+
+def test_a_core_failure_removes_stale_metric_outputs_and_exits_4(tmp_path):
+    root = fake_repo(tmp_path)
+    out = tmp_path / "out"
+    assert run("--stages", "metrics", "--repo-root", str(root), "--out", str(out)).returncode == 0
+    assert (out / "metrics" / "metrics.csv").is_file()
+    (root / "data" / "raw" / "flavoria" / "dataset_csv.tar").unlink()
+    r = run("--stages", "metrics", "--repo-root", str(root), "--out", str(out))
+    assert r.returncode == 4 and "Metrics (canonical model only)" in r.stdout
+    assert not list((out / "metrics").glob("*")), "stale metrics must not survive a failed run"
+
+
+def test_a_weather_problem_exits_6_but_the_core_metrics_are_still_computed(tmp_path):
+    root = fake_repo(tmp_path, drop=("data/raw/weather/fmi_100949_20201012_20201018.xml",))
+    out = tmp_path / "out"
+    r = run("--stages", "metrics", "--repo-root", str(root), "--out", str(out))
+    assert r.returncode == 6 and "M1  499 g" in r.stdout and "weather lane: BLOCKED" in r.stdout
+    assert (out / "metrics" / "metrics.csv").is_file()
