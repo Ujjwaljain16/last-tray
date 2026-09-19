@@ -1,6 +1,8 @@
-# Implementation Plan (proposed, awaiting review)
+# Implementation Plan (historical: written before implementation)
 
-Nothing below has been built. The Phase 2 research scripts in `research/phase2/` are historical evidence and are **not** the pipeline; production code will be written fresh under `src/`, with the exploration numbers used as regression anchors.
+> **Status.** Work packages 1-8 have since been delivered (pipeline, validation, model, metrics, sensitivity, orchestration) and WP9 documentation is in place; see `pipeline.md` and `decision_log.md`. The text below is the original plan and is kept as history. Where it says something is not yet built, that was true when it was written.
+
+Original statement: nothing below had been built. The Phase 2 research scripts in `research/phase2/` are historical evidence and are **not** the pipeline; production code will be written fresh under `src/`, with the exploration numbers used as regression anchors.
 
 ## Principles
 

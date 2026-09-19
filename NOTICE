@@ -38,8 +38,19 @@ PROVENANCE
 
 Exact URLs, versions, retrieval dates, checksums and snapshot identifiers: docs/data_provenance.md and config/sources.yml.
 
+OWNERSHIP AND LIMITS
+--------------------
+
+No ownership is claimed over any external data. The raw files under data/raw/ belong to their providers and are redistributed
+unmodified under the licences above. Everything derived (sessions, derived selected meal weights, metrics, sensitivity
+analysis, documentation) is this project's own work and is not published or endorsed by the providers.
+
+Access limits: the Flavoria Lunch Line Waste, Weigh & Dine, Cash Register, Building Data, MyFlavoria and survey data are not
+publicly accessible in a usable form. None of it is held, used, or reproduced here. The Flavoria Data Catalog pages state no
+licence or terms, so only short factual phrases are quoted, with links.
+
 CODE
 ----
 
-The licence for this project's own code has not been decided. It will be chosen in the final licence, secrets and raw-data
-audit, before any public repository is created.
+The licence for this project's own code has not been decided. It must be chosen (by the project owner) before any public
+repository is created. Until then the code is not offered under any open-source licence.

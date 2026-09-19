@@ -34,7 +34,7 @@ All changes below **have been applied** to the documents named. Reasons and evid
 
 ## Other documents changed
 
-`validation_rules.md` (rewritten with final thresholds and observed counts; B06 retired; S08, T09, I07, C02a/b added), `data_dictionary.md` (fields, population codes, dotted identification times, `fact_daily_volume`), `source_of_truth.md`, `assumptions_limitations.md` (K8-K15, A1-A8, Q1-Q13), `population_decision.md`, `timezone_decision.md`, `decision_log.md`.
+`validation_rules.md` (rewritten with final thresholds and observed counts; B06 retired; S08, T09, I07, C02a/b added), `data_dictionary.md` (fields, population codes, dotted identification times, `fact_daily_volume`), `source_truth_decisions.md`, `known_unknowns_assumptions_limitations.md` (K8-K15, A1-A8, Q1-Q13), `population_decision.md`, `timezone_decision.md`, `decision_log.md`.
 
 ## Not changed
 

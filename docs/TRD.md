@@ -1,6 +1,6 @@
 # LAST TRAY: Technical Requirements (v2, source-verified)
 
-Companion to `docs/PRD.md`. Status: **specification frozen for review; no production code exists yet.**
+Companion to `docs/PRD.md`. Status: **historical design specification (v2, written before implementation). It has since been implemented (WP1-WP8); where this document and the code differ, the code, `pipeline.md` and `decision_log.md` are authoritative.**
 
 ## 1. Design principles
 
@@ -134,16 +134,18 @@ Rule taxonomy and full definitions in `docs/validation_rules.md`. Severities: `I
 Validation reads only staging tables verified against the checksums, headers and row counts staging recorded (D44). It never opens
 `data/raw`. Findings carry a stable schema and row lineage; quarantine is a flag plus a manifest at `(session_id, population)` grain and
 deletes nothing (D45); `events_in = modelled + duplicates_excluded + quarantined` is checked (C04). A missing or altered staging table
-stops the core lane (exit 4) and removes stale validation outputs; a damaged weather table blocks weather checks only (exit 6). Outputs are
+stops the core lane (exit 7 since WP8; 4 was the earlier single core code) and removes stale validation outputs; a damaged weather table blocks weather checks only (exit 6). Outputs are
 byte-identical across runs. See `validation_rules.md` "WP4 implementation" and `data_dictionary.md` section 11.
 
 ### 8.2 Canonical model stage (WP5)
 
 The model reads only verified staging and verified WP4 outputs (D49), reconstructs the selected meal weight independently and compares it with
-WP4's working value (D50), and blocks with no canonical rows if any control fails. A missing or altered input stops the core lane (exit 4) and
+WP4's working value (D50), and blocks with no canonical rows if any control fails. A missing or altered input stops the core lane (exit 8 since WP8) and
 removes stale model files; a weather problem blocks `fact_weather` only (exit 6). Outputs are byte-identical across runs. See D49-D53.
 
 ## 9. Pipeline
+
+> **Implemented status (WP8).** The design below is the original plan. What was built is described in `pipeline.md`: six gated stages (ingest, stage, validate, model, metrics, sensitivity), statuses PASSED / FAILED / BLOCKED / INVALIDATED / NOT_RUN / REUSED instead of RECOVERED / WARNING, exit codes 0, 2, 4-11, and `outputs/pipeline/run_manifest.json`. Where the two differ, `pipeline.md` is authoritative.
 
 `python -m src.pipeline.run [--stages ingest|all] [--out outputs]` : **always offline**. It never downloads. If a raw source is missing it fails and names the explicit retrieval command.
 

@@ -1,6 +1,8 @@
-# LAST TRAY: Product Requirements (v3, final for implementation review)
+# LAST TRAY: Product Requirements (v3, historical: written before implementation)
 
-**Flavoria DiningOps Truth.** Supersedes the ChatGPT-drafted `plan.md` (kept as history). Every change from that plan is in `docs/decision_log.md`.
+> **Status.** This is the requirements document the implementation followed. The implemented behaviour, final metric wording and evidence are in `README.md`, `final_evidence.md` and `decision_log.md`; where they differ, those are authoritative.
+
+**Flavoria DiningOps Truth.** Supersedes the original ChatGPT-drafted plan (an early working document, not included in this repository). Every change from that plan is in `docs/decision_log.md`.
 
 > The client scenario is **simulated for educational purposes**. The data and documentation are real and public, published by the University of Turku and collaborators. We are not working for, and do not speak for, Flavoria, the University of Turku, or any partner.
 
@@ -133,4 +135,4 @@ Baseline values (Phase 2 preview, to be reproduced by the pipeline): M1 = 499 g,
 
 ## 14. Open questions
 
-`docs/assumptions_limitations.md`, "Unresolved questions".
+`docs/known_unknowns_assumptions_limitations.md`, "Unresolved questions".

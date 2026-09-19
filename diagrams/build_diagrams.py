@@ -68,18 +68,19 @@ def zone(ax, x, y, w, h, label, col="#9ca3af"):
 
 
 def legend(ax, y=1.6):
-    items = [("obs", "OBSERVED"), ("der", "DERIVED"), ("unk", "UNKNOWN"), ("gap", "SOURCE GAP")]
+    items = [("obs", "OBSERVED"), ("der", "DERIVED"), ("ext", "CONTEXT (external)"), ("unk", "UNKNOWN"), ("gap", "SOURCE GAP")]
     x = 2
     for k, t in items:
         fc, ec = C[k]
         ax.add_patch(FancyBboxPatch((x, y), 2.2, 1.9, boxstyle="round,pad=0.1", fc=fc, ec=ec, lw=2,
                                     ls="--" if k == "gap" else "-"))
         ax.text(x + 3.2, y + 0.95, t, fontsize=11.5, va="center", color=INK)
-        x += 15
+        x += 19
 
 
 def save(fig, name):
     fig.savefig(OUT / name, bbox_inches="tight", facecolor="white")
+    fig.savefig(OUT / name.replace(".png", ".svg"), bbox_inches="tight", facecolor="white", metadata={"Date": None})   # editable vector copy
     plt.close(fig)
 
 
@@ -116,111 +117,128 @@ def source_map():
 
 # 2. WORKFLOW -----------------------------------------------------------------------------
 def workflow():
-    fig, ax = canvas(16, 9, "Business workflow: what the data can see",
-                     "The public data covers only the first half of a diner's path through the restaurant")
-    y = 40
+    fig, ax = canvas(16, 9, "Workflow: from dining activity to evidence",
+                     "What is observed, what is derived, what is unknown, and what is a source gap. Public research data, not a live operational feed.")
+    w, gap = 11.6, 2.3
     steps = [
-        (2.5, "Take tray\nRFID tray_id", "obs"),
-        (19, "Select and weigh\neach component\n(grams per scale)", "obs"),
-        (35.5, "Tray identified\n(identification\ntime)", "obs"),
-        (52, "Checkout scale\nWeigh & Dine total", "gap"),
-        (68.5, "Eat", "unk"),
-        (84, "Return tray\nwaste station", "gap"),
+        ("DINING\nACTIVITY\nlunch line, one\ntray pass", "obs"),
+        ("TRAY / SESSION\nIDENTIFICATION\ntray_id,\nsession_id", "obs"),
+        ("COMPONENT\nWEIGHING EVENTS\n12,284 events\n(grams per scale)", "obs"),
+        ("DERIVED SESSION\nMEASUREMENT\nselected meal\nweight, 1,697 core-\nready sessions", "der"),
+        ("AVAILABLE\nCONTEXT\nFMI weather by\nhour (context only)", "ext"),
+        ("VALIDATION /\nRECONCILIATION\nrules, quarantine,\nidentities", "pipe"),
+        ("EVIDENCE\nM1-M5, S2,\nsensitivity,\nW1 BLOCKED", "pipe"),
     ]
-    for x, t, k in steps:
-        box(ax, x, y, 13.5, 14, t, k, 11.5, dashed=(k == "gap"))
-    for i in range(len(steps) - 1):
-        x1 = steps[i][0] + 13.5
-        x2 = steps[i + 1][0]
-        arrow(ax, x1, y + 7, x2, y + 7, "obs" if i < 2 else "gap", dashed=i >= 2, lw=2.2)
+    y, h = 55, 24
+    xs = []
+    x = 1.2
+    for t, k in steps:
+        box(ax, x, y, w, h, t, k, 10.2, bold=False)
+        xs.append(x)
+        x += w + gap
+    kinds = ["obs", "obs", "der", "ext", "pipe", "pipe"]
+    for i in range(6):
+        arrow(ax, xs[i] + w, y + h / 2, xs[i + 1], y + h / 2, kinds[i], lw=2.0)
+    ax.text(1.2, y + h + 3.2, "OBSERVED", fontsize=11, color=C["obs"][1], fontweight="bold")
+    ax.text(xs[3], y + h + 3.2, "DERIVED (our rule)", fontsize=11, color=C["der"][1], fontweight="bold")
+    ax.text(xs[4], y + h + 3.2, "CONTEXT", fontsize=11, color=C["ext"][1], fontweight="bold")
+    ax.text(xs[5], y + h + 3.2, "CONTROLS", fontsize=11, color=C["pipe"][1], fontweight="bold")
 
-    # derived session bracket
-    ax.plot([2.5, 2.5, 49.2, 49.2], [58, 61, 61, 58], color=C["der"][1], lw=2.6)
-    box(ax, 12, 63, 28, 8, "DINING SESSION (derived)\nevents grouped by session_id", "der", 12, True)
-    ax.text(26, 56.3, "we reconstruct this; the source never states it", ha="center", fontsize=11, color=C["der"][1], style="italic")
-
-    # measurement callouts
-    box(ax, 5, 18, 43, 13, "DERIVED: derived_selected_meal_weight_g\n= sum of component events in the session\nNOT an observed meal weight", "der", 12, True)
-    arrow(ax, 26, 31.3, 26, 39.4, "der", lw=2)
-    box(ax, 55, 18, 20.5, 13, "UNKNOWN\nconsumed quantity\n(never measured)", "unk", 12, True)
-    box(ax, 78, 18, 19.5, 13, "SOURCE GAP\nwaste_weight_g = NULL\nnever 0", "gap", 12, True, dashed=True)
-    arrow(ax, 75.2, 39.4, 65.5, 31.4, "unk", lw=2)
-    arrow(ax, 90.7, 39.4, 88, 31.4, "gap", dashed=True, lw=2)
-    ax.text(50, 11.2, "selected weight  ≠  consumption  ≠  waste", ha="center", fontsize=17, fontweight="bold", color=INK)
-    legend(ax, 2.2)
+    # what the chain does not reach
+    box(ax, 4, 24, 20, 12, "ACTUAL CONSUMPTION", "unk", 11.5, True)
+    box(ax, 32, 24, 20, 12, "NOT OBSERVED\nno source measures it", "unk", 11.5, True)
+    arrow(ax, 24.4, 30, 31.6, 30, "unk", lw=2.0)
+    box(ax, 4, 6, 20, 12, "FOOD WASTE", "gap", 11.5, True, dashed=True)
+    box(ax, 32, 6, 24, 12, "REQUIRED SOURCE\nNOT ACCESSIBLE", "gap", 11.5, True, dashed=True)
+    box(ax, 64, 6, 22, 12, "SOURCE GAP\nW1 BLOCKED, never 0", "gap", 11.5, True, dashed=True)
+    arrow(ax, 24.4, 12, 31.6, 12, "gap", dashed=True, lw=2.0)
+    arrow(ax, 56.4, 12, 63.6, 12, "gap", dashed=True, lw=2.0)
+    arrow(ax, xs[3] + w / 2, y - 0.4, 14, 36.6, "unk", dashed=True, lw=1.6)
+    ax.text(58, 30, "selected weight  is not  consumption,\nconsumption  is not  waste", fontsize=15, fontweight="bold", color=INK, va="center")
+    ax.text(58, 22, "Only the first half of the diner's path is public.\nEvery number above the line is a reconstruction, never a waste figure.", fontsize=11, color="#4b5563", va="center")
+    legend(ax, 0.2)
     save(fig, "workflow.png")
 
 
 # 3. DATA MODEL ---------------------------------------------------------------------------
 def data_model():
-    fig, ax = canvas(16, 9, "Data model",
-                     "Grain first: the atomic row is a weighing event; the session is derived")
-    box(ax, 2, 58, 29, 25, "fact_weighing_event\n\nGRAIN: one component\nweighing event\nkey: event_id (file + row)\ncomponent_weight_g  OBSERVED", "obs", 11)
-    box(ax, 36, 58, 30, 25, "fact_dining_session\n\nGRAIN: one derived session\n(session_id x population)\nderived_selected_meal_weight_g\ncore_ready (excludes weather)", "der", 11)
-    box(ax, 71, 58, 27, 25, "fact_session_component\n\nGRAIN: one distinct\ncomponent in one session\nderived_component_weight_g", "der", 11)
-    arrow(ax, 31.5, 70.5, 35.5, 70.5, "obs", label="group", ly=0.8)
-    arrow(ax, 66.5, 70.5, 70.5, 70.5, "der", label="split", ly=0.8)
+    fig, ax = canvas(16, 9, "Business data model",
+                     "Grain first: the atomic row is a weighing event; the session is derived; the session key is (session_id, population)")
+    box(ax, 1.5, 58, 29, 24, "fact_weighing_event\n\nGRAIN: one component\nweighing event  (12,284)\ncomponent_weight_g  OBSERVED", "obs", 10.5)
+    box(ax, 36, 58, 31, 24, "fact_dining_session\n\nGRAIN: one derived session\nkey (session_id, population)  (3,345)\nderived_selected_meal_weight_g\ncore_ready flag", "der", 10.5)
+    box(ax, 72, 58, 26.5, 24, "fact_session_component\n\nGRAIN: one distinct component\nin one session  (11,925)\nderived_component_weight_g", "der", 10.5)
+    arrow(ax, 30.8, 70, 35.6, 70, "obs", label="group", ly=0.8)
+    arrow(ax, 67.2, 70, 71.6, 70, "der", label="split", ly=0.8)
 
-    box(ax, 2, 30, 22, 20, "dim_scale\n\nGRAIN: one physical\nscale (30 scales)", "aud", 10.5)
-    arrow(ax, 13, 50.4, 13, 57.6, "aud", lw=2)
-    box(ax, 26, 30, 22, 20, "fact_daily_volume\n\nGRAIN: one service date\nx population\nflags only, never\nexcludes a day", "der", 10.5)
-    arrow(ax, 40, 57.6, 40, 50.6, "der", lw=2)
-    box(ax, 50, 30, 22, 20, "fact_weather\n\nGRAIN: one station\nx UTC hour\nNULL kept as NULL", "ext", 10.5)
-    arrow(ax, 58, 57.6, 58, 50.6, "ext", dashed=True, label="context join", lx=8, ly=-1.5)
-    box(ax, 74, 30, 24, 20, "waste_weight_g\nSOURCE GAP\nalways NULL in MVP,\nnever 0", "gap", 11, True, dashed=True)
-    arrow(ax, 84, 57.6, 86, 50.6, "gap", dashed=True, lw=2)
+    box(ax, 1.5, 33, 22, 16, "fact_validation_issue\nvalidation_issues.csv\none rule finding on\none event or session", "aud", 10)
+    arrow(ax, 12.5, 49.4, 12.5, 57.6, "aud", lw=2)
+    box(ax, 26, 33, 22, 16, "fact_daily_volume\n\none service date x\npopulation; flags only,\nnever excludes a day", "der", 10)
+    arrow(ax, 44, 57.6, 44, 49.4, "der", lw=2)
+    box(ax, 50.5, 33, 22, 16, "fact_weather\n\none station x UTC hour\nCONTEXT; NULL kept", "ext", 10)
+    arrow(ax, 61.5, 57.6, 61.5, 49.4, "ext", dashed=True, label="context join", lx=8, ly=-2.2)
+    box(ax, 75.5, 33, 23, 16, "waste_weight_g\nSOURCE GAP\nnever produced; never 0", "gap", 10.5, True, dashed=True)
+    arrow(ax, 88, 57.6, 88, 49.4, "gap", dashed=True, lw=2)
 
-    ax.text(2, 24.5, "Audit tables: nothing is silently dropped", fontsize=11.5, color="#6b7280", style="italic")
-    box(ax, 2, 10, 29, 11, "fact_validation_issue\none rule violation on one record", "aud", 10.5)
-    box(ax, 36, 10, 30, 11, "raw_file_manifest\none raw file in one run", "aud", 10.5)
-    box(ax, 71, 10, 27, 11, "pipeline_run\none execution", "aud", 10.5)
-    legend(ax, 0.6)
+    box(ax, 1.5, 6, 29, 14, "pipeline_run / provenance\nrun_manifest.json, source snapshot,\nraw_artifact_manifest (checksums)", "aud", 10)
+    box(ax, 36, 3.5, 62.5, 19, "Why session_id alone is not enough\nsession2266 and session3222 appear in BOTH exports: 3,343 distinct session_ids but 3,345 keys.\nThe same ID in two exports is two records, not one session, so the key is (session_id, population).\nBoth crossover keys are quarantined and never pooled.", "der", 10, align="left")
+    legend(ax, 0.0)
     save(fig, "data-model.png")
 
 
 # 4. PIPELINE -----------------------------------------------------------------------------
 def pipeline():
     fig, ax = canvas(16, 9, "Pipeline: python -m src.pipeline.run",
-                     "Core lane and context lane are independent: weather can fail without touching the KPIs")
-    zone(ax, 1.5, 55, 97, 32, "CORE LANE (gate: raw checksum, required columns, no unexplained event loss)", C["pipe"][1])
-    core = [
-        ("1-3\nDiscover, ingest,\npreserve raw\n+ manifest", "pipe"),
-        ("4\nProfile", "pipe"),
-        ("5\nValidate\nquarantine", "pipe"),
-        ("6, 9\nTransform,\nbuild model", "der"),
-        ("10\nMetrics\nM1-M5", "der"),
-        ("11\nEvidence\ntable", "der"),
-    ]
-    w, gap = 13.5, 2.7
-    x = 3
+                     "Six gated stages, offline by default; a failed stage blocks everything after it and removes its stale outputs")
+    names = [("ingest", "outputs/ingestion", "pinned raw files,\nchecksums, schema"), ("stage", "outputs/staging", "verified reads only"), ("validate", "outputs/validation", "rules, quarantine"),
+             ("model", "outputs/model", "facts, controls"), ("metrics", "outputs/metrics", "M1-M5, S2,\nW1 BLOCKED"),("sensitivity", "outputs/evidence", "scenarios, robustness")]
+    w, gap, y, h = 14.2, 2.4, 52, 26
+    x = 1.2
     xs = []
-    for t, k in core:
-        box(ax, x, 59, w, 20, t, k, 11.5)
+    for i, (n, d, t) in enumerate(names):
+        box(ax, x, y, w, h, f"{i + 1}  {n}\n\n{t}\n\n{d}", "pipe" if i < 3 else "der", 10.2)
         xs.append(x)
         x += w + gap
-    for i in range(len(core) - 1):
-        arrow(ax, xs[i] + w, 69, xs[i + 1], 69, "pipe", lw=2.2)
-
-    zone(ax, 1.5, 24, 64, 27, "CONTEXT LANE (failure = BLOCKED weather outputs only)", C["ext"][1])
-    box(ax, 3, 28, 18, 16, "7\nFMI retrieve\nretry + backoff", "ext", 11.5)
-    box(ax, 24, 28, 18, 16, "7\nParse XML\nNULL stays NULL", "ext", 11.5)
-    box(ax, 45, 28, 18, 16, "8\nHour join\nS1 coverage", "ext", 11.5)
-    arrow(ax, 21, 36, 24, 36, "ext")
-    arrow(ax, 42, 36, 45, 36, "ext")
-    arrow(ax, 54, 44.4, 54, 58.6, "ext", dashed=True, label="enrich only", lx=6, ly=-3)
-
-    box(ax, 70, 26, 28, 22, "12-13  Gates + manifest\nCore gate: pass / fail\nContext gate: pass / fail\nrun_manifest.json + log", "pipe", 11.5, True)
-    arrow(ax, 84, 58.6, 84, 48.4, "pipe", lw=2.2)
-
-    ax.text(2, 18, "Failure classes", fontsize=12.5, fontweight="bold", color=INK)
-    fc = [("RECOVERED", "retry or fallback worked"), ("WARNING", "output with a stated limitation"),
-          ("FAILED", "stage could not run; stop"), ("BLOCKED", "one output impossible")]
-    for i, (a, b) in enumerate(fc):
-        ax.text(2 + i * 24.5, 12.5, a, fontsize=12.5, fontweight="bold", color=C["pipe"][1])
-        ax.text(2 + i * 24.5, 8.5, b, fontsize=10.5, color="#4b5563")
-    ax.text(2, 2.5, "Rerun on the same inputs: same row counts, same hashes, no duplicates.  --offline reproduces from saved raw files.",
-            fontsize=11.5, color=INK, style="italic")
+    for i in range(5):
+        arrow(ax, xs[i] + w, y + h / 2, xs[i + 1], y + h / 2, "pipe", lw=2.0)
+    ax.text(1.2, y + h + 3, "GATE: a stage runs only if the previous one passed; each stage re-verifies its upstream checksums, headers and row counts", fontsize=11.5, color=C["pipe"][1], fontweight="bold")
+    box(ax, 1.2, 26, 45, 19, "On failure: later stages BLOCKED (not run, stale outputs removed)\nExit code names the first failed stage: 4 source, 7 validation,\n8 model, 9 metrics, 10 sensitivity, 11 orchestration\nWeather-only problem: exit 6, core outputs unaffected", "aud", 10.8, align="left")
+    box(ax, 50, 26, 48.6, 19, "outputs/pipeline/: run_manifest.json (run id, snapshot ids, config\nfingerprint, per-stage status, output SHA-256), stage_summary.csv,\npipeline_controls.csv (P01-P11), runtime_summary.json, run_log.jsonl\nAtomic writes; same inputs give byte-identical outputs", "pipe", 10.8, align="left")
+    ax.text(1.2, 16.5, "Default run is OFFLINE: it never downloads. A missing raw source fails with exit 4 and names python -m src.pipeline.fetch.", fontsize=11.5, color=INK)
+    ax.text(1.2, 11.5, "Resume: --resume-from <stage> re-runs from that stage; reused stages are checked against the last manifest, never trusted because a file exists.", fontsize=11.5, color=INK)
+    ax.text(1.2, 6.5, "Reproducible: a clean clone reproduced every output byte for byte and passed the full test suite.", fontsize=11.5, color=INK, style="italic")
     save(fig, "pipeline.png")
+
+
+# 5. M1 / M2 DISTRIBUTION -------------------------------------------------------------------
+def weight_distribution():
+    """Reads outputs/model/fact_dining_session.csv (regenerate it first: python -m src.pipeline.run)."""
+    import csv
+
+    with (OUT.parent / "outputs" / "model" / "fact_dining_session.csv").open(newline="", encoding="utf-8") as fh:
+        weights = [float(r["derived_selected_meal_weight_g"]) for r in csv.DictReader(fh)
+                   if r["population"] == "registered_export" and r["core_ready"] == "true" and r["derived_selected_meal_weight_g"]]
+    weights.sort()
+    n = len(weights)
+    m1 = (weights[(n - 1) // 2] + weights[n // 2]) / 2
+    pos = 0.9 * (n - 1)
+    lo = int(pos)
+    m2 = weights[lo] + (pos - lo) * (weights[min(lo + 1, n - 1)] - weights[lo])
+    fig, ax = plt.subplots(figsize=(11, 6.2), dpi=110)
+    ax.hist(weights, bins=range(0, 3501, 50), color=C["der"][0], edgecolor=C["der"][1], lw=1.0)
+    ax.axvline(m1, color=C["obs"][1], lw=2.4)
+    ax.axvline(m2, color=C["gap"][1], lw=2.4, ls="--")
+    top = ax.get_ylim()[1]
+    ax.text(m1 + 15, top * 0.94, f"M1 median\n{m1:,.0f} g", color=C["obs"][1], fontweight="bold", va="top")
+    ax.text(m2 + 15, top * 0.94, f"M2 P90\n{m2:,.1f} g", color=C["gap"][1], fontweight="bold", va="top")
+    ax.set_xlim(0, 3500)
+    ax.set_xlabel("Derived selected meal weight per session (grams, sum of component weighing events)")
+    ax.set_ylabel(f"Sessions (n = {n:,})")
+    ax.set_title("Derived selected meal weight, registered-export core-ready sessions", loc="left", fontsize=15, fontweight="bold", color=INK)
+    ax.spines[["top", "right"]].set_visible(False)
+    fig.text(0.01, -0.02, "Population: core_ready_registered_export_sessions (baseline; 50 g bins). Weight is derived from observed component events. It is what was selected at the\n"
+             "lunch line, not what was consumed and not food waste. P90 uses linear interpolation. Source: outputs/model/fact_dining_session.csv.", fontsize=9, color="#4b5563", va="top")
+    save(fig, "weight-distribution.png")
+    return n, m1, m2
 
 
 if __name__ == "__main__":
@@ -228,4 +246,5 @@ if __name__ == "__main__":
     workflow()
     data_model()
     pipeline()
+    print("weight-distribution", weight_distribution())
     print("ok")

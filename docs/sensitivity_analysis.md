@@ -5,10 +5,10 @@ Every scenario changes one assumption of the approved baseline and recomputes th
 M4 5, M5 99.88%, S2 97.88%, W1 BLOCKED / SOURCE GAP) and is never overwritten or tuned. A scenario is a **sensitivity test, not an alternative truth**, and no scenario
 is chosen because it gives a better number. This is not a leaderboard.
 
-**How it runs.** `python -m src.pipeline.run --stages sensitivity` reads only the verified canonical model tables (never staging or raw files), runs the scenarios
+**How it runs.** `python -m src.pipeline.run` (stage `sensitivity`) reads only the verified canonical model tables (never staging or raw files), runs the scenarios
 declared in `src/sensitivity/registry.py`, and writes `outputs/evidence/`: `scenario_registry.json` and `.csv` (the declarations), `sensitivity_results.csv` (one row per scenario),
 `metric_sensitivity.csv` (one row per metric and scenario), `timezone_evidence.csv`, `evidence_matrix.csv`, `uncertainty_register.csv`, `sensitivity_summary.json`,
-`sensitivity_controls.csv` and four figures. It **fails** (exit 4) if the baseline moves or an approved Phase 2 reference stops reproducing, and reports the difference instead of adjusting anything.
+`sensitivity_controls.csv` and four figures. It **fails** (exit 10) if the baseline moves or an approved Phase 2 reference stops reproducing, and reports the difference instead of adjusting anything.
 
 **Phase 2 provenance.** The 25 approved Phase 2 scenarios (S00-S40) were produced by `research/phase2/phase2_e_sensitivity.py`; all 25 are reproduced here from the canonical model
 (M1 and M2 within 0.05 g, counts exact), including the weather consequences of each timezone hypothesis. One scenario is new: **G01**, a forbidden guardrail.

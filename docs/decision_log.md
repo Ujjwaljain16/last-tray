@@ -1,6 +1,6 @@
 # Decision Log
 
-Every material decision has the same seven parts: **Decision, Evidence, Alternatives tested, Chosen approach, Why, Business impact, Residual uncertainty.** "vs plan" says whether the original `plan.md` was confirmed, changed, or silent. Sensitivity scenario IDs (S00, TZ0 ...) refer to `outputs/validation/sensitivity_analysis.csv`.
+Every material decision has the same seven parts: **Decision, Evidence, Alternatives tested, Chosen approach, Why, Business impact, Residual uncertainty.** "vs plan" says whether the original draft plan (an early working document, not included in this repository) was confirmed, changed, or silent. Sensitivity scenario IDs (S00, TZ0 ...) refer to `outputs/validation/sensitivity_analysis.csv`.
 
 Population labels are inherited from source filenames and are not interpreted semantically. Diagnostic thresholds in this log are derived from observed data structure and are not claims of physical impossibility.
 
@@ -156,7 +156,7 @@ Population labels are inherited from source filenames and are not interpreted se
 - **Business impact.** Crossovers are visible instead of silently merged.
 - **Residual uncertainty.** None.
 
-## D16. Placeholder numbers from `plan.md` are not used
+## D16. Placeholder numbers from the original plan are not used
 *vs plan: CONFIRMED as illustrative only* · 2026-09-18
 - **Decision.** "12,384 sessions / 642 g / 97.6%" never appear.
 - **Evidence.** Actual: 3,343 IDs, M1 499 g.

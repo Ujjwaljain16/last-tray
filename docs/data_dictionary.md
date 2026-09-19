@@ -424,3 +424,21 @@ Written to `outputs/pipeline/` by every `python -m src.pipeline.run`. Definition
 | `run_manifest.json` | run | run id, pipeline version, started/finished, elapsed, target, resume point, exit code and meaning, weather flag, config fingerprint (per-file SHA-256), provenance (input fingerprint, snapshot ids, validation run id, 18 links), per-stage record with counts and output path/SHA-256/size (not tracked) |
 | `runtime_summary.json` | run | total and per-stage seconds, output bytes, optional peak Python allocation (not tracked) |
 | `run_log.jsonl` | event | `ts, run_id, event, stage, status` plus counts or reason (not tracked) |
+
+## 16. Glossary (plain English)
+
+The terms below are used in the README and the evidence table. Each states what it means, its grain, whether it is observed or derived, and what it does **not** mean.
+
+| Term | Meaning | Grain | Observed / derived | Does NOT mean |
+|---|---|---|---|---|
+| **Weighing event** | A scale recorded a weight for one named component at one moment | one row of the source (12,284) | OBSERVED | a whole meal, or anything eaten |
+| **Component** | One named item weighed on one scale (a dish or side). Counted within a session by its normalised name | one distinct component in one session | OBSERVED name, DERIVED count | a recipe, a dish identity that holds across days or exports |
+| **Session** | The weighing events that share one `session_id` within one population: one tray pass through the weighed line | one row of `fact_dining_session` (3,345) | DERIVED (the source never states it) | a person, a whole visit, a purchase or a meal eaten |
+| **Session key** | `(session_id, population)`. `session_id` alone is not enough because two IDs (`session2266`, `session3222`) occur in both exports | one session | DERIVED | a person identifier |
+| **Population** | Which export a record came from, taken from the file-name prefix: registered-export (primary, the measurement population) or non-registered-export (diagnostic, never pooled) | one session | label inherited from file names | customer-registration status, or a business segment (the source does not define the labels) |
+| **Derived selected meal weight** (`derived_selected_meal_weight_g`) | The sum of the observed component weighing events of a session, in grams, under our rule | one session | DERIVED from observed events | **consumed quantity, actual intake, food waste or leftover food** |
+| **Core-ready** | A registered-export session that is not quarantined, has at least one valid event, no ERROR-level finding, valid weights and parsed times. The measurement population (1,697 of 1,699) | one session | DERIVED status | that the data is error-free, or that the session is typical |
+| **Warn-free** | A core-ready session with no session-level WARN finding (S2, 1,663 of 1,699) | one session | DERIVED status | a second readiness score, or a claim that flagged sessions are wrong |
+| **Quarantine** | A record kept in the model, flagged and listed, but excluded from the measurement population until the source owner resolves it (the two crossover sessions) | one session key | DERIVED status | deletion: quarantined records are never removed |
+| **Observed volume** | The count of sessions observed on a service date in one population (`fact_daily_volume`, M3 for the measurement population) | one service date × population | DERIVED count of observed sessions | how many people came, or demand |
+| **Weather observation** | One FMI reading (`t2m`, `ws_10min`, `r_1h`, `ri_10min`) for one hour at Turku Artukainen, joined to a session by the hour-ending observation | one station × one UTC hour | OBSERVED (by FMI) | on-site weather, or a cause of anything |
