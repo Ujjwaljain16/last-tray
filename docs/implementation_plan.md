@@ -37,7 +37,7 @@ outputs/     validation/  reconciliation/  metrics/  evidence/  run_manifest.jso
 | **5** Model | SQLite build (drop and recreate in one transaction), sessions, session components, weather, daily volume, flags | 3, 4 | M | invariants I-1 to I-10 hold |
 | **6** Metrics | M1-M5, S1-S4, W1 `BLOCKED`, `final_evidence.csv`, `kpi_summary.csv`, `measurement_readiness.csv`, `population_diagnostics.csv` | 5 | M | baseline values reproduced exactly |
 | **7** Sensitivity | the 25 scenarios, baseline row equals headline KPIs | 6 | M | `sensitivity_analysis.csv` matches the exploration file |
-| **8** Orchestration | `python -m src.pipeline.run`, stage statuses `RECOVERED/WARNING/FAILED/BLOCKED`, core and context gates, `run_manifest.json`, per-run log | 2-7 | M | two runs give identical hashes; weather outage blocks only weather outputs |
+| **8** Orchestration | `python -m src.pipeline.run`, stage statuses `PASSED/FAILED/BLOCKED/INVALIDATED/NOT_RUN/REUSED`, core and context gates, exit classes 0/2/4/5/6-11, `run_manifest.json`, `stage_summary.csv`, `pipeline_controls.csv`, `runtime_summary.json`, per-run log; delivered in WP8, see `pipeline.md` | 2-7 | M | two runs give identical hashes; weather outage blocks only weather outputs |
 | **9** Docs and visuals | README, notebooks refreshed from real pipeline outputs, diagrams checked against the code, demo script and checklist | 8 | M | README matches implementation |
 | **10** Self-audit | ruthless evaluator-style review against the five grading areas | 9 | S | `final_self_audit.md` written, gaps listed honestly |
 

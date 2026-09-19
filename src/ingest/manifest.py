@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from src.config import Config
+from src.fsutil import atomic_path, atomic_write_text
 from src.ingest.hashing import digest_file
 from src.ingest.model import ArtifactStatus, IngestionResult, LaneOutcome, SchemaStatus
 
@@ -37,7 +38,7 @@ def _cell(v: Any) -> str:
 
 
 def write_csv(path: Path, rows: Iterable[Any], cols: list[str]) -> None:
-    with path.open("w", newline="", encoding="utf-8") as fh:
+    with atomic_path(path) as tmp, tmp.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh, lineterminator="\n")
         w.writerow(cols)
         for r in rows:
@@ -46,7 +47,7 @@ def write_csv(path: Path, rows: Iterable[Any], cols: list[str]) -> None:
 
 
 def write_json(path: Path, obj: Any) -> None:
-    path.write_text(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    atomic_write_text(path, json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
 
 
 def build_handoff(cfg: Config, result: IngestionResult) -> dict[str, Any]:

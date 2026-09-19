@@ -27,6 +27,17 @@ class ConfigError(Exception):
     """A configuration file is missing, malformed, or would change an approved decision."""
 
 
+# ---- approved decisions that configuration may NOT change (one place; every check below reads these) ------------------------------------------------
+APPROVED_OVERRIDE_OFFSET_HOURS = 3        # the file-specific normalization; its label NORMALISED_PLUS_3H_STRONGEST_SUPPORT names it
+APPROVED_READINESS_DENOMINATOR = "registered_export_session_ids_in_source"      # M5's denominator, counted before any removal or quarantine
+# (severity, handling) of every rule that config/thresholds.yml declares. A WARN or INFO rule may only FLAG; only T03 quarantines here.
+APPROVED_TREATMENT: dict[str, tuple[str, str]] = {
+    "B02": ("WARN", "FLAG"), "B03": ("INFO", "FLAG"), "B07": ("WARN", "FLAG"), "T05": ("WARN", "FLAG"), "T03": ("ERROR", "QUARANTINE"),
+    "T07": ("WARN", "FLAG"), "C02a": ("INFO", "FLAG"), "C02b": ("WARN", "FLAG"),
+}
+NETWORK_KEY_PARTS = ("auto_fetch", "auto_retriev", "auto_download", "download_on_missing", "fetch_on_missing", "allow_network", "network_retrieval")
+
+
 # ---- thresholds -----------------------------------------------------------------------------------------------
 @dataclass(frozen=True)
 class Rule:
@@ -281,6 +292,17 @@ def load_thresholds(path: Path) -> Thresholds:
         if rule.low is not None and not rule.low < rule.high:
             raise ConfigError(f"{where}: low ({rule.low}) must be below high ({rule.high})")
         rules[rid] = rule
+    for rid, rule in rules.items():
+        approved = APPROVED_TREATMENT.get(rid)
+        if approved is not None and (rule.severity.value, rule.handling.value) != approved:
+            raise ConfigError(f"{name}: rule {rid} must be {approved[0]}/{approved[1]}; changing its severity or handling would change an approved decision "
+                              "(a WARN or INFO rule never excludes a record; only ERROR rules quarantine)")
+        if approved is None and rule.handling in (Handling.QUARANTINE, Handling.BLOCK) and rule.severity is not Severity.ERROR:
+            raise ConfigError(f"{name}: rule {rid} excludes or blocks but is not ERROR: a non-ERROR rule may only FLAG")
+    denominator = (d.get("readiness") or {}).get("eligible_denominator")
+    if denominator != APPROVED_READINESS_DENOMINATOR:
+        raise ConfigError(f"{name}: readiness.eligible_denominator must be {APPROVED_READINESS_DENOMINATOR!r}, got {denominator!r}. "
+                          "M5's denominator is fixed before any removal or quarantine; changing it changes the meaning of M5")
     v = _need(d, "volume", name)
     regimes = _need(v, "expected_regime_by_weekday", f"{name}: volume")
     if set(regimes) != set(WEEKDAYS) or not set(regimes.values()) <= {"high", "low"}:
@@ -307,6 +329,9 @@ def load_timezone(path: Path) -> TimezoneConfig:
         label = _enum(TimezoneNormalization, _need(o, "label", where), where)
         if label is not TimezoneNormalization.NORMALISED_PLUS_3H_STRONGEST_SUPPORT:
             raise ConfigError(f"{where}: an override must carry the NORMALISED_PLUS_3H_STRONGEST_SUPPORT label")
+        if int(_need(o, "offset_hours", where)) != APPROVED_OVERRIDE_OFFSET_HOURS:
+            raise ConfigError(f"{where}: offset_hours must be {APPROVED_OVERRIDE_OFFSET_HOURS}. The approved normalization is the file-specific "
+                              f"+{APPROVED_OVERRIDE_OFFSET_HOURS}h named by its label; another offset is a sensitivity scenario, never a configuration")
         if o.get("source_confirmed") is not False:
             raise ConfigError(
                 f"{where}: source_confirmed must be false. The +3h normalisation is an evidence-backed engineering decision; "
@@ -367,9 +392,23 @@ def load_populations(path: Path) -> PopulationsConfig:
     )
 
 
+def _forbid_automatic_retrieval(node: Any, name: str, trail: str = "") -> None:
+    """Normal execution is offline. No configuration key may switch on automatic retrieval or downloading."""
+    if isinstance(node, dict):
+        for key, value in node.items():
+            where = f"{trail}.{key}" if trail else str(key)
+            if any(part in str(key).lower() for part in NETWORK_KEY_PARTS) and value not in (False, None, 0, "", "never"):
+                raise ConfigError(f"{name}: {where} enables automatic network retrieval. Retrieval is explicit only: python -m src.pipeline.fetch")
+            _forbid_automatic_retrieval(value, name, where)
+    elif isinstance(node, list):
+        for i, value in enumerate(node):
+            _forbid_automatic_retrieval(value, name, f"{trail}[{i}]")
+
+
 def load_sources(path: Path) -> SourcesConfig:
     d = _read(path)
     name = path.name
+    _forbid_automatic_retrieval(d, name)
     f = _need(d, "flavoria", name)
     arc = _need(f, "archive", f"{name}: flavoria")
     members = tuple(

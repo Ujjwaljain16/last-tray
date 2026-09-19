@@ -615,3 +615,53 @@ See D23. *vs plan: NEW* · 2026-09-19. Recorded separately so the wording is not
 - **Why.** The submission needs a compact, trustworthy story.
 - **Business impact.** README and demo can quote the evidence matrix and figures directly.
 - **Residual uncertainty.** None.
+
+## D64. One orchestrator, gates by stage result, first failure names the exit code
+*vs plan: NEW (extends the plan's stage statuses)* · 2026-09-19
+- **Decision.** `python -m src.pipeline.run` runs ingest, stage, validate, model, metrics and sensitivity in that fixed order. A stage runs only if the previous one passed; when one fails, every later stage is BLOCKED and its stale outputs are removed, and the exit code is the class of the first failed stage (4 source, 7 validation, 8 model, 9 metrics, 10 sensitivity, 11 orchestration). Code 3 is retired. A weather problem alone exits 6 and never closes the core gate; a core failure outranks it.
+- **Evidence.** Fake-stage tests for every failure position, and real-data failure injection for a tampered archive, a missing archive, a missing weather chunk, tampered staging, validation and canonical tables, a changed metric reference and an invalid registry.
+- **Alternatives tested.** Continuing after a failure and reporting all failures (rejected: later stages would read what the earlier stage refused); one exit code for every core failure (rejected: the caller could not tell which layer failed).
+- **Chosen approach.** Fail closed, name the layer.
+- **Why.** A downstream number built on a failed layer is worse than no number.
+- **Business impact.** A green run means all six layers were verified in this run.
+- **Residual uncertainty.** None.
+
+## D65. Nothing is skipped because a file exists; reuse is verified twice
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `--resume-from` reuses upstream artifacts, but each stage re-verifies its upstream contract (checksums, headers, row counts, run ids), and the reused stages' files are also compared with the hashes the previous `run_manifest.json` recorded; a difference fails that stage with its own exit class. Running fewer stages leaves later outputs alone only if upstream outputs are unchanged; otherwise they are removed (INVALIDATED).
+- **Evidence.** A validation summary edited in a field no later stage reads passes every stage check; only the manifest comparison catches it (test). Without a previous manifest, the stage checks still catch tampered staging, validation and canonical files (tests).
+- **Alternatives tested.** File-existence skipping (rejected: it trusts stale or edited files); hashing the summary inside the stage that writes it (impossible: a file cannot contain its own hash).
+- **Chosen approach.** Stage checks plus a manifest comparison at the orchestration layer.
+- **Why.** Each layer's summary is the root of trust for that layer; something outside it must notice a change to the root.
+- **Business impact.** A resumed run is as trustworthy as a full one, or it says exactly which file changed.
+- **Residual uncertainty.** With no previous manifest a resume relies on the stage checks alone; a field no stage reads could then be edited unnoticed, but it would not change any number.
+
+## D66. Atomic outputs, and outputs cleared before a run
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Every deterministic file is written to a same-directory temporary and moved with `os.replace` (`src/fsutil.py`); a failed write leaves the previous file or nothing and removes its temporary. `outputs/pipeline/` is cleared at the start of each run, so a previous manifest never looks current.
+- **Evidence.** Failure-injection tests: a failing `os.replace`, a writer that raises halfway, and an unwritable manifest (exit 11, no partial manifest, no temporary left).
+- **Alternatives tested.** Writing in place (rejected: a crash leaves a truncated file that parses as a shorter valid file).
+- **Chosen approach.** Temp file plus rename.
+- **Why.** A half-written table with a valid header is the worst failure mode.
+- **Business impact.** None visible; it removes a class of silent corruption.
+- **Residual uncertainty.** A crash between two files of one stage can leave the stage half-updated; the next run's stage checks reject it.
+
+## D67. Configuration cannot change an approved decision
+*vs plan: NEW* · 2026-09-19
+- **Decision.** The configuration loader refuses (exit 2, before any output is touched) a timezone offset other than +3, a changed M5 denominator token, an altered quarantine treatment, a non-ERROR rule that does anything but flag, and any key that asks for automatic retrieval. Alternatives (+2, +4, other treatments) remain sensitivity scenarios, never configuration.
+- **Evidence.** One test per refusal, each asserting that no output directory appears.
+- **Alternatives tested.** Trusting the configuration files as committed (rejected: an edited copy would silently produce different approved numbers).
+- **Chosen approach.** Guard the approved values where the configuration is loaded.
+- **Why.** The approved interpretation is a decision, not a parameter.
+- **Business impact.** A changed decision has to be a documented decision-log entry and a code change.
+- **Residual uncertainty.** None.
+
+## D68. What the run manifest records, and what git tracks
+*vs plan: NEW* · 2026-09-19
+- **Decision.** `run_manifest.json` records run id, pipeline version, times, snapshot ids, a config fingerprint, stage status, row counts, warning and error counts, elapsed time, exit status and the SHA-256 and size of every output, plus an 18-link provenance walk. `stage_summary.csv` and `pipeline_controls.csv` (deterministic, small) are tracked; the manifest, runtime summary and run log (wall-clock values) are ignored, like `ingestion_run.json`.
+- **Evidence.** Tests recompute every recorded hash from the file on disk and require that no output file is missing from the manifest.
+- **Alternatives tested.** Tracking the manifest (rejected: every run would dirty the working tree).
+- **Chosen approach.** Deterministic summaries in git, run metadata beside them.
+- **Why.** Reproducibility is judged on deterministic bytes; provenance is judged on the manifest of a run.
+- **Business impact.** A reviewer can regenerate and compare.
+- **Residual uncertainty.** None.

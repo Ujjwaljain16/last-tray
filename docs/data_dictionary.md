@@ -412,3 +412,15 @@ Written to `outputs/evidence/` (all tracked; small) by `python -m src.pipeline.r
 | `figures/*.png` | figure | four sensitivity figures |
 
 `robustness_class` is STABLE, SENSITIVE, CONDITIONAL, BLOCKED, or NOT_CLASSIFIED (the diagnostic population contrast S40 and the forbidden guardrail G01). There is no waste, consumption or leftover value in any file.
+
+## 15. Pipeline outputs (WP8)
+
+Written to `outputs/pipeline/` by every `python -m src.pipeline.run`. Definitions and gates: `pipeline.md`, decisions D64-D68. Stage names are `ingest, stage, validate, model, metrics, sensitivity`; statuses are `PASSED, FAILED, BLOCKED, INVALIDATED, NOT_RUN, REUSED`.
+
+| File | Grain | Content |
+|---|---|---|
+| `stage_summary.csv` | one stage | `stage, status, gate, exit_class, reason, warnings, errors, output_files, output_bytes, outputs_sha256, removed_outputs` (deterministic; tracked) |
+| `pipeline_controls.csv` | one control | `control_id` P01-P11, `control`, `status` PASS/FAIL/INFO, `detail` (deterministic; tracked) |
+| `run_manifest.json` | run | run id, pipeline version, started/finished, elapsed, target, resume point, exit code and meaning, weather flag, config fingerprint (per-file SHA-256), provenance (input fingerprint, snapshot ids, validation run id, 18 links), per-stage record with counts and output path/SHA-256/size (not tracked) |
+| `runtime_summary.json` | run | total and per-stage seconds, output bytes, optional peak Python allocation (not tracked) |
+| `run_log.jsonl` | event | `ts, run_id, event, stage, status` plus counts or reason (not tracked) |

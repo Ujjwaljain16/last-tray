@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from src.config import Config
+from src.fsutil import atomic_write_text
 from src.ingest.hashing import digest_file
 from src.ingest.manifest import write_csv, write_json
 from src.metrics import compute, contracts as ct
@@ -283,6 +284,6 @@ def run_metrics(cfg: Config, out_dir: Path) -> MetricsResult:
     write_csv(d / CONTROLS_CSV, [c.row() for c in res.checks], list(CONTROL_COLUMNS))
     write_json(d / CONTRACTS_JSON, res.contracts_out)
     write_json(d / SUMMARY_JSON, res.summary)
-    (d / REPORT_MD).write_text(_report(res, inp), encoding="utf-8", newline="\n")
+    atomic_write_text(d / REPORT_MD, _report(res, inp))
     res.hashes = {n: digest_file(d / n).sha256 for n in DETERMINISTIC_FILES}
     return res

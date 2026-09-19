@@ -1,0 +1,12 @@
+control_id,control,status,detail
+P01,"stages are exactly ingest, stage, validate, model, metrics, sensitivity in that order",PASS,ingest > stage > validate > model > metrics > sensitivity
+P02,no stage ran after a failed stage (gate held),PASS,none ran after a failure
+P03,a blocked or invalidated stage has no outputs left (stale outputs removed),PASS,no stale outputs
+P04,every recorded output hash matches the file on disk after the run,PASS,all match
+P05,no temporary (partially written) files remain,PASS,none
+P06,"the provenance chain is unbroken (fingerprints, snapshot ids, checksums, run ids agree across stages)",PASS,18 links checked
+P07,every stage that passed recorded at least one output,PASS,6 passed
+P08,raw files were unchanged during ingestion,PASS,verified by ingestion
+P09,weather-lane problems do not hide core results,INFO,weather lane not blocked
+P10,network retrieval,INFO,none: the pipeline has no download path; a missing raw source is a core failure naming the explicit fetch command
+P11,the exit code is one of the documented classes,PASS,exit 0

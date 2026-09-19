@@ -45,7 +45,7 @@ def test_stages_ingest_succeeds_offline_and_writes_only_ingestion_outputs(tmp_pa
     r = run("--stages", "ingest", "--out", str(out))
     assert r.returncode == 0, r.stderr
     assert "core lane   : OK" in r.stdout and "context lane: OK" in r.stdout and "21 VERIFIED" in r.stdout
-    assert {p.name for p in out.iterdir()} == {"ingestion"}
+    assert {p.name for p in out.iterdir()} == {"ingestion", "pipeline"}
     assert (out / "ingestion" / "staging_handoff.json").is_file()
 
 
@@ -55,7 +55,7 @@ def test_stages_stage_runs_ingestion_then_staging_and_reports_the_counts(tmp_pat
     assert r.returncode == 0, r.stderr
     assert "Staging (verified reads only)" in r.stdout and "events staged: 12,284" in r.stdout and "weather observations staged: 4,516" in r.stdout
     assert "3,343 ids / 3,345 (session_id, population) keys" in r.stdout
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging"}
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "pipeline"}
     assert (out / "staging" / "stg_weighing_event.csv").is_file() and (out / "staging" / "staging_summary.json").is_file()
 
 
@@ -67,16 +67,18 @@ def test_stages_validate_runs_validation_and_reports_the_quarantine(tmp_path):
     assert "findings    : 1,383 (ERROR 4, WARN 530, INFO 849)" in r.stdout
     assert "4 session keys (session2266, session3222), 22 events; kept, listed, never deleted" in r.stdout
     assert "35 pass, 0 warn, 0 fail, 11 info" in r.stdout
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation"}
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "pipeline"}
     assert (out / "validation" / "validation_issues.csv").is_file() and (out / "validation" / "quarantine_manifest.csv").is_file()
 
 
-def test_full_run_is_honest_that_later_stages_do_not_exist_yet(tmp_path):
+def test_full_run_completes_every_stage_exits_0_and_writes_the_pipeline_outputs(tmp_path):
     out = tmp_path / "out"
     r = run("--out", str(out))
-    assert r.returncode == 3, "a run that cannot complete every stage must not exit 0"
-    assert "not implemented yet" in r.stderr and "Outputs cover ingestion, staging, validation, the canonical model, the metrics and the sensitivity evidence only" in r.stderr
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "evidence"}, "no orchestration or gate outputs may appear before those stages exist"
+    assert r.returncode == 0, r.stderr
+    assert r.stderr == "", "a successful full run prints nothing to stderr"
+    assert "6 PASSED" in r.stdout and ", 0 fail;" in r.stdout
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "evidence", "pipeline"}
+    assert {p.name for p in (out / "pipeline").iterdir()} == {"run_manifest.json", "stage_summary.csv", "pipeline_controls.csv", "runtime_summary.json", "run_log.jsonl"}
 
 
 def test_missing_core_source_exits_4_names_the_fetch_command_and_downloads_nothing(tmp_path):
@@ -174,7 +176,7 @@ def test_stages_model_builds_the_canonical_tables_and_reports_the_counts(tmp_pat
     assert "Canonical model (verified inputs only)" in r.stdout and "core lane   : BUILT" in r.stdout
     assert "fact_weighing_event 12,284" in r.stdout and "fact_dining_session 3,345" in r.stdout and "fact_session_component 11,925" in r.stdout
     assert "fact_weather 1,129" in r.stdout and "fact_daily_volume 65" in r.stdout and "19 pass, 0 warn, 0 fail, 7 info" in r.stdout
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model"}
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "pipeline"}
     assert (out / "model" / "fact_dining_session.csv").is_file() and (out / "model" / "model_manifest.json").is_file()
 
 
@@ -204,7 +206,7 @@ def test_stages_metrics_computes_the_approved_metrics_and_blocks_waste(tmp_path)
     assert "Metrics (canonical model only)" in r.stdout and "core lane   : PASSED" in r.stdout
     for line in ("M1  499 g", "M2  1,039.6 g", "M3  1,697 sessions", "M4  5 components", "M5  99.88%", "S2  97.88%", "W1  BLOCKED / SOURCE GAP"):
         assert line in r.stdout, line
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics"}
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "pipeline"}
     assert (out / "metrics" / "metrics.csv").is_file() and (out / "metrics" / "metric_evidence.csv").is_file()
 
 
@@ -234,7 +236,7 @@ def test_stages_sensitivity_runs_the_scenarios_and_keeps_the_baseline_frozen(tmp
     assert "Sensitivity analysis (canonical model only)" in r.stdout and "26 registered; Phase 2 reproduced 25; guardrail G01" in r.stdout
     assert "M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88% (frozen)" in r.stdout
     assert "M1 493.0-505.0; M2 977.0-1,066.0" in r.stdout and "{'BLOCKED': 2, 'CONDITIONAL': 2, 'SENSITIVE': 3, 'STABLE': 6}" in r.stdout
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "evidence"}
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "evidence", "pipeline"}
     assert (out / "evidence" / "evidence_matrix.csv").is_file() and (out / "evidence" / "figures" / "m1_m2_sensitivity.png").is_file()
 
 

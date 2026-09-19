@@ -31,3 +31,11 @@ outputs/validation/event_validation_status.csv
 # Large regenerable canonical tables; the sessions, weather, volume, manifest and control files next to them ARE tracked
 outputs/model/fact_weighing_event.csv
 outputs/model/fact_session_component.csv
+
+# Interrupted-write temporaries (src/fsutil.py); a failed write removes its own
+.*.tmp-*
+
+# Pipeline run metadata carries wall-clock values (run id, times, elapsed); the deterministic stage_summary.csv and pipeline_controls.csv next to them ARE tracked
+outputs/pipeline/run_manifest.json
+outputs/pipeline/runtime_summary.json
+outputs/pipeline/run_log.jsonl

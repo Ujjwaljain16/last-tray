@@ -179,10 +179,14 @@ class TestNegativeAttempts:
         a = evidence.run_analysis(inp, cfg)
         assert a.failed and any("M1: baseline 504.0 differs from the approved 499.0" in p for p in a.baseline_problems)
 
-    def test_making_2h_the_production_timezone_is_detected(self, inp, config_copy):
-        from src.config import load_config
+    def test_making_2h_the_production_timezone_is_refused_at_configuration_and_again_by_the_analysis(self, inp, cfg, config_copy):
+        from src.config import ConfigError, load_config
         config_copy.edit("timezone_overrides.yml", "offset_hours: 3", "offset_hours: 2")
-        cfg2 = load_config(config_copy.dir)
+        with pytest.raises(ConfigError, match="offset_hours must be 3"):
+            load_config(config_copy.dir)
+        # defence in depth: even a Config object built around the loader carries +2h, the analysis refuses to treat it as the baseline
+        override = next(iter(cfg.timezone.overrides.values()))
+        cfg2 = dataclasses.replace(cfg, timezone=dataclasses.replace(cfg.timezone, overrides={override.filename: dataclasses.replace(override, offset_hours=2)}))
         a = evidence.run_analysis(inp, cfg2)
         sc = next(c for c in a.checks if c.description.startswith("the configured override offset"))
         assert sc.status == "FAIL" and a.failed, "an alternative offset is tested, never adopted"

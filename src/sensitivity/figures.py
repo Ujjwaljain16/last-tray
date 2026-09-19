@@ -13,6 +13,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
+from src.fsutil import atomic_path  # noqa: E402
 from src.sensitivity import classify as cl  # noqa: E402
 from src.sensitivity.evidence import Analysis, is_comparable, value_of  # noqa: E402
 from src.sensitivity.registry import SCENARIOS, SCENARIO_BY_ID  # noqa: E402
@@ -42,7 +43,8 @@ def _finish(fig, path: Path, title: str, subtitle: str) -> None:
     fig.text(0.01, 1 - 0.14 / h, title, ha="left", va="top", fontsize=11, color=INK, fontweight="bold")
     fig.text(0.01, 1 - 0.50 / h, subtitle, ha="left", va="top", fontsize=8.5, color=MUTED)
     fig.text(0.01, 0.15 / h, NOTE, ha="left", va="bottom", fontsize=7.5, color=MUTED)
-    fig.savefig(path, dpi=120, metadata={"Software": None})
+    with atomic_path(path) as tmp:
+        fig.savefig(tmp, dpi=120, format="png", metadata={"Software": None})
     plt.close(fig)
 
 
