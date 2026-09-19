@@ -215,7 +215,7 @@ def test_notice_and_provenance_state_sources_licences_and_the_open_items_without
     for needle in ("10.5281/zenodo.5850856", "CC BY 4.0", "Finnish Meteorological Institute", "flavoriadatacatalog.tt.utu.fi", "not affiliated with", "No ownership is claimed"):
         assert needle in notice, needle
     assert "state no\nlicence or terms" in notice or "states no licence" in notice or "state no licence" in notice.replace("\n", " ")
-    assert "not been decided" in notice
+    assert "MIT Licence" in notice and "does NOT apply to third-party material" in notice
     assert "no licence or terms statement was found" in prov and "Ownership and public-accessibility limits" in prov
 
 
@@ -225,3 +225,44 @@ def test_the_diagram_build_script_is_the_editable_source_of_every_diagram():
         assert f"def {name}(" in script, name
     for svg in ("workflow.svg", "data-model.svg", "pipeline.svg", "source-map.svg", "weight-distribution.svg"):
         assert (REPO / "diagrams" / svg).is_file(), svg
+
+
+def test_the_licence_is_mit_and_is_fenced_off_from_the_third_party_data():
+    licence = text("LICENSE")
+    assert licence.startswith("MIT License") and "Permission is hereby granted, free of charge" in licence and 'THE SOFTWARE IS PROVIDED "AS IS"' in licence
+    readme = text("README.md")
+    assert "MIT Licence" in readme and "does not cover third-party data" in readme and "CC BY 4.0" in readme
+    notice = text("NOTICE")
+    for needle in ("data/raw/flavoria/", "data/raw/weather/", "Flavoria Data Catalog", "MIT Licence"):
+        assert needle in notice, needle
+    assert "MIT" in text("docs/data_provenance.md")
+
+
+def _tracked_files() -> list[str]:
+    import subprocess
+    try:
+        out = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True, text=True, check=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        pytest.skip("not a git checkout")
+    return [f for f in out.splitlines() if f]
+
+
+def test_drafting_and_course_material_is_not_part_of_the_public_repository():
+    tracked = _tracked_files()
+    assert "plan.md" not in tracked and "assignment.md" not in tracked
+    for doc in ("README.md", "docs/PRD.md", "docs/decision_log.md"):
+        assert "`plan.md`" not in text(doc) and "`assignment.md`" not in text(doc), doc
+
+
+def test_no_personal_identifier_email_or_local_path_is_tracked():
+    """Only text files outside the raw data are scanned; the patterns are generic so this test does not itself contain a personal identifier."""
+    email = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}")
+    path = re.compile(r"[A-Za-z]:[\/]Users[\/]|OneDrive|/c/Users/|/home/[a-z]+/|AppData[\/]", re.I)
+    problems = []
+    for f in _tracked_files():
+        if f.startswith("data/raw/") or f.endswith((".png", ".tar")) or f == "tests/test_final_docs.py":   # this file holds the patterns
+            continue
+        body = (REPO / f).read_text(encoding="utf-8", errors="ignore")
+        problems += [(f, m.group(0)) for m in email.finditer(body) if not m.group(0).endswith("@users.noreply.github.com")]
+        problems += [(f, m.group(0)) for m in path.finditer(body)]
+    assert not problems, problems

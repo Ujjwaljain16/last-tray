@@ -34,7 +34,7 @@ class TestNotice:
         assert "Finnish Meteorological Institute open data" in NOTICE
 
     def test_no_licence_version_is_guessed_for_anything_unverified(self):
-        assert "not been decided" in NOTICE                       # code licence explicitly undecided
+        assert "MIT Licence" in NOTICE and "does NOT apply to third-party material" in NOTICE   # the code licence is stated and fenced off from the data
         assert "state no licence or terms" in flat(NOTICE)        # the catalogue pages: no terms found, said plainly
 
     def test_notice_states_the_scenario_is_simulated_and_unaffiliated(self):

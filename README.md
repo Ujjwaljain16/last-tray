@@ -154,4 +154,6 @@ A 3-5 minute script: [`docs/demo_script.md`](docs/demo_script.md).
 
 ## Licence and attribution
 
-Third-party data is used under CC BY 4.0 with attribution; see [`NOTICE`](NOTICE) and [`docs/data_provenance.md`](docs/data_provenance.md). The licence for this project's own code has not been chosen yet.
+- **This project's own code and documentation** are released under the [MIT Licence](LICENSE).
+- **The MIT Licence does not cover third-party data.** FlavoriaFoodWeight1700 (Zenodo, DOI 10.5281/zenodo.5850856) and the FMI weather observations remain under CC BY 4.0 and are attributed in [`NOTICE`](NOTICE) and [`docs/data_provenance.md`](docs/data_provenance.md). The raw files under `data/raw/` are redistributed unmodified.
+- This project is not affiliated with or endorsed by the data providers.

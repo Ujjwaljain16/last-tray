@@ -665,3 +665,13 @@ See D23. *vs plan: NEW* · 2026-09-19. Recorded separately so the wording is not
 - **Why.** Reproducibility is judged on deterministic bytes; provenance is judged on the manifest of a run.
 - **Business impact.** A reviewer can regenerate and compare.
 - **Residual uncertainty.** None.
+
+## D69. Publication decisions: raw data kept, MIT for own code, drafting material excluded, author privacy
+*vs plan: NEW* · 2026-09-19
+- **Decision.** (1) The pinned raw data (4.72 MB: the Zenodo CSV archive and nine FMI XML files) stays in the public repository, unmodified. (2) The project's own code and documentation are MIT-licensed (`LICENSE`); the MIT licence does not apply to the third-party data, which stays under CC BY 4.0 with attribution in `NOTICE` and `data_provenance.md`. (3) The course handout and the original draft plan are not part of the public repository; they remain local working material. (4) Before the first public push the eight existing local commits were rewritten so author and committer use a GitHub noreply address instead of a personal address; a recoverable backup bundle was made first and tree contents were verified unchanged.
+- **Evidence.** FMI stamps each response with its generation time, so weather bytes cannot be re-retrieved identically to the pins; removing the raw data would break byte-for-byte reproducibility and the raw-data tests. CC BY 4.0 permits redistribution with attribution.
+- **Alternatives tested.** Removing `data/raw/` and requiring an explicit fetch (rejected: weather would need re-pinning and change snapshot ids); Apache-2.0 (rejected as heavier than needed); preserving history with the personal address (rejected for privacy).
+- **Chosen approach.** Keep the data, license only our own work, publish nothing that is drafting or course material, and clean the author metadata once before publication.
+- **Why.** A public repository should reproduce from a fresh clone, state clearly who owns what, and not expose more than the project needs.
+- **Business impact.** None on any metric or conclusion.
+- **Residual uncertainty.** The GitHub profile's own public email setting is outside the repository and is the owner's to review.

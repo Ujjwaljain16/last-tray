@@ -49,8 +49,15 @@ Access limits: the Flavoria Lunch Line Waste, Weigh & Dine, Cash Register, Build
 publicly accessible in a usable form. None of it is held, used, or reproduced here. The Flavoria Data Catalog pages state no
 licence or terms, so only short factual phrases are quoted, with links.
 
-CODE
-----
+LICENCES IN THIS REPOSITORY
+---------------------------
 
-The licence for this project's own code has not been decided. It must be chosen (by the project owner) before any public
-repository is created. Until then the code is not offered under any open-source licence.
+Project code and documentation (src/, tests/, config/, diagrams/build_diagrams.py, docs/, README.md and this project's own
+analysis): MIT Licence, see the LICENSE file. Copyright (c) 2026 Ujjwaljain16.
+
+The MIT Licence does NOT apply to third-party material. It does not apply to:
+  - the FlavoriaFoodWeight1700 raw data (data/raw/flavoria/), which is CC BY 4.0 (item 1 above);
+  - the FMI raw data (data/raw/weather/), which is CC BY 4.0 (item 2 above);
+  - the Flavoria Data Catalog, which is used as documentation only and states no licence or terms (item 3 above).
+Files derived from the CC BY 4.0 data under outputs/ are this project's own analysis, and any reuse of the underlying data
+must keep the attribution in items 1 and 2.

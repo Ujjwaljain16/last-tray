@@ -147,7 +147,7 @@ content-identical or not (this was checked by a real explicit retrieval on 2026-
 |---|---|
 | FMI attribution wording | not prescribed by FMI; our wording is in `NOTICE` |
 | Flavoria Data Catalog terms | none found on the pages reviewed; only short quotations used |
-| Licence for this project's own code | **not chosen; a decision by the project owner is required before any public repository is created** (see the WP9 repository audit) |
+| Licence for this project's own code and documentation | **MIT** (`LICENSE`); it does not apply to the third-party data, which stays under CC BY 4.0 |
 | Confirmation of the population labels and of the timezone of one file | source owner (Q1, Q3); not a licensing matter |
 
 ## 6. Ownership and public-accessibility limits
@@ -155,5 +155,5 @@ content-identical or not (this was checked by a real explicit retrieval on 2026-
 - **No ownership is claimed** over FlavoriaFoodWeight1700 or the FMI observations. They belong to their providers, are licensed CC BY 4.0, and are redistributed unmodified with attribution (`NOTICE`).
 - **Accessibility limits.** The waste, checkout (Weigh & Dine), cash-register, building, MyFlavoria and survey data are documented but not publicly accessible in a usable form. None of it is held or reproduced; the consequence is the permanent source gap in `source_gap_register.md`.
 - **Catalogue terms unknown.** The Flavoria Data Catalog states no licence or terms on the pages reviewed. We do not assume any: pages are read as documentation, quoted briefly with links, and not redistributed.
-- **Redistribution of raw data.** The 1.28 MB archive and the seven weather XML files (about 4 MB in total) are committed unmodified because CC BY 4.0 permits it and because it lets a fresh clone run offline. This is a deliberate choice recorded for the project owner to confirm before the repository is made public; the alternative is to remove `data/raw/` and require `python -m src.pipeline.fetch` first.
+- **Redistribution of raw data.** The 1.28 MB archive and the seven weather XML files (about 4 MB in total) are committed unmodified because CC BY 4.0 permits it and because it lets a fresh clone run offline. This is a deliberate decision by the project owner (D69): the raw data stays in the public repository. Removing it was considered and rejected because the weather bytes cannot be re-retrieved identically (FMI stamps each response), so a fresh clone could not reproduce the pinned state.
 - **Scope statement.** The project is an FDE-style reconstruction using public research data. It is not an analysis of Flavoria's operational systems and does not represent all current dining operations.
