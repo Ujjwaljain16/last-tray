@@ -128,7 +128,7 @@ outputs/             generated evidence (ingestion, staging, validation, model, 
 docs/                assignment artifacts and decision log (start with the list below)
 diagrams/            source map, workflow, data model, pipeline, distribution (PNG, SVG, build script)
 research/            the exploration scripts that produced the reference values
-notebooks/           source exploration notebook
+notebooks/           01 source exploration; 02 read-only pipeline walkthrough for evaluators (displays committed outputs only)
 ```
 
 Start here: [`docs/assignment_traceability.md`](docs/assignment_traceability.md) (rubric to artifact), [`docs/source_map.md`](docs/source_map.md), [`docs/source_truth_decisions.md`](docs/source_truth_decisions.md), [`docs/final_evidence.md`](docs/final_evidence.md), [`docs/known_unknowns_assumptions_limitations.md`](docs/known_unknowns_assumptions_limitations.md), [`docs/judgement_call.md`](docs/judgement_call.md), [`docs/demo_script.md`](docs/demo_script.md), [`docs/pipeline.md`](docs/pipeline.md), [`docs/data_provenance.md`](docs/data_provenance.md), [`docs/data_dictionary.md`](docs/data_dictionary.md), [`docs/sensitivity_analysis.md`](docs/sensitivity_analysis.md), [`docs/decision_log.md`](docs/decision_log.md). Background: `docs/PRD.md` and `docs/TRD.md` (original requirements and design), `docs/implementation_overview.md` (how it is built), and `docs/profile_report.md`, `docs/validation_findings.md`, `docs/spec_changes.md` and `research/exploration/` (the exploratory profiling that informed the design: historical evidence, not the pipeline).
