@@ -4,11 +4,11 @@ Normal execution is OFFLINE. This command never downloads anything: if a require
 and names the explicit retrieval command (python -m src.pipeline.fetch --source <name>).
 
 Implemented so far: configuration (WP1), ingestion / raw preservation (WP2), staging (WP3), validation / reconciliation (WP4)
-the canonical model (WP5) and metrics (WP6). The later stages (sensitivity, evidence, gates) arrive in WP7-WP8. Until then a full run stops with an explicit non-zero exit
+the canonical model (WP5) metrics (WP6) and the sensitivity analysis (WP7). The later stages (orchestration, gates) arrive in WP8. Until then a full run stops with an explicit non-zero exit
 code: it must never report success for work it has not done.
 
 Exit codes
-    0  the requested stages completed (--check-config, --help, or --stages ingest|stage|validate|model|metrics with both lanes OK or WARNING;
+    0  the requested stages completed (--check-config, --help, or --stages ingest|stage|validate|model|metrics|sensitivity with both lanes OK or WARNING;
        quarantine is a finding, not a failure)
     2  configuration is missing, malformed, or would change an approved decision
     3  the implemented stages finished, but the stages after them are not implemented yet
@@ -32,6 +32,7 @@ from src.ingest.model import ArtifactStatus, IngestionResult, LaneOutcome
 from src.stage.stage import StagingResult, run_staging
 from src.metrics.evaluate import MetricsResult, run_metrics
 from src.model.build import ModelResult, run_model
+from src.sensitivity.stage import SensitivityResult, run_sensitivity
 from src.validate.validate import ValidationResult, run_validation
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -53,8 +54,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--config-dir", type=Path, default=DEFAULT_CONFIG_DIR, help="directory holding config/*.yml (default: ./config)")
     p.add_argument("--out", type=Path, default=REPO_ROOT / "outputs", help="directory for outputs (default: ./outputs)")
     p.add_argument("--repo-root", type=Path, default=REPO_ROOT, help="repository root containing data/raw (default: this repository)")
-    p.add_argument("--stages", choices=("ingest", "stage", "validate", "model", "metrics", "all"), default="all",
-                   help="'ingest' runs ingestion; 'stage' adds staging; 'validate' adds validation; 'model' adds the canonical model; 'metrics' adds the metrics; each exits 0 on success. 'all' also reports that later stages are not implemented (default)")
+    p.add_argument("--stages", choices=("ingest", "stage", "validate", "model", "metrics", "sensitivity", "all"), default="all",
+                   help="'ingest' runs ingestion; 'stage' adds staging; 'validate' adds validation; 'model' adds the canonical model; 'metrics' adds the metrics; 'sensitivity' adds the sensitivity analysis and evidence tables; each exits 0 on success. 'all' also reports that later stages are not implemented (default)")
     p.add_argument("--check-config", action="store_true", help="load and validate configuration, print a summary, then exit")
     return p
 
@@ -138,6 +139,20 @@ def describe_metrics(res: MetricsResult) -> str:
     return "\n".join(lines)
 
 
+def describe_sensitivity(res: SensitivityResult) -> str:
+    if res.error:
+        return "\n".join(["Sensitivity analysis (canonical model only)", f"  core lane   : {res.core_status}", f"  BLOCKED: {res.error}"])
+    sm = res.summary
+    lines = ["Sensitivity analysis (canonical model only)", f"  core lane   : {res.core_status}",
+             f"  scenarios   : {sm['scenarios']['registered']} registered; Phase 2 reproduced {sm['scenarios']['phase2_reproduced']}; guardrail {', '.join(sm['scenarios']['guardrail'])}",
+             f"  baseline    : M1 {sm['baseline']['M1']:g} g, M2 {sm['baseline']['M2']:,.1f} g, M3 {sm['baseline']['M3']:,}, M4 {sm['baseline']['M4']:g}, M5 {sm['baseline']['M5']:.2f}%, S2 {sm['baseline']['S2']:.2f}% (frozen)",
+             "  ranges      : " + "; ".join(f"{m} {r['min']:,.1f}-{r['max']:,.1f}" for m, r in sm["ranges"].items() if m in ("M1", "M2")),
+             f"  conclusions : {sm['conclusion_classes']}", f"  controls    : {sm['controls']['pass']} pass, {sm['controls']['fail']} fail, {sm['controls']['info']} info"]
+    for p in sm["baseline_problems"] + sm["phase2_mismatches"]:
+        lines.append(f"  FAILED: {p}")
+    return "\n".join(lines)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
@@ -170,7 +185,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"FAILED: {exc}", file=sys.stderr)
             core_failed = True
 
-    if args.stages in ("validate", "model", "metrics", "all"):
+    if args.stages in ("validate", "model", "metrics", "sensitivity", "all"):
         # Validation reads only the staging tables it can verify. If staging failed it finds no trustworthy table, BLOCKS, and removes
         # its own stale outputs, so an earlier run's findings can never look current.
         validated = run_validation(cfg, args.out)
@@ -178,7 +193,7 @@ def main(argv: list[str] | None = None) -> int:
         core_failed = core_failed or validated.core_status == "BLOCKED"
         context_blocked = context_blocked or validated.weather_status == "BLOCKED"
 
-    if args.stages in ("model", "metrics", "all"):
+    if args.stages in ("model", "metrics", "sensitivity", "all"):
         # The model reads only verified staging and verified validation outputs. If either is unusable it BLOCKS and removes its own
         # stale tables; if a control check fails it publishes no canonical rows and writes only the control files for inspection.
         modelled = run_model(cfg, args.out)
@@ -186,7 +201,7 @@ def main(argv: list[str] | None = None) -> int:
         core_failed = core_failed or modelled.core_status == "BLOCKED"
         context_blocked = context_blocked or modelled.weather_status == "BLOCKED"
 
-    if args.stages in ("metrics", "all"):
+    if args.stages in ("metrics", "sensitivity", "all"):
         # Metrics read only the canonical model tables, verified against the model manifest. A missing or altered table BLOCKS the stage and
         # removes stale metric files; a metric that misses its approved tolerance is reported FAILED, never recalibrated.
         measured = run_metrics(cfg, args.out)
@@ -194,8 +209,15 @@ def main(argv: list[str] | None = None) -> int:
         core_failed = core_failed or measured.core_status in ("BLOCKED", "FAILED")
         context_blocked = context_blocked or measured.weather_status == "BLOCKED"
 
+    if args.stages in ("sensitivity", "all"):
+        # The sensitivity analysis reads only the verified canonical tables. It never edits them, and it FAILS (never tunes) if the baseline
+        # moved or an approved Phase 2 reference no longer reproduces.
+        tested = run_sensitivity(cfg, args.out)
+        print(describe_sensitivity(tested))
+        core_failed = core_failed or tested.core_status in ("BLOCKED", "FAILED")
+
     if core_failed:
-        print("FAILED: the core lane could not be verified, staged, validated, modelled or measured, so nothing downstream may run. Stale staging, validation, model and metric outputs were removed. "
+        print("FAILED: the core lane could not be verified, staged, validated, modelled, measured or tested, so nothing downstream may run. Stale staging, validation, model, metric and evidence outputs were removed. "
               "If a raw source is missing, retrieve it explicitly: python -m src.pipeline.fetch --source <flavoria|weather>", file=sys.stderr)
         return EXIT_CORE_FAILED
     if context_blocked:
@@ -203,8 +225,8 @@ def main(argv: list[str] | None = None) -> int:
         return EXIT_CONTEXT_BLOCKED
     if args.stages != "all":
         return EXIT_OK
-    print("BLOCKED: stages after the metrics (sensitivity, evidence, gates) are not implemented yet. "
-          "Outputs cover ingestion, staging, validation, the canonical model and the metrics only. Use --stages metrics to run the implemented stages.", file=sys.stderr)
+    print("BLOCKED: stages after the sensitivity analysis (orchestration, gates) are not implemented yet. "
+          "Outputs cover ingestion, staging, validation, the canonical model, the metrics and the sensitivity evidence only. Use --stages sensitivity to run the implemented stages.", file=sys.stderr)
     return EXIT_NOT_IMPLEMENTED
 
 

@@ -1,0 +1,967 @@
+[
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "the approved baseline (registered-export core-ready sessions, crossover quarantined, exact repeats left out of sums, file-specific +3h)",
+    "assumption_changed": "none",
+    "baseline_assumption": "the approved baseline (registered-export core-ready sessions, crossover quarantined, exact repeats left out of sums, file-specific +3h)",
+    "decision_impact": "none: this is the baseline",
+    "defensible": true,
+    "diagnostic_only": false,
+    "forbidden": false,
+    "group": "baseline",
+    "interpretation": "The approved metric package (M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88%).",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Approved baseline",
+    "operation": {
+      "kind": "baseline"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      1697,
+      97.881
+    ],
+    "rationale": "The frozen approved interpretation; every other scenario is compared with it.",
+    "scenario_id": "S00"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "both registered-export versions are counted as ordinary sessions",
+    "assumption_changed": "crossover session treatment",
+    "baseline_assumption": "session2266 and session3222 are quarantined in both populations",
+    "decision_impact": "none: the quarantine stays; M5 must never be reported this way",
+    "defensible": false,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "crossover",
+    "interpretation": "M1, M2 and M4 barely move; M5 rises to 100% only because the quarantine is lifted, which is not a valid readiness figure.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Crossover sessions included (both)",
+    "operation": {
+      "keys": "quarantined_registered",
+      "kind": "include"
+    },
+    "phase2": [
+      499.0,
+      1042.4,
+      1699,
+      5.0,
+      1699,
+      null
+    ],
+    "rationale": "What if the quarantine were lifted? Shows the effect is small on weights and that readiness would be 100% only because the check was removed.",
+    "scenario_id": "S01"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "session2266 (an exact cross-export duplicate) counted once in the registered-export population",
+    "assumption_changed": "crossover session treatment",
+    "baseline_assumption": "quarantined",
+    "decision_impact": "none",
+    "defensible": false,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "crossover",
+    "interpretation": "Adds a duplicate tray pass; effect on weights is negligible.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Only session2266 included",
+    "operation": {
+      "keys": [
+        "session2266|registered_export"
+      ],
+      "kind": "include"
+    },
+    "phase2": [
+      499.0,
+      1039.2,
+      1698,
+      5.0,
+      1698,
+      null
+    ],
+    "rationale": "Isolates the exact duplicate: it would add a second copy of one tray pass.",
+    "scenario_id": "S02"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "session3222 (a version conflict between the exports) counted in the registered-export population",
+    "assumption_changed": "crossover session treatment",
+    "baseline_assumption": "quarantined",
+    "decision_impact": "none",
+    "defensible": false,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "crossover",
+    "interpretation": "One conflicted session moves M2 by about 3 g.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Only session3222 included",
+    "operation": {
+      "keys": [
+        "session3222|registered_export"
+      ],
+      "kind": "include"
+    },
+    "phase2": [
+      499.5,
+      1042.6,
+      1698,
+      5.0,
+      1698,
+      null
+    ],
+    "rationale": "Isolates the version-conflict session.",
+    "scenario_id": "S03"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "that whole session is left out (analytic only)",
+    "assumption_changed": "treatment of the largest observation",
+    "baseline_assumption": "the session holding the 2,097 g event stays in the population",
+    "decision_impact": "none: the event stays in canonical data and in the baseline",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "outlier",
+    "interpretation": "Removing the session shifts M2 by about -1.6 g: the observation is immaterial.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "2,097 g session removed",
+    "operation": {
+      "kind": "exclude_session",
+      "selector": "largest_event_session"
+    },
+    "phase2": [
+      499.0,
+      1038.0,
+      1696,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "The 2,097 g event is an UNUSUAL observation, not an INVALID one. Tests whether it drives the result.",
+    "scenario_id": "S04"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "only that event is dropped from its session's weight",
+    "assumption_changed": "treatment of the largest observation",
+    "baseline_assumption": "the event counts in its session's weight",
+    "decision_impact": "none",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "outlier",
+    "interpretation": "Same effect on M2 as removing the session.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "2,097 g event removed (session kept)",
+    "operation": {
+      "kind": "drop_event",
+      "selector": "largest_event"
+    },
+    "phase2": [
+      499.0,
+      1038.0,
+      1697,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Separates the event from the session.",
+    "scenario_id": "S05"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "sessions outside the data's own 0.5th and 99.5th percentiles are left out",
+    "assumption_changed": "outlier bounds",
+    "baseline_assumption": "no exclusion (B07 [50, 2,200] g is a flag only)",
+    "decision_impact": "none: exclusion is diagnostic",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "outlier",
+    "interpretation": "Trimming the tails lowers M2 by about 2%.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude outside data percentiles P0.5-P99.5",
+    "operation": {
+      "hi": 0.995,
+      "kind": "exclude_weight_outside",
+      "lo": 0.005,
+      "method": "percentile"
+    },
+    "phase2": [
+      499.0,
+      1017.0,
+      1679,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Compares a data-driven bound with the approved fixed bound.",
+    "scenario_id": "S06"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "the B07-flagged sessions are left out",
+    "assumption_changed": "outlier bounds",
+    "baseline_assumption": "B07 flags sessions outside [50, 2,200] g but keeps them",
+    "decision_impact": "none: B07 stays a flag",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "outlier",
+    "interpretation": "Lowers M2 by about 2%.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude outside the approved B07 range",
+    "operation": {
+      "kind": "exclude_weight_outside",
+      "method": "threshold",
+      "rule": "B07"
+    },
+    "phase2": [
+      499.0,
+      1020.5,
+      1682,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "What if the diagnostic B07 flag were an exclusion rule?",
+    "scenario_id": "S07"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "sessions with one weighing event are left out",
+    "assumption_changed": "session completeness",
+    "baseline_assumption": "single-event sessions are kept",
+    "decision_impact": "none: B04 stays a flag",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "outlier",
+    "interpretation": "M1 +2 g, M2 +4.6 g.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude single-event sessions (B04)",
+    "operation": {
+      "field": "modellable_event_count",
+      "kind": "exclude_where",
+      "op": "<=",
+      "value": 1
+    },
+    "phase2": [
+      501.0,
+      1044.2,
+      1680,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "The 17 single-event sessions are a diagnostic population; do they drive M1?",
+    "scenario_id": "S08"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "those sessions are left out",
+    "assumption_changed": "session span",
+    "baseline_assumption": "sessions with a span over 600 s are kept",
+    "decision_impact": "none: T05 stays a flag",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "outlier",
+    "interpretation": "Effect below 3 g.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude long sessions (T05)",
+    "operation": {
+      "field": "session_span_s",
+      "kind": "exclude_where",
+      "op": ">",
+      "value_ref": "T05"
+    },
+    "phase2": [
+      498.0,
+      1037.1,
+      1690,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Long spans may merge two tray passes; do they drive the result?",
+    "scenario_id": "S09"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "sessions with a session-level or event-level WARN are left out",
+    "assumption_changed": "warning treatment",
+    "baseline_assumption": "WARN findings never remove a session",
+    "decision_impact": "none: a WARN never excludes",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "outlier",
+    "interpretation": "M2 falls by about 25 g (2.4%): flagged sessions are somewhat heavier.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude every session with any WARN",
+    "operation": {
+      "kind": "exclude_where_any_warn"
+    },
+    "phase2": [
+      499.5,
+      1015.0,
+      1660,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "What if every flagged session were excluded? Also shows why M5 and S2 differ.",
+    "scenario_id": "S10"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "the same file shifted by +0h from its raw wall-clock times (all other files unchanged; service-hours rule T03 applied)",
+    "assumption_changed": "timezone of the suspect registered export",
+    "baseline_assumption": "the file-specific +3h normalization (strongest-supported, not source-confirmed)",
+    "decision_impact": "none: contradicted by the cross-export and hour-of-day evidence",
+    "defensible": false,
+    "diagnostic_only": false,
+    "forbidden": false,
+    "group": "timezone",
+    "interpretation": "Raw times are before service hours for many sessions: T03 quarantines 303 of them and M5 falls to 82.05%.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Suspect export shifted by +0h",
+    "operation": {
+      "hours": 0,
+      "kind": "timezone_shift"
+    },
+    "phase2": [
+      505.0,
+      989.1,
+      1394,
+      5.0,
+      1394,
+      null
+    ],
+    "rationale": "The source does not confirm the timezone metadata. The offset is tested across the plausible range, only on the named file.",
+    "scenario_id": "TZ0"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "the same file shifted by +1h from its raw wall-clock times (all other files unchanged; service-hours rule T03 applied)",
+    "assumption_changed": "timezone of the suspect registered export",
+    "baseline_assumption": "the file-specific +3h normalization (strongest-supported, not source-confirmed)",
+    "decision_impact": "none: contradicted by the evidence",
+    "defensible": false,
+    "diagnostic_only": false,
+    "forbidden": false,
+    "group": "timezone",
+    "interpretation": "Still leaves 103 sessions outside service hours.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Suspect export shifted by +1h",
+    "operation": {
+      "hours": 1,
+      "kind": "timezone_shift"
+    },
+    "phase2": [
+      498.5,
+      1019.5,
+      1594,
+      5.0,
+      1594,
+      null
+    ],
+    "rationale": "The source does not confirm the timezone metadata. The offset is tested across the plausible range, only on the named file.",
+    "scenario_id": "TZ1"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "the same file shifted by +2h from its raw wall-clock times (all other files unchanged; service-hours rule T03 applied)",
+    "assumption_changed": "timezone of the suspect registered export",
+    "baseline_assumption": "the file-specific +3h normalization (strongest-supported, not source-confirmed)",
+    "decision_impact": "none: KPIs cannot separate +2h, +3h and +4h; the cross-export evidence selects +3h",
+    "defensible": true,
+    "diagnostic_only": false,
+    "forbidden": false,
+    "group": "timezone",
+    "interpretation": "No session leaves service hours; KPIs identical to +3h (weights do not depend on the clock). Only the weather join and hour-of-day differ.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Suspect export shifted by +2h",
+    "operation": {
+      "hours": 2,
+      "kind": "timezone_shift"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      1697,
+      null
+    ],
+    "rationale": "The source does not confirm the timezone metadata. The offset is tested across the plausible range, only on the named file.",
+    "scenario_id": "TZ2"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "the same file shifted by +3h from its raw wall-clock times (all other files unchanged; service-hours rule T03 applied)",
+    "assumption_changed": "timezone of the suspect registered export",
+    "baseline_assumption": "the file-specific +3h normalization (strongest-supported, not source-confirmed)",
+    "decision_impact": "none: this is the baseline",
+    "defensible": true,
+    "diagnostic_only": false,
+    "forbidden": false,
+    "group": "timezone",
+    "interpretation": "The approved baseline offset, reproduced.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Suspect export shifted by +3h",
+    "operation": {
+      "hours": 3,
+      "kind": "timezone_shift"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      1697,
+      null
+    ],
+    "rationale": "The source does not confirm the timezone metadata. The offset is tested across the plausible range, only on the named file.",
+    "scenario_id": "TZ3"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "the same file shifted by +4h from its raw wall-clock times (all other files unchanged; service-hours rule T03 applied)",
+    "assumption_changed": "timezone of the suspect registered export",
+    "baseline_assumption": "the file-specific +3h normalization (strongest-supported, not source-confirmed)",
+    "decision_impact": "none: KPIs cannot separate +2h, +3h and +4h; the cross-export evidence selects +3h",
+    "defensible": true,
+    "diagnostic_only": false,
+    "forbidden": false,
+    "group": "timezone",
+    "interpretation": "KPIs identical to +3h; the file's first events would be about 1.5 h later than the other exports'.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "S2"
+    ],
+    "name": "Suspect export shifted by +4h",
+    "operation": {
+      "hours": 4,
+      "kind": "timezone_shift"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      1697,
+      null
+    ],
+    "rationale": "The source does not confirm the timezone metadata. The offset is tested across the plausible range, only on the named file.",
+    "scenario_id": "TZ4"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_daily_volume"
+    ],
+    "alternative_assumption": "those days are left out (diagnostic test only)",
+    "assumption_changed": "irregular-volume days",
+    "baseline_assumption": "the six days whose observed volume regime differs from the weekday baseline stay included",
+    "decision_impact": "none: the flag never excludes",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "volume",
+    "interpretation": "Removes 252 sessions; M2 +26.4 g (2.5%).",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude the six volume-irregularity days",
+    "operation": {
+      "kind": "exclude_dates",
+      "set": "irregular_volume_days"
+    },
+    "phase2": [
+      505.0,
+      1066.0,
+      1445,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Irregularity is a regime finding, not proof of corrupt data. Tests whether those days drive the profile.",
+    "scenario_id": "S20"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "the final week is left out (diagnostic test only)",
+    "assumption_changed": "final week",
+    "baseline_assumption": "the final week is included",
+    "decision_impact": "none",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "volume",
+    "interpretation": "Effect below 15 g on M2.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude 2020-11-16 to 2020-11-20",
+    "operation": {
+      "from": "2020-11-16",
+      "kind": "exclude_dates",
+      "to": "2020-11-20"
+    },
+    "phase2": [
+      499.5,
+      1052.1,
+      1530,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Four of the six irregular days fall in this week.",
+    "scenario_id": "S21"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_daily_volume"
+    ],
+    "alternative_assumption": "the 16 registered-export days under 30 sessions are left out (diagnostic test only)",
+    "assumption_changed": "low-volume days",
+    "baseline_assumption": "low-volume days are included",
+    "decision_impact": "none",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "volume",
+    "interpretation": "M1 -6 g, M2 +13.4 g.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exclude the 16 low-observed-volume days",
+    "operation": {
+      "kind": "exclude_dates",
+      "set": "low_volume_days"
+    },
+    "phase2": [
+      493.0,
+      1053.0,
+      1507,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Low-volume days follow the weekday pattern (Thursday and Friday).",
+    "scenario_id": "S22"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session"
+    ],
+    "alternative_assumption": "2020-10-05 to 2020-10-16 is left out (period sensitivity, not a correction)",
+    "assumption_changed": "study period",
+    "baseline_assumption": "the full 2020-10-05 to 2020-11-20 window",
+    "decision_impact": "M2 is described as period sensitive; the baseline window stays",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "period",
+    "interpretation": "M2 falls by 62.6 g (6%): the upper end of the distribution is period dependent; M1 and M4 are not.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Period sensitivity: exclude the first two weeks",
+    "operation": {
+      "before": "2020-10-19",
+      "kind": "exclude_dates"
+    },
+    "phase2": [
+      505.0,
+      977.0,
+      1312,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "The first two weeks are the period of the +3h file and of cross-export name disagreement. Not called bad data; tests whether the profile is period dependent.",
+    "scenario_id": "S23"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "components are compared as written",
+    "assumption_changed": "component identity",
+    "baseline_assumption": "components are compared after trim, whitespace collapse and case-fold",
+    "decision_impact": "none",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "definition",
+    "interpretation": "M4 unchanged.",
+    "metrics_recalculated": [
+      "M4"
+    ],
+    "name": "M4 with raw component names",
+    "operation": {
+      "definition": "raw_names",
+      "kind": "m4_definition"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Tests whether the (deliberately minimal) normalization matters.",
+    "scenario_id": "S30"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "distinct scales per session",
+    "assumption_changed": "component identity",
+    "baseline_assumption": "distinct normalized component names",
+    "decision_impact": "none",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "definition",
+    "interpretation": "M4 unchanged.",
+    "metrics_recalculated": [
+      "M4"
+    ],
+    "name": "M4 counted as distinct scales",
+    "operation": {
+      "definition": "scales",
+      "kind": "m4_definition"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "A name-free variant of breadth.",
+    "scenario_id": "S31"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "weighing events per session",
+    "assumption_changed": "component identity",
+    "baseline_assumption": "distinct normalized component names",
+    "decision_impact": "none",
+    "defensible": true,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "definition",
+    "interpretation": "M4 unchanged.",
+    "metrics_recalculated": [
+      "M4"
+    ],
+    "name": "M4 counted as weighing events",
+    "operation": {
+      "definition": "events",
+      "kind": "m4_definition"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "The crudest variant of breadth.",
+    "scenario_id": "S32"
+  },
+  {
+    "affected_population": "registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "exact repeat rows are summed",
+    "assumption_changed": "duplicate handling",
+    "baseline_assumption": "exact repeat rows are left out of sums",
+    "decision_impact": "none: exact repeats stay excluded",
+    "defensible": false,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "definition",
+    "interpretation": "No headline effect; the rule matters for one session.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "Exact duplicate rows summed",
+    "operation": {
+      "duplicates": "included",
+      "kind": "weight_definition"
+    },
+    "phase2": [
+      499.0,
+      1039.6,
+      1697,
+      5.0,
+      null,
+      null
+    ],
+    "rationale": "Shows what the duplicate rule protects against (one repeated 67 g row).",
+    "scenario_id": "S33"
+  },
+  {
+    "affected_population": "non_registered_export",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "the other export, measured on its own",
+    "assumption_changed": "population",
+    "baseline_assumption": "registered-export sessions only",
+    "decision_impact": "none: never a KPI source",
+    "defensible": false,
+    "diagnostic_only": true,
+    "forbidden": false,
+    "group": "population",
+    "interpretation": "A different population with a different profile: pooling them would be misleading.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "DIAGNOSTIC: non-registered-export population",
+    "operation": {
+      "kind": "population",
+      "population": "non_registered_export"
+    },
+    "phase2": [
+      192.0,
+      855.4,
+      1644,
+      2.0,
+      null,
+      null
+    ],
+    "rationale": "Shows the two exports behave differently; never a KPI source and never pooled.",
+    "scenario_id": "S40"
+  },
+  {
+    "affected_population": "pooled (forbidden)",
+    "affected_tables": [
+      "fact_dining_session",
+      "fact_weighing_event"
+    ],
+    "alternative_assumption": "both populations pooled into one set (invalid; shown only to demonstrate population-confounding risk)",
+    "assumption_changed": "population",
+    "baseline_assumption": "populations are never pooled",
+    "decision_impact": "none: forbidden; excluded from every range and conclusion",
+    "defensible": false,
+    "diagnostic_only": true,
+    "forbidden": true,
+    "group": "guardrail",
+    "interpretation": "Pooling changes the headline numbers by an amount that reflects population mix, not measurement.",
+    "metrics_recalculated": [
+      "M1",
+      "M2",
+      "M3",
+      "M4"
+    ],
+    "name": "FORBIDDEN COMPARISON: pooled registered and non-registered sessions",
+    "operation": {
+      "kind": "pooled"
+    },
+    "phase2": null,
+    "rationale": "A guardrail, not a candidate interpretation: it demonstrates why the populations must not be pooled.",
+    "scenario_id": "G01"
+  }
+]

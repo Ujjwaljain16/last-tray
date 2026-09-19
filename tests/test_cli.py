@@ -75,8 +75,8 @@ def test_full_run_is_honest_that_later_stages_do_not_exist_yet(tmp_path):
     out = tmp_path / "out"
     r = run("--out", str(out))
     assert r.returncode == 3, "a run that cannot complete every stage must not exit 0"
-    assert "not implemented yet" in r.stderr and "Outputs cover ingestion, staging, validation, the canonical model and the metrics only" in r.stderr
-    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics"}, "no sensitivity or final evidence files may appear before those stages exist"
+    assert "not implemented yet" in r.stderr and "Outputs cover ingestion, staging, validation, the canonical model, the metrics and the sensitivity evidence only" in r.stderr
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "evidence"}, "no orchestration or gate outputs may appear before those stages exist"
 
 
 def test_missing_core_source_exits_4_names_the_fetch_command_and_downloads_nothing(tmp_path):
@@ -225,3 +225,25 @@ def test_a_weather_problem_exits_6_but_the_core_metrics_are_still_computed(tmp_p
     r = run("--stages", "metrics", "--repo-root", str(root), "--out", str(out))
     assert r.returncode == 6 and "M1  499 g" in r.stdout and "weather lane: BLOCKED" in r.stdout
     assert (out / "metrics" / "metrics.csv").is_file()
+
+
+def test_stages_sensitivity_runs_the_scenarios_and_keeps_the_baseline_frozen(tmp_path):
+    out = tmp_path / "out"
+    r = run("--stages", "sensitivity", "--out", str(out))
+    assert r.returncode == 0, r.stderr
+    assert "Sensitivity analysis (canonical model only)" in r.stdout and "26 registered; Phase 2 reproduced 25; guardrail G01" in r.stdout
+    assert "M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88% (frozen)" in r.stdout
+    assert "M1 493.0-505.0; M2 977.0-1,066.0" in r.stdout and "{'BLOCKED': 2, 'CONDITIONAL': 2, 'SENSITIVE': 3, 'STABLE': 6}" in r.stdout
+    assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "evidence"}
+    assert (out / "evidence" / "evidence_matrix.csv").is_file() and (out / "evidence" / "figures" / "m1_m2_sensitivity.png").is_file()
+
+
+def test_a_core_failure_removes_stale_evidence_and_exits_4(tmp_path):
+    root = fake_repo(tmp_path)
+    out = tmp_path / "out"
+    assert run("--stages", "sensitivity", "--repo-root", str(root), "--out", str(out)).returncode == 0
+    assert (out / "evidence" / "uncertainty_register.csv").is_file()
+    (root / "data" / "raw" / "flavoria" / "dataset_csv.tar").unlink()
+    r = run("--stages", "sensitivity", "--repo-root", str(root), "--out", str(out))
+    assert r.returncode == 4 and "Sensitivity analysis (canonical model only)" in r.stdout
+    assert not list((out / "evidence").rglob("*.csv")) and not list((out / "evidence").rglob("*.png")), "stale evidence must not survive a failed run"

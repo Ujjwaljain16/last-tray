@@ -565,3 +565,53 @@ See D23. *vs plan: NEW* · 2026-09-19. Recorded separately so the wording is not
 - **Why.** The assignment asks for evidence, not metric volume.
 - **Business impact.** The final README can reuse the table as it stands.
 - **Residual uncertainty.** None.
+
+## D59. The baseline is frozen; scenarios are data; the Phase 2 space is a hard reproduction gate
+*vs plan: NEW* · 2026-09-19
+- **Decision.** WP7 recomputes the baseline (S00) from the verified canonical tables and requires it to equal the approved package and the independent WP6 computation. Every scenario is declared in `src/sensitivity/registry.py` (assumption changed, baseline and alternative values, rationale, tables, population, metrics, an `operation`, interpretation, defensibility, diagnostic-only flag, decision impact, and the approved Phase 2 reference) and run by a generic engine that knows operations, not scenarios. If the baseline moves or a Phase 2 reference stops reproducing, the stage FAILS (exit 4) with the difference; nothing is tuned.
+- **Evidence.** All 25 Phase 2 scenarios reproduce (M1 and M2 within 0.05 g, counts exact), including the weather consequences of every offset. Tests show the analysis leaves the canonical files byte-identical and that overwriting the baseline, making +2h the production timezone, unquarantining the crossover sessions, excluding the irregular days, changing M5's denominator, adding a waste proxy or pooling populations are all rejected.
+- **Alternatives tested.** Scenario logic in code (hidden definitions); re-deriving reference values instead of pinning them.
+- **Chosen approach.** Declare, run, compare, fail loudly.
+- **Why.** Sensitivity analysis is only evidence if it cannot be tuned after the fact.
+- **Business impact.** A reviewer can read every assumption that was tested and see that the answers were not selected.
+- **Residual uncertainty.** None.
+
+## D60. One transparent robustness classification
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Each metric-scenario change is classed STABLE, SENSITIVE or CONDITIONAL (BLOCKED when no value exists) by fixed thresholds declared in the registry and reused for every metric and scenario: M1 10 g / 20 g, M2 25 g / 75 g, M3 5% / 20%, M4 0.5 / 1.5 components, M5 and S2 0.5 / 5 percentage points. The STABLE bounds are the approved Phase 2 materiality convention (|dM1| >= 10 g, |dM2| >= 25 g, any change in M4). A conclusion takes the worst class over its metrics and scenarios; structural conclusions (reconstruction) are backed by controls, and conclusions that depend on an unresolved assumption are declared CONDITIONAL with the reason.
+- **Evidence.** M1 and M4 are STABLE everywhere; M2 is SENSITIVE (period, timezone, irregular days); M5 is CONDITIONAL only under the timezone hypotheses the evidence contradicts.
+- **Alternatives tested.** Calling anything within about 1% stable (arbitrary); per-scenario judgement (not reproducible).
+- **Chosen approach.** Thresholds first, results after.
+- **Why.** "Stable" must not mean "the number moved a little".
+- **Business impact.** Each headline conclusion carries a class and its basis.
+- **Residual uncertainty.** The thresholds are conventions, not physical limits; changing them changes the classes but not the numbers.
+
+## D61. Timezone sensitivity is file-specific and does not select the offset
+*vs plan: NEW* · 2026-09-19
+- **Decision.** The timezone scenarios shift only the file(s) named in `config/timezone_overrides.yml`, recovering the raw wall-clock time from the canonical event fact (canonical local time minus the offset applied), applying the service-hours rule T03 to the shifted times and re-joining weather at the next full UTC hour. The baseline remains +3h: M1-M4 are identical under +2h, +3h and +4h, so the KPIs cannot choose; the decision rests on the cross-export evidence (an exact 10,800 s difference for `session3222`, and a median first-event hour of 10.54 h against 10.53 h for the other registered-export files only at +3h).
+- **Evidence.** +0h quarantines 303 sessions (M5 82.05%), +1h 103 (93.82%); +2h, +3h and +4h quarantine none; all 385 sessions change weather hour under any offset other than +3h.
+- **Alternatives tested.** Choosing the offset by KPI (rejected: they tie); shifting every file (contradicts the file-specific decision).
+- **Chosen approach.** Report consequences; keep the evidence-backed decision.
+- **Why.** A tie on the KPIs is not a reason to change an evidence-based decision.
+- **Business impact.** Time-of-day and weather-join outputs stay conditional until the source confirms the timezone.
+- **Residual uncertainty.** The metadata is unconfirmed; one-hour resolution cannot separate +3h from +3h plus or minus 30 minutes.
+
+## D62. Guardrail and blocked scenarios
+*vs plan: NEW* · 2026-09-19
+- **Decision.** G01 (pooling the two populations) is registered and executed so its danger is visible, but it is labelled a forbidden comparison, never classified and excluded from every range and conclusion; S40 is a diagnostic population contrast. The crossover what-ifs are marked not defensible and diagnostic. W1 has no scenario: the evidence matrix and uncertainty register state that no lower or upper waste bound, band or proxy is produced and name the data that would resolve it (per-tray waste weight linked by tray id).
+- **Evidence.** Pooling gives M1 413 g and M4 4, numbers that describe the population mix.
+- **Alternatives tested.** Omitting the guardrail (hides the risk); classifying it (treats a forbidden comparison as a candidate).
+- **Chosen approach.** Show it, fence it.
+- **Why.** The population-confounding risk is easier to understand with the number than without it.
+- **Business impact.** The final narrative can cite why the populations are never pooled.
+- **Residual uncertainty.** None.
+
+## D63. Evidence artifacts, figures and a generated report
+*vs plan: NEW* · 2026-09-19
+- **Decision.** Outputs under `outputs/evidence/` are deterministic (sorted rows, LF endings, no wall clock, fixed figure metadata) and tracked because they are small. `docs/sensitivity_analysis.md` embeds a block rendered by `src/sensitivity/report.py`; a test fails if the document drifts from the computed results. Four figures show the M1/M2 range, M5 under what-ifs, the timezone evidence and the period/volume tests, each with a title, population, units, a baseline marker and the note that scenarios are tests, not alternative truths.
+- **Evidence.** Two runs with different hash seeds, directories and output directories are byte-identical, figures included.
+- **Alternatives tested.** A dashboard (out of scope); hand-written numbers in the report (would drift).
+- **Chosen approach.** Generate what can be generated.
+- **Why.** The submission needs a compact, trustworthy story.
+- **Business impact.** README and demo can quote the evidence matrix and figures directly.
+- **Residual uncertainty.** None.

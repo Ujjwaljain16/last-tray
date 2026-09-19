@@ -105,4 +105,5 @@ outputs/     validation/  reconciliation/  metrics/  evidence/  run_manifest.jso
 | 4 Validate | **done** (see WP4 checkpoint report) |
 | 5 Model | **done** (see WP5 checkpoint report) |
 | 6 Metrics | **done** (see WP6 checkpoint report) |
-| 7-10 | not started |
+| 7 Sensitivity | **done** (see WP7 checkpoint report) |
+| 8-10 | not started |

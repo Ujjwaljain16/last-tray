@@ -60,6 +60,7 @@ class MetricInputs:
     manifest: dict[str, Any]
     snapshot_id: str
     columns: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    session_rows: list[dict[str, str]] = field(default_factory=list)      # the verified session table as written (used by the sensitivity stage)
 
 
 def _bool(text: str) -> bool:
@@ -136,4 +137,4 @@ def load_metric_inputs(out_dir: Path) -> MetricInputs:
     snapshots = sorted({s.source_snapshot_id for s in sessions})
     if len(snapshots) != 1:
         raise MetricInputError(f"expected one source snapshot in the session table, found {snapshots}")
-    return MetricInputs(sessions, data[schema.COMPONENT.name], data[schema.VOLUME.name], data[schema.EVENT.name], weather, weather_error, manifest, snapshots[0])
+    return MetricInputs(sessions, data[schema.COMPONENT.name], data[schema.VOLUME.name], data[schema.EVENT.name], weather, weather_error, manifest, snapshots[0], session_rows=data[schema.SESSION.name])

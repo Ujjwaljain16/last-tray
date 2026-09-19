@@ -102,7 +102,7 @@ WHERE s.derived_selected_meal_weight_g <> e.w;      -- must return no rows
 
 ## 7. Sensitivity contract
 
-`outputs/validation/sensitivity_analysis.csv`: 25 scenarios. The baseline row (S00) must equal the rows above. Scenarios S20-S22 (volume) are **analysis only**: they measure the effect of excluding days that the pipeline never excludes. The timezone is **not** selected by the KPIs: TZ2, TZ3 and TZ4 are identical on every KPI, so cross-export evidence, not KPI sensitivity, selects +3h.
+The WP7 sensitivity analysis (`outputs/evidence/`, `docs/sensitivity_analysis.md`) reproduces the 25 approved Phase 2 scenarios in `outputs/validation/sensitivity_analysis.csv` (frozen in `tests/golden/`) and adds one forbidden guardrail; the frozen baseline is never overwritten. The baseline row (S00) must equal the rows above. Scenarios S20-S22 (volume) are **analysis only**: they measure the effect of excluding days that the pipeline never excludes. The timezone is **not** selected by the KPIs: TZ2, TZ3 and TZ4 are identical on every KPI, so cross-export evidence, not KPI sensitivity, selects +3h.
 
 ## 8. WP6 implementation (metrics and evidence)
 

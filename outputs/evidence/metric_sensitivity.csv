@@ -1,0 +1,115 @@
+metric_id,scenario_id,baseline_value,scenario_value,absolute_delta,relative_delta,population,interpretation,robustness_class
+M1,S00,499.0,499.0,0.0,0.0,registered-export (core-ready),"The approved metric package (M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88%).",STABLE
+M1,S01,499.0,499.0,0.0,0.0,registered-export (core-ready),"M1, M2 and M4 barely move; M5 rises to 100% only because the quarantine is lifted, which is not a valid readiness figure.",STABLE
+M1,S02,499.0,499.0,0.0,0.0,registered-export (core-ready),Adds a duplicate tray pass; effect on weights is negligible.,STABLE
+M1,S03,499.0,499.5,0.5,0.001002,registered-export (core-ready),One conflicted session moves M2 by about 3 g.,STABLE
+M1,S04,499.0,499.0,0.0,0.0,registered-export (core-ready),Removing the session shifts M2 by about -1.6 g: the observation is immaterial.,STABLE
+M1,S05,499.0,499.0,0.0,0.0,registered-export (core-ready),Same effect on M2 as removing the session.,STABLE
+M1,S06,499.0,499.0,0.0,0.0,registered-export (core-ready),Trimming the tails lowers M2 by about 2%.,STABLE
+M1,S07,499.0,499.0,0.0,0.0,registered-export (core-ready),Lowers M2 by about 2%.,STABLE
+M1,S08,499.0,501.0,2.0,0.004008,registered-export (core-ready),"M1 +2 g, M2 +4.6 g.",STABLE
+M1,S09,499.0,498.0,-1.0,-0.002004,registered-export (core-ready),Effect below 3 g.,STABLE
+M1,S10,499.0,499.5,0.5,0.001002,registered-export (core-ready),M2 falls by about 25 g (2.4%): flagged sessions are somewhat heavier.,STABLE
+M1,TZ0,499.0,505.0,6.0,0.012024,registered-export (core-ready),Raw times are before service hours for many sessions: T03 quarantines 303 of them and M5 falls to 82.05%.,STABLE
+M1,TZ1,499.0,498.5,-0.5,-0.001002,registered-export (core-ready),Still leaves 103 sessions outside service hours.,STABLE
+M1,TZ2,499.0,499.0,0.0,0.0,registered-export (core-ready),No session leaves service hours; KPIs identical to +3h (weights do not depend on the clock). Only the weather join and hour-of-day differ.,STABLE
+M1,TZ3,499.0,499.0,0.0,0.0,registered-export (core-ready),"The approved baseline offset, reproduced.",STABLE
+M1,TZ4,499.0,499.0,0.0,0.0,registered-export (core-ready),KPIs identical to +3h; the file's first events would be about 1.5 h later than the other exports'.,STABLE
+M1,S20,499.0,505.0,6.0,0.012024,registered-export (core-ready),Removes 252 sessions; M2 +26.4 g (2.5%).,STABLE
+M1,S21,499.0,499.5,0.5,0.001002,registered-export (core-ready),Effect below 15 g on M2.,STABLE
+M1,S22,499.0,493.0,-6.0,-0.012024,registered-export (core-ready),"M1 -6 g, M2 +13.4 g.",STABLE
+M1,S23,499.0,505.0,6.0,0.012024,registered-export (core-ready),M2 falls by 62.6 g (6%): the upper end of the distribution is period dependent; M1 and M4 are not.,STABLE
+M1,S33,499.0,499.0,0.0,0.0,registered-export (core-ready),No headline effect; the rule matters for one session.,STABLE
+M1,S40,499.0,192.0,-307.0,-0.61523,non-registered-export (diagnostic),A different population with a different profile: pooling them would be misleading.,NOT_CLASSIFIED
+M1,G01,499.0,413.0,-86.0,-0.172345,pooled (forbidden),"Pooling changes the headline numbers by an amount that reflects population mix, not measurement.",NOT_CLASSIFIED
+M2,S00,1039.6,1039.6,0.0,0.0,registered-export (core-ready),"The approved metric package (M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88%).",STABLE
+M2,S01,1039.6,1042.4,2.8,0.002693,registered-export (core-ready),"M1, M2 and M4 barely move; M5 rises to 100% only because the quarantine is lifted, which is not a valid readiness figure.",STABLE
+M2,S02,1039.6,1039.2,-0.4,-0.000385,registered-export (core-ready),Adds a duplicate tray pass; effect on weights is negligible.,STABLE
+M2,S03,1039.6,1042.6,3.0,0.002886,registered-export (core-ready),One conflicted session moves M2 by about 3 g.,STABLE
+M2,S04,1039.6,1038.0,-1.6,-0.001539,registered-export (core-ready),Removing the session shifts M2 by about -1.6 g: the observation is immaterial.,STABLE
+M2,S05,1039.6,1038.0,-1.6,-0.001539,registered-export (core-ready),Same effect on M2 as removing the session.,STABLE
+M2,S06,1039.6,1017.0,-22.6,-0.021739,registered-export (core-ready),Trimming the tails lowers M2 by about 2%.,STABLE
+M2,S07,1039.6,1020.5,-19.1,-0.018372,registered-export (core-ready),Lowers M2 by about 2%.,STABLE
+M2,S08,1039.6,1044.2,4.6,0.004425,registered-export (core-ready),"M1 +2 g, M2 +4.6 g.",STABLE
+M2,S09,1039.6,1037.1,-2.5,-0.002405,registered-export (core-ready),Effect below 3 g.,STABLE
+M2,S10,1039.6,1015.0,-24.6,-0.023663,registered-export (core-ready),M2 falls by about 25 g (2.4%): flagged sessions are somewhat heavier.,STABLE
+M2,TZ0,1039.6,989.1,-50.5,-0.048576,registered-export (core-ready),Raw times are before service hours for many sessions: T03 quarantines 303 of them and M5 falls to 82.05%.,SENSITIVE
+M2,TZ1,1039.6,1019.5,-20.1,-0.019334,registered-export (core-ready),Still leaves 103 sessions outside service hours.,STABLE
+M2,TZ2,1039.6,1039.6,0.0,0.0,registered-export (core-ready),No session leaves service hours; KPIs identical to +3h (weights do not depend on the clock). Only the weather join and hour-of-day differ.,STABLE
+M2,TZ3,1039.6,1039.6,0.0,0.0,registered-export (core-ready),"The approved baseline offset, reproduced.",STABLE
+M2,TZ4,1039.6,1039.6,0.0,0.0,registered-export (core-ready),KPIs identical to +3h; the file's first events would be about 1.5 h later than the other exports'.,STABLE
+M2,S20,1039.6,1066.0,26.4,0.025394,registered-export (core-ready),Removes 252 sessions; M2 +26.4 g (2.5%).,SENSITIVE
+M2,S21,1039.6,1052.1,12.5,0.012024,registered-export (core-ready),Effect below 15 g on M2.,STABLE
+M2,S22,1039.6,1053.0,13.4,0.01289,registered-export (core-ready),"M1 -6 g, M2 +13.4 g.",STABLE
+M2,S23,1039.6,977.0,-62.6,-0.060215,registered-export (core-ready),M2 falls by 62.6 g (6%): the upper end of the distribution is period dependent; M1 and M4 are not.,SENSITIVE
+M2,S33,1039.6,1039.6,0.0,0.0,registered-export (core-ready),No headline effect; the rule matters for one session.,STABLE
+M2,S40,1039.6,855.4,-184.2,-0.177184,non-registered-export (diagnostic),A different population with a different profile: pooling them would be misleading.,NOT_CLASSIFIED
+M2,G01,1039.6,950.0,-89.6,-0.086187,pooled (forbidden),"Pooling changes the headline numbers by an amount that reflects population mix, not measurement.",NOT_CLASSIFIED
+M3,S00,1697,1697,0,0.0,registered-export (core-ready),"The approved metric package (M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88%).",STABLE
+M3,S01,1697,1699,2,0.001179,registered-export (core-ready),"M1, M2 and M4 barely move; M5 rises to 100% only because the quarantine is lifted, which is not a valid readiness figure.",STABLE
+M3,S02,1697,1698,1,0.000589,registered-export (core-ready),Adds a duplicate tray pass; effect on weights is negligible.,STABLE
+M3,S03,1697,1698,1,0.000589,registered-export (core-ready),One conflicted session moves M2 by about 3 g.,STABLE
+M3,S04,1697,1696,-1,-0.000589,registered-export (core-ready),Removing the session shifts M2 by about -1.6 g: the observation is immaterial.,STABLE
+M3,S05,1697,1697,0,0.0,registered-export (core-ready),Same effect on M2 as removing the session.,STABLE
+M3,S06,1697,1679,-18,-0.010607,registered-export (core-ready),Trimming the tails lowers M2 by about 2%.,STABLE
+M3,S07,1697,1682,-15,-0.008839,registered-export (core-ready),Lowers M2 by about 2%.,STABLE
+M3,S08,1697,1680,-17,-0.010018,registered-export (core-ready),"M1 +2 g, M2 +4.6 g.",STABLE
+M3,S09,1697,1690,-7,-0.004125,registered-export (core-ready),Effect below 3 g.,STABLE
+M3,S10,1697,1660,-37,-0.021803,registered-export (core-ready),M2 falls by about 25 g (2.4%): flagged sessions are somewhat heavier.,STABLE
+M3,TZ0,1697,1394,-303,-0.17855,registered-export (core-ready),Raw times are before service hours for many sessions: T03 quarantines 303 of them and M5 falls to 82.05%.,SENSITIVE
+M3,TZ1,1697,1594,-103,-0.060695,registered-export (core-ready),Still leaves 103 sessions outside service hours.,SENSITIVE
+M3,TZ2,1697,1697,0,0.0,registered-export (core-ready),No session leaves service hours; KPIs identical to +3h (weights do not depend on the clock). Only the weather join and hour-of-day differ.,STABLE
+M3,TZ3,1697,1697,0,0.0,registered-export (core-ready),"The approved baseline offset, reproduced.",STABLE
+M3,TZ4,1697,1697,0,0.0,registered-export (core-ready),KPIs identical to +3h; the file's first events would be about 1.5 h later than the other exports'.,STABLE
+M3,S20,1697,1445,-252,-0.148497,registered-export (core-ready),Removes 252 sessions; M2 +26.4 g (2.5%).,SENSITIVE
+M3,S21,1697,1530,-167,-0.098409,registered-export (core-ready),Effect below 15 g on M2.,SENSITIVE
+M3,S22,1697,1507,-190,-0.111962,registered-export (core-ready),"M1 -6 g, M2 +13.4 g.",SENSITIVE
+M3,S23,1697,1312,-385,-0.226871,registered-export (core-ready),M2 falls by 62.6 g (6%): the upper end of the distribution is period dependent; M1 and M4 are not.,CONDITIONAL
+M3,S33,1697,1697,0,0.0,registered-export (core-ready),No headline effect; the rule matters for one session.,STABLE
+M3,S40,1697,1644,-53,-0.031232,non-registered-export (diagnostic),A different population with a different profile: pooling them would be misleading.,NOT_CLASSIFIED
+M3,G01,1697,3341,1644,0.968768,pooled (forbidden),"Pooling changes the headline numbers by an amount that reflects population mix, not measurement.",NOT_CLASSIFIED
+M4,S00,5.0,5.0,0.0,0.0,registered-export (core-ready),"The approved metric package (M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88%).",STABLE
+M4,S01,5.0,5.0,0.0,0.0,registered-export (core-ready),"M1, M2 and M4 barely move; M5 rises to 100% only because the quarantine is lifted, which is not a valid readiness figure.",STABLE
+M4,S02,5.0,5.0,0.0,0.0,registered-export (core-ready),Adds a duplicate tray pass; effect on weights is negligible.,STABLE
+M4,S03,5.0,5.0,0.0,0.0,registered-export (core-ready),One conflicted session moves M2 by about 3 g.,STABLE
+M4,S04,5.0,5.0,0.0,0.0,registered-export (core-ready),Removing the session shifts M2 by about -1.6 g: the observation is immaterial.,STABLE
+M4,S05,5.0,5.0,0.0,0.0,registered-export (core-ready),Same effect on M2 as removing the session.,STABLE
+M4,S06,5.0,5.0,0.0,0.0,registered-export (core-ready),Trimming the tails lowers M2 by about 2%.,STABLE
+M4,S07,5.0,5.0,0.0,0.0,registered-export (core-ready),Lowers M2 by about 2%.,STABLE
+M4,S08,5.0,5.0,0.0,0.0,registered-export (core-ready),"M1 +2 g, M2 +4.6 g.",STABLE
+M4,S09,5.0,5.0,0.0,0.0,registered-export (core-ready),Effect below 3 g.,STABLE
+M4,S10,5.0,5.0,0.0,0.0,registered-export (core-ready),M2 falls by about 25 g (2.4%): flagged sessions are somewhat heavier.,STABLE
+M4,TZ0,5.0,5.0,0.0,0.0,registered-export (core-ready),Raw times are before service hours for many sessions: T03 quarantines 303 of them and M5 falls to 82.05%.,STABLE
+M4,TZ1,5.0,5.0,0.0,0.0,registered-export (core-ready),Still leaves 103 sessions outside service hours.,STABLE
+M4,TZ2,5.0,5.0,0.0,0.0,registered-export (core-ready),No session leaves service hours; KPIs identical to +3h (weights do not depend on the clock). Only the weather join and hour-of-day differ.,STABLE
+M4,TZ3,5.0,5.0,0.0,0.0,registered-export (core-ready),"The approved baseline offset, reproduced.",STABLE
+M4,TZ4,5.0,5.0,0.0,0.0,registered-export (core-ready),KPIs identical to +3h; the file's first events would be about 1.5 h later than the other exports'.,STABLE
+M4,S20,5.0,5.0,0.0,0.0,registered-export (core-ready),Removes 252 sessions; M2 +26.4 g (2.5%).,STABLE
+M4,S21,5.0,5.0,0.0,0.0,registered-export (core-ready),Effect below 15 g on M2.,STABLE
+M4,S22,5.0,5.0,0.0,0.0,registered-export (core-ready),"M1 -6 g, M2 +13.4 g.",STABLE
+M4,S23,5.0,5.0,0.0,0.0,registered-export (core-ready),M2 falls by 62.6 g (6%): the upper end of the distribution is period dependent; M1 and M4 are not.,STABLE
+M4,S30,5.0,5.0,0.0,0.0,registered-export (core-ready),M4 unchanged.,STABLE
+M4,S31,5.0,5.0,0.0,0.0,registered-export (core-ready),M4 unchanged.,STABLE
+M4,S32,5.0,5.0,0.0,0.0,registered-export (core-ready),M4 unchanged.,STABLE
+M4,S33,5.0,5.0,0.0,0.0,registered-export (core-ready),No headline effect; the rule matters for one session.,STABLE
+M4,S40,5.0,2.0,-3.0,-0.6,non-registered-export (diagnostic),A different population with a different profile: pooling them would be misleading.,NOT_CLASSIFIED
+M4,G01,5.0,4.0,-1.0,-0.2,pooled (forbidden),"Pooling changes the headline numbers by an amount that reflects population mix, not measurement.",NOT_CLASSIFIED
+M5,S00,99.882284,99.882284,0.0,0.0,registered-export (core-ready),"The approved metric package (M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88%).",STABLE
+M5,S01,99.882284,100.0,0.117716,0.001179,registered-export (core-ready),"M1, M2 and M4 barely move; M5 rises to 100% only because the quarantine is lifted, which is not a valid readiness figure.",STABLE
+M5,S02,99.882284,99.941142,0.058858,0.000589,registered-export (core-ready),Adds a duplicate tray pass; effect on weights is negligible.,STABLE
+M5,S03,99.882284,99.941142,0.058858,0.000589,registered-export (core-ready),One conflicted session moves M2 by about 3 g.,STABLE
+M5,TZ0,99.882284,82.048264,-17.83402,-0.17855,registered-export (core-ready),Raw times are before service hours for many sessions: T03 quarantines 303 of them and M5 falls to 82.05%.,CONDITIONAL
+M5,TZ1,99.882284,93.819894,-6.06239,-0.060695,registered-export (core-ready),Still leaves 103 sessions outside service hours.,CONDITIONAL
+M5,TZ2,99.882284,99.882284,0.0,0.0,registered-export (core-ready),No session leaves service hours; KPIs identical to +3h (weights do not depend on the clock). Only the weather join and hour-of-day differ.,STABLE
+M5,TZ3,99.882284,99.882284,0.0,0.0,registered-export (core-ready),"The approved baseline offset, reproduced.",STABLE
+M5,TZ4,99.882284,99.882284,0.0,0.0,registered-export (core-ready),KPIs identical to +3h; the file's first events would be about 1.5 h later than the other exports'.,STABLE
+S2,S00,97.881107,97.881107,0.0,0.0,registered-export (core-ready),"The approved metric package (M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88%).",STABLE
+S2,S01,97.881107,97.939965,0.058858,0.000601,registered-export (core-ready),"M1, M2 and M4 barely move; M5 rises to 100% only because the quarantine is lifted, which is not a valid readiness figure.",STABLE
+S2,S02,97.881107,97.939965,0.058858,0.000601,registered-export (core-ready),Adds a duplicate tray pass; effect on weights is negligible.,STABLE
+S2,S03,97.881107,97.881107,0.0,0.0,registered-export (core-ready),One conflicted session moves M2 by about 3 g.,STABLE
+S2,TZ0,97.881107,80.282519,-17.598587,-0.179796,registered-export (core-ready),Raw times are before service hours for many sessions: T03 quarantines 303 of them and M5 falls to 82.05%.,CONDITIONAL
+S2,TZ1,97.881107,91.877575,-6.003531,-0.061335,registered-export (core-ready),Still leaves 103 sessions outside service hours.,CONDITIONAL
+S2,TZ2,97.881107,97.881107,0.0,0.0,registered-export (core-ready),No session leaves service hours; KPIs identical to +3h (weights do not depend on the clock). Only the weather join and hour-of-day differ.,STABLE
+S2,TZ3,97.881107,97.881107,0.0,0.0,registered-export (core-ready),"The approved baseline offset, reproduced.",STABLE
+S2,TZ4,97.881107,97.881107,0.0,0.0,registered-export (core-ready),KPIs identical to +3h; the file's first events would be about 1.5 h later than the other exports'.,STABLE
+W1,S00,,,,,n/a,"BLOCKED / SOURCE GAP: no scenario can turn missing source data into observed evidence; no waste estimate, band or proxy is produced.",BLOCKED

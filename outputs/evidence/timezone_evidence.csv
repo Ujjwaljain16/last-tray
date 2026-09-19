@@ -1,0 +1,6 @@
+offset_hours,is_baseline,sessions_in_shifted_file,t03_quarantined_sessions,median_first_event_hour,other_registered_files_median_hour,gap_to_other_files_h,inside_t07_band,weather_hour_changed_sessions,mean_abs_t2m_diff_c,rainy_hour_share_pct
+0,false,385,303,7.54,10.53,2.99,false,385,1.231,15.06
+1,false,385,103,8.54,10.53,1.99,false,385,0.873,27.53
+2,false,385,0,9.54,10.53,0.99,false,385,0.529,36.62
+3,true,385,0,10.54,10.53,0.01,true,0,0.0,21.3
+4,false,385,0,11.54,10.53,1.01,false,385,0.467,11.69

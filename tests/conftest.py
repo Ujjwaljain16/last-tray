@@ -138,3 +138,19 @@ def real_metrics(real_model, cfg):
     from src.metrics.evaluate import run_metrics
 
     return RealMetrics(real_model.out, run_metrics(cfg, real_model.out))
+
+
+class RealSensitivity:
+    """The sensitivity stage run over the shared real canonical model (read-only for tests)."""
+
+    def __init__(self, out, result):
+        self.out, self.result = out, result
+        self.analysis = result.analysis
+        self.results = result.analysis.results
+
+
+@pytest.fixture(scope="session")
+def real_sensitivity(real_metrics, cfg):
+    from src.sensitivity.stage import run_sensitivity
+
+    return RealSensitivity(real_metrics.out, run_sensitivity(cfg, real_metrics.out))

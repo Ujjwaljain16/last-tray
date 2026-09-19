@@ -1,0 +1,14 @@
+check_id,area,description,expected,observed,status,basis
+SC01,scenarios,every registered scenario was executed exactly once,"['S00', 'S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'TZ0', 'TZ1', 'TZ2', 'TZ3', 'TZ4', 'S20', 'S21', 'S22', 'S23', 'S30', 'S31', 'S32', 'S33', 'S40', 'G01']","['S00', 'S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'TZ0', 'TZ1', 'TZ2', 'TZ3', 'TZ4', 'S20', 'S21', 'S22', 'S23', 'S30', 'S31', 'S32', 'S33', 'S40', 'G01']",PASS,registry
+SC02,baseline,the recomputed baseline equals the frozen approved package and the independent WP6 computation,[],[],PASS,approved baseline
+SC03,baseline,"every approved Phase 2 scenario reproduces (M1, M2, M3, M4, M5 numerator)",[],[],PASS,approved Phase 2 sensitivity
+SC04,baseline,running every scenario leaves the baseline working set untouched (fingerprint of every baseline session),5af048a66ebecc9e,5af048a66ebecc9e,PASS,purity
+SC05,timezone,only the override file(s) in the configuration are shifted,['registered_2020_10_05-2020_10_18.csv'],['registered_2020_10_05-2020_10_18.csv'],PASS,file-specific override
+SC06,timezone,the +3h scenario reproduces the baseline exactly,"(499.0, 1039.6000000000004, 1697)","(499.0, 1039.6000000000004, 1697)",PASS,approved decision
+SC07,baseline,"M5's denominator is the fixed 1,699 in every scenario that defines M5",{1699},{1699},PASS,approved denominator rule
+SC08,baseline,both quarantined registered-export sessions remain quarantined and eligible in the baseline,2,2,PASS,quarantine policy
+SC09,guardrail,the forbidden pooled comparison is never classified,{'NOT_CLASSIFIED'},{'NOT_CLASSIFIED'},PASS,population separation
+SC10,timezone,"the configured override offset is the approved +3h (an alternative offset is tested, never adopted)",[3],[3],PASS,approved decision
+SC11,timezone,at the baseline offset no session changes weather hour,0,0,PASS,identity
+SC12,semantics,no output metric is about waste or consumption other than the blocked W1,[],[],PASS,semantic chain
+SC13,scenarios,scenarios executed | of which comparable registered-export | diagnostic-only | forbidden,,26 | 24 | 20 | 1,INFO,reported

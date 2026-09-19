@@ -394,3 +394,21 @@ Written to `outputs/metrics/` from the canonical model (all tracked; small). Con
 | `metrics_report.md` | report | the evidence table, results, populations, why M5 and S2 differ, the W1 statement |
 
 `status` is PASS, FAIL or BLOCKED. `evidence_status` is READY_WITH_LIMITATION or BLOCKED. `value` is empty for W1; there is no waste, consumption, leftover or intake column anywhere.
+
+
+## 14. Sensitivity and evidence outputs (WP7)
+
+Written to `outputs/evidence/` (all tracked; small) by `python -m src.pipeline.run --stages sensitivity`. Definitions and thresholds: `sensitivity_analysis.md`, decisions D59-D63.
+
+| File | Grain | Content |
+|---|---|---|
+| `scenario_registry.json` / `.csv` | one scenario | id, group, assumption changed, baseline and alternative assumption, rationale, affected tables and population, metrics recalculated, operation, interpretation, decision impact, defensible, diagnostic-only, forbidden |
+| `sensitivity_results.csv` | one scenario | the metric values, deltas and percentage deltas, worst robustness class, whether the Phase 2 reference reproduced |
+| `metric_sensitivity.csv` | one metric x scenario | `metric_id, scenario_id, baseline_value, scenario_value, absolute_delta, relative_delta, population, interpretation, robustness_class` |
+| `timezone_evidence.csv` | one candidate offset | sessions outside service hours, median first-event hour, gap to the other files, weather-hour changes, temperature difference, rainy-hour share |
+| `evidence_matrix.csv` | one question | Question, Baseline evidence, Sensitivity tested, Observed range/change, Robustness, What can be concluded, What cannot be concluded, Next evidence needed |
+| `uncertainty_register.csv` | one uncertainty | id, assumption, why it matters, current evidence, sensitivity result, impact level, affected metrics, current disposition, evidence that would resolve it |
+| `sensitivity_summary.json`, `sensitivity_controls.csv` | run | baseline (frozen), ranges, largest changes, classification thresholds, conclusion classes, 13 controls |
+| `figures/*.png` | figure | four sensitivity figures |
+
+`robustness_class` is STABLE, SENSITIVE, CONDITIONAL, BLOCKED, or NOT_CLASSIFIED (the diagnostic population contrast S40 and the forbidden guardrail G01). There is no waste, consumption or leftover value in any file.

@@ -1,0 +1,312 @@
+{
+  "baseline": {
+    "M1": 499.0,
+    "M2": 1039.6,
+    "M3": 1697,
+    "M4": 5.0,
+    "M5": 99.882284,
+    "M5_denominator": 1699,
+    "M5_numerator": 1697,
+    "S2": 97.881107,
+    "S2_numerator": 1663,
+    "W1": "BLOCKED / SOURCE GAP",
+    "frozen": true
+  },
+  "baseline_problems": [],
+  "biggest_changes": {
+    "M1": {
+      "largest_absolute": {
+        "delta": 6.0,
+        "relative": 0.012024,
+        "scenario_id": "TZ0"
+      },
+      "largest_relative": {
+        "delta": 6.0,
+        "relative": 0.012024,
+        "scenario_id": "TZ0"
+      }
+    },
+    "M2": {
+      "largest_absolute": {
+        "delta": -62.6,
+        "relative": -0.060215,
+        "scenario_id": "S23"
+      },
+      "largest_relative": {
+        "delta": -62.6,
+        "relative": -0.060215,
+        "scenario_id": "S23"
+      }
+    },
+    "M3": {
+      "largest_absolute": {
+        "delta": -385,
+        "relative": -0.226871,
+        "scenario_id": "S23"
+      },
+      "largest_relative": {
+        "delta": -385,
+        "relative": -0.226871,
+        "scenario_id": "S23"
+      }
+    },
+    "M4": {
+      "largest_absolute": {
+        "delta": 0.0,
+        "relative": 0.0,
+        "scenario_id": "TZ4"
+      },
+      "largest_relative": {
+        "delta": 0.0,
+        "relative": 0.0,
+        "scenario_id": "TZ4"
+      }
+    },
+    "M5": {
+      "largest_absolute": {
+        "delta": -17.83402,
+        "relative": -0.17855,
+        "scenario_id": "TZ0"
+      },
+      "largest_relative": {
+        "delta": -17.83402,
+        "relative": -0.17855,
+        "scenario_id": "TZ0"
+      }
+    },
+    "S2": {
+      "largest_absolute": {
+        "delta": -17.598587,
+        "relative": -0.179796,
+        "scenario_id": "TZ0"
+      },
+      "largest_relative": {
+        "delta": -17.598587,
+        "relative": -0.179796,
+        "scenario_id": "TZ0"
+      }
+    }
+  },
+  "classification_thresholds": {
+    "M1": {
+      "basis": "Phase 2 materiality convention |dM1| >= 10 g; sensitive band = 2x",
+      "kind": "absolute",
+      "sensitive_below": 20.0,
+      "stable_below": 10.0,
+      "unit": "g"
+    },
+    "M2": {
+      "basis": "Phase 2 materiality convention |dM2| >= 25 g; sensitive band = 3x",
+      "kind": "absolute",
+      "sensitive_below": 75.0,
+      "stable_below": 25.0,
+      "unit": "g"
+    },
+    "M3": {
+      "basis": "5% and 20% of the 1,697 baseline sessions",
+      "kind": "relative",
+      "sensitive_below": 0.2,
+      "stable_below": 0.05,
+      "unit": "fraction of baseline"
+    },
+    "M4": {
+      "basis": "Phase 2 convention: any change in M4 is material; one component is sensitive",
+      "kind": "absolute",
+      "sensitive_below": 1.5,
+      "stable_below": 0.5,
+      "unit": "components"
+    },
+    "M5": {
+      "basis": "readiness moved by half a point is stable; five points is the sensitive limit",
+      "kind": "absolute",
+      "sensitive_below": 5.0,
+      "stable_below": 0.5,
+      "unit": "percentage points"
+    },
+    "S2": {
+      "basis": "as M5",
+      "kind": "absolute",
+      "sensitive_below": 5.0,
+      "stable_below": 0.5,
+      "unit": "percentage points"
+    }
+  },
+  "conclusion_classes": {
+    "BLOCKED": 2,
+    "CONDITIONAL": 2,
+    "SENSITIVE": 3,
+    "STABLE": 6
+  },
+  "controls": {
+    "checks": 13,
+    "fail": 0,
+    "failed_checks": [],
+    "info": 1,
+    "pass": 12
+  },
+  "core_status": "PASSED",
+  "eligible_denominator": 1699,
+  "note": "Scenarios are sensitivity tests, not alternative truths. The baseline is the approved interpretation and is never overwritten.",
+  "phase2_mismatches": [],
+  "questions": {
+    "Q1": "STABLE",
+    "Q10": "STABLE",
+    "Q11": "CONDITIONAL",
+    "Q12": "BLOCKED",
+    "Q13": "BLOCKED",
+    "Q2": "STABLE",
+    "Q3": "SENSITIVE",
+    "Q4": "STABLE",
+    "Q5": "CONDITIONAL",
+    "Q6": "STABLE",
+    "Q7": "SENSITIVE",
+    "Q8": "SENSITIVE",
+    "Q9": "STABLE"
+  },
+  "ranges": {
+    "M1": {
+      "baseline": 499.0,
+      "defensible_max": 505.0,
+      "defensible_min": 493.0,
+      "defensible_scenarios": 15,
+      "max": 505.0,
+      "min": 493.0,
+      "scenarios": 21,
+      "unit": "g"
+    },
+    "M2": {
+      "baseline": 1039.6,
+      "defensible_max": 1066.0,
+      "defensible_min": 977.0,
+      "defensible_scenarios": 15,
+      "max": 1066.0,
+      "min": 977.0,
+      "scenarios": 21,
+      "unit": "g"
+    },
+    "M3": {
+      "baseline": 1697,
+      "defensible_max": 1697,
+      "defensible_min": 1312,
+      "defensible_scenarios": 15,
+      "max": 1699,
+      "min": 1312,
+      "scenarios": 21,
+      "unit": "sessions"
+    },
+    "M4": {
+      "baseline": 5.0,
+      "defensible_max": 5.0,
+      "defensible_min": 5.0,
+      "defensible_scenarios": 18,
+      "max": 5.0,
+      "min": 5.0,
+      "scenarios": 24,
+      "unit": "components"
+    },
+    "M5": {
+      "baseline": 99.882284,
+      "defensible_max": 99.882284,
+      "defensible_min": 99.882284,
+      "defensible_scenarios": 4,
+      "max": 100.0,
+      "min": 82.048264,
+      "scenarios": 9,
+      "unit": "%"
+    },
+    "S2": {
+      "baseline": 97.881107,
+      "defensible_max": 97.881107,
+      "defensible_min": 97.881107,
+      "defensible_scenarios": 4,
+      "max": 97.939965,
+      "min": 80.282519,
+      "scenarios": 9,
+      "unit": "%"
+    }
+  },
+  "scenarios": {
+    "defensible": 18,
+    "diagnostic_only": 20,
+    "guardrail": [
+      "G01"
+    ],
+    "phase2_reproduced": 25,
+    "registered": 26
+  },
+  "semantic_chain": [
+    "OBSERVED component weighing events",
+    "DERIVED selected meal weight",
+    "UNKNOWN actual consumed quantity",
+    "SOURCE GAP actual food waste"
+  ],
+  "stage": "sensitivity",
+  "timezone": [
+    {
+      "gap_to_other_files_h": 2.99,
+      "inside_t07_band": false,
+      "is_baseline": false,
+      "mean_abs_t2m_diff_c": 1.231,
+      "median_first_event_hour": 7.54,
+      "offset_hours": 0,
+      "other_registered_files_median_hour": 10.53,
+      "rainy_hour_share_pct": 15.06,
+      "sessions_in_shifted_file": 385,
+      "t03_quarantined_sessions": 303,
+      "weather_hour_changed_sessions": 385
+    },
+    {
+      "gap_to_other_files_h": 1.99,
+      "inside_t07_band": false,
+      "is_baseline": false,
+      "mean_abs_t2m_diff_c": 0.873,
+      "median_first_event_hour": 8.54,
+      "offset_hours": 1,
+      "other_registered_files_median_hour": 10.53,
+      "rainy_hour_share_pct": 27.53,
+      "sessions_in_shifted_file": 385,
+      "t03_quarantined_sessions": 103,
+      "weather_hour_changed_sessions": 385
+    },
+    {
+      "gap_to_other_files_h": 0.99,
+      "inside_t07_band": false,
+      "is_baseline": false,
+      "mean_abs_t2m_diff_c": 0.529,
+      "median_first_event_hour": 9.54,
+      "offset_hours": 2,
+      "other_registered_files_median_hour": 10.53,
+      "rainy_hour_share_pct": 36.62,
+      "sessions_in_shifted_file": 385,
+      "t03_quarantined_sessions": 0,
+      "weather_hour_changed_sessions": 385
+    },
+    {
+      "gap_to_other_files_h": 0.01,
+      "inside_t07_band": true,
+      "is_baseline": true,
+      "mean_abs_t2m_diff_c": 0.0,
+      "median_first_event_hour": 10.54,
+      "offset_hours": 3,
+      "other_registered_files_median_hour": 10.53,
+      "rainy_hour_share_pct": 21.3,
+      "sessions_in_shifted_file": 385,
+      "t03_quarantined_sessions": 0,
+      "weather_hour_changed_sessions": 0
+    },
+    {
+      "gap_to_other_files_h": 1.01,
+      "inside_t07_band": false,
+      "is_baseline": false,
+      "mean_abs_t2m_diff_c": 0.467,
+      "median_first_event_hour": 11.54,
+      "offset_hours": 4,
+      "other_registered_files_median_hour": 10.53,
+      "rainy_hour_share_pct": 11.69,
+      "sessions_in_shifted_file": 385,
+      "t03_quarantined_sessions": 0,
+      "weather_hour_changed_sessions": 385
+    }
+  ],
+  "waste": "W1 BLOCKED / SOURCE GAP: no scenario produces a waste estimate, band or proxy"
+}
