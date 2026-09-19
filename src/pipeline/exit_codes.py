@@ -11,14 +11,14 @@ from enum import IntEnum
 class ExitCode(IntEnum):
     OK = 0
     CONFIG = 2               # configuration missing, malformed, or violating an approved decision
-    RETIRED_NOT_IMPLEMENTED = 3   # retired in WP8: every stage is now implemented, so a full run can no longer stop for that reason
+    RETIRED_NOT_IMPLEMENTED = 3   # retired in pipeline orchestration: every stage is now implemented, so a full run can no longer stop for that reason
     SOURCE = 4               # missing / corrupt / unverified raw source, timezone override out of scope, ingestion or staging failure (core lane)
     FETCH = 5                # explicit retrieval (python -m src.pipeline.fetch) failed
     WEATHER = 6              # core lane usable, weather context lane BLOCKED
     VALIDATION = 7           # validation BLOCKED: staging unusable or a reconciliation identity broke
     MODEL = 8                # canonical model BLOCKED: validation output unusable or a control check failed
     METRICS = 9              # metric contract failure: canonical input unusable or a metric missed its approved value
-    SENSITIVITY = 10         # sensitivity FAILED or BLOCKED: baseline moved, Phase 2 reference not reproduced, registry invalid, input unusable
+    SENSITIVITY = 10         # sensitivity FAILED or BLOCKED: baseline moved, profiling reference not reproduced, registry invalid, input unusable
     ORCHESTRATION = 11       # the orchestrator itself failed: invalid stage order, unexpected exception, unwritable run manifest
 
 
@@ -35,6 +35,6 @@ EXIT_TABLE = (
     (ExitCode.VALIDATION, "VALIDATION", "validation blocked: a staging table is missing or altered, or a reconciliation identity broke"),
     (ExitCode.MODEL, "MODEL", "canonical model blocked: a validation output is missing or altered, or a control check failed"),
     (ExitCode.METRICS, "METRICS", "metric contract failure: a canonical table is missing or altered, or a metric missed its approved value or tolerance"),
-    (ExitCode.SENSITIVITY, "SENSITIVITY", "sensitivity failed: a canonical table is unusable, the baseline moved, a Phase 2 reference stopped reproducing, or the registry is invalid"),
+    (ExitCode.SENSITIVITY, "SENSITIVITY", "sensitivity failed: a canonical table is unusable, the baseline moved, an approved reference stopped reproducing, or the registry is invalid"),
     (ExitCode.ORCHESTRATION, "ORCHESTRATION", "the orchestrator failed: invalid stage order, unexpected exception, or an unwritable pipeline manifest"),
 )

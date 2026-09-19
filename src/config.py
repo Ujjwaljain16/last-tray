@@ -480,7 +480,7 @@ def load_sources(path: Path) -> SourcesConfig:
     if weather.chunk_hours > weather.max_hours_per_request:
         raise ConfigError(f"{name}: chunk_hours ({weather.chunk_hours}) exceeds the server limit ({weather.max_hours_per_request})")
     if weather.r_1h_convention != "hour_ending":
-        raise ConfigError(f"{name}: r_1h_convention must be 'hour_ending' (Phase 2 empirical result); change it only with new evidence")
+        raise ConfigError(f"{name}: r_1h_convention must be 'hour_ending' (profiling empirical result); change it only with new evidence")
     if weather.retry.max_attempts < 1:
         raise ConfigError(f"{name}: retry.max_attempts must be at least 1")
 

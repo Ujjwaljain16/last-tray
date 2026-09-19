@@ -25,7 +25,7 @@ def has_edge_whitespace(raw: str) -> bool:
 
 
 def parse_weight(raw: str) -> tuple[int | None, WeightParseStatus]:
-    """Integer grams or NULL. Zero and negative are not judged here (that is validation, WP4)."""
+    """Integer grams or NULL. Zero and negative are not judged here (that is validation, validation)."""
     text = raw.strip()
     if not text:
         return None, WeightParseStatus.EMPTY

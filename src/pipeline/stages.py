@@ -159,7 +159,7 @@ def _sensitivity(ctx: Context) -> StageReport:
         return StageReport("FAILED", str(exc), console=describe_failed("sensitivity", str(exc)), errors=1)
     failed = res.core_status in ("BLOCKED", "FAILED")
     controls = res.summary.get("controls", {}) if res.summary else {}
-    reason = res.error or ("; ".join(res.summary.get("baseline_problems", []) + res.summary.get("phase2_mismatches", [])) or "controls failed") if failed else None
+    reason = res.error or ("; ".join(res.summary.get("baseline_problems", []) + res.summary.get("reference_mismatches", [])) or "controls failed") if failed else None
     return StageReport("FAILED" if failed else "PASSED", reason, False,
                        counts={"scenarios": res.summary.get("scenarios", {}).get("registered", 0), "controls": controls.get("checks", 0)} if res.summary else {},
                        errors=controls.get("fail", 0), console=describe_sensitivity(res))

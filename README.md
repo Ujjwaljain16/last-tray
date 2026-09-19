@@ -127,11 +127,11 @@ tests/               unit, real-data, failure-injection and documentation tests
 outputs/             generated evidence (ingestion, staging, validation, model, metrics, evidence, pipeline)
 docs/                assignment artifacts and decision log (start with the list below)
 diagrams/            source map, workflow, data model, pipeline, distribution (PNG, SVG, build script)
-research/            the Phase 2 exploration scripts that produced the reference values
+research/            the exploration scripts that produced the reference values
 notebooks/           source exploration notebook
 ```
 
-Start here: [`docs/assignment_traceability.md`](docs/assignment_traceability.md) (rubric to artifact), [`docs/source_map.md`](docs/source_map.md), [`docs/source_truth_decisions.md`](docs/source_truth_decisions.md), [`docs/final_evidence.md`](docs/final_evidence.md), [`docs/known_unknowns_assumptions_limitations.md`](docs/known_unknowns_assumptions_limitations.md), [`docs/judgement_call.md`](docs/judgement_call.md), [`docs/demo_script.md`](docs/demo_script.md), [`docs/pipeline.md`](docs/pipeline.md), [`docs/data_provenance.md`](docs/data_provenance.md), [`docs/data_dictionary.md`](docs/data_dictionary.md), [`docs/sensitivity_analysis.md`](docs/sensitivity_analysis.md), [`docs/decision_log.md`](docs/decision_log.md). Older design documents (`docs/PRD.md`, `docs/TRD.md`, `docs/implementation_plan.md`, `docs/phase2_*`, `research/`) are historical and are marked as such.
+Start here: [`docs/assignment_traceability.md`](docs/assignment_traceability.md) (rubric to artifact), [`docs/source_map.md`](docs/source_map.md), [`docs/source_truth_decisions.md`](docs/source_truth_decisions.md), [`docs/final_evidence.md`](docs/final_evidence.md), [`docs/known_unknowns_assumptions_limitations.md`](docs/known_unknowns_assumptions_limitations.md), [`docs/judgement_call.md`](docs/judgement_call.md), [`docs/demo_script.md`](docs/demo_script.md), [`docs/pipeline.md`](docs/pipeline.md), [`docs/data_provenance.md`](docs/data_provenance.md), [`docs/data_dictionary.md`](docs/data_dictionary.md), [`docs/sensitivity_analysis.md`](docs/sensitivity_analysis.md), [`docs/decision_log.md`](docs/decision_log.md). Background: `docs/PRD.md` and `docs/TRD.md` (original requirements and design), `docs/implementation_overview.md` (how it is built), and `docs/profile_report.md`, `docs/validation_findings.md`, `docs/spec_changes.md` and `research/exploration/` (the exploratory profiling that informed the design: historical evidence, not the pipeline).
 
 ## 14. Known / Unknown / Assumptions / Limitations
 

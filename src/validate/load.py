@@ -59,7 +59,7 @@ class Ev:
     timezone_handling: str
     timezone_offset_hours: int
     unmapped_cells: str
-    raw_artifact_id: str = ""                       # lineage fields added for the canonical model (WP5)
+    raw_artifact_id: str = ""                       # lineage fields added for the canonical model
     timezone_transformation_reason: str = ""
 
 

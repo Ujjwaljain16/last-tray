@@ -1,10 +1,10 @@
-"""Phase 2 section M: apply the draft rules to the real data, write validation_issues.csv, derive threshold evidence
+"""Profile report section M: apply the draft rules to the real data, write validation_issues.csv, derive threshold evidence
 and a KPI sensitivity PREVIEW. Exploratory: the production validator will live in src/validate/."""
 import json
 
 import pandas as pd
 
-from phase2_common import OUT, UTC_FILES, exact_dup_mask
+from exploration_common import OUT, UTC_FILES, exact_dup_mask
 
 pd.set_option("display.width", 250)
 pd.set_option("display.max_columns", 40)
@@ -21,7 +21,7 @@ def add(rule, cat, sev, etype, eid, pop, src, msg, handling, cons):
                        source_file=src, message=msg, handling=handling, business_consequence=cons))
 
 
-# Proposed thresholds. Evidence for each is in docs/phase2_profile_report.md section 9.
+# Proposed thresholds. Evidence for each is in docs/profile_report.md section 9.
 TH = dict(event_warn_g=1500, trace_g=3, session_low_g=50, session_high_g=2200, span_warn_s=600, gap_warn_s=300,
           hour_lo=9, hour_hi=15, t07_lo=10.0, t07_hi=11.0, low_volume_sessions=30)
 
@@ -126,7 +126,7 @@ add("C02", "COMPLETENESS", "INFO", "population", REG, REG, "",
 
 vi = pd.DataFrame(issues)
 vi.insert(0, "issue_id", range(1, len(vi) + 1))
-vi.insert(1, "run_id", "phase2_exploration")
+vi.insert(1, "run_id", "exploration")
 vi.to_csv(OUT.parent / "validation" / "validation_issues.csv", index=False)
 summ = vi.assign(population=vi.population.fillna("n/a")).groupby(["rule_id", "category", "severity", "population"]).agg(issues=("issue_id", "size"), entities=("entity_id", "nunique")).reset_index()
 summ.to_csv(OUT.parent / "validation" / "validation_summary_by_rule.csv", index=False)

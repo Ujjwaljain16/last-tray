@@ -89,14 +89,14 @@
   },
   "classification_thresholds": {
     "M1": {
-      "basis": "Phase 2 materiality convention |dM1| >= 10 g; sensitive band = 2x",
+      "basis": "profiling materiality convention |dM1| >= 10 g; sensitive band = 2x",
       "kind": "absolute",
       "sensitive_below": 20.0,
       "stable_below": 10.0,
       "unit": "g"
     },
     "M2": {
-      "basis": "Phase 2 materiality convention |dM2| >= 25 g; sensitive band = 3x",
+      "basis": "profiling materiality convention |dM2| >= 25 g; sensitive band = 3x",
       "kind": "absolute",
       "sensitive_below": 75.0,
       "stable_below": 25.0,
@@ -110,7 +110,7 @@
       "unit": "fraction of baseline"
     },
     "M4": {
-      "basis": "Phase 2 convention: any change in M4 is material; one component is sensitive",
+      "basis": "profiling convention: any change in M4 is material; one component is sensitive",
       "kind": "absolute",
       "sensitive_below": 1.5,
       "stable_below": 0.5,
@@ -147,7 +147,6 @@
   "core_status": "PASSED",
   "eligible_denominator": 1699,
   "note": "Scenarios are sensitivity tests, not alternative truths. The baseline is the approved interpretation and is never overwritten.",
-  "phase2_mismatches": [],
   "questions": {
     "Q1": "STABLE",
     "Q10": "STABLE",
@@ -225,13 +224,14 @@
       "unit": "%"
     }
   },
+  "reference_mismatches": [],
   "scenarios": {
     "defensible": 18,
     "diagnostic_only": 20,
     "guardrail": [
       "G01"
     ],
-    "phase2_reproduced": 25,
+    "reference_reproduced": 25,
     "registered": 26
   },
   "semantic_chain": [

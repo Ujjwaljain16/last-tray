@@ -11,7 +11,7 @@ The labels are **inherited from the source filenames** (`registered_*.csv`, `non
 
 ## 2. Evidence that the populations behave differently
 
-Phase 2 profile, the two crossover sessions excluded from both (`outputs/phase2/population_profile.csv`):
+profile, the two crossover sessions excluded from both (`outputs/exploration/population_profile.csv`):
 
 | Measure | registered-export | non-registered-export |
 |---|---:|---:|

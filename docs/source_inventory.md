@@ -1,6 +1,6 @@
 # Source Inventory
 
-Generated from `outputs/source_inventory.csv` (Phase 0 spike, 2026-09-18). Full field-level detail lives in the CSV.
+Generated from `outputs/source_inventory.csv` (initial source review, 2026-09-18). Full field-level detail lives in the CSV.
 
 | ID | Source | Access | Grain | Retrievable | Joinable | Key limitation |
 |---|---|---|---|---|---|---|

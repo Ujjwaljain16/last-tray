@@ -1,7 +1,7 @@
 """Inputs of the metric layer: the CANONICAL MODEL tables, verified against the model manifest. Nothing else.
 
 Metrics are computed from `fact_dining_session` (and cross-checked against `fact_session_component`, `fact_daily_volume`, `fact_weather`
-and `fact_weighing_event`). They never read staging or raw files: WP5 owns the canonical derived fields. A table is trusted only if it
+and `fact_weighing_event`). They never read staging or raw files: model owns the canonical derived fields. A table is trusted only if it
 matches the SHA-256, header and row count the model manifest recorded, the manifest reports a BUILT core lane with no failed control,
 and it was built on the validation run that is currently on disk.
 """

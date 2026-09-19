@@ -94,7 +94,7 @@ def session_checks(inp: StagedInputs, cfg: Config, profiles: dict[str, SessionPr
         info("S03", "sessions", "session_ids present in both populations (crossover)", ",".join(both)),
         eq("S04", "sessions", "every crossover session key is quarantined (rule I01)", crossover_keys, sorted(quarantined & set(crossover_keys)), "approved decision"),
         eq("S05", "sessions", "every staged event belongs to exactly one session key", len(inp.events), n_events, "identity"),
-        eq("S06", "sessions", "session keys with more than one identification value (approved Phase 2 correction: 0)", 0, ident_by_key, "approved Phase 2 finding"),
+        eq("S06", "sessions", "session keys with more than one identification value (approved profiling correction: 0)", 0, ident_by_key, "approved profiling finding"),
         info("S07", "sessions", "the same count if populations were pooled by session_id alone (a pooling artefact; keys are never pooled): canonical instants | raw wall-clock",
               f"{pooled_canonical} | {pooled_raw}"),
     ]
@@ -123,7 +123,7 @@ def name_checks(profiles: dict[str, SessionProfile], events: list[Ev]) -> list[C
     differing = sorted(k for k, p in profiles.items() if len({e.component_name_raw for e in p.counted}) != len({e.component_id_normalized for e in p.counted}))
     raw_names, norm_names = {e.component_name_raw for e in events}, {e.component_id_normalized for e in events}
     return [
-        eq("N01", "components", "within every session, distinct raw component names equal distinct normalised names (Phase 2 conclusion; observed = sessions that differ)", [], differing, "approved Phase 2 finding"),
+        eq("N01", "components", "within every session, distinct raw component names equal distinct normalised names (profiling conclusion; observed = sessions that differ)", [], differing, "approved profiling finding"),
         info("N02", "components", "distinct component names across the data: raw | normalised (trim, whitespace collapse, casefold; no alias table)", f"{len(raw_names)} | {len(norm_names)}"),
     ]
 

@@ -25,7 +25,7 @@ The single source for table grains and columns. `data_dictionary.md` describes e
 
 Every metric and sensitivity output is a CSV (`outputs/`), not a table, so it can be diffed between runs.
 
-**Implementation note (WP2).** `source_snapshot` and `raw_file_manifest` are produced by ingestion as CSV under `outputs/ingestion/` (deterministic) and are loaded into SQLite by the model build (WP5). Only `source_snapshot_id` is deterministic content identity; the run record (`ingestion_run.json`) is the one time-dependent file.
+**Implementation note.** `source_snapshot` and `raw_file_manifest` are produced by ingestion as CSV under `outputs/ingestion/` (deterministic) and are loaded into SQLite by the model build. Only `source_snapshot_id` is deterministic content identity; the run record (`ingestion_run.json`) is the one time-dependent file.
 
 ## 2. DDL (SQLite)
 
@@ -209,4 +209,4 @@ CREATE TABLE pipeline_run (run_id TEXT PRIMARY KEY, started_at TEXT NOT NULL, fi
 | M1 / M2 / M4 | 499 g / 1,039.6 g / 5 |
 | M5 / Warn-free rate | 99.88% (1,697/1,699) / 97.88% (1,663/1,699); event-level variant 97.70% (1,660/1,699), diagnostic |
 | Weather hours / canonical sessions matched (dry run) | 1,129 / 1,697 |
-| Validation issues (Phase 2 exploration) | 1,278 |
+| Validation issues (exploration) | 1,278 |

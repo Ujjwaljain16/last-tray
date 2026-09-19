@@ -10,7 +10,7 @@
   "core_status": "BUILT",
   "field_notes": {
     "derived_selected_meal_weight_g": "DERIVED from MODELLABLE events; not consumed quantity, not food waste, not actual intake",
-    "rule_weight_sum_g": "WP4 validation working value, used only as a reconciliation control",
+    "rule_weight_sum_g": "validation working value, used only as a reconciliation control",
     "sessions": "Observed Valid Sessions; an observation of the export, not demand"
   },
   "inputs": {
@@ -28,7 +28,7 @@
       "event_validation_status.csv": "180ad8b295dedcbb32109998f6ee42c0a6ec0fe79043b339c127715ec168f88e",
       "field_completeness.csv": "6e4e8522588610f60f09eb68c8acdc398203b49128cad121f508a6c60bb85f30",
       "quarantine_manifest.csv": "f79bed6b923f457e074e7975477897aa1148a5cb012b08bc580abb51b383412b",
-      "reconciliation_summary.csv": "0d58b2da32e4d64ed2ecdcd8899ab6c0edb01d1312d32a1192b15ab64fa44ab1",
+      "reconciliation_summary.csv": "1b2501bc77f4f176191a35aca927a0bf39b3ae10bf36fb144d48a52442f4c13e",
       "service_day_volume.csv": "5df69f32dbc95746675ee912c06b298f0c2678ecb7ad05bfb600eab65ddeb817",
       "session_validation_status.csv": "7d7df056878729f0f0177299398a48bdd0d2235203f272126077c184e6749f7d",
       "validation_issues.csv": "bc9907009dda332c1822015a8b870802b43fad5090b1e704b5ce6c2b0cb4478e",
@@ -36,7 +36,7 @@
     },
     "validation_run_id": "val-f0bbad162772"
   },
-  "model_version": "wp5-1",
+  "model_version": "model-1",
   "semantic_chain": [
     "OBSERVED component weighing events",
     "DERIVED selected meal weight",

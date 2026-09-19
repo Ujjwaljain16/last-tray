@@ -1,10 +1,10 @@
-"""Phase 2 sections A-D: schema drift, column profile, population profile, timestamp/timezone validation."""
+"""Profile report sections A-D: schema drift, column profile, population profile, timestamp/timezone validation."""
 import json
 
 import numpy as np
 import pandas as pd
 
-from phase2_common import OUT, UTC_FILES, load_raw, parse, sessions, crossover_ids, exact_dup_mask, q
+from exploration_common import OUT, UTC_FILES, load_raw, parse, sessions, crossover_ids, exact_dup_mask, q
 
 OUT.mkdir(parents=True, exist_ok=True)
 pd.set_option("display.width", 250)
@@ -85,8 +85,8 @@ pp = core.groupby("population").apply(prof, include_groups=False).T
 pp["note"] = "crossover sessions excluded from both"
 print(pp.round(2))
 pp.round(3).to_csv(OUT / "population_profile.csv")
-# same statistics including the crossover sessions once per population, for comparability with Phase 0
-print("Phase-0-comparable (crossover included) sessions per pop:", s.groupby("population").size().to_dict())
+# same statistics including the crossover sessions once per population, for comparability with the initial review
+print("initial-review-comparable (crossover included) sessions per pop:", s.groupby("population").size().to_dict())
 R["population"] = pp.round(3).drop(columns="note").to_dict()
 
 # ---- D. timestamp / timezone validation ------------------------------------------------------------

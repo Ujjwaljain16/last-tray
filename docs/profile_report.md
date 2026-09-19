@@ -1,10 +1,10 @@
-# Phase 2 Profile Report
+# Profile Report
 
-Real data, no cleaning. Reproduce with `python research/phase2/phase2_a_schema_population_tz.py`, then `phase2_b_...`, `phase2_c_...`, `phase2_d_...` (exploration scripts, not the production pipeline). Machine-readable results are in `outputs/phase2/`.
+Real data, no cleaning. Reproduce with `python research/exploration/exploration_a_schema_population_tz.py`, then `exploration_b_...`, `exploration_c_...`, `exploration_d_...` (exploration scripts, not the production pipeline). Machine-readable results are in `outputs/exploration/`.
 
 **Population labels.** "registered-export population" and "non-registered-export population" are **inherited from source filenames**. The public documentation reviewed for this project does not define what they mean, so we do not read them as customer-registration status. Session keys are `(session_id, population)`. The two populations are never pooled.
 
-**Corrections to Phase 0 numbers.** Phase 0 pooled the two crossover sessions across populations. Re-profiled per `(session_id, population)`: sessions with more than one identification value = **0** (was 2), sessions spanning more than 10 minutes = **7** (was 8; the eighth was `session3222` pooled across exports, 10,873 s), same-scale repeats = **512 events in 222 sessions** (was 538). Nothing else moved.
+**Corrections to the initial review numbers.** The initial review pooled the two crossover sessions across populations. Re-profiled per `(session_id, population)`: sessions with more than one identification value = **0** (was 2), sessions spanning more than 10 minutes = **7** (was 8; the eighth was `session3222` pooled across exports, 10,873 s), same-scale repeats = **512 events in 222 sessions** (was 538). Nothing else moved.
 
 ---
 
@@ -25,7 +25,7 @@ Real data, no cleaning. Reproduce with `python research/phase2/phase2_a_schema_p
 
 ## 2. Population-level profile
 
-Crossover sessions excluded from both. Full table: `outputs/phase2/population_profile.csv`.
+Crossover sessions excluded from both. Full table: `outputs/exploration/population_profile.csv`.
 
 | Measure | registered-export | non-registered-export |
 |---|---:|---:|
@@ -40,11 +40,11 @@ Crossover sessions excluded from both. Full table: `outputs/phase2/population_pr
 | Session span, median / P99 | 71 s / 155 s | 24 s / 122 s |
 | Service days covered | 35 | 30 |
 
-The Phase 0 population decision stands with cleaner numbers. Non-registered-export sessions contain far less per session, with 28% below 50 g. The cause is not identifiable from the source (see Q2).
+The initial review population decision stands with cleaner numbers. Non-registered-export sessions contain far less per session, with 28% below 50 g. The cause is not identifiable from the source (see Q2).
 
 ## 3. Timestamp and timezone validation
 
-Full evidence: `docs/timezone_decision.md`. New in Phase 2:
+Full evidence: `docs/timezone_decision.md`. New in profiling:
 
 - **T07 (file median first-event hour in 10:00-11:00) behaves as designed.** Only `registered_2020_10_05-2020_10_18.csv` fails on raw times (7.54 h; 1,925 of its 1,931 events before 10:00). After the +3h normalisation every file passes (10.48-10.58 h). All other files pass on raw times.
 - **Offset scan, -6 h to +6 h** (L1 distance of hour-of-day distribution to the other registered-export files): +3 h = **0.046**, +2 h = 1.029, +4 h = 1.064, all other offsets 1.5-2.0. The test has 1-hour resolution, so it cannot separate 3 h from 3 h ± 30 min. The exact 10,800 s difference on `session3222` does.
@@ -104,7 +104,7 @@ In the Oct 5-16 window the two exports disagree about which dish was on which sc
 
 ## 7. Daily volume profile
 
-Full table: `outputs/phase2/daily_volume_by_population.csv`.
+Full table: `outputs/exploration/daily_volume_by_population.csv`.
 
 **Registered-export volume is bimodal by weekday, not steady.**
 
@@ -165,7 +165,7 @@ Both are **quarantined** (I01, ERROR) from primary metrics until the source-of-t
 
 ## 11. Investigation: the 17 single-event registered-export sessions
 
-Full list: `outputs/phase2/single_event_registered_export_sessions.csv`.
+Full list: `outputs/exploration/single_event_registered_export_sessions.csv`.
 
 - 10 on hot scales, 7 on cold; weights 3-565 g (median 127 g).
 - **10 exceed 100 g**, and several are soups or a single main (e.g. 565 g vegetable pea soup, 492 g chicken soup), which reads as a plausible single-item lunch. **6 are 50 g or less** (3, 3, 4, 4, 38, 46 g) and look like partial captures.
@@ -188,7 +188,7 @@ FMI's public pages reviewed for this project do not document the convention. We 
 
 ## 13. KPI sensitivity preview
 
-**PREVIEW ONLY. Not evidence outputs**; the pipeline will compute the real ones. `outputs/phase2/kpi_sensitivity_preview.csv`.
+**PREVIEW ONLY. Not evidence outputs**; the pipeline will compute the real ones. `outputs/exploration/kpi_sensitivity_preview.csv`.
 
 | Scenario | Sessions | M1 median (g) | M2 P90 (g) | M4 median |
 |---|---:|---:|---:|---:|

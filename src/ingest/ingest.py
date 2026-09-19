@@ -1,4 +1,4 @@
-"""Ingestion orchestration (WP2). Runs entirely offline.
+"""Ingestion orchestration. Runs entirely offline.
 
     source discovery -> source snapshot identity -> checksum verification -> schema fingerprint
     -> timezone override scope (T10) -> immutable raw preservation check -> ingestion manifest -> staging handoff

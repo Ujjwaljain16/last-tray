@@ -18,7 +18,7 @@ class TestComponentNames:
         assert normalize_component_name("CLASSIC CHICKEN GUMBO ") == normalize_component_name("classic chicken gumbo")
 
     def test_no_alias_table_language_variants_and_different_dishes_stay_distinct(self):
-        """Phase 2: exports disagree by mixing language variants with genuinely different dishes. Nothing is merged."""
+        """profiling: exports disagree by mixing language variants with genuinely different dishes. Nothing is merged."""
         pairs = [("lohkoperunoita", "baked potato"), ("kaali-porkkanaraaste", "grated cabbage"),
                  ("kalkkunaa bbq kastikkeessa", "kalkkunaa herkkusienikastikkeessa"), ("Punakaali", "Marinoitu kaalisalaatti")]
         for a, b in pairs:

@@ -1,4 +1,4 @@
-"""Builders for canonical-model tests: staged events plus WP4-style dispositions, assembled into ModelInputs by hand."""
+"""Builders for canonical-model tests: staged events plus validation-style dispositions, assembled into ModelInputs by hand."""
 from __future__ import annotations
 
 from datetime import datetime, timezone
@@ -13,7 +13,7 @@ from tests.validate_helpers import make_event  # noqa: F401  (re-exported for th
 
 def model_inputs(events: list[Ev], quarantine: Iterable[str] = (), errors: dict[str, str] | None = None, warns: dict[str, str] | None = None,
                  session_warn: Iterable[str] = (), issues: list[dict] | None = None, weather: list[Wx] | None = None) -> ModelInputs:
-    """Dispositions follow the WP4 rule: quarantined key wins, then exact repeat, else MODELLABLE."""
+    """Dispositions follow the validation rule: quarantined key wins, then exact repeat, else MODELLABLE."""
     quarantined = set(quarantine)
     repeats = find_repeats(events)
     errors, warns = errors or {}, warns or {}

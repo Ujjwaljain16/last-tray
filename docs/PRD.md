@@ -1,8 +1,8 @@
-# LAST TRAY: Product Requirements (v3, historical: written before implementation)
+# LAST TRAY: Product Requirements (v3)
 
-> **Status.** This is the requirements document the implementation followed. The implemented behaviour, final metric wording and evidence are in `README.md`, `final_evidence.md` and `decision_log.md`; where they differ, those are authoritative.
+> **Status.** The original requirements the implementation followed. The implemented behaviour, final metric wording and evidence are in `README.md`, `final_evidence.md` and `decision_log.md`; where they differ, those are authoritative.
 
-**Flavoria DiningOps Truth.** Supersedes the original ChatGPT-drafted plan (an early working document, not included in this repository). Every change from that plan is in `docs/decision_log.md`.
+**Flavoria DiningOps Truth.** Every change from the initial design is recorded in `docs/decision_log.md`.
 
 > The client scenario is **simulated for educational purposes**. The data and documentation are real and public, published by the University of Turku and collaborators. We are not working for, and do not speak for, Flavoria, the University of Turku, or any partner.
 
@@ -16,7 +16,7 @@ It is deliberately **not** a dining-analytics dashboard. The hard work is recons
 
 A self-service restaurant wants to reduce food waste without hurting the dining experience. Its data is fragmented across lunch-line scales, a checkout scale, a cash register, a waste-station system, menu data and building sensors. Leadership's instinct: "we weigh food, so we can see waste."
 
-**We do not yet know that.** The MVP does not measure food waste. It answers a prior question:
+**We do not yet know that.** This project does not measure food waste. It answers a prior question:
 
 > **Are the operational measurements available to us sufficient to support future food-waste decisions, what can we already trust about what was selected at the lunch line, and what exact data is missing?**
 
@@ -37,7 +37,7 @@ The lunch-line scales record grams of each component **as it is placed on the tr
 
 ## 5. Scope
 
-**In the MVP (all retrievable today):** FlavoriaFoodWeight1700 CSV archive (Zenodo, CC-BY-4.0, 2020-10-05 to 2020-11-20); FMI hourly weather (WFS API, Turku Artukainen) as **context only**; Flavoria Data Catalog pages as source-definition evidence.
+**In scope (all retrievable today):** FlavoriaFoodWeight1700 CSV archive (Zenodo, CC-BY-4.0, 2020-10-05 to 2020-11-20); FMI hourly weather (WFS API, Turku Artukainen) as **context only**; Flavoria Data Catalog pages as source-definition evidence.
 
 **Documented, not ingested:** Lunch Line Waste, Weigh & Dine, Cash Register, Building Data, MyFlavoria, Surveys (see `source_gap_register.md`).
 
@@ -77,7 +77,7 @@ All core metrics describe the **registered-export population**. Formulas and ful
 | M4 | **Median Distinct Normalized Components per Session** | `MEDIAN(distinct_component_count)` | canonical sessions |
 | M5 | **Core Measurement Readiness** | `core_ready sessions / eligible sessions` | eligible = **every registered-export session ID in the source (1,699), counted before any record is removed** |
 
-Baseline values (Phase 2 preview, to be reproduced by the pipeline): M1 = 499 g, M2 = 1,039.6 g, M3 = 1,697, M4 = 5, **M5 = 1,697 / 1,699 = 99.88%**.
+Baseline values (profiling preview, to be reproduced by the pipeline): M1 = 499 g, M2 = 1,039.6 g, M3 = 1,697, M4 = 5, **M5 = 1,697 / 1,699 = 99.88%**.
 
 **Supporting metrics (not core KPIs):**
 | ID | Name | Definition |

@@ -51,7 +51,7 @@ def write_json(path: Path, obj: Any) -> None:
 
 
 def build_handoff(cfg: Config, result: IngestionResult) -> dict[str, Any]:
-    """The contract with staging (WP3): what may be read, from where, verified against which snapshot."""
+    """The contract with staging: what may be read, from where, verified against which snapshot."""
     f = cfg.sources.flavoria
     w = cfg.sources.weather
     core_ready = result.core_outcome in (LaneOutcome.OK, LaneOutcome.WARNING)

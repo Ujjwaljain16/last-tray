@@ -1,27 +1,27 @@
 check_id,area,description,expected,observed,status,basis
 M01,events,fact_weighing_event rows equal the staged events and the pinned total,12284,12284,PASS,pin + staging
 M02,events,canonical event ids equal the staged event ids in staging order,True,True,PASS,staging
-M03,events,events by population equal WP4,"{'non_registered_export': 3912, 'registered_export': 8372}","{'non_registered_export': 3912, 'registered_export': 8372}",PASS,WP4 summary
-M04,events,dispositions equal WP4 (nothing dropped: modellable + duplicate-excluded + quarantined = staged),"{'DUPLICATE_EXCLUDED': 2, 'MODELLABLE': 12260, 'QUARANTINED': 22}","{'DUPLICATE_EXCLUDED': 2, 'MODELLABLE': 12260, 'QUARANTINED': 22}",PASS,WP4 summary
-M05,sessions,session keys equal WP4 and the sum of session event counts equals the event total,"(3345, 12284)","(3345, 12284)",PASS,WP4 summary
+M03,events,events by population equal validation,"{'non_registered_export': 3912, 'registered_export': 8372}","{'non_registered_export': 3912, 'registered_export': 8372}",PASS,validation summary
+M04,events,dispositions equal validation (nothing dropped: modellable + duplicate-excluded + quarantined = staged),"{'DUPLICATE_EXCLUDED': 2, 'MODELLABLE': 12260, 'QUARANTINED': 22}","{'DUPLICATE_EXCLUDED': 2, 'MODELLABLE': 12260, 'QUARANTINED': 22}",PASS,validation summary
+M05,sessions,session keys equal validation and the sum of session event counts equals the event total,"(3345, 12284)","(3345, 12284)",PASS,validation summary
 M06,sessions,distinct session ids equal the pinned count,3343,3343,PASS,pin: config/sources.yml
-M07,sessions,session ids present in both populations equal WP4 (the crossover ids; keys are never merged),"['session2266', 'session3222']","['session2266', 'session3222']",PASS,WP4 summary
-M08,sessions,quarantined session keys equal the WP4 quarantine,"['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']","['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']",PASS,WP4 quarantine manifest
-M09,sessions,every event of a quarantined key is QUARANTINED and no other event is,0,0,PASS,WP4 quarantine manifest
-M10,control,sessions whose canonical selected-meal weight differs from WP4 rule_weight_sum_g (quarantined excluded by design),[],[],PASS,independent reconstruction
+M07,sessions,session ids present in both populations equal validation (the crossover ids; keys are never merged),"['session2266', 'session3222']","['session2266', 'session3222']",PASS,validation summary
+M08,sessions,quarantined session keys equal the validation quarantine,"['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']","['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']",PASS,validation quarantine manifest
+M09,sessions,every event of a quarantined key is QUARANTINED and no other event is,0,0,PASS,validation quarantine manifest
+M10,control,sessions whose canonical selected-meal weight differs from validation rule_weight_sum_g (quarantined excluded by design),[],[],PASS,independent reconstruction
 M11,control,sessions with a MATCHING independent weight | quarantined sessions with no canonical weight,,3341 | 4,INFO,reported
-M12,control,sessions whose canonical span differs from WP4,[],[],PASS,independent reconstruction
-M13,control,"sessions whose event, modellable or repeat counts differ from WP4",[],[],PASS,independent reconstruction
-M14,control,sessions whose first weighing differs from WP4,[],[],PASS,independent reconstruction
-M15,components,sessions where distinct raw and normalised component counts differ (Phase 2 property),[],[],PASS,approved Phase 2 finding
+M12,control,sessions whose canonical span differs from validation,[],[],PASS,independent reconstruction
+M13,control,"sessions whose event, modellable or repeat counts differ from validation",[],[],PASS,independent reconstruction
+M14,control,sessions whose first weighing differs from validation,[],[],PASS,independent reconstruction
+M15,components,sessions where distinct raw and normalised component counts differ (profiling property),[],[],PASS,approved profiling finding
 M16,components,session_component rows equal the sum of the sessions' distinct component counts,11925,11925,PASS,identity
-M17,timezone,events carrying the file-specific override equal WP4 and sit only in the configured file(s),0,0,PASS,approved decision
+M17,timezone,events carrying the file-specific override equal validation and sit only in the configured file(s),0,0,PASS,approved decision
 M18,timezone,events by timezone_handling,,NORMALISED_PLUS_3H_STRONGEST_SUPPORT=1931;SOURCE_LOCAL_ASSUMED=10353,INFO,reported
-M19,readiness,core_ready sessions | eligible primary-population sessions (fields prepared for M5; the metric itself is WP6),,1697 | 1699,INFO,reported
+M19,readiness,core_ready sessions | eligible primary-population sessions (fields prepared for M5; the metric itself is metrics),,1697 | 1699,INFO,reported
 M20,readiness,core_ready sessions are never quarantined and never carry an ERROR finding,0,0,PASS,approved readiness contract
-M21,volume,registered-export daily sessions and both flags equal the WP4 day table,True,True,PASS,WP4 service_day_volume
+M21,volume,registered-export daily sessions and both flags equal the validation day table,True,True,PASS,validation service_day_volume
 M22,weather,fact_weather hours (grain: one station x UTC hour),,1129,INFO,reported
 M23,weather,"no duplicate (station, hour) in fact_weather",1129,1129,PASS,identity
 M24,weather,session weather_join_status counts,,MATCHED=3341;NOT_ATTEMPTED_QUARANTINED=4,INFO,reported
-M25,weather,"core_ready registered-export sessions matched | eligible (approved Phase 2: 1,697 of 1,697)",,1697 | 1697,INFO,reported
+M25,weather,"core_ready registered-export sessions matched | eligible (approved profiling: 1,697 of 1,697)",,1697 | 1697,INFO,reported
 M26,weather,core_ready sessions whose matched hour has NULL r_1h | NULL ri_10min,,67 | 25,INFO,reported

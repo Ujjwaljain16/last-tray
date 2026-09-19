@@ -1,6 +1,6 @@
-"""Sensitivity stage (WP7): verified canonical tables in, evidence artifacts out. Offline; writes only under outputs/evidence/.
+"""Sensitivity stage: verified canonical tables in, evidence artifacts out. Offline; writes only under outputs/evidence/.
 
-Blocked on missing or altered canonical inputs (stale outputs removed). FAILED if the baseline moved or an approved Phase 2 reference no
+Blocked on missing or altered canonical inputs (stale outputs removed). FAILED if the baseline moved or an approved reference no
 longer reproduces (the artifacts are still written so the difference is visible; nothing is tuned).
 """
 from __future__ import annotations
@@ -60,8 +60,8 @@ def _summary(a: Analysis, status: str) -> dict[str, Any]:
         "baseline": {"M1": base.m1, "M2": round(base.m2, 6), "M3": base.m3, "M4": base.m4, "M5": round(base.m5, 6), "M5_numerator": base.m5_numerator, "M5_denominator": base.m5_denominator,
                      "S2": round(base.s2, 6), "S2_numerator": base.s2_numerator, "W1": "BLOCKED / SOURCE GAP", "frozen": True},
         "scenarios": {"registered": len(SCENARIOS), "guardrail": list(GUARDRAIL_IDS), "diagnostic_only": sum(s.diagnostic_only for s in SCENARIOS),
-                      "defensible": sum(s.defensible for s in SCENARIOS), "phase2_reproduced": sum(s.phase2 is not None for s in SCENARIOS) - len(a.phase2_mismatches)},
-        "phase2_mismatches": a.phase2_mismatches, "baseline_problems": a.baseline_problems,
+                      "defensible": sum(s.defensible for s in SCENARIOS), "reference_reproduced": sum(s.reference is not None for s in SCENARIOS) - len(a.reference_mismatches)},
+        "reference_mismatches": a.reference_mismatches, "baseline_problems": a.baseline_problems,
         "ranges": a.ranges, "biggest_changes": a.biggest, "classification_thresholds": CLASSIFICATION, "conclusion_classes": dict(sorted(classes.items())),
         "questions": {r["question_id"]: r["Robustness"] for r in a.matrix},
         "controls": {"checks": len(a.checks), "pass": sum(c.status == "PASS" for c in a.checks), "fail": sum(c.status == "FAIL" for c in a.checks), "info": sum(c.status == "INFO" for c in a.checks),

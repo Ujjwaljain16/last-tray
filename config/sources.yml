@@ -1,6 +1,6 @@
 # Sources: where each input comes from and what "complete and uncorrupted" means for it.
 # Pins below were computed from the committed raw files on 2026-09-19 and cross-checked against the
-# Zenodo record (MD5) and the Phase 2 profile (row counts). WP2 verifies them at run time.
+# Zenodo record (MD5) and the profile (row counts). Ingestion verifies them at run time.
 
 flavoria:
   name: FlavoriaFoodWeight1700
@@ -76,7 +76,7 @@ weather:
   chunk_hours: 167
   window: {start: "2020-10-05T00:00:00Z", end: "2020-11-21T00:00:00Z"}
   expected_hours: 1129         # 47 days * 24 + 1
-  r_1h_convention: hour_ending # accumulation over the hour ENDING at the timestamp (Phase 2 empirical test)
+  r_1h_convention: hour_ending # accumulation over the hour ENDING at the timestamp (profiling empirical test)
   retry: {max_attempts: 4, backoff_base_seconds: 2, backoff_factor: 2, timeout_seconds: 30}
   rate_limits: {per_day: 20000, per_5_minutes: 600}    # FMI published limits
   retrieved_on: 2026-09-18

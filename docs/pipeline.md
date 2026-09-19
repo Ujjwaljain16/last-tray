@@ -1,4 +1,4 @@
-# Pipeline (WP8)
+# Pipeline
 
 `python -m src.pipeline.run` runs the whole project, offline, from the committed repository:
 
@@ -51,7 +51,7 @@ Nothing is skipped because a file exists. Every stage re-verifies its upstream c
 | 7 | VALIDATION | a staging table is missing or altered, or a reconciliation identity broke |
 | 8 | MODEL | a validation output is missing or altered, or a canonical control failed |
 | 9 | METRICS | a canonical table is missing or altered, or a metric missed its approved value |
-| 10 | SENSITIVITY | a canonical table is unusable, the baseline moved, a Phase 2 reference stopped reproducing, or the registry is invalid |
+| 10 | SENSITIVITY | a canonical table is unusable, the baseline moved, an approved reference stopped reproducing, or the registry is invalid |
 | 11 | ORCHESTRATION | invalid stage order, an unexpected exception inside a stage, or an unwritable pipeline manifest |
 
 ## 4. Offline guarantee

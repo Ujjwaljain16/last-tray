@@ -4,7 +4,7 @@ The +3h normalization was made for ONE file, on the evidence of cross-export tem
 general statement about any timezone and it is not source-confirmed. This check refuses to apply it if the file, its date
 range, or the shift it was made to correct is not what the evidence covered. Failing this check FAILS the core lane.
 
-This is a scope check on raw text only. Parsing and normalising events is WP3.
+This is a scope check on raw text only. Parsing and normalising events is staging.
 """
 from __future__ import annotations
 

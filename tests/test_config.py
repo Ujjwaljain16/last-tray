@@ -257,7 +257,7 @@ class TestConfigRefusesDishonestEdits:
             load_config(config_copy.dir)
 
 
-# ---- WP2 pins: everything ingestion verifies must be pinned, and pinned precisely ---------------------------------------------------
+# ---- ingestion pins: everything ingestion verifies must be pinned, and pinned precisely ---------------------------------------------------
 class TestIngestionPins:
     def test_every_member_is_pinned_by_sha256(self, cfg):
         shas = [m.sha256 for m in cfg.sources.flavoria.members]

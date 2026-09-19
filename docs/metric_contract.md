@@ -26,7 +26,7 @@ Population labels (`registered_export`, `non_registered_export`) are inherited f
 | **S2 (canonical)** | `SUM(has_session_warn = 0 AND core_ready = 1) * 1.0 / COUNT(*)` over `WHERE population = 'registered_export'` | eligible | 1699 | **1663 / 1699 = 97.88%** |
 | **W1** | none. Evidence row only | n/a | n/a | `BLOCKED / SOURCE GAP`, value NULL |
 
-`derived_selected_meal_weight_g` = `SUM(component_weight_g)` over the session's MODELLABLE events (`disposition = 'MODELLABLE'`: not an exact repeat and not quarantined); NULL if there is none or any weight is invalid. It is DERIVED, never labelled observed, and is NOT consumed quantity, food waste or actual intake. WP4's `rule_weight_sum_g` is a validation working value used only as a reconciliation control (D50).
+`derived_selected_meal_weight_g` = `SUM(component_weight_g)` over the session's MODELLABLE events (`disposition = 'MODELLABLE'`: not an exact repeat and not quarantined); NULL if there is none or any weight is invalid. It is DERIVED, never labelled observed, and is NOT consumed quantity, food waste or actual intake. Validation's `rule_weight_sum_g` is a validation working value used only as a reconciliation control (D50).
 
 **Never used in any metric filter:** `weather_matched`, `low_observed_volume_day`, `volume_irregularity`, `has_session_warn` (except in S2), `has_event_warn`, `distinct_component_count_status`, `quality_status`. Invariant I-6: volume flags appear in no WHERE clause of any metric query.
 
@@ -102,9 +102,9 @@ WHERE s.derived_selected_meal_weight_g <> e.w;      -- must return no rows
 
 ## 7. Sensitivity contract
 
-The WP7 sensitivity analysis (`outputs/evidence/`, `docs/sensitivity_analysis.md`) reproduces the 25 approved Phase 2 scenarios in `outputs/validation/sensitivity_analysis.csv` (frozen in `tests/golden/`) and adds one forbidden guardrail; the frozen baseline is never overwritten. The baseline row (S00) must equal the rows above. Scenarios S20-S22 (volume) are **analysis only**: they measure the effect of excluding days that the pipeline never excludes. The timezone is **not** selected by the KPIs: TZ2, TZ3 and TZ4 are identical on every KPI, so cross-export evidence, not KPI sensitivity, selects +3h.
+The sensitivity analysis (`outputs/evidence/`, `docs/sensitivity_analysis.md`) reproduces the 25 approved reference scenarios in `outputs/validation/sensitivity_analysis.csv` (frozen in `tests/golden/`) and adds one forbidden guardrail; the frozen baseline is never overwritten. The baseline row (S00) must equal the rows above. Scenarios S20-S22 (volume) are **analysis only**: they measure the effect of excluding days that the pipeline never excludes. The timezone is **not** selected by the KPIs: TZ2, TZ3 and TZ4 are identical on every KPI, so cross-export evidence, not KPI sensitivity, selects +3h.
 
-## 8. WP6 implementation (metrics and evidence)
+## 8. Metrics implementation (metrics and evidence)
 
 Implemented in `src/metrics/` and run by `python -m src.pipeline.run --stages metrics`. Outputs in `outputs/metrics/`: `metrics.csv`,
 `metric_evidence.csv`, `metric_summary.json`, `metric_contracts.json` (each contract with its computed value, tolerance and pass/fail),
@@ -144,10 +144,10 @@ equal to `statistics.quantiles(..., n=10, method="inclusive")[8]`, which a contr
 sessions. S2 additionally leaves out the 34 core-ready sessions that carry a session-level WARN (B04, B07, T04, T05, I06), which stay in every KPI
 (1,663 + 34 + 2 = 1,699). S2D also counts event-level WARNs (B02, I02; three more sessions) and never replaces S2. Neither is a measure of accuracy.
 
-**S1 and the quarantined sessions (differs from the Phase 2 expectation).** The definition above fixes S1's denominator at 1,699 and the Phase 2 dry run
+**S1 and the quarantined sessions (differs from the profiling expectation).** The definition above fixes S1's denominator at 1,699 and the profiling dry run
 expected all 1,699 to match, on the assumption that the pipeline would also join the two quarantined sessions. The canonical model deliberately does not
 join quarantined sessions (`weather_join_status = NOT_ATTEMPTED_QUARANTINED`, D52). S1 is therefore 1,697 / 1,699 = 99.88%: the same numerator as the
-Phase 2 dry run (1,697 core-ready sessions matched, 1,697 of 1,697), and the two "unmatched" sessions are not-attempted, not missing weather. Precipitation
+the profiling dry run (1,697 core-ready sessions matched, 1,697 of 1,697), and the two "unmatched" sessions are not-attempted, not missing weather. Precipitation
 NULLs at the matched hours: 67 sessions for `r_1h`, 25 for `ri_10min`.
 
 **W1.** The Flavoria system documents lunch-line waste measurement keyed on tray; the public data reachable here has no such records. Status BLOCKED / SOURCE GAP, value

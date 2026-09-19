@@ -1,8 +1,8 @@
 """The scenario registry: WHAT is tested and WHY, as data. No calculation lives here.
 
 Each scenario changes exactly one documented assumption of the approved baseline. The engine (engine.py) interprets the `operation`
-declarations; it contains no scenario-specific logic. Scenario ids and reference values are the Phase 2 approved sensitivity space
-(docs/sensitivity_analysis.md, tests/golden/phase2_sensitivity_analysis.csv), reproduced from the canonical model, never tuned.
+declarations; it contains no scenario-specific logic. Scenario ids and reference values are the profiling approved sensitivity space
+(docs/sensitivity_analysis.md, tests/golden/reference_sensitivity_analysis.csv), reproduced from the canonical model, never tuned.
 
 A scenario is a SENSITIVITY TEST, not an alternative truth. `defensible` says whether a reasonable analyst could hold that assumption;
 `diagnostic_only` says the scenario can never become a production rule; `forbidden` marks a comparison that is invalid by design.
@@ -16,20 +16,20 @@ POP_REG, POP_NON = "registered_export", "non_registered_export"
 ALL_KPIS = ("M1", "M2", "M3", "M4")
 WITH_READINESS = ("M1", "M2", "M3", "M4", "M5", "S2")
 
-# Approved Phase 2 reference values: (M1 g, M2 g, M3, M4, M5 numerator, S2 baseline %). None = not defined for that scenario.
+# Approved profiling reference values: (M1 g, M2 g, M3, M4, M5 numerator, S2 baseline %). None = not defined for that scenario.
 # Tolerances: grams 0.05 (the reference is published to one decimal), counts exact.
-PHASE2_TOLERANCE_G = 0.05
+REFERENCE_TOLERANCE_G = 0.05
 
 # Robustness classification (transparent, applied identically to every metric and scenario). |delta| is measured against the frozen baseline.
-#   STABLE       |delta| < stable_below      (below the approved Phase 2 materiality convention: 10 g on M1, 25 g on M2, no change in M4)
+#   STABLE       |delta| < stable_below      (below the approved profiling materiality convention: 10 g on M1, 25 g on M2, no change in M4)
 #   SENSITIVE    |delta| < sensitive_below   (material, but within twice the convention; the interpretation may remain)
 #   CONDITIONAL  otherwise                   (the result depends strongly on the assumption that was changed)
 #   BLOCKED      no value can be produced because required evidence is unavailable
 CLASSIFICATION: dict[str, dict[str, Any]] = {
-    "M1": {"kind": "absolute", "unit": "g", "stable_below": 10.0, "sensitive_below": 20.0, "basis": "Phase 2 materiality convention |dM1| >= 10 g; sensitive band = 2x"},
-    "M2": {"kind": "absolute", "unit": "g", "stable_below": 25.0, "sensitive_below": 75.0, "basis": "Phase 2 materiality convention |dM2| >= 25 g; sensitive band = 3x"},
+    "M1": {"kind": "absolute", "unit": "g", "stable_below": 10.0, "sensitive_below": 20.0, "basis": "profiling materiality convention |dM1| >= 10 g; sensitive band = 2x"},
+    "M2": {"kind": "absolute", "unit": "g", "stable_below": 25.0, "sensitive_below": 75.0, "basis": "profiling materiality convention |dM2| >= 25 g; sensitive band = 3x"},
     "M3": {"kind": "relative", "unit": "fraction of baseline", "stable_below": 0.05, "sensitive_below": 0.20, "basis": "5% and 20% of the 1,697 baseline sessions"},
-    "M4": {"kind": "absolute", "unit": "components", "stable_below": 0.5, "sensitive_below": 1.5, "basis": "Phase 2 convention: any change in M4 is material; one component is sensitive"},
+    "M4": {"kind": "absolute", "unit": "components", "stable_below": 0.5, "sensitive_below": 1.5, "basis": "profiling convention: any change in M4 is material; one component is sensitive"},
     "M5": {"kind": "absolute", "unit": "percentage points", "stable_below": 0.5, "sensitive_below": 5.0, "basis": "readiness moved by half a point is stable; five points is the sensitive limit"},
     "S2": {"kind": "absolute", "unit": "percentage points", "stable_below": 0.5, "sensitive_below": 5.0, "basis": "as M5"},
 }
@@ -54,7 +54,7 @@ class ScenarioSpec:
     defensible: bool
     diagnostic_only: bool
     forbidden: bool = False
-    phase2: tuple[float | None, ...] | None = None      # (M1, M2, M3, M4, M5 numerator, S2 %) approved reference, or None for new scenarios
+    reference: tuple[float | None, ...] | None = None      # (M1, M2, M3, M4, M5 numerator, S2 %) approved reference, or None for new scenarios
 
     def as_dict(self) -> dict[str, Any]:
         return {f.name: (list(getattr(self, f.name)) if isinstance(getattr(self, f.name), tuple) else getattr(self, f.name)) for f in fields(self)}
@@ -66,9 +66,9 @@ BASE_ASSUMPTION = "the approved baseline (registered-export core-ready sessions,
 
 
 def S(scenario_id, group, name, assumption, baseline, alternative, rationale, tables, population, metrics, operation, interpretation, impact, defensible,
-      diagnostic_only, phase2, forbidden=False) -> ScenarioSpec:
+      diagnostic_only, reference, forbidden=False) -> ScenarioSpec:
     return ScenarioSpec(scenario_id, group, name, assumption, baseline, alternative, rationale, tables, population, metrics, operation, interpretation, impact,
-                        defensible, diagnostic_only, forbidden, phase2)
+                        defensible, diagnostic_only, forbidden, reference)
 
 
 SCENARIOS: tuple[ScenarioSpec, ...] = (
@@ -202,6 +202,6 @@ def validate_registry(specs: tuple[ScenarioSpec, ...] = SCENARIOS) -> list[str]:
             problems.append(f"{s.scenario_id}: including quarantined sessions is a what-if only; the quarantine is never weakened")
         if kind == "timezone_shift" and not (isinstance(s.operation.get("hours"), int) and 0 <= s.operation["hours"] <= 4):
             problems.append(f"{s.scenario_id}: a timezone scenario must shift by 0-4 whole hours")
-        if s.phase2 is not None and len(s.phase2) != 6:
-            problems.append(f"{s.scenario_id}: a Phase 2 reference has six values")
+        if s.reference is not None and len(s.reference) != 6:
+            problems.append(f"{s.scenario_id}: an approved reference has six values")
     return problems

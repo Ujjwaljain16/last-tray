@@ -1,5 +1,5 @@
 """The metric layer as a stage: determinism, refusal to compute from missing or tampered canonical inputs, a consistent forgery caught by the
-contracts, weather-only blocking, and static/runtime guarantees that WP6 never reads raw (or staging) data."""
+contracts, weather-only blocking, and static/runtime guarantees that metrics never reads raw (or staging) data."""
 from __future__ import annotations
 
 import csv
@@ -222,7 +222,7 @@ class TestDocumentation:
         doc = (REPO / "docs" / "metric_contract.md").read_text(encoding="utf-8")
         for mid in ct.ORDER:
             assert f"**{mid}**" in doc or f"| {mid} |" in doc or f"{mid}" in doc
-        assert "WP6 implementation" in doc and "NOT_ATTEMPTED_QUARANTINED" in doc
+        assert "metrics implementation" in doc.lower() and "NOT_ATTEMPTED_QUARANTINED" in doc
 
     def test_no_output_makes_an_affirmative_forbidden_claim(self, real_metrics):
         from src.metrics.evaluate import _has_banned_affirmative

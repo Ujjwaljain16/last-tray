@@ -1,4 +1,4 @@
-"""Staging orchestration (WP3): verified raw -> staging tables. Offline. No business logic.
+"""Staging orchestration: verified raw -> staging tables. Offline. No business logic.
 
 Every read of raw bytes goes through the VerifiedReader (src.ingest.handoff). This module never opens data/raw, never opens a
 tar file, and never builds a path to a raw artifact. A failed verification stops that source's staging path: nothing partial is

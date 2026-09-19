@@ -3,7 +3,7 @@
 This file holds declarations only. It contains no calculation. `src/metrics/compute.py` calculates, `src/metrics/evaluate.py` presents, and
 tests compare the three so the contract, the code and the documentation cannot drift apart.
 
-The approved reference values are the Phase 2 baseline reproduced by the pipeline (docs/metric_contract.md, decision D28). They are the
+The approved reference values are the profiling baseline reproduced by the pipeline (docs/metric_contract.md, decision D28). They are the
 tolerance targets. A computed value that misses its tolerance FAILS the metric; the formula is never adjusted to fit.
 
 Language rule: derived_selected_meal_weight_g is DERIVED. It is not consumption, not food waste, not leftovers and not actual intake.
@@ -128,7 +128,7 @@ CONTRACTS: dict[str, MetricContract] = {c.metric_id: c for c in (
         "quarantined sessions are not joined and count as unmatched", "NULL weather values are counted separately and never filled", "ratio",
         ("fact_dining_session", "fact_weather"), LINEAGE + "; weather join -> fact_weather (station x UTC hour) -> stg_weather_observation",
         "Coverage of the contextual weather join (next full UTC hour after the first weighing; r_1h is the hour ending at its timestamp).",
-        "context only; regional station roughly 6 km away; the Phase 2 dry run matched all 1,697 core-ready sessions and expected the two quarantined sessions to be joined too, which the model deliberately does not do.",
+        "context only; regional station roughly 6 km away; the profiling dry run matched all 1,697 core-ready sessions and expected the two quarantined sessions to be joined too, which the model deliberately does not do.",
         "Whether a weather observation is available for the session's hour.", "That weather affected weight, dining behaviour or anything else.", 99.88, 0.005, "READY_WITH_LIMITATION"),
     MetricContract(
         "S2", "Warn-Free Rate", "supporting",

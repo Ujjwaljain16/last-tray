@@ -15,17 +15,17 @@ G = Path(__file__).resolve().parent / "golden"
 
 @pytest.fixture(scope="module")
 def issues() -> pd.DataFrame:
-    return pd.read_csv(G / "phase2_validation_issues.csv")
+    return pd.read_csv(G / "reference_validation_issues.csv")
 
 
 @pytest.fixture(scope="module")
 def summary() -> pd.DataFrame:
-    return pd.read_csv(G / "phase2_validation_summary_by_rule.csv")
+    return pd.read_csv(G / "reference_validation_summary_by_rule.csv")
 
 
 @pytest.fixture(scope="module")
 def sens() -> pd.DataFrame:
-    return pd.read_csv(G / "phase2_sensitivity_analysis.csv").set_index("scenario_id")
+    return pd.read_csv(G / "reference_sensitivity_analysis.csv").set_index("scenario_id")
 
 
 # ---- source counts: the raw layer -------------------------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ def test_m4_is_five_wherever_it_is_a_kpi(sens):
 
 
 def test_population_profile_fixture_counts(golden):
-    prof = pd.read_csv(G / "phase2_population_profile.csv", index_col=0)
+    prof = pd.read_csv(G / "reference_population_profile.csv", index_col=0)
     assert int(prof.loc["sessions", "registered_export"]) == golden["counts"]["canonical_sessions"]
     assert int(prof.loc["sessions", "non_registered_export"]) == golden["counts"]["non_registered_export_sessions_excluding_crossover"]
     assert int(prof.loc["events", "registered_export"]) + int(prof.loc["events", "non_registered_export"]) == 8360 + 3900

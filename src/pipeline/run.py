@@ -19,7 +19,7 @@ Exit codes (stable; see docs/pipeline.md)
     7  VALIDATION: a staging table is missing or altered, or a reconciliation identity broke
     8  MODEL: a validation output is missing or altered, or a canonical control failed
     9  METRICS: a canonical table is missing or altered, or a metric missed its approved value
-    10 SENSITIVITY: baseline moved, a Phase 2 reference stopped reproducing, registry invalid, or input unusable
+    10 SENSITIVITY: baseline moved, an approved reference stopped reproducing, registry invalid, or input unusable
     11 ORCHESTRATION: invalid stage order, unexpected exception, or an unwritable pipeline manifest
 """
 from __future__ import annotations

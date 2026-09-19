@@ -1,7 +1,7 @@
-"""Phase 2 sections F2 (name disagreement in the Oct 5-16 window) and L (weather join dry-run, precipitation semantics)."""
+"""Profile report sections F2 (name disagreement in the Oct 5-16 window) and L (weather join dry-run, precipitation semantics)."""
 import json, re
 import numpy as np, pandas as pd
-from phase2_common import OUT, UTC_FILES, ROOT, exact_dup_mask
+from exploration_common import OUT, UTC_FILES, ROOT, exact_dup_mask
 pd.set_option("display.width", 250)
 e = pd.read_pickle(OUT / "_events.pkl"); s = pd.read_pickle(OUT / "_sessions.pkl")
 REG, NON = "registered_export", "non_registered_export"

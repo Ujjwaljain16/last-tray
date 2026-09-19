@@ -233,7 +233,7 @@ def test_stages_sensitivity_runs_the_scenarios_and_keeps_the_baseline_frozen(tmp
     out = tmp_path / "out"
     r = run("--stages", "sensitivity", "--out", str(out))
     assert r.returncode == 0, r.stderr
-    assert "Sensitivity analysis (canonical model only)" in r.stdout and "26 registered; Phase 2 reproduced 25; guardrail G01" in r.stdout
+    assert "Sensitivity analysis (canonical model only)" in r.stdout and "26 registered; profiling reproduced 25; guardrail G01" in r.stdout
     assert "M1 499 g, M2 1,039.6 g, M3 1,697, M4 5, M5 99.88%, S2 97.88% (frozen)" in r.stdout
     assert "M1 493.0-505.0; M2 977.0-1,066.0" in r.stdout and "{'BLOCKED': 2, 'CONDITIONAL': 2, 'SENSITIVE': 3, 'STABLE': 6}" in r.stdout
     assert {p.name for p in out.iterdir()} == {"ingestion", "staging", "validation", "model", "metrics", "evidence", "pipeline"}

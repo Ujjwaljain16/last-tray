@@ -1,6 +1,6 @@
 """fact_weather and the session weather join (context only; no business conclusion is drawn from weather here).
 
-FMI states timestamps in UTC. `r_1h` at time t is the precipitation over the HOUR ENDING at t (approved reading, Phase 2), so a session
+FMI states timestamps in UTC. `r_1h` at time t is the precipitation over the HOUR ENDING at t (approved reading, profiling), so a session
 is matched to the observation stamped at the end of the hour that contains its first weighing: the first weighing in UTC ceiled to the
 next full hour (an event exactly on the hour keeps its own hour). Missing values stay NULL and are never backfilled or interpolated.
 A session without weather stays a valid session.

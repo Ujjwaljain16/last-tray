@@ -2,7 +2,7 @@
 
 Verified 2026-09-18 against primary sources. "Not ingested" is not "forgotten": each row is a client data gap.
 
-| Required business fact | Expected source | Publicly accessible? | Actual access status (evidence) | Why it matters | MVP impact | Future integration required |
+| Required business fact | Expected source | Publicly accessible? | Actual access status (evidence) | Why it matters | Impact on this project | Future integration required |
 |---|---|---|---|---|---|---|
 | Plate waste per tray | Flavoria Lunch Line Waste | **No** | Doc page: sample section reads "TODO, Ask!"; detail in a restricted GitLab repo; MQTT feed for authorised users only. No public download, API, schema or contact address. | Waste = selected minus returned. Without it, no waste KPI can exist. | Waste KPI = `SOURCE GAP`; `waste_weight_g` stays NULL, never 0 | Request extract (tray_id, waste_time, waste_g, waste_point, imputed flag); join on tray_id + time window |
 | Total plate weight at checkout | Weigh & Dine (cash register scale) | No sample | Doc describes it; no data link | Independent check on the sum of component weights | Not available; we derive selected weight by summing S1 | Extract of WnD transactions; reconcile against derived selected weight |

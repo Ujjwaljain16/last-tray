@@ -1,2 +1,2 @@
-"""Orchestration, statuses, gates, manifest and logging. Implemented in WP8.
+"""Orchestration, statuses, gates, manifest and logging. Implemented in pipeline orchestration.
 """

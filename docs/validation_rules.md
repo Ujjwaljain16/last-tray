@@ -4,7 +4,7 @@ Rules come from business meaning: *can this record honestly support a statement 
 
 Severity: **ERROR** breaks `core_ready`. **WARN** is kept and visible. **INFO** records a fact.
 
-"Observed" counts in the tables below come from the Phase 2 exploration run (frozen in `tests/golden/`); the production counts and their differences are in "WP4 implementation" at the end. Rationale for every threshold: `docs/phase2_validation_findings.md` section 3. Thresholds are declared in `config/thresholds.yml`. **Status: approved 2026-09-19; implemented in WP4.**
+"Observed" counts in the tables below come from the exploration run (frozen in `tests/golden/`); the production counts and their differences are in "validation implementation" at the end. Rationale for every threshold: `docs/validation_findings.md` section 3. Thresholds are declared in `config/thresholds.yml`. **Status: approved 2026-09-19; implemented in validation.**
 
 > **These are diagnostic validation thresholds derived from the observed structure of this data. They are not claims of physical impossibility or universal abnormality.** A flagged record is not evidence of error, and a WARN or INFO flag never removes a record from the KPI population. Only ERROR-level rules do.
 
@@ -34,7 +34,7 @@ Populations use the labels inherited from source filenames: **registered-export 
 | B05 | Same scale weighed repeatedly in a session | INFO | duplicate `(session, scale)` | usually once | FLAG; summed | Repeats are additive scoops (100% same name, 93.8% within 30 s) | 222 sessions (212 + 10) |
 | B07 | Derived session weight range | WARN | **outside [50, 2,200] g** | inside | FLAG; kept | Extreme trays influence P90 | registered-export 15 (7 low, 8 high); non-registered-export 470 |
 
-(B06, "re-weigh within 30 s", is **retired**: Phase 2 showed repeats are additive scoops, so B05 covers it.)
+(B06, "re-weigh within 30 s", is **retired**: Profiling showed repeats are additive scoops, so B05 covers it.)
 
 ## TEMPORAL
 
@@ -45,7 +45,7 @@ Populations use the labels inherited from source filenames: **registered-export 
 | T03 | Event inside service hours (local, after the timezone rule) | ERROR | **09:00 <= hour < 15:00** | 10:13-14:43 observed | QUARANTINE | Clock problem | 0 (1,925 would fail without the +3h rule) |
 | T04 | Identification after last weighing | WARN | `identified_at >= last_weighing_at` | true | FLAG; kept | Tray was identified and then returned to the line | 3 (2 + 1) |
 | T05 | Session span | WARN | **`session_span_s <= 600`** | median 71 s, P99 155 s | FLAG; kept | May merge two tray passes | 7 (registered-export) |
-| T06 | One identification time per (session, population) | WARN | distinct values = 1 | 1 | FLAG | Session boundary uncertain | **0** (Phase 0's "2" was a pooling artefact) |
+| T06 | One identification time per (session, population) | WARN | distinct values = 1 | 1 | FLAG | Session boundary uncertain | **0** (the initial review's "2" was a pooling artefact) |
 | T07 | **File timezone consistency** | WARN | **median first-event hour per file in [10.0, 11.0) local** | 10.48-10.58 | FLAG `timezone_suspect`; apply only a registered override | A silent 3 h shift corrupts weather join and time-of-day analysis | 1 file (7.54 h raw); passes at 10.54 after the +3h rule |
 | T08 | Timestamp formats recorded | INFO | format per column per file | known | FLAG | Parser must be per column | dotted in 2 files (one only in the identification column) |
 | T09 | Row order is not trusted | INFO | events sorted by parsed time before any sequence logic | n/a | n/a | Files list events out of order; one file newest-first | 78-464 inversions per file |
@@ -112,9 +112,9 @@ C02a, C02b and every WARN/INFO rule **flag** records. `low_observed_volume_day` 
 
 ## Output
 
-The Phase 2 exploration columns were `issue_id, run_id, rule_id, category, severity, entity_type, entity_id, population, source_file, message, handling, business_consequence`. The production schema (WP4) is listed under "Validation outputs" below.
+The exploration columns were `issue_id, run_id, rule_id, category, severity, entity_type, entity_id, population, source_file, message, handling, business_consequence`. The production schema is listed under "Validation outputs" below.
 
-## WP4 implementation (validation and reconciliation)
+## validation implementation (validation and reconciliation)
 
 Status: **implemented and tested** (`src/validate/`, `python -m src.pipeline.run --stages validate`). Validation consumes only the
 checksum-verified staging tables (decision D44), evaluates every rule above except the deferred ones, writes findings with lineage,
@@ -130,7 +130,7 @@ and lists quarantine without deleting anything (D45).
 | I01, I02, I04, I06, I07 | I06 is INFO when the two versions are identical, WARN when they disagree. I07 uses normalised strings only (no alias table). |
 | X01, X03, X04, X07, X08 | Weather structure and coverage; X04 re-derives every local time from its UTC instant with the zone database (24,568 timestamps, 0 failures). |
 | C01, C02a, C02b, C03, C04 | C02 flags exist only for the registered-export population; C04 is the event partition identity. |
-| **Deferred** | I05 (tray overlap, a weak test with 0 findings), X02 and the weather join (model layer, WP5), X05 (documentation only), T09 (a design rule: sequence logic sorts by time). X06 (waste) is reported as a source gap in `validation_summary.json`, not as an issue row. |
+| **Deferred** | I05 (tray overlap, a weak test with 0 findings), X02 and the weather join (model layer, model), X05 (documentation only), T09 (a design rule: sequence logic sorts by time). X06 (waste) is reported as a source gap in `validation_summary.json`, not as an issue row. |
 
 ### Result on the real data
 
@@ -142,11 +142,11 @@ Event dispositions: 12,260 `MODELLABLE`, 2 `DUPLICATE_EXCLUDED`, 22 `QUARANTINED
 |---|---|---|
 | B02 | 6 | events at or above 1,500 g, including the 2,097 g event; kept and modellable |
 | B03 | 512 | trace weights (99 + 413), INFO |
-| B04 | 17 | single-event registered-export sessions; identical to the Phase 2 list |
+| B04 | 17 | single-event registered-export sessions; identical to the profiling list |
 | B05 | 222 | same scale weighed repeatedly: additive scoops, not duplicates |
 | B07 | 485 | outside [50, 2,200] g: 15 registered-export (7 low, 8 high), 470 non-registered-export |
-| T04 / T05 | 3 / 7 | T05 was 8 in Phase 0 and 7 once sessions are keyed by population |
-| T06 | 0 | the Phase 0 count of 2 is a pooling artefact: pooled by `session_id` alone it is 2, by session key it is 0 |
+| T04 / T05 | 3 / 7 | T05 was 8 in the initial review and 7 once sessions are keyed by population |
+| T06 | 0 | the initial review count of 2 is a pooling artefact: pooled by `session_id` alone it is 2, by session key it is 0 |
 | T07 / T08 | 1 / 2 | the suspect file (raw median 7.54 h, 10.54 h after the +3h file-specific rule); two files with dotted timestamps |
 | I01 / I02 / I06 | 4 / 2 / 2 | crossover (ERROR); exact repeats (keep first); `session2266` identical (INFO), `session3222` differs (WARN) |
 | I07 | 86 | scale-days in both exports with no shared normalised component name (of 682 shared scale-days) |
@@ -154,12 +154,12 @@ Event dispositions: 12,260 `MODELLABLE`, 2 `DUPLICATE_EXCLUDED`, 22 `QUARANTINED
 | S03 | 7 | seven files lack `weighting_type` (6,990 rows, not applicable, not missing) |
 | X03 | 3 | source NaN precipitation values, stored as NULL |
 
-### Differences from the Phase 2 exploration run
+### Differences from the exploration run
 
-Every rule count equals the Phase 2 fixture (`tests/golden/phase2_validation_summary_by_rule.csv`) except these, which the tests assert by name:
+Every rule count equals the profiling fixture (`tests/golden/reference_validation_summary_by_rule.csv`) except these, which the tests assert by name:
 
 1. **C02a** is written per low-volume day (16 INFO issues) instead of one population-level issue, so each day is traceable.
-2. **C01, I07, X03** were specified but not emitted in Phase 2.
+2. **C01, I07, X03** were specified but not emitted in profiling.
 3. Ids are content-derived instead of sequential, and the file carries the stable schema below.
 
 ### Severity, handling and quarantine
@@ -196,4 +196,4 @@ physical impossibility.
 
 Of the 1,699 eligible registered-export session keys: 2 quarantined (crossover), 34 with a session-level WARN (B04, B07, T04, T05, I06),
 1,663 with none; three further sessions (`session320`, `session1116`, `session1274`) carry only event-level WARNs (B02, I02). This
-reproduces the golden reconciliation. The warn-free rate itself is a metric and is computed in WP6.
+reproduces the golden reconciliation. The warn-free rate itself is a metric and is computed in metrics.

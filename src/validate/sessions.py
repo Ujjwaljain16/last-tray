@@ -1,6 +1,6 @@
 """Session profiles used by validation rules: one profile per (session_id, population) key.
 
-A profile is a VALIDATION working structure, not the canonical session model (WP5). It exists so that rules such as the
+A profile is a VALIDATION working structure, not the canonical session model. It exists so that rules such as the
 session span, the single-event check or the weight range can be evaluated. Its weight sum is named `rule_weight_sum_g` for that
 reason: the approved derived_selected_meal_weight_g is produced by the canonical model, from the same definition.
 

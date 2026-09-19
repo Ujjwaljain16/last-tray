@@ -1,4 +1,4 @@
-session_key,population,is_quarantined,canonical_weight_g,wp4_rule_weight_sum_g,weight_control,canonical_span_s,wp4_span_s,span_control,event_count_control,canonical_first_weighing_local,wp4_first_weighing_local,first_weighing_control
+session_key,population,is_quarantined,canonical_weight_g,validation_rule_weight_sum_g,weight_control,canonical_span_s,validation_span_s,span_control,event_count_control,canonical_first_weighing_local,validation_first_weighing_local,first_weighing_control
 session0|non_registered_export,non_registered_export,false,358,358,MATCH,61,61,MATCH,MATCH,2020-10-28T11:32:13,2020-10-28T11:32:13,MATCH
 session1000|non_registered_export,non_registered_export,false,346,346,MATCH,62,62,MATCH,MATCH,2020-10-29T11:43:06,2020-10-29T11:43:06,MATCH
 session1001|non_registered_export,non_registered_export,false,329,329,MATCH,27,27,MATCH,MATCH,2020-10-28T12:15:11,2020-10-28T12:15:11,MATCH

@@ -1,5 +1,5 @@
-"""The canonical model on the real committed data: golden counts, independent reconstruction, control against WP4, weather join,
-quarantine, components, timezone provenance and lineage. The independent recomputation below uses pandas on the STAGING csv and the WP4
+"""The canonical model on the real committed data: golden counts, independent reconstruction, control against validation, weather join,
+quarantine, components, timezone provenance and lineage. The independent recomputation below uses pandas on the STAGING csv and the validation
 disposition file; it shares no code with src/model."""
 from __future__ import annotations
 
@@ -114,12 +114,12 @@ class TestIndependentSelectedMealWeight:
         canon = pd.to_numeric(s.derived_selected_meal_weight_g, errors="coerce").dropna().astype(int)
         assert canon.to_dict() == independent["weights"].to_dict() and len(canon) == 3341
 
-    def test_the_canonical_weight_equals_wp4_rule_weight_sum_g_for_every_eligible_session(self, real_model, real_validation, golden):
-        wp4 = pd.read_csv(real_validation.out / "validation" / "session_validation_status.csv", dtype=str, keep_default_na=False).set_index("session_key")
+    def test_the_canonical_weight_equals_validation_rule_weight_sum_g_for_every_eligible_session(self, real_model, real_validation, golden):
+        validation_status = pd.read_csv(real_validation.out / "validation" / "session_validation_status.csv", dtype=str, keep_default_na=False).set_index("session_key")
         s = table(real_model, "fact_dining_session").set_index("session_key")
         live = s[s.is_quarantined == "false"]
         assert len(live) == golden["model"]["weight_control_matches"] == 3341
-        assert (live.derived_selected_meal_weight_g == wp4.loc[live.index, "rule_weight_sum_g"]).all()
+        assert (live.derived_selected_meal_weight_g == validation_status.loc[live.index, "rule_weight_sum_g"]).all()
         assert real_model.checks["M10"].status == "PASS" and real_model.checks["M10"].observed == "[]"
 
     def test_the_control_file_lists_every_session_and_flags_no_mismatch(self, real_model):
@@ -146,7 +146,7 @@ class TestIndependentSelectedMealWeight:
     def test_the_weight_is_documented_as_derived_and_never_as_consumed_or_waste(self):
         col = next(c for c in schema.SESSION.columns if c.name == "derived_selected_meal_weight_g")
         assert col.cls == "DERIVED" and "NOT consumed quantity" in col.meaning and "NOT food waste" in col.meaning and "NOT actual intake" in col.meaning
-        assert not any(c.name == "rule_weight_sum_g" for t in schema.TABLES for c in t.columns), "the WP4 working value is not a canonical field"
+        assert not any(c.name == "rule_weight_sum_g" for t in schema.TABLES for c in t.columns), "the validation working value is not a canonical field"
 
 
 class TestSessionReconstruction:
@@ -201,7 +201,7 @@ class TestComponents:
         s = table(real_model, "fact_dining_session").set_index("session_key")
         live = s[s.modellable_event_count != "0"]
         assert (live.distinct_component_count.astype(int) == independent["components"].reindex(live.index)).all()
-        assert (s.distinct_raw_component_count == s.distinct_component_count).all(), "Phase 2 property: raw and normalised counts never differ within a session"
+        assert (s.distinct_raw_component_count == s.distinct_component_count).all(), "profiling property: raw and normalised counts never differ within a session"
         assert real_model.checks["M15"].status == "PASS"
 
     def test_no_alias_table_names_are_only_trimmed_collapsed_and_casefolded(self, real_model):
@@ -261,7 +261,7 @@ class TestWeather:
         on_the_hour = m[first.dt.minute.eq(0) & first.dt.second.eq(0)]
         assert (pd.to_datetime(on_the_hour.weather_hour_utc) == pd.to_datetime(on_the_hour.first_weighing_utc)).all()
 
-    def test_null_precipitation_counts_reproduce_phase2(self, real_model, golden):
+    def test_null_precipitation_counts_reproduce_reference(self, real_model, golden):
         s = table(real_model, "fact_dining_session")
         core = s[s.core_ready == "true"]
         n = golden["model"]["weather_null_precipitation_core_ready"]
@@ -301,6 +301,6 @@ class TestControlSummary:
     def test_the_manifest_declares_semantics_and_inputs(self, real_model):
         m = real_model.result.manifest
         assert m["semantic_chain"][-1].startswith("SOURCE GAP") and "not consumed quantity" in m["field_notes"]["derived_selected_meal_weight_g"]
-        assert m["field_notes"]["rule_weight_sum_g"].startswith("WP4 validation working value")
+        assert m["field_notes"]["rule_weight_sum_g"].startswith("validation working value")
         assert m["inputs"]["validation_run_id"].startswith("val-") and set(m["inputs"]["staging_table_sha256"]) >= {"stg_weighing_event.csv"}
         assert all(t["sha256"] for t in m["tables"].values()) and m["tables"]["fact_weighing_event"]["rows"] == 12284

@@ -1,6 +1,6 @@
-"""Validation on the real committed data, checked against the golden expectations and the Phase 2 evidence.
+"""Validation on the real committed data, checked against the golden expectations and the profiling evidence.
 
-Structural expectations are integers and are asserted exactly. Where WP4 differs from the Phase 2 exploration, the difference is
+Structural expectations are integers and are asserted exactly. Where validation differs from the exploration, the difference is
 named in DOCUMENTED_DIFFERENCES and asserted too, so a difference can never hide inside a tolerance.
 """
 from __future__ import annotations
@@ -18,9 +18,9 @@ REPO = Path(__file__).resolve().parents[1]
 GOLDEN = REPO / "tests" / "golden"
 pytestmark = pytest.mark.usefixtures("no_network")
 
-# WP4 vs the Phase 2 exploration run (docs/validation_rules.md, "Differences from Phase 2"). Everything else must match exactly.
+# validation vs the exploration run (docs/validation_rules.md, "Differences from profiling"). Everything else must match exactly.
 NEW_IN_WP4 = {"C01", "I07", "X03"}          # documented in the specification, never emitted by the exploration run
-C02_GRANULARITY = {"C02a"}                 # Phase 2 wrote ONE population-level C02 INFO issue; WP4 writes one INFO per low-volume day (16)
+C02_GRANULARITY = {"C02a"}                 # profiling wrote ONE population-level C02 INFO issue; validation writes one INFO per low-volume day (16)
 
 
 def rows(path: Path) -> list[dict]:
@@ -28,9 +28,9 @@ def rows(path: Path) -> list[dict]:
         return list(csv.DictReader(fh))
 
 
-def phase2_by_rule() -> Counter:
+def reference_by_rule() -> Counter:
     c: Counter = Counter()
-    for r in rows(GOLDEN / "phase2_validation_summary_by_rule.csv"):
+    for r in rows(GOLDEN / "reference_validation_summary_by_rule.csv"):
         rule = "C02b" if r["rule_id"] == "C02" and r["severity"] == "WARN" else "C02a" if r["rule_id"] == "C02" else r["rule_id"]
         c[(rule, r["severity"], r["population"])] += int(r["issues"])
     return c
@@ -120,12 +120,12 @@ class TestApprovedThresholds:
     def test_t05_span_over_600s_registered(self, real_validation):
         t05 = [i for i in real_validation.issues if i["rule_id"] == "T05"]
         assert len(t05) == 7 and all(i["population"] == "registered_export" and int(i["observed_value"].split()[0]) > 600 for i in t05)
-        assert real_validation.result.summary["issues"]["by_rule"]["T05"] == 7, "Phase 2 correction: 8 -> 7 after sessions are keyed by population"
+        assert real_validation.result.summary["issues"]["by_rule"]["T05"] == 7, "profiling correction: 8 -> 7 after sessions are keyed by population"
 
-    def test_b04_seventeen_single_event_sessions_all_kept_and_match_phase2(self, real_validation):
+    def test_b04_seventeen_single_event_sessions_all_kept_and_match_reference(self, real_validation):
         b04 = {i["session_key"]: i for i in real_validation.issues if i["rule_id"] == "B04"}
-        phase2 = {f"{r['session_id']}|{r['population']}" for r in rows(REPO / "outputs" / "phase2" / "single_event_registered_export_sessions.csv")}
-        assert len(b04) == 17 and set(b04) == phase2
+        reference = {f"{r['session_id']}|{r['population']}" for r in rows(REPO / "outputs" / "exploration" / "single_event_registered_export_sessions.csv")}
+        assert len(b04) == 17 and set(b04) == reference
         assert all(not i["quarantine"] and "not automatically invalid" in i["description"] for i in b04.values())
         over_100 = sum(int(i["observed_value"].split(";")[1].split()[0]) > 100 for i in b04.values())
         assert 0 <= over_100 <= 17, "classification by 100 g is descriptive only: it adds no meaning"
@@ -176,19 +176,19 @@ class TestIdentificationDuplicatesAndNames:
         assert real_validation.checks["N02"].observed == "246 | 245", "one string-level variant exists across the data (a casing difference), never inside a session"
 
 
-class TestPhase2Comparison:
-    def test_every_rule_count_matches_the_phase2_fixture_except_the_documented_differences(self, real_validation):
+class TestReferenceComparison:
+    def test_every_rule_count_matches_the_reference_fixture_except_the_documented_differences(self, real_validation):
         actual: Counter = Counter()
         for i in real_validation.issues:
             actual[(i["rule_id"], i["severity"], i["population"] or "n/a")] += 1
-        expected = phase2_by_rule()
+        expected = reference_by_rule()
         comparable_actual = Counter({k: v for k, v in actual.items() if k[0] not in NEW_IN_WP4 | C02_GRANULARITY})
         comparable_expected = Counter({k: v for k, v in expected.items() if k[0] not in C02_GRANULARITY})
         assert comparable_actual == comparable_expected
 
     def test_the_documented_differences_are_exactly_these(self, real_validation):
         by_rule = real_validation.result.summary["issues"]["by_rule"]
-        assert by_rule["C02a"] == 16, "one INFO per low-volume day (Phase 2 wrote one population-level issue)"
+        assert by_rule["C02a"] == 16, "one INFO per low-volume day (profiling wrote one population-level issue)"
         assert by_rule["I07"] == 86 and by_rule["X03"] == 3 and by_rule["C01"] == 1
 
     def test_severity_totals(self, real_validation):
@@ -204,8 +204,8 @@ class TestPhase2Comparison:
         assert a["eligible_primary_session_keys"] == a["quarantined"] + a["with_session_level_warn"] + a["no_session_level_warn"]
         assert a["event_level_only_warn_session_ids"] == sorted(w["event_level_only_warn_sessions"])
 
-    def test_cross_export_component_evidence_matches_phase2(self, real_validation):
-        results_b = json.loads((REPO / "outputs" / "phase2" / "results_b.json").read_text(encoding="utf-8"))["names"]
+    def test_cross_export_component_evidence_matches_reference(self, real_validation):
+        results_b = json.loads((REPO / "outputs" / "exploration" / "results_b.json").read_text(encoding="utf-8"))["names"]
         assert results_b["cross_export_disjoint"] == 86 == real_validation.result.summary["issues"]["by_rule"]["I07"]
 
 

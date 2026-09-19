@@ -1,6 +1,6 @@
 """The committed raw inputs must match the pins in config/sources.yml.
 
-This proves the pins are right and the raw layer is intact. WP2 performs the same verification at run time, with
+This proves the pins are right and the raw layer is intact. Ingestion performs the same verification at run time, with
 failure handling; here it guards the configuration itself.
 """
 from __future__ import annotations

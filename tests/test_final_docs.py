@@ -266,3 +266,18 @@ def test_no_personal_identifier_email_or_local_path_is_tracked():
         problems += [(f, m.group(0)) for m in email.finditer(body) if not m.group(0).endswith("@users.noreply.github.com")]
         problems += [(f, m.group(0)) for m in path.finditer(body)]
     assert not problems, problems
+
+
+def test_no_build_phase_vocabulary_appears_anywhere_in_the_repository():
+    """The repository describes the project, not how it was staged: no phase numbers, work-package labels or MVP language."""
+    pattern = re.compile(r"\b[Pp]hase[ -]?[0-9]|phase2|\bWP ?[0-9]+\b|\bwp[0-9]|[Ww]ork packages?|\bMVP\b|vs plan")
+    problems = []
+    for f in _tracked_files():
+        if f.startswith("data/raw/") or f.endswith((".png", ".tar", ".svg")) or f == "tests/test_final_docs.py":
+            continue
+        p = REPO / f
+        if not p.is_file():
+            continue
+        body = p.read_text(encoding="utf-8", errors="ignore")
+        problems += [(f, m.group(0)) for m in pattern.finditer(body)]
+    assert not problems, problems[:10]

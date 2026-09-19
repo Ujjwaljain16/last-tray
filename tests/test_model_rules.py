@@ -234,7 +234,7 @@ class TestControlDetectsDisagreement:
         inp, ev, sessions = build(evs, cfg)
         inp.session_status["s1|registered_export"]["rule_weight_sum_g"] = "999"
         rows = control.session_control_rows(sessions, inp)
-        assert rows[0]["weight_control"] == "MISMATCH" and rows[0]["canonical_weight_g"] == 50 and rows[0]["wp4_rule_weight_sum_g"] == 999
+        assert rows[0]["weight_control"] == "MISMATCH" and rows[0]["canonical_weight_g"] == 50 and rows[0]["validation_rule_weight_sum_g"] == 999
 
     def test_a_quarantined_session_with_a_canonical_weight_would_be_a_mismatch(self, cfg):
         inp, ev, sessions = build([make_event(row=1)], cfg, quarantine=["s1|registered_export"])

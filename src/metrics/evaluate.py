@@ -1,4 +1,4 @@
-"""Metric orchestration and PRESENTATION (WP6): canonical tables in, metric rows, contracts, controls, evidence table and report out. Offline.
+"""Metric orchestration and PRESENTATION: canonical tables in, metric rows, contracts, controls, evidence table and report out. Offline.
 
 Three separate layers: compute.py calculates, contracts.py declares meaning and limits, and this module joins them, judges each result
 against the approved value and tolerance, and writes the files. A metric that misses its tolerance is reported FAILED with the exact

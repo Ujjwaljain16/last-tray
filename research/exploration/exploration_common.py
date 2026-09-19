@@ -1,4 +1,4 @@
-"""Phase 2 research helpers. HISTORICAL EVIDENCE, not the production pipeline (that lives in src/).
+"""exploratory research helpers. HISTORICAL EVIDENCE, not the production pipeline (that lives in src/).
 
 Reads the raw archive directly and writes nothing to data/raw. Kept small and boring on purpose.
 """
@@ -10,14 +10,14 @@ from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]  # repo root (this file lives in research/phase2/)
+ROOT = Path(__file__).resolve().parents[2]  # repo root (this file lives in research/exploration/)
 TAR = ROOT / "data" / "raw" / "flavoria" / "dataset_csv.tar"
-OUT = ROOT / "outputs" / "phase2"
+OUT = ROOT / "outputs" / "exploration"
 
 # Labels are inherited from the source FILENAMES. The public source does not define their meaning.
 POP_LABEL = {"registered_export": "registered-export population",
              "non_registered_export": "non-registered-export population"}
-# Phase 0 timezone decision: +3h normalisation for this file (see docs/timezone_decision.md).
+# Initial timezone decision: +3h normalisation for this file (see docs/timezone_decision.md).
 UTC_FILES = {"registered_2020_10_05-2020_10_18.csv"}
 REQUIRED = ["session_id", "weighing_event_time", "scale_identifier", "weight_of_a_component",
             "component_name", "tray_id", "user_identification_time"]
@@ -54,7 +54,7 @@ def load_raw() -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def parse(ev: pd.DataFrame) -> pd.DataFrame:
-    """Typed copy. Adds parsed naive times, the Phase 0 tz-normalised local time, and simple derived keys."""
+    """Typed copy. Adds parsed naive times, the initial review tz-normalised local time, and simple derived keys."""
     e = ev.copy()
     e["w"] = pd.to_numeric(e["weight_of_a_component"], errors="coerce")
     e["ts_format"] = e["weighing_event_time"].str.replace(r"\d", "9", regex=True)

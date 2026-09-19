@@ -1,4 +1,4 @@
-"""Sensitivity analysis on the real canonical model: the frozen baseline, the reproduction of every approved Phase 2 scenario, ranges,
+"""Sensitivity analysis on the real canonical model: the frozen baseline, the reproduction of every approved reference scenario, ranges,
 robustness classes, the evidence matrix and uncertainty register, and the semantic guardrails."""
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from src.sensitivity.stage import (CONTROLS_CSV, FIGURE_DIR, MATRIX_COLUMNS, MAT
                                    REGISTRY_JSON, RESULTS_CSV, SUMMARY_JSON, TZ_CSV)
 
 REPO = Path(__file__).resolve().parents[1]
-GOLDEN = REPO / "tests" / "golden" / "phase2_sensitivity_analysis.csv"
+GOLDEN = REPO / "tests" / "golden" / "reference_sensitivity_analysis.csv"
 pytestmark = pytest.mark.usefixtures("no_network")
 
 
@@ -41,7 +41,7 @@ class TestFrozenBaseline:
 
     def test_the_analysis_passes_all_controls_and_reports_no_problem(self, real_sensitivity):
         a = real_sensitivity.analysis
-        assert real_sensitivity.result.core_status == "PASSED" and not a.failed and a.baseline_problems == [] and a.phase2_mismatches == []
+        assert real_sensitivity.result.core_status == "PASSED" and not a.failed and a.baseline_problems == [] and a.reference_mismatches == []
         assert [c.status for c in a.checks if c.check_id != "SC13"] == ["PASS"] * 12 and a.checks[-1].status == "INFO"
 
     def test_w1_stays_blocked_and_no_scenario_recomputes_it(self, real_sensitivity):
@@ -50,8 +50,8 @@ class TestFrozenBaseline:
         assert real_sensitivity.result.summary["baseline"]["W1"] == "BLOCKED / SOURCE GAP"
 
 
-class TestPhase2Reproduction:
-    def test_every_approved_phase2_scenario_is_reproduced(self, real_sensitivity):
+class TestReferenceReproduction:
+    def test_every_approved_reference_scenario_is_reproduced(self, real_sensitivity):
         golden = {r["scenario_id"]: r for r in rows(GOLDEN)}
         assert len(golden) == 25
         for sid, g in golden.items():
@@ -63,16 +63,16 @@ class TestPhase2Reproduction:
                 assert (r.m5_numerator, r.m5_denominator) == (int(float(g["m5_numerator"])), 1699), sid
                 assert abs(r.m5 - float(g["m5_rate_pct"])) <= 0.005, sid
 
-    def test_the_registry_references_equal_the_frozen_phase2_file(self):
+    def test_the_registry_references_equal_the_frozen_reference_file(self):
         golden = {r["scenario_id"]: r for r in rows(GOLDEN)}
         for s in SCENARIOS:
-            if s.phase2 is None:
+            if s.reference is None:
                 continue
             g = golden[s.scenario_id]
-            assert (s.phase2[0], s.phase2[1], s.phase2[2], s.phase2[3]) == (float(g["m1_median_g"]), float(g["m2_p90_g"]), int(float(g["m3_observed_valid_sessions"])), float(g["m4_median_components"]))
-            assert s.phase2[4] == (None if num(g["m5_numerator"]) is None else int(float(g["m5_numerator"])))
+            assert (s.reference[0], s.reference[1], s.reference[2], s.reference[3]) == (float(g["m1_median_g"]), float(g["m2_p90_g"]), int(float(g["m3_observed_valid_sessions"])), float(g["m4_median_components"]))
+            assert s.reference[4] == (None if num(g["m5_numerator"]) is None else int(float(g["m5_numerator"])))
 
-    def test_the_headline_phase2_findings_still_hold(self, real_sensitivity):
+    def test_the_headline_reference_findings_still_hold(self, real_sensitivity):
         r = real_sensitivity.results
         d = lambda sid, k: getattr(r[sid], k) - getattr(r["S00"], k)
         assert abs(d("S23", "m2") + 62.6) <= 0.05 and abs(d("TZ0", "m2") + 50.5) <= 0.05 and abs(d("S20", "m2") - 26.4) <= 0.05
@@ -108,7 +108,7 @@ class TestRegistryAndExecutionAgree:
         by = {r["scenario_id"]: r for r in rows(real_sensitivity.out / OUT_SUBDIR / RESULTS_CSV)}
         assert float(by["S23"]["d_m2_g"]) == pytest.approx(-62.6, abs=0.05) and float(by["S23"]["pct_d_m2_g"]) == pytest.approx(-6.02, abs=0.01)
         assert by["S00"]["d_m1_g"] == "0.0" and by["S30"]["m1_g"] == "499.0"
-        assert by["G01"]["forbidden"] == "true" and by["S00"]["phase2_reference"] == "reproduced" and by["G01"]["phase2_reference"] == "n/a"
+        assert by["G01"]["forbidden"] == "true" and by["S00"]["reference_status"] == "reproduced" and by["G01"]["reference_status"] == "n/a"
 
 
 class TestTimezoneIsFileSpecific:
@@ -255,7 +255,7 @@ class TestSemanticsAndOutputs:
 
     def test_the_summary_records_the_conclusion_classes(self, real_sensitivity):
         s = real_sensitivity.result.summary
-        assert s["baseline"]["frozen"] is True and s["scenarios"]["registered"] == 26 and s["scenarios"]["phase2_reproduced"] == 25
+        assert s["baseline"]["frozen"] is True and s["scenarios"]["registered"] == 26 and s["scenarios"]["reference_reproduced"] == 25
         assert s["conclusion_classes"] == {"BLOCKED": 2, "CONDITIONAL": 2, "SENSITIVE": 3, "STABLE": 6}
         assert s["questions"]["Q11"] == "CONDITIONAL" and s["questions"]["Q12"] == "BLOCKED" and "not alternative truths" in s["note"]
 

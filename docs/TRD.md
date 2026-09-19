@@ -1,10 +1,10 @@
 # LAST TRAY: Technical Requirements (v2, source-verified)
 
-Companion to `docs/PRD.md`. Status: **historical design specification (v2, written before implementation). It has since been implemented (WP1-WP8); where this document and the code differ, the code, `pipeline.md` and `decision_log.md` are authoritative.**
+Companion to `docs/PRD.md`. Status: **the technical design the implementation followed. Where this document and the code differ, the code, `pipeline.md` and `decision_log.md` are authoritative.**
 
 ## 1. Design principles
 
-1. Simplest architecture that proves the assignment: Python + pandas + SQLite + pytest. No orchestrator, no containers, no cloud.
+1. Simplest architecture that proves the approach: Python + pandas + SQLite + pytest. No orchestrator, no containers, no cloud.
 2. **Raw is immutable.** Nothing writes to `data/raw/`.
 3. **Nothing is silently dropped.** Every excluded row has a reason in `validation_issues.csv`.
 4. **Judgement lives in config, not in code paths**: timezone overrides, population labels, plausibility thresholds are declared in `config/*.yml`, each with a rationale.
@@ -23,7 +23,7 @@ Python **3.11+** (3.11.9 installed here; the earlier draft said 3.12), pandas 2.
 | FMI weather | **API** (WFS 2.0.0, XML) | Stored query `fmi::observations::weather::simple`, `fmisid=100949`, `timestep=60`, parameters `t2m,ws_10min,r_1h,ri_10min`. Max 168 h per request, so the window is chunked in 7-day requests. No API key. Server limits 20,000/day, 600 per 5 min. |
 | Flavoria catalogue pages | Reference only | Fetched as evidence, stored in `docs/`, not a pipeline input. |
 
-Completeness evidence (assignment class 5): Flavoria = archive checksum equals Zenodo's, 11 of 11 members extracted, per-file row counts recorded, every weekday of the window present. FMI = expected hourly count (1,129) equals received, no gaps, no duplicate (time, parameter). Failures of these checks are logged, not swallowed.
+Completeness evidence (retrieval completeness): Flavoria = archive checksum equals Zenodo's, 11 of 11 members extracted, per-file row counts recorded, every weekday of the window present. FMI = expected hourly count (1,129) equals received, no gaps, no duplicate (time, parameter). Failures of these checks are logged, not swallowed.
 
 ## 4. Repository structure (trimmed from the draft)
 
@@ -43,8 +43,8 @@ outputs/           source_inventory.csv, validation/, reconciliation/, metrics/,
 tests/             see section 12
 logs/              one log per run
 docs/  diagrams/  notebooks/   (notebooks/01_source_exploration.ipynb is a deliverable built from real outputs)
-research/phase2/   historical Phase 2 investigation scripts + README (never imported by src/)
-tests/golden/      golden_values.yml + frozen Phase 2 fixtures (regression authority)
+research/exploration/   historical profiling investigation scripts + README (never imported by src/)
+tests/golden/      golden_values.yml + frozen profiling fixtures (regression authority)
 ```
 
 ## 5. Data layers
@@ -93,7 +93,7 @@ Idempotency: tables are **rebuilt** per run from raw inputs (`DROP` + `CREATE` i
 ### 6.4 `fact_weather`
 `fmisid, obs_time_utc, t2m_c, ws_10min_ms, r_1h_mm, ri_10min_mmh, source_file, is_null_any`. Missing values stay NULL.
 
-### 6.5 Implemented canonical model (WP5)
+### 6.5 Implemented canonical model
 
 Built by `python -m src.pipeline.run --stages model` into `outputs/model/` from the verified staging and validation outputs. The
 authoritative column list is `data_dictionary.md` section 12 (generated from `src/model/schema.py`). Differences from the columns above:
@@ -103,7 +103,7 @@ authoritative column list is `data_dictionary.md` section 12 (generated from `sr
 `derived_selected_meal_weight_g` sums MODELLABLE events and is NULL for a quarantined session (D50). `fact_weather` and `fact_daily_volume` are as
 above with per-parameter statuses and provenance columns.
 
-### 7.0 Staging contract (WP3)
+### 7.0 Staging contract
 
 Staging consumes only the ingestion handoff and reads raw bytes **only through the `VerifiedReader`**, which re-checks the SHA-256
 recorded at ingestion on every read. No downstream stage opens `data/raw`, and a failed verification stops that source's staging path
@@ -118,34 +118,34 @@ handoff both name that exact file. See `data_dictionary.md` section 10.
 3. **Population** = `registered_export` or `non_registered_export` from the file name prefix (config-driven). These labels are inherited from filenames and are not interpreted as customer-registration status. Never pooled.
 4. **Exact duplicates** (all source columns equal within one file): mark `is_exact_duplicate`, keep the first, exclude the rest from sums, log as `I02`.
 5. **Identity conflict**: any `session_id` present in both populations gets `identity_conflict = true` and is excluded from primary metrics (`I01`).
-6. **Component normalisation**: trim, collapse whitespace, case-fold. The result is `component_id_normalized`; the raw string is retained. **No alias table**: names are not collapsed beyond string normalisation because no defensible mapping exists (Phase 2: differences across exports mix language variants with real dish differences). Distinct components are counted **within one session**.
+6. **Component normalisation**: trim, collapse whitespace, case-fold. The result is `component_id_normalized`; the raw string is retained. **No alias table**: names are not collapsed beyond string normalisation because no defensible mapping exists (profiling: differences across exports mix language variants with real dish differences). Distinct components are counted **within one session**.
 7. **Session build**: group events by `session_id` within population; compute counts, sums, first/last time, span.
-8. **Weather join** (context only): `first_weighing_at` (Europe/Helsinki) → convert to UTC → **ceil to the next full hour** (an event exactly on the hour keeps its own hour) → left join `fact_weather`. Reason: FMI `r_1h` at time t is the accumulation over the **hour ending at t** (Phase 2 empirical test, one rainy day: mean error 0.021 mm vs 0.378 mm), so the observation stamped at the end of the hour containing the meal is the one that covers it. A session without weather stays valid.
+8. **Weather join** (context only): `first_weighing_at` (Europe/Helsinki) → convert to UTC → **ceil to the next full hour** (an event exactly on the hour keeps its own hour) → left join `fact_weather`. Reason: FMI `r_1h` at time t is the accumulation over the **hour ending at t** (profiling empirical test, one rainy day: mean error 0.021 mm vs 0.378 mm), so the observation stamped at the end of the hour containing the meal is the one that covers it. A session without weather stays valid.
 9. **Volume flags**: per service date and population compute `observed_regime` (`high` if sessions >= 30, else `low`) and compare with the weekday's `expected_regime` (Mon-Wed high, Thu-Fri low, derived from the baseline weeks 2020-10-05..30). Set `low_observed_volume_day` and `volume_irregularity`. Days are **never** excluded.
 
 ## 8. Validation
 
 Rule taxonomy and full definitions in `docs/validation_rules.md`. Severities: `INFO`, `WARN`, `ERROR`. Handling classes: `FLAG` (kept, counted), `QUARANTINE` (kept in model, excluded from primary metrics, listed), `BLOCK` (stops the affected stage; used for structural failures such as missing required columns).
 
-`core_ready` = registered-export population, no `ERROR` on the session or any of its events, no identity conflict, all weights > 0, at least one event, timestamps parsed. Thresholds live in `config/thresholds.yml` (approved values and evidence: `docs/phase2_validation_findings.md`). M5 = `core_ready` sessions / all registered-export session IDs in the source (**1,699, fixed before any removal**); the warn-free rate (no session-level WARN, same denominator; baseline 1,663 / 1,699 = 97.88%) is reported beside it. All thresholds are **diagnostic validation thresholds derived from observed data structure, approved 2026-09-19, not claims of physical impossibility**. Volume flags are flag-only and appear in no metric filter.
+`core_ready` = registered-export population, no `ERROR` on the session or any of its events, no identity conflict, all weights > 0, at least one event, timestamps parsed. Thresholds live in `config/thresholds.yml` (approved values and evidence: `docs/validation_findings.md`). M5 = `core_ready` sessions / all registered-export session IDs in the source (**1,699, fixed before any removal**); the warn-free rate (no session-level WARN, same denominator; baseline 1,663 / 1,699 = 97.88%) is reported beside it. All thresholds are **diagnostic validation thresholds derived from observed data structure, approved 2026-09-19, not claims of physical impossibility**. Volume flags are flag-only and appear in no metric filter.
 
-### 8.1 Validation stage (WP4)
+### 8.1 Validation stage
 
 Validation reads only staging tables verified against the checksums, headers and row counts staging recorded (D44). It never opens
 `data/raw`. Findings carry a stable schema and row lineage; quarantine is a flag plus a manifest at `(session_id, population)` grain and
 deletes nothing (D45); `events_in = modelled + duplicates_excluded + quarantined` is checked (C04). A missing or altered staging table
-stops the core lane (exit 7 since WP8; 4 was the earlier single core code) and removes stale validation outputs; a damaged weather table blocks weather checks only (exit 6). Outputs are
-byte-identical across runs. See `validation_rules.md` "WP4 implementation" and `data_dictionary.md` section 11.
+stops the core lane (exit 7 since pipeline orchestration; 4 was the earlier single core code) and removes stale validation outputs; a damaged weather table blocks weather checks only (exit 6). Outputs are
+byte-identical across runs. See `validation_rules.md` "validation implementation" and `data_dictionary.md` section 11.
 
-### 8.2 Canonical model stage (WP5)
+### 8.2 Canonical model stage
 
-The model reads only verified staging and verified WP4 outputs (D49), reconstructs the selected meal weight independently and compares it with
-WP4's working value (D50), and blocks with no canonical rows if any control fails. A missing or altered input stops the core lane (exit 8 since WP8) and
+The model reads only verified staging and verified validation outputs (D49), reconstructs the selected meal weight independently and compares it with
+validation's working value (D50), and blocks with no canonical rows if any control fails. A missing or altered input stops the core lane (exit 8 since pipeline orchestration) and
 removes stale model files; a weather problem blocks `fact_weather` only (exit 6). Outputs are byte-identical across runs. See D49-D53.
 
 ## 9. Pipeline
 
-> **Implemented status (WP8).** The design below is the original plan. What was built is described in `pipeline.md`: six gated stages (ingest, stage, validate, model, metrics, sensitivity), statuses PASSED / FAILED / BLOCKED / INVALIDATED / NOT_RUN / REUSED instead of RECOVERED / WARNING, exit codes 0, 2, 4-11, and `outputs/pipeline/run_manifest.json`. Where the two differ, `pipeline.md` is authoritative.
+> **Implemented status.** The design below is the original specification. What was built is described in `pipeline.md`: six gated stages (ingest, stage, validate, model, metrics, sensitivity), statuses PASSED / FAILED / BLOCKED / INVALIDATED / NOT_RUN / REUSED instead of RECOVERED / WARNING, exit codes 0, 2, 4-11, and `outputs/pipeline/run_manifest.json`. Where the two differ, `pipeline.md` is authoritative.
 
 `python -m src.pipeline.run [--stages ingest|all] [--out outputs]` : **always offline**. It never downloads. If a raw source is missing it fails and names the explicit retrieval command.
 
@@ -158,7 +158,7 @@ removes stale model files; a weather problem blocks `fact_weather` only (exit 6)
 | 3 | Raw preservation check, ingestion manifest, staging handoff | raw tree byte/mtime identical; `source_snapshot.csv`, `raw_artifact_manifest.csv`, `staging_handoff.json` | `FAILED` if raw changed |
 | 4 | Profiling | `profile_summary.csv` | `WARNING` |
 | 5 | Validation | `validation_issues.csv` | records issues; structural = `BLOCKED` |
-| 6 | Staging (WP3): verified raw to staging tables; canonical timestamps; field normalization | staging tables | `FAILED` |
+| 6 | Staging: verified raw to staging tables; canonical timestamps; field normalization | staging tables | `FAILED` |
 | 7 | External enrichment | `fact_weather` | `RECOVERED` (retry) / `WARNING` (partial) / `BLOCKED` for weather-dependent outputs only |
 | 8 | Reconciliation | `reconciliation_summary.csv` | `WARNING` |
 | 9 | Model build | SQLite | `FAILED` |
@@ -209,7 +209,7 @@ Structured line log per run. Every decision that changes data (override applied,
 
 ## 12. Tests (business rules first, not syntax)
 
-`tests/test_ingest.py` (checksum, 11 files, row counts), `test_schema.py` (drift: 7 of 11 files lack `weighting_type`, still ingest), `test_timezone.py` (override applied, T07 detects unregistered shift), `test_validation.py` (duplicates, zero weight, identification-before-weighing), `test_model.py` (grain: no duplicate keys; events reconcile to sessions), `test_metrics.py` (median, P90 on hand-built fixtures; NULL never becomes 0), `test_weather_join.py` (UTC ceil (hour-ending) and DST correctness; missing weather keeps session valid), `test_waste_blocked.py` (waste metric always `BLOCKED`, never numeric), `test_pipeline_idempotency.py` (run twice, hashes equal), `test_failure_modes.py` (empty input, corrupt archive, weather 500). Added after Phase 2: `test_row_order.py` (newest-first file gives identical sessions), `test_timestamp_formats.py` (dotted identification with dashed weighing), `test_weather_hour_ending.py` (ceil rule; `r_1h` maps to the hour containing the meal), `test_volume_flags.py` (irregular days flagged, never excluded), `test_component_counting.py` (M4 within-session; no alias collapse).
+`tests/test_ingest.py` (checksum, 11 files, row counts), `test_schema.py` (drift: 7 of 11 files lack `weighting_type`, still ingest), `test_timezone.py` (override applied, T07 detects unregistered shift), `test_validation.py` (duplicates, zero weight, identification-before-weighing), `test_model.py` (grain: no duplicate keys; events reconcile to sessions), `test_metrics.py` (median, P90 on hand-built fixtures; NULL never becomes 0), `test_weather_join.py` (UTC ceil (hour-ending) and DST correctness; missing weather keeps session valid), `test_waste_blocked.py` (waste metric always `BLOCKED`, never numeric), `test_pipeline_idempotency.py` (run twice, hashes equal), `test_failure_modes.py` (empty input, corrupt archive, weather 500). Added after profiling: `test_row_order.py` (newest-first file gives identical sessions), `test_timestamp_formats.py` (dotted identification with dashed weighing), `test_weather_hour_ending.py` (ceil rule; `r_1h` maps to the hour containing the meal), `test_volume_flags.py` (irregular days flagged, never excluded), `test_component_counting.py` (M4 within-session; no alias collapse).
 
 ## 13. Known risks
 

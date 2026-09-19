@@ -1,4 +1,4 @@
-"""The WP7 report, generated from the computed analysis so that no number in it can drift from the outputs.
+"""The sensitivity analysis report, generated from the computed analysis so that no number in it can drift from the outputs.
 
 `render_block(analysis)` returns the generated sections; docs/sensitivity_analysis.md embeds it between markers and a test compares the two.
 """
@@ -27,7 +27,7 @@ def render_block(a: Analysis) -> str:
     base = a.results["S00"]
     out: list[str] = [BEGIN, ""]
     out += ["## 1. Baseline definition (frozen)", "",
-            "The approved baseline is recomputed from the canonical model as scenario S00 and must equal the approved package and the independent WP6 computation. It is never overwritten and no scenario is chosen because it gives a nicer number.", "",
+            "The approved baseline is recomputed from the canonical model as scenario S00 and must equal the approved package and the independent metrics computation. It is never overwritten and no scenario is chosen because it gives a nicer number.", "",
             "| Metric | Baseline | Population |", "|---|---:|---|",
             f"| M1 Median Derived Selected Meal Weight | {_f(base.m1)} g | core-ready registered-export sessions |",
             f"| M2 P90 Derived Selected Meal Weight | {_f(base.m2)} g | same |",
@@ -40,7 +40,7 @@ def render_block(a: Analysis) -> str:
     out += ["## 2. Scenario methodology", "",
             "Each scenario changes exactly one documented assumption, is declared as data in `src/sensitivity/registry.py` (exported as `outputs/evidence/scenario_registry.json`), "
             "and is run by a generic engine on the verified canonical tables; no canonical table, threshold or configuration value is modified. "
-            f"{len(SCENARIOS)} scenarios are registered: the 25 approved Phase 2 scenarios (every one reproduced) and one forbidden guardrail (G01). "
+            f"{len(SCENARIOS)} scenarios are registered: the 25 approved reference scenarios (every one reproduced) and one forbidden guardrail (G01). "
             "M5 and S2 are computed only where a scenario varies eligibility or quarantine, always over the fixed denominator of "
             f"{base.m5_denominator:,}; an analytic exclusion does not redefine readiness.", "",
             "**Robustness classes** (one rule set for every metric and scenario; |change| against the frozen baseline):", "",
@@ -51,13 +51,13 @@ def render_block(a: Analysis) -> str:
         out.append(f"| {m} | {r['stable_below'] * scale:g}{unit} | {r['sensitive_below'] * scale:g}{unit} | {r['sensitive_below'] * scale:g}{unit} | {r['basis']} |")
     out += ["", "BLOCKED means no defensible conclusion can be produced because the required evidence is unavailable. A scenario that is a diagnostic population contrast (S40) or a forbidden comparison (G01) is reported but never classified or ranged.", ""]
 
-    out += ["## 3. Scenario table", "", "Deltas are against the baseline. `class` is the worst class over the metrics the scenario recomputes. **M3 falls by construction when sessions are excluded**, so for an exclusion scenario the class can reflect the session-count effect alone (S23 is CONDITIONAL because it leaves out 385 sessions, while its effect on M2 is SENSITIVE); the conclusion classes in sections 5-8 therefore use M1, M2 and M4 for exclusion tests and use M3 and M5 only for the timezone and crossover scenarios. `ref` = Phase 2 reference reproduced.", "",
+    out += ["## 3. Scenario table", "", "Deltas are against the baseline. `class` is the worst class over the metrics the scenario recomputes. **M3 falls by construction when sessions are excluded**, so for an exclusion scenario the class can reflect the session-count effect alone (S23 is CONDITIONAL because it leaves out 385 sessions, while its effect on M2 is SENSITIVE); the conclusion classes in sections 5-8 therefore use M1, M2 and M4 for exclusion tests and use M3 and M5 only for the timezone and crossover scenarios. `ref` = profiling reference reproduced.", "",
             "| ID | Scenario | Group | M1 g | M2 g | M3 | M4 | M5 % | S2 % | ΔM1 | ΔM2 | class | ref |", "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|"]
     rows = {r["scenario_id"]: r for r in a.result_rows}
     for s in SCENARIOS:
         r, x = rows[s.scenario_id], a.results[s.scenario_id]
         out.append(f"| {s.scenario_id} | {s.name} | {s.group} | {_f(x.m1)} | {_f(x.m2)} | {x.m3:,} | {x.m4:g} | {_f(x.m5, 2)} | {_f(x.s2, 2)} | {_d(r['d_m1_g'])} | {_d(r['d_m2_g'])} | "
-                   f"{r['worst_robustness_class'].lower().replace('_', ' ')} | {'yes' if r['phase2_reference'] == 'reproduced' else 'new' if r['phase2_reference'] == 'n/a' else 'NO'} |")
+                   f"{r['worst_robustness_class'].lower().replace('_', ' ')} | {'yes' if r['reference_status'] == 'reproduced' else 'new' if r['reference_status'] == 'n/a' else 'NO'} |")
     g = a.results["G01"]
     out += ["", f"G01 is a **forbidden comparison** used only to demonstrate population-confounding risk: pooling the two exports gives M1 {_f(g.m1)} g, M2 {_f(g.m2)} g and M4 {g.m4:g}, "
             "numbers that describe the population mix and not any measurement. The populations are never pooled. S40 shows the non-registered-export population on its own (a diagnostic contrast, never a KPI source).", ""]

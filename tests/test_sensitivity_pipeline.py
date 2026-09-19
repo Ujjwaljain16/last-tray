@@ -1,5 +1,5 @@
 """The sensitivity stage: determinism (figures included), refusal to run on missing or tampered canonical inputs, a consistent forgery caught by
-the baseline gate, no mutation of any canonical file, and static/runtime guarantees that WP7 never reads raw or staging data."""
+the baseline gate, no mutation of any canonical file, and static/runtime guarantees that sensitivity analysis never reads raw or staging data."""
 from __future__ import annotations
 
 import hashlib

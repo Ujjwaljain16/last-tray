@@ -1,4 +1,4 @@
-"""Phase 2 sections E-J: session diagnostics, component-name stability, span checks, daily volume,
+"""Profile report sections E-J: session diagnostics, component-name stability, span checks, daily volume,
 Nov 16-20, the 2,097 g event, the single-event registered-export sessions."""
 import json
 from itertools import combinations
@@ -6,7 +6,7 @@ from itertools import combinations
 import numpy as np
 import pandas as pd
 
-from phase2_common import OUT, UTC_FILES, exact_dup_mask
+from exploration_common import OUT, UTC_FILES, exact_dup_mask
 
 pd.set_option("display.width", 250)
 pd.set_option("display.max_columns", 40)

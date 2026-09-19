@@ -1,8 +1,8 @@
-"""Validation orchestration (WP4): verified staging tables in, findings, quarantine and reconciliation out. Offline.
+"""Validation orchestration: verified staging tables in, findings, quarantine and reconciliation out. Offline.
 
 Reads ONLY the staging tables (through src.validate.load, which verifies them against what staging recorded). It never opens
 data/raw. It deletes nothing: quarantine is a list plus a flag, every staged row keeps a disposition, and the derived tables here
-are validation evidence, not the canonical model or any metric (WP5-WP6).
+are validation evidence, not the canonical model or any metric (the model or metrics).
 
 Semantic chain, unchanged: OBSERVED component weighing events -> DERIVED selected meal weight -> UNKNOWN consumed quantity ->
 SOURCE GAP for actual food waste. Nothing in validation infers consumption or waste from any weight.
@@ -190,7 +190,7 @@ def _summarise(res: ValidationResult, inp: StagedInputs, cfg: Config, profiles: 
         "sessions": {"session_ids": len({p.session_id for p in profiles.values()}), "session_keys": len(profiles), "session_ids_in_both_populations": both,
                      "by_population": dict(sorted(Counter(p.population for p in profiles.values()).items()))},
         "session_level_warn_accounting": {
-            "note": "validation-level reconciliation only; the metric (warn-free rate) is computed in the metric layer (WP6)",
+            "note": "validation-level reconciliation only; the metric (warn-free rate) is computed in the metric layer",
             "eligible_primary_session_keys": len(eligible), "quarantined": len(eligible) - len(live),
             "with_session_level_warn": sum(r["session_level_warn"] for r in live), "no_session_level_warn": sum(not r["session_level_warn"] for r in live),
             "event_level_only_warn_session_ids": warn_ids, "session_level_warn_rules": list(SESSION_LEVEL_WARN_RULES), "event_level_warn_rules": list(EVENT_LEVEL_WARN_RULES)},

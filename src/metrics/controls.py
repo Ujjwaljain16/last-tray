@@ -1,7 +1,7 @@
 """Metric controls: independent cross-checks that the populations and the inputs behind the metrics are what the contracts say.
 
 None of these changes a metric. They compare the metric layer with the canonical model tables it reads (never staging or raw files) and with
-an independent implementation of the statistics from the Python standard library. Statuses: PASS, WARN, FAIL, INFO (as in WP4 and WP5).
+an independent implementation of the statistics from the Python standard library. Statuses: PASS, WARN, FAIL, INFO (as in validation and model).
 """
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ def population_checks(inp: MetricInputs) -> list[Check]:
              " | ".join(str(n[k]) for k in (ct.A, ct.B, ct.C, ct.D, ct.E))),
         eq("MC02", "populations", "populations are never pooled: A = C + E and C and E share no session key", (n[ct.A], 0), (n[ct.C] + n[ct.E], len(overlap)), "identity"),
         eq("MC03", "populations", "the quarantined session keys are exactly the sessions of A that are not in B", sorted(s.session_key for s in quarantined),
-           sorted(s.session_key for s in all_s if s.session_key not in modelled), "WP4 quarantine, via the model"),
+           sorted(s.session_key for s in all_s if s.session_key not in modelled), "validation quarantine, via the model"),
         eq("MC04", "populations", "every quarantined registered-export session stays inside the eligible population C (the M5 denominator is not shrunk)",
            sum(s.population == "registered_export" for s in quarantined), sum(s.is_quarantined for s in select(all_s, ct.C)), "approved denominator rule"),
         eq("MC05", "populations", "no quarantined session is in the measurement population D", 0, sum(s.is_quarantined for s in select(all_s, ct.D)), "quarantine policy"),
@@ -88,8 +88,8 @@ def component_checks(inp: MetricInputs) -> list[Check]:
     return [
         eq("MC13", "components", "distinct components counted from fact_session_component equal distinct_component_count for every D session", [],
            sorted(k for k, s in d.items() if len(by_key.get(k, ())) != s.distinct_component_count), "canonical component fact"),
-        eq("MC14", "components", "raw and normalised distinct component counts do not differ within any D session (Phase 2 property)", [],
-           sorted(k for k, s in d.items() if s.distinct_raw_component_count != s.distinct_component_count), "approved Phase 2 finding"),
+        eq("MC14", "components", "raw and normalised distinct component counts do not differ within any D session (profiling property)", [],
+           sorted(k for k, s in d.items() if s.distinct_raw_component_count != s.distinct_component_count), "approved profiling finding"),
         eq("MC15", "components", "no component row is attached to a session of another population (no pooling)", 0, sum(session_pop.get(k) != p for k, p in populations), "population separation"),
     ]
 

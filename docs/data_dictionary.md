@@ -58,7 +58,7 @@ XML `wfs:FeatureCollection`, one `BsWfs:BsWfsElement` per (time, parameter). Tim
 | `is_exact_duplicate` | bool | No | identical repeat of an earlier row in the same file | DERIVED |
 | `quality_status` | text | No | `VALID`, `WARN`, `INVALID` | DERIVED |
 
-> **Planned model (Phase 4).** The implemented canonical tables are specified in section 12, which governs where names or rules differ (for example `component_weighing_event_count` is now `modellable_event_count`, and the selected weight sums MODELLABLE events).
+> **Original model design.** The implemented canonical tables are specified in section 12, which governs where names or rules differ (for example `component_weighing_event_count` is now `modellable_event_count`, and the selected weight sums MODELLABLE events).
 
 ## 4. Model: `fact_dining_session` (one **derived** session per `session_id` × population; DERIVED)
 
@@ -84,7 +84,7 @@ XML `wfs:FeatureCollection`, one `BsWfs:BsWfsElement` per (time, parameter). Tim
 | `weather_hour_utc` | timestamp | Yes | first weighing converted to UTC, ceiled to the next full hour (hour-ending rule) | DERIVED |
 | `weather_matched` | bool | No | a `fact_weather` row exists for `weather_hour_utc` | DERIVED |
 | `consumed_weight_g` | n/a | not modelled | food actually eaten | **UNKNOWN**, no column, no value |
-| `waste_weight_g` | real | **Always NULL in MVP** | food discarded | **SOURCE GAP**, never 0 |
+| `waste_weight_g` | real | **Always NULL** | food discarded | **SOURCE GAP**, never 0 |
 
 ## 5. Model: `fact_session_component` (one distinct normalised component within a session; DERIVED)
 
@@ -141,7 +141,7 @@ XML `wfs:FeatureCollection`, one `BsWfs:BsWfsElement` per (time, parameter). Tim
 | evidence status | `READY`, `READY_WITH_LIMITATION`, `BLOCKED` |
 | pipeline outcome | `RECOVERED`, `WARNING`, `FAILED`, `BLOCKED` |
 
-## 10. Staging tables (WP3)
+## 10. Staging tables
 
 Staging sits between the verified raw files and the canonical model. It **preserves and normalises; it does not judge**: every source
 row is kept (duplicates, odd weights, odd timestamps), raw text is stored beside every normalised value, and every row carries its
@@ -181,17 +181,17 @@ date range that reproduces the raw time read as UTC.
 `staging_summary.json` (counts, statuses, declared transformations, output checksums).
 
 
-## 11. Validation tables (WP4)
+## 11. Validation tables
 
 Written to `outputs/validation/` from the verified staging tables. They are evidence about staging: they add findings, dispositions and
 reconciliation, and they change no staged value. Field meanings for the issue table, the severity / handling / quarantine distinction
-and the lineage bases are in `validation_rules.md` ("WP4 implementation").
+and the lineage bases are in `validation_rules.md` ("validation implementation").
 
 | Table | Grain | Key fields |
 |---|---|---|
 | `validation_issues` | one finding on one entity | `validation_issue_id` (content-derived), `run_id`, `rule_id`, `severity`, `handling`, `quarantine`, `entity_type`, `entity_id`, `session_key`, `event_id`, `lineage_basis`, `source_row_lineage` |
 | `event_validation_status` | one staged event | `event_id`, `disposition` (`MODELLABLE`, `DUPLICATE_EXCLUDED`, `QUARANTINED`), rule ids by severity |
-| `session_validation_status` | one `(session_id, population)` key | counts, `service_date`, `span_s`, `rule_weight_sum_g` (validation working value; the canonical `derived_selected_meal_weight_g` is produced in WP5), `quarantined`, `session_level_warn`, `event_level_warn`, day flags |
+| `session_validation_status` | one `(session_id, population)` key | counts, `service_date`, `span_s`, `rule_weight_sum_g` (validation working value; the canonical `derived_selected_meal_weight_g` is produced in model), `quarantined`, `session_level_warn`, `event_level_warn`, day flags |
 | `quarantine_manifest` | one quarantined session key or event | `quarantine_entity_type`, `entity_id`, `quarantine_rule_ids` |
 | `reconciliation_summary` | one check | `check_id`, `status` (PASS, WARN, FAIL, INFO), `expected`, `observed`, `basis` |
 | `service_day_volume` | one population and service date | `sessions`, `observed_regime`, `expected_regime`, `low_observed_volume_day`, `volume_irregularity_day` (registered-export only) |
@@ -200,22 +200,22 @@ and the lineage bases are in `validation_rules.md` ("WP4 implementation").
 Dispositions: `QUARANTINED` (session key quarantined; wins over repeat), `DUPLICATE_EXCLUDED` (an exact repeat of an earlier row of
 the same file, left out of sums), `MODELLABLE` (available to the model layer). Every staged event has exactly one.
 
-## 12. Canonical model (WP5)
+## 12. Canonical model
 
-The canonical business-facing model, built from the verified staging tables and the verified WP4 validation outputs, and written to
+The canonical business-facing model, built from the verified staging tables and the verified validation outputs, and written to
 `outputs/model/`. This section is **generated from `src/model/schema.py`** (`python -m src.model.schema`) and a test fails if it drifts.
-It governs where it differs from the planned model in sections 4-6, which record the Phase 4 design.
+It governs where it differs from the original model in sections 4-6, which record the original design.
 
 **Semantic classes.** OBSERVED: written by a source system and carried through unchanged. DERIVED: computed by this pipeline by a stated
-rule. VALIDATION: consumed unchanged from WP4 (dispositions, rule ids). PROVENANCE: says where a value came from. Two things have
+rule. VALIDATION: consumed unchanged from validation (dispositions, rule ids). PROVENANCE: says where a value came from. Two things have
 **no column anywhere**: the amount actually consumed (UNKNOWN) and food waste (SOURCE GAP).
 
 **`derived_selected_meal_weight_g` is DERIVED.** It is the sum of the weights a session's MODELLABLE weighing events recorded at the
 lunch line. It is NOT consumed quantity, NOT food waste, NOT actual intake, and nothing in the model infers waste from it. It is
-reconstructed from `fact_weighing_event` and then compared with WP4's `rule_weight_sum_g`, a validation/reconciliation working value
+reconstructed from `fact_weighing_event` and then compared with validation's `rule_weight_sum_g`, a validation/reconciliation working value
 that is used only as a reconciliation control and is not a canonical field (`session_weight_control.csv`).
 
-**Event dispositions** (from WP4, one per event): MODELLABLE (feeds the business fields), DUPLICATE_EXCLUDED (an exact repeat of an earlier
+**Event dispositions** (from validation, one per event): MODELLABLE (feeds the business fields), DUPLICATE_EXCLUDED (an exact repeat of an earlier
 row of the same file: kept as a row, left out of sums), QUARANTINED (its session key is quarantined: kept as a row, no selected weight).
 Business fields (weight, component counts, `modellable_event_count`) use MODELLABLE events only; timing and identity fields (first/last,
 span, tray) use every event that is not an exact repeat, so a quarantined session stays traceable in time.
@@ -224,7 +224,7 @@ span, tray) use every event that is not an exact repeat, so a quarantined sessio
 are four keys, never merged.
 
 **Other files in `outputs/model/`:** `model_manifest.json` (tables, grains, columns, semantic classes, checksums, inputs, controls),
-`model_control_summary.csv` (26 controls: PASS, WARN, FAIL, INFO) and `session_weight_control.csv` (per session: canonical weight, WP4
+`model_control_summary.csv` (26 controls: PASS, WARN, FAIL, INFO) and `session_weight_control.csv` (per session: canonical weight, validation
 working value, span, counts and first weighing, each MATCH, MISMATCH or EXCLUDED_QUARANTINED). The two large tables
 (`fact_weighing_event.csv`, `fact_session_component.csv`) are regenerable and ignored by git.
 
@@ -303,9 +303,9 @@ working value, span, counts and first weighing, each MATCH, MISMATCH or EXCLUDED
 | `distinct_raw_component_count` | integer | DERIVED | yes | distinct raw component names among MODELLABLE events (control for the normalisation property) | count distinct component_name_raw over MODELLABLE events | lineage only |
 | `distinct_component_count_status` | text | DERIVED | no | READY_WITH_LIMITATION, or LIMITED where cross-export component identity is unstable on that scale and day (rule I07) | I07 findings matched to the session's scale-days | M4 caveat |
 | `identity_conflict` | boolean | DERIVED | no | session_id occurs in both populations | session_id present under two populations | core_ready |
-| `is_quarantined` | boolean | VALIDATION | no | the session key is quarantined by WP4 | all events QUARANTINED; equals the WP4 quarantine flag | lineage only |
+| `is_quarantined` | boolean | VALIDATION | no | the session key is quarantined by validation | all events QUARANTINED; equals the validation quarantine flag | lineage only |
 | `quarantine_rule_ids` | text | VALIDATION | yes | rule ids that caused the quarantine | validation session_validation_status | lineage only |
-| `core_ready` | boolean | DERIVED | no | primary population, not quarantined, at least one modellable event, no ERROR finding, valid weights and parsed times; weather, WARN rules and volume flags never enter it | the approved WP4 readiness contract; the metric itself is WP6 | M1-M5 filter |
+| `core_ready` | boolean | DERIVED | no | primary population, not quarantined, at least one modellable event, no ERROR finding, valid weights and parsed times; weather, WARN rules and volume flags never enter it | the approved validation readiness contract; the metric itself is metrics | M1-M5 filter |
 | `max_validation_severity` | text | VALIDATION | no | highest severity among the session's findings: ERROR, WARN, INFO or NONE | validation session_validation_status | lineage only |
 | `validation_error_rule_ids` | text | VALIDATION | yes | `;`-joined ERROR rule ids | validation session_validation_status | lineage only |
 | `validation_warn_rule_ids` | text | VALIDATION | yes | `;`-joined WARN rule ids | validation session_validation_status | lineage only |
@@ -380,7 +380,7 @@ working value, span, counts and first weighing, each MATCH, MISMATCH or EXCLUDED
 | `source_files` | text | PROVENANCE | no | `;`-joined source files of the day's sessions | distinct source_files | lineage only |
 
 
-## 13. Metric outputs (WP6)
+## 13. Metric outputs
 
 Written to `outputs/metrics/` from the canonical model (all tracked; small). Contract, computation and presentation are separate (see `metric_contract.md` section 8).
 
@@ -396,14 +396,14 @@ Written to `outputs/metrics/` from the canonical model (all tracked; small). Con
 `status` is PASS, FAIL or BLOCKED. `evidence_status` is READY_WITH_LIMITATION or BLOCKED. `value` is empty for W1; there is no waste, consumption, leftover or intake column anywhere.
 
 
-## 14. Sensitivity and evidence outputs (WP7)
+## 14. Sensitivity and evidence outputs
 
 Written to `outputs/evidence/` (all tracked; small) by `python -m src.pipeline.run --stages sensitivity`. Definitions and thresholds: `sensitivity_analysis.md`, decisions D59-D63.
 
 | File | Grain | Content |
 |---|---|---|
 | `scenario_registry.json` / `.csv` | one scenario | id, group, assumption changed, baseline and alternative assumption, rationale, affected tables and population, metrics recalculated, operation, interpretation, decision impact, defensible, diagnostic-only, forbidden |
-| `sensitivity_results.csv` | one scenario | the metric values, deltas and percentage deltas, worst robustness class, whether the Phase 2 reference reproduced |
+| `sensitivity_results.csv` | one scenario | the metric values, deltas and percentage deltas, worst robustness class, whether the profiling reference reproduced |
 | `metric_sensitivity.csv` | one metric x scenario | `metric_id, scenario_id, baseline_value, scenario_value, absolute_delta, relative_delta, population, interpretation, robustness_class` |
 | `timezone_evidence.csv` | one candidate offset | sessions outside service hours, median first-event hour, gap to the other files, weather-hour changes, temperature difference, rainy-hour share |
 | `evidence_matrix.csv` | one question | Question, Baseline evidence, Sensitivity tested, Observed range/change, Robustness, What can be concluded, What cannot be concluded, Next evidence needed |
@@ -413,7 +413,7 @@ Written to `outputs/evidence/` (all tracked; small) by `python -m src.pipeline.r
 
 `robustness_class` is STABLE, SENSITIVE, CONDITIONAL, BLOCKED, or NOT_CLASSIFIED (the diagnostic population contrast S40 and the forbidden guardrail G01). There is no waste, consumption or leftover value in any file.
 
-## 15. Pipeline outputs (WP8)
+## 15. Pipeline outputs
 
 Written to `outputs/pipeline/` by every `python -m src.pipeline.run`. Definitions and gates: `pipeline.md`, decisions D64-D68. Stage names are `ingest, stage, validate, model, metrics, sensitivity`; statuses are `PASSED, FAILED, BLOCKED, INVALIDATED, NOT_RUN, REUSED`.
 

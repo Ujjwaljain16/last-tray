@@ -1,8 +1,8 @@
-# Phase 2 Validation Findings and Final Thresholds
+# Validation Findings and Final Thresholds
 
 **Status: thresholds approved 2026-09-19.** They are diagnostic validation thresholds derived from the observed structure of this data, not claims of physical impossibility or universal abnormality. The authoritative rule table is `validation_rules.md`.
 
-Draft rules from `docs/validation_rules.md` were applied to the real data by `research/phase2/phase2_d_findings.py`. Output: `outputs/validation/validation_issues.csv` (1,278 rows) and `validation_summary_by_rule.csv`. **Nothing was deleted or excluded from the raw or staging data.** "Handling" describes what the production pipeline will do.
+Draft rules from `docs/validation_rules.md` were applied to the real data by `research/exploration/exploration_d_findings.py`. Output: `outputs/validation/validation_issues.csv` (1,278 rows) and `validation_summary_by_rule.csv`. **Nothing was deleted or excluded from the raw or staging data.** "Handling" describes what the production pipeline will do.
 
 Severity: **ERROR** breaks `core_ready`. **WARN** is visible and kept. **INFO** records a fact.
 

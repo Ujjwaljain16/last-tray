@@ -21,13 +21,13 @@ S02,sessions,"session keys = session ids + ids present in both populations (why 
 S03,sessions,session_ids present in both populations (crossover),,"session2266,session3222",INFO,reported
 S04,sessions,every crossover session key is quarantined (rule I01),"['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']","['session2266|non_registered_export', 'session2266|registered_export', 'session3222|non_registered_export', 'session3222|registered_export']",PASS,approved decision
 S05,sessions,every staged event belongs to exactly one session key,12284,12284,PASS,identity
-S06,sessions,session keys with more than one identification value (approved Phase 2 correction: 0),0,0,PASS,approved Phase 2 finding
+S06,sessions,session keys with more than one identification value (approved profiling correction: 0),0,0,PASS,approved profiling finding
 S07,sessions,the same count if populations were pooled by session_id alone (a pooling artefact; keys are never pooled): canonical instants | raw wall-clock,,2 | 2,INFO,reported
 F01,structure,row_parse_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
 F02,structure,weight_parse_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
 F03,structure,event_time_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
 F04,structure,identification_time_status counts reconcile to all staged events,12284,12284 (OK=12284),PASS,identity
-N01,components,"within every session, distinct raw component names equal distinct normalised names (Phase 2 conclusion; observed = sessions that differ)",[],[],PASS,approved Phase 2 finding
+N01,components,"within every session, distinct raw component names equal distinct normalised names (profiling conclusion; observed = sessions that differ)",[],[],PASS,approved profiling finding
 N02,components,"distinct component names across the data: raw | normalised (trim, whitespace collapse, casefold; no alias table)",,246 | 245,INFO,reported
 Z01,timezone,"rows carrying a timezone override equal the rows of the configured override file(s), and no others",1931,1931,PASS,config/timezone_overrides.yml
 Z02,timezone,no row outside the configured override file carries an override,0,0,PASS,approved decision

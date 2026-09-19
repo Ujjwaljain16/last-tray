@@ -1,7 +1,7 @@
 """The sensitivity analysis itself: run every registered scenario on the verified working set and assemble the evidence tables.
 
 Order of events: (1) the baseline (S00) is recomputed and must equal the frozen approved package; (2) every scenario runs from scratch on the
-same working set; (3) every scenario with an approved Phase 2 reference must reproduce it, otherwise the analysis FAILS with the difference
+same working set; (3) every scenario with an approved reference must reproduce it, otherwise the analysis FAILS with the difference
 (nothing is tuned); (4) results are classified with one rule set; (5) the evidence matrix, uncertainty register and controls are built from
 the computed results. The analysis reads nothing but the verified canonical tables and never writes to them.
 """
@@ -20,7 +20,7 @@ from src.sensitivity import classify as cl
 from src.sensitivity.data import WorkingSet, build_working_set
 from src.sensitivity.engine import ScenarioResult, run_scenario
 from src.sensitivity.questions import QUESTIONS, Facts, uncertainty_rows
-from src.sensitivity.registry import (APPROVED_OVERRIDE_OFFSET_HOURS, CLASSIFICATION, GUARDRAIL_IDS, PHASE2_TOLERANCE_G, SCENARIOS, SCENARIO_BY_ID, ScenarioSpec,
+from src.sensitivity.registry import (APPROVED_OVERRIDE_OFFSET_HOURS, CLASSIFICATION, GUARDRAIL_IDS, REFERENCE_TOLERANCE_G, SCENARIOS, SCENARIO_BY_ID, ScenarioSpec,
                                       validate_registry)
 from src.sensitivity.timezone import timezone_rows
 from src.validate.reconcile import Check, eq, info
@@ -33,7 +33,7 @@ POPULATION_LABEL = {"registered_export": "registered-export (core-ready)", "non_
 
 
 class SensitivityError(Exception):
-    """The analysis cannot be trusted: the baseline moved, a Phase 2 reference no longer reproduces, or a scenario is undeclared."""
+    """The analysis cannot be trusted: the baseline moved, an approved reference no longer reproduces, or a scenario is undeclared."""
 
 
 @dataclass
@@ -47,13 +47,13 @@ class Analysis:
     matrix: list[dict[str, Any]]
     register: list[dict[str, Any]]
     checks: list[Check]
-    phase2_mismatches: list[str] = field(default_factory=list)
+    reference_mismatches: list[str] = field(default_factory=list)
     baseline_problems: list[str] = field(default_factory=list)
     eligible: int = 0
 
     @property
     def failed(self) -> bool:
-        return bool(self.baseline_problems or self.phase2_mismatches or any(c.status == "FAIL" for c in self.checks))
+        return bool(self.baseline_problems or self.reference_mismatches or any(c.status == "FAIL" for c in self.checks))
 
 
 def value_of(r: ScenarioResult, metric: str) -> float | None:
@@ -69,20 +69,20 @@ def is_comparable(spec: ScenarioSpec) -> bool:
     return spec.scenario_id not in GUARDRAIL_IDS and spec.scenario_id != "S40"
 
 
-# ---- baseline freeze and Phase 2 reproduction --------------------------------------------------------------------------------------------------
+# ---- baseline freeze and profiling reproduction --------------------------------------------------------------------------------------------------
 def baseline_problems(base: ScenarioResult, inp: MetricInputs, ws: WorkingSet) -> list[str]:
-    """The S00 recomputation must equal the frozen approved package AND the independent WP6 computation."""
+    """The S00 recomputation must equal the frozen approved package AND the independent metrics computation."""
     problems = []
     c = ct.CONTRACTS
-    wp6 = compute_all(inp)
-    checks = (("M1", base.m1, c["M1"].approved_value, c["M1"].tolerance, wp6["M1"].value), ("M2", base.m2, c["M2"].approved_value, c["M2"].tolerance, wp6["M2"].value),
-              ("M3", base.m3, c["M3"].approved_value, 0, wp6["M3"].value), ("M4", base.m4, c["M4"].approved_value, 0, wp6["M4"].value),
-              ("M5", base.m5, c["M5"].approved_value, c["M5"].tolerance, wp6["M5"].value), ("S2", base.s2, c["S2"].approved_value, c["S2"].tolerance, wp6["S2"].value))
+    recomputed = compute_all(inp)
+    checks = (("M1", base.m1, c["M1"].approved_value, c["M1"].tolerance, recomputed["M1"].value), ("M2", base.m2, c["M2"].approved_value, c["M2"].tolerance, recomputed["M2"].value),
+              ("M3", base.m3, c["M3"].approved_value, 0, recomputed["M3"].value), ("M4", base.m4, c["M4"].approved_value, 0, recomputed["M4"].value),
+              ("M5", base.m5, c["M5"].approved_value, c["M5"].tolerance, recomputed["M5"].value), ("S2", base.s2, c["S2"].approved_value, c["S2"].tolerance, recomputed["S2"].value))
     for name, got, approved, tol, independent in checks:
         if abs(got - approved) > tol:
             problems.append(f"{name}: baseline {got} differs from the approved {approved} (tolerance {tol})")
         if abs(got - independent) > 1e-9:
-            problems.append(f"{name}: baseline {got} differs from the WP6 computation {independent}")
+            problems.append(f"{name}: baseline {got} differs from the metrics computation {independent}")
     if (base.m5_numerator, base.m5_denominator) != (1697, 1699) or ws.eligible != 1699:
         problems.append(f"M5 counts {base.m5_numerator}/{base.m5_denominator} differ from the approved 1697/1699")
     if base.s2_numerator != 1663:
@@ -90,17 +90,17 @@ def baseline_problems(base: ScenarioResult, inp: MetricInputs, ws: WorkingSet) -
     return problems
 
 
-def phase2_mismatches(results: dict[str, ScenarioResult]) -> list[str]:
+def reference_mismatches(results: dict[str, ScenarioResult]) -> list[str]:
     out = []
     for spec in SCENARIOS:
-        ref = spec.phase2
+        ref = spec.reference
         if ref is None:
             continue
         r = results[spec.scenario_id]
         bad = []
-        if abs(r.m1 - ref[0]) > PHASE2_TOLERANCE_G:
+        if abs(r.m1 - ref[0]) > REFERENCE_TOLERANCE_G:
             bad.append(f"M1 {r.m1} vs {ref[0]}")
-        if abs(r.m2 - ref[1]) > PHASE2_TOLERANCE_G:
+        if abs(r.m2 - ref[1]) > REFERENCE_TOLERANCE_G:
             bad.append(f"M2 {r.m2:.3f} vs {ref[1]}")
         if r.m3 != ref[2]:
             bad.append(f"M3 {r.m3} vs {ref[2]}")
@@ -159,7 +159,7 @@ def _result_rows(results: dict[str, ScenarioResult], metric_rows: list[dict[str,
         row.update({"defensible": spec.defensible, "diagnostic_only": spec.diagnostic_only, "forbidden": spec.forbidden, "interpretation": spec.interpretation,
                     "decision_impact": spec.decision_impact,
                     "worst_robustness_class": cl.worst(by_scenario[spec.scenario_id]) if spec.scenario_id in by_scenario else NOT_CLASSIFIED,
-                    "phase2_reference": "n/a" if spec.phase2 is None else ("MISMATCH" if spec.scenario_id in bad_ids else "reproduced"),
+                    "reference_status": "n/a" if spec.reference is None else ("MISMATCH" if spec.scenario_id in bad_ids else "reproduced"),
                     "detail": json.dumps(r.detail, sort_keys=True)})
         rows.append(row)
     return rows
@@ -213,8 +213,8 @@ def _controls(results: dict[str, ScenarioResult], ws: WorkingSet, cfg: Config, m
     shifted = {f for r in results.values() for f in r.detail.get("files_shifted", [])}
     return [
         eq("SC01", "scenarios", "every registered scenario was executed exactly once", ids, sorted(results, key=ids.index), "registry"),
-        eq("SC02", "baseline", "the recomputed baseline equals the frozen approved package and the independent WP6 computation", [], bp, "approved baseline"),
-        eq("SC03", "baseline", "every approved Phase 2 scenario reproduces (M1, M2, M3, M4, M5 numerator)", [], mism, "approved Phase 2 sensitivity"),
+        eq("SC02", "baseline", "the recomputed baseline equals the frozen approved package and the independent metrics computation", [], bp, "approved baseline"),
+        eq("SC03", "baseline", "every approved reference scenario reproduces (M1, M2, M3, M4, M5 numerator)", [], mism, "approved profiling sensitivity"),
         eq("SC04", "baseline", "running every scenario leaves the baseline working set untouched (fingerprint of every baseline session)", _digest(before), _digest(after), "purity"),
         eq("SC05", "timezone", "only the override file(s) in the configuration are shifted", sorted(cfg.timezone.overrides), sorted(shifted), "file-specific override"),
         eq("SC06", "timezone", "the +3h scenario reproduces the baseline exactly", (results["S00"].m1, results["S00"].m2, results["S00"].m3), (results["TZ3"].m1, results["TZ3"].m2, results["TZ3"].m3), "approved decision"),
@@ -246,7 +246,7 @@ def run_analysis(inp: MetricInputs, cfg: Config) -> Analysis:
     results = {s.scenario_id: run_scenario(s, ws, cfg) for s in SCENARIOS}
     after = _fingerprint(ws)
     bp = baseline_problems(results["S00"], inp, ws)
-    mism = phase2_mismatches(results)
+    mism = reference_mismatches(results)
     tz = timezone_rows(ws, cfg)
     metric_rows = _metric_rows(results)
     ranges, biggest = _ranges(results, metric_rows)

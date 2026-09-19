@@ -1,4 +1,4 @@
-"""Phase 2 section N: sensitivity analysis. Writes outputs/validation/sensitivity_analysis.csv.
+"""Profile report section N: sensitivity analysis. Writes outputs/validation/sensitivity_analysis.csv.
 
 Purpose: show that assumptions were TESTED, not selected for favourable KPI results. Every scenario recomputes
 M1-M5 under an alternative assumption; the baseline is scenario S00. Diagnostic thresholds are derived from the
@@ -10,7 +10,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from phase2_common import OUT, ROOT, UTC_FILES, exact_dup_mask
+from exploration_common import OUT, ROOT, UTC_FILES, exact_dup_mask
 
 pd.set_option("display.width", 260)
 pd.set_option("display.max_columns", 40)

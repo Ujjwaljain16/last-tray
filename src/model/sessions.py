@@ -1,6 +1,6 @@
-"""fact_dining_session and fact_session_component, reconstructed from the CANONICAL event rows and the WP4 dispositions.
+"""fact_dining_session and fact_session_component, reconstructed from the CANONICAL event rows and the validation dispositions.
 
-This module does not use WP4's session profiles and does not read `rule_weight_sum_g`; that WP4 value is only a control, compared in
+This module does not use validation's session profiles and does not read `rule_weight_sum_g`; that validation value is only a control, compared in
 src/model/control.py. Two event sets are used, and the difference is deliberate:
 
   business fields (weight, components, event counts)  -> MODELLABLE events only

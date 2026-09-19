@@ -1,4 +1,4 @@
-"""Console descriptions of each stage result: the human-readable text the CLI prints (kept identical across the WP8 refactor)."""
+"""Console descriptions of each stage result: the human-readable text the CLI prints (kept identical across the pipeline orchestration refactor)."""
 from __future__ import annotations
 
 from src.config import Config
@@ -107,10 +107,10 @@ def describe_sensitivity(res: SensitivityResult) -> str:
         return "\n".join(["Sensitivity analysis (canonical model only)", f"  core lane   : {res.core_status}", f"  BLOCKED: {res.error}"])
     sm = res.summary
     lines = ["Sensitivity analysis (canonical model only)", f"  core lane   : {res.core_status}",
-             f"  scenarios   : {sm['scenarios']['registered']} registered; Phase 2 reproduced {sm['scenarios']['phase2_reproduced']}; guardrail {', '.join(sm['scenarios']['guardrail'])}",
+             f"  scenarios   : {sm['scenarios']['registered']} registered; profiling reproduced {sm['scenarios']['reference_reproduced']}; guardrail {', '.join(sm['scenarios']['guardrail'])}",
              f"  baseline    : M1 {sm['baseline']['M1']:g} g, M2 {sm['baseline']['M2']:,.1f} g, M3 {sm['baseline']['M3']:,}, M4 {sm['baseline']['M4']:g}, M5 {sm['baseline']['M5']:.2f}%, S2 {sm['baseline']['S2']:.2f}% (frozen)",
              "  ranges      : " + "; ".join(f"{m} {r['min']:,.1f}-{r['max']:,.1f}" for m, r in sm["ranges"].items() if m in ("M1", "M2")),
              f"  conclusions : {sm['conclusion_classes']}", f"  controls    : {sm['controls']['pass']} pass, {sm['controls']['fail']} fail, {sm['controls']['info']} info"]
-    for p in sm["baseline_problems"] + sm["phase2_mismatches"]:
+    for p in sm["baseline_problems"] + sm["reference_mismatches"]:
         lines.append(f"  FAILED: {p}")
     return "\n".join(lines)

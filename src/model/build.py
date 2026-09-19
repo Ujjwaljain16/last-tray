@@ -1,7 +1,7 @@
-"""Canonical model orchestration (WP5): verified staging + verified WP4 outputs in, canonical tables and control evidence out. Offline.
+"""Canonical model orchestration: verified staging + verified validation outputs in, canonical tables and control evidence out. Offline.
 
 Never opens data/raw. Builds the five canonical tables, reconstructs `derived_selected_meal_weight_g` independently and compares it with
-the WP4 working value, and blocks (writing only the control files, so the difference can be inspected) if any core control fails.
+the validation working value, and blocks (writing only the control files, so the difference can be inspected) if any core control fails.
 Core failure => exit 4 and stale canonical tables removed. Weather failure => fact_weather blocked, core model unaffected.
 
 Not here: M1-M5, sensitivity, dashboards, judgement. Nothing here estimates consumption or waste.
@@ -30,7 +30,7 @@ CONTROL_CSV = "model_control_summary.csv"
 SESSION_CONTROL_CSV = "session_weight_control.csv"
 TABLE_FILES = {t.name: f"{t.name}.csv" for t in schema.TABLES}
 DETERMINISTIC_FILES = (*TABLE_FILES.values(), MANIFEST_JSON, CONTROL_CSV, SESSION_CONTROL_CSV)
-MODEL_VERSION = "wp5-1"
+MODEL_VERSION = "model-1"
 
 
 @dataclass
@@ -67,7 +67,7 @@ def _manifest(res: ModelResult, inp: ModelInputs, cfg: Config, written: dict[str
                      "failed_checks": [c.check_id for c in res.checks if c.status == "FAIL"]},
         "semantic_chain": ["OBSERVED component weighing events", "DERIVED selected meal weight", "UNKNOWN actual consumed quantity", "SOURCE GAP actual food waste"],
         "field_notes": {"derived_selected_meal_weight_g": "DERIVED from MODELLABLE events; not consumed quantity, not food waste, not actual intake",
-                        "rule_weight_sum_g": "WP4 validation working value, used only as a reconciliation control",
+                        "rule_weight_sum_g": "validation working value, used only as a reconciliation control",
                         "sessions": "Observed Valid Sessions; an observation of the export, not demand"},
     }
 

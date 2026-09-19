@@ -16,7 +16,7 @@ G = Path(__file__).resolve().parent / "golden"
 
 @pytest.fixture(scope="module")
 def sens() -> pd.DataFrame:
-    return pd.read_csv(G / "phase2_sensitivity_analysis.csv").set_index("scenario_id")
+    return pd.read_csv(G / "reference_sensitivity_analysis.csv").set_index("scenario_id")
 
 
 def pct(numerator: int, denominator: int) -> float:

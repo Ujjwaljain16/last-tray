@@ -1,8 +1,8 @@
-# GOLDEN VALUES: the test authority for the pipeline. Baseline from the Phase 2 research run
-# (research/phase2/), reproduced by hash-stable scripts. The production pipeline must reproduce every figure here.
+# GOLDEN VALUES: the test authority for the pipeline. Baseline from the exploratory research run
+# (research/exploration/), reproduced by hash-stable scripts. The production pipeline must reproduce every figure here.
 # A difference is investigated and documented, never tolerated or silently patched.
 #
-# Fixtures next to this file (phase2_*.csv) are copies of the Phase 2 outputs, kept so the production pipeline can
+# Fixtures next to this file (reference_*.csv) are copies of the profiling outputs, kept so the production pipeline can
 # overwrite outputs/validation/ without losing the reference.
 
 counts:
@@ -17,7 +17,7 @@ counts:
   non_registered_export_sessions_excluding_crossover: 1644
   exact_duplicate_rows: 2
   weather_hours: 1129
-  canonical_sessions_weather_matched: 1697   # Phase 2 dry run, hour-ending rule
+  canonical_sessions_weather_matched: 1697   # profiling dry run, hour-ending rule
 
 metrics:
   M1_median_derived_selected_meal_weight_g: 499.0
@@ -54,11 +54,11 @@ supporting:
 validation:
   total_issues: 1278
   errors: 4               # I01 x 4 (two sessions x two populations)
-  by_rule_population_fixture: phase2_validation_summary_by_rule.csv
+  by_rule_population_fixture: reference_validation_summary_by_rule.csv
 
 sensitivity:
   scenarios: 25
-  fixture: phase2_sensitivity_analysis.csv
+  fixture: reference_sensitivity_analysis.csv
   baseline_m1_range_g: [493.0, 505.0]
   m4_all_scenarios: 5
   tz0_no_shift: {sessions_failing_t03: 303, m5_percent: 82.05, m2_delta_g: -50.5}
@@ -75,7 +75,7 @@ tolerances:
   percent_abs: 0.005     # published to two decimals
   delta_g_abs: 0.05
 
-# STAGING (WP3): expectations for the verified raw -> staging layer. Integers only; asserted exactly.
+# STAGING: expectations for the verified raw -> staging layer. Integers only; asserted exactly.
 staging:
   events_rows: 12284
   events_by_population: {registered_export: 8372, non_registered_export: 3912}
@@ -92,7 +92,7 @@ staging:
   weather_distinct_hours: 1129
   weather_nan_values: 3                     # NULL, never zero
 
-# CANONICAL MODEL (WP5): integers, asserted exactly. Derived from the committed data and cross-checked against WP4 and Phase 2.
+# CANONICAL MODEL: integers, asserted exactly. Derived from the committed data and cross-checked against validation and profiling.
 model:
   rows: {fact_weighing_event: 12284, fact_dining_session: 3345, fact_session_component: 11925, fact_weather: 1129, fact_daily_volume: 65}
   session_keys: 3345
@@ -101,8 +101,8 @@ model:
   core_ready_sessions: 1697
   sessions_with_derived_weight: 3341        # every non-quarantined key; the 4 quarantined keys have no canonical weight
   quarantined_sessions_without_weight: 4
-  weight_control_matches: 3341              # canonical weight == WP4 rule_weight_sum_g
+  weight_control_matches: 3341              # canonical weight == validation rule_weight_sum_g
   event_dispositions: {MODELLABLE: 12260, DUPLICATE_EXCLUDED: 2, QUARANTINED: 22}
   weather_join: {matched_core_ready: 1697, eligible_core_ready: 1697, matched_all: 3341, not_attempted_quarantined: 4, unmatched: 0}
-  weather_null_precipitation_core_ready: {r_1h: 67, ri_10min: 25}     # Phase 2 results_c.json
+  weather_null_precipitation_core_ready: {r_1h: 67, ri_10min: 25}     # profiling results_c.json
   limited_component_count_sessions_note: "distinct_component_count_status LIMITED where rule I07 applies; counted by the test, not fixed here"

@@ -8,7 +8,7 @@ Four buckets, kept separate on purpose. Each item cites where the evidence lives
 
 | # | Statement | Evidence |
 |---|---|---|
-| K1 | Event-level weight exists: 12,284 component weighing events, 3,343 session IDs, 687 trays, 30 scales, 246 raw component names | `docs/phase2_profile_report.md`, `outputs/ingestion/` |
+| K1 | Event-level weight exists: 12,284 component weighing events, 3,343 session IDs, 687 trays, 30 scales, 246 raw component names | `docs/profile_report.md`, `outputs/ingestion/` |
 | K2 | Session reconstruction is possible: grouping by `session_id` within one population gives 3,345 session keys, none with more than one tray or more than one identification time | `docs/source_truth_decisions.md`, `outputs/model/fact_dining_session.csv` |
 | K3 | A selected meal weight can be reconstructed as the sum of component events; 1,697 of 1,699 registered-export sessions are core-ready (M5 99.88%) | `outputs/metrics/metrics.csv` |
 | K4 | Weather alignment is available for the core-ready registered-export sessions: all 1,697 core-ready sessions match an FMI hour (S1 99.88% of the 1,699 eligible) | `outputs/metrics/metrics.csv`, `outputs/model/fact_weather.csv` |
@@ -18,12 +18,12 @@ Four buckets, kept separate on purpose. Each item cites where the evidence lives
 | K8 | No total-meal-weight column and no waste column exists in any of the 11 files | headers, `outputs/ingestion/schema_fingerprints.csv` |
 | K9 | The public waste sample is documented as `"TODO, Ask!"`; no download, API, schema or contact is published | Flavoria waste page, updated 2026-04-09 |
 | K10 | Weigh & Dine records a checkout plate total (±5 g) and has no component weights; it is a different system from the public CSV | Flavoria Weigh & Dine page |
-| K11 | FMI weather is retrievable with no key: 1,129 hourly rows for Turku Artukainen (FMISID 100949), 3 NULL precipitation values; `r_1h` is the hour ending at its timestamp (one-day test: error 0.021 mm versus 0.378 mm) | `data/raw/weather/`, `docs/phase2_profile_report.md` section 12 |
+| K11 | FMI weather is retrievable with no key: 1,129 hourly rows for Turku Artukainen (FMISID 100949), 3 NULL precipitation values; `r_1h` is the hour ending at its timestamp (one-day test: error 0.021 mm versus 0.378 mm) | `data/raw/weather/`, `docs/profile_report.md` section 12 |
 | K12 | One file's timestamps are offset by exactly 10,800 s from the same session in the other export; +3h makes its hour-of-day profile match the other registered-export files (distance 0.046 versus 1.994) | `docs/timezone_decision.md` |
 | K13 | The populations differ: 1.0% versus 37.7% single-event sessions, 97% versus 75% with a hot dish, median derived weight 499 g versus 192 g | `docs/population_decision.md` |
-| K14 | Schema drift: 7 of 11 files lack `weighting_type`; two timestamp formats; row order is not chronological | Phase 2 section 1 |
-| K15 | Repeated weighings on one scale in a session are additive scoops (100% same name, 93.8% within 30 s) | Phase 2 section 4 |
-| K16 | The M4 median is 5 under raw names, normalised names, scales and event counts | Phase 2 section 5, `outputs/evidence/` |
+| K14 | Schema drift: 7 of 11 files lack `weighting_type`; two timestamp formats; row order is not chronological | profile report section 1 |
+| K15 | Repeated weighings on one scale in a session are additive scoops (100% same name, 93.8% within 30 s) | profile report section 4 |
+| K16 | The M4 median is 5 under raw names, normalised names, scales and event counts | profile report section 5, `outputs/evidence/` |
 | K17 | Across the registered scenarios (the forbidden pooling guardrail G01 and the diagnostic population contrast are excluded from every range) M1 stays within 493-505 g and M4 is 5; M2 ranges 977-1,066 g | `docs/sensitivity_analysis.md` |
 
 ## UNKNOWN (no source available to us)

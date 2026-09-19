@@ -59,7 +59,7 @@ downstream may run:
 Why this matters: if a corrected file were ever delivered under the same name, applying +3h would silently push genuine local times
 to about 13:30. The scope check turns that silent error into a loud failure. Tests: `tests/test_tz_scope_and_handoff.py`.
 
-## 5b. How staging applies it (WP3)
+## 5b. How staging applies it
 
 - Every staged timestamp keeps `*_raw` (verbatim), `*_canonical_utc` and `timezone_handling`, plus `timezone_transformation_reason`
   (for this file: "cross-export temporal alignment (file-specific, evidence-backed; not source-confirmed)").
@@ -80,7 +80,7 @@ to about 13:30. The scope check turns that silent error into a loud failure. Tes
 
 This is why weather sits outside the core metric set. A timezone uncertainty must never be able to invalidate a weight.
 
-## 6a. Phase 2 additions
+## 6a. Profiling additions
 
 | Check | Result |
 |---|---|

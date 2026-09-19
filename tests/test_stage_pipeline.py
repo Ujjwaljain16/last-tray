@@ -58,7 +58,7 @@ class TestStagingCountsMatchGolden:
     def test_component_fields(self, real_staging, golden):
         ev = real_staging.events
         assert int((ev.component_name_had_edge_whitespace == "true").sum()) == golden["staging"]["rows_with_component_name_edge_whitespace"] == 398
-        assert ev.component_name_raw.nunique() == 246 and ev.component_id_normalized.nunique() == 245     # Phase 2: one case-fold merge only
+        assert ev.component_name_raw.nunique() == 246 and ev.component_id_normalized.nunique() == 245     # profiling: one case-fold merge only
 
     def test_staging_keeps_what_validation_will_judge_later(self, real_staging, golden):
         ev = real_staging.events

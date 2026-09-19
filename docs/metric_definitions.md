@@ -1,6 +1,6 @@
 # Metric Definitions (final formulas)
 
-Every metric states: what it means, its grain, who is in and who is out, the source, the validation it depends on, and what it cannot claim. Baseline values come from the Phase 2 exploration run; the pipeline must reproduce them. Sensitivity ranges are from `outputs/validation/sensitivity_analysis.csv`.
+Every metric states: what it means, its grain, who is in and who is out, the source, the validation it depends on, and what it cannot claim. Baseline values come from the exploration run; the pipeline must reproduce them. Sensitivity ranges are from `outputs/validation/sensitivity_analysis.csv`.
 
 **Canonical session** = a `fact_dining_session` row with `core_ready = 1`: registered-export population, at least one valid event, no ERROR-level violation, no identity conflict. Population labels are inherited from source filenames and are not interpreted.
 
@@ -71,7 +71,7 @@ Every metric states: what it means, its grain, who is in and who is out, the sou
 ## Supporting metrics (not core KPIs)
 
 ### S1. Weather Context Coverage
-`sessions with weather_matched = 1 / 1,699` (same fixed eligible denominator). Phase 2 dry run: all 1,697 canonical sessions matched; the two quarantined sessions stay in the denominator and are joined by the pipeline like any other (both fall inside the covered window, so 1,699 / 1,699 is expected). Context only; never affects M1-M5. Precipitation NULL count reported separately (67 sessions `r_1h`, 25 `ri_10min`).
+`sessions with weather_matched = 1 / 1,699` (same fixed eligible denominator). The profiling dry run: all 1,697 canonical sessions matched; the two quarantined sessions stay in the denominator and are joined by the pipeline like any other (both fall inside the covered window, so 1,699 / 1,699 is expected). Context only; never affects M1-M5. Precipitation NULL count reported separately (67 sessions `r_1h`, 25 `ri_10min`).
 
 ### S2. Warn-free Rate
 `eligible registered-export sessions with no session-level WARN / 1,699` (fixed denominator). Session-level WARN rules: B04, B07, T04, T05, I06. Baseline **1,663 / 1,699 = 97.88%**. File-level (T07) and day-level (C02) flags are excluded by design.

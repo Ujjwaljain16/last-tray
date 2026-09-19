@@ -6,7 +6,7 @@ and a test fails if the documentation drifts from it. Nothing here is a business
 Semantic classes (see docs/data_dictionary.md):
   OBSERVED    written by a source system and carried through unchanged (raw text, weights, names, weather values)
   DERIVED     computed by this pipeline from observed values by a stated rule
-  VALIDATION  consumed unchanged from the WP4 validation layer (dispositions, rule ids)
+  VALIDATION  consumed unchanged from the validation layer (dispositions, rule ids)
   PROVENANCE  identifies where a value came from (snapshot, artifact, file, row)
 There is deliberately NO column for consumed quantity (UNKNOWN) or for food waste (SOURCE GAP).
 """
@@ -110,9 +110,9 @@ SESSION = Table("fact_dining_session", "one DERIVED session key (session_id, pop
     C("distinct_raw_component_count", "integer", DERIVED, True, "distinct raw component names among MODELLABLE events (control for the normalisation property)", "count distinct component_name_raw over MODELLABLE events"),
     C("distinct_component_count_status", "text", DERIVED, False, "READY_WITH_LIMITATION, or LIMITED where cross-export component identity is unstable on that scale and day (rule I07)", "I07 findings matched to the session's scale-days", "M4 caveat"),
     C("identity_conflict", "boolean", DERIVED, False, "session_id occurs in both populations", "session_id present under two populations", "core_ready"),
-    C("is_quarantined", "boolean", VALIDATION, False, "the session key is quarantined by WP4", "all events QUARANTINED; equals the WP4 quarantine flag"),
+    C("is_quarantined", "boolean", VALIDATION, False, "the session key is quarantined by validation", "all events QUARANTINED; equals the validation quarantine flag"),
     C("quarantine_rule_ids", "text", VALIDATION, True, "rule ids that caused the quarantine", "validation session_validation_status"),
-    C("core_ready", "boolean", DERIVED, False, "primary population, not quarantined, at least one modellable event, no ERROR finding, valid weights and parsed times; weather, WARN rules and volume flags never enter it", "the approved WP4 readiness contract; the metric itself is WP6", "M1-M5 filter"),
+    C("core_ready", "boolean", DERIVED, False, "primary population, not quarantined, at least one modellable event, no ERROR finding, valid weights and parsed times; weather, WARN rules and volume flags never enter it", "the approved validation readiness contract; the metric itself is metrics", "M1-M5 filter"),
     C("max_validation_severity", "text", VALIDATION, False, "highest severity among the session's findings: ERROR, WARN, INFO or NONE", "validation session_validation_status"),
     C("validation_error_rule_ids", "text", VALIDATION, True, "`;`-joined ERROR rule ids", "validation session_validation_status"),
     C("validation_warn_rule_ids", "text", VALIDATION, True, "`;`-joined WARN rule ids", "validation session_validation_status"),

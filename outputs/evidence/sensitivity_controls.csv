@@ -1,7 +1,7 @@
 check_id,area,description,expected,observed,status,basis
 SC01,scenarios,every registered scenario was executed exactly once,"['S00', 'S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'TZ0', 'TZ1', 'TZ2', 'TZ3', 'TZ4', 'S20', 'S21', 'S22', 'S23', 'S30', 'S31', 'S32', 'S33', 'S40', 'G01']","['S00', 'S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'TZ0', 'TZ1', 'TZ2', 'TZ3', 'TZ4', 'S20', 'S21', 'S22', 'S23', 'S30', 'S31', 'S32', 'S33', 'S40', 'G01']",PASS,registry
-SC02,baseline,the recomputed baseline equals the frozen approved package and the independent WP6 computation,[],[],PASS,approved baseline
-SC03,baseline,"every approved Phase 2 scenario reproduces (M1, M2, M3, M4, M5 numerator)",[],[],PASS,approved Phase 2 sensitivity
+SC02,baseline,the recomputed baseline equals the frozen approved package and the independent metrics computation,[],[],PASS,approved baseline
+SC03,baseline,"every approved reference scenario reproduces (M1, M2, M3, M4, M5 numerator)",[],[],PASS,approved profiling sensitivity
 SC04,baseline,running every scenario leaves the baseline working set untouched (fingerprint of every baseline session),5af048a66ebecc9e,5af048a66ebecc9e,PASS,purity
 SC05,timezone,only the override file(s) in the configuration are shifted,['registered_2020_10_05-2020_10_18.csv'],['registered_2020_10_05-2020_10_18.csv'],PASS,file-specific override
 SC06,timezone,the +3h scenario reproduces the baseline exactly,"(499.0, 1039.6000000000004, 1697)","(499.0, 1039.6000000000004, 1697)",PASS,approved decision

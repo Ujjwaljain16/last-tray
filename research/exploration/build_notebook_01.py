@@ -1,7 +1,7 @@
 """Builds notebooks/01_source_exploration.ipynb with real outputs embedded (no jupyter needed). HISTORICAL EVIDENCE tooling.
 
 Each code cell is executed here, its stdout (and any matplotlib figure) is stored as the cell output.
-Run after the phase2_*.py scripts:  python research/phase2/build_notebook_01.py
+Run after the reference_*.py scripts:  python research/exploration/build_notebook_01.py
 """
 import base64
 import contextlib
@@ -60,12 +60,12 @@ We did not begin with a clean session table. We began with **12,284 component-le
 
 **Labels.** "registered-export population" and "non-registered-export population" are **inherited from source filenames**. The public documentation reviewed for this project does not define them, so they are population labels only, not customer-registration status.
 
-Every table below is loaded from `outputs/phase2/` (written by the exploration scripts `phase2_*.py`). Nothing here is cleaned or modified; nothing is dropped.
+Every table below is loaded from `outputs/exploration/` (written by the exploration scripts `reference_*.py`). Nothing here is cleaned or modified; nothing is dropped.
 """)
 code("""
 import pandas as pd
 pd.set_option("display.width", 200); pd.set_option("display.max_columns", 30)
-P = "../outputs/phase2/"
+P = "../outputs/exploration/"
 schema = pd.read_csv(P + "schema_drift_by_file.csv")
 pop = pd.read_csv(P + "population_profile.csv", index_col=0)
 tz = pd.read_csv(P + "timezone_validation_by_file.csv")
@@ -158,7 +158,7 @@ print(kpi[["scenario", "sessions", "M1_median_g", "M2_p90_g", "M4_median_compone
 """)
 md("""
 ## What comes next
-Thresholds and specification changes are proposed in `docs/phase2_validation_findings.md` and `docs/phase2_spec_changes.md`. Production code has not been started.
+Thresholds and specification changes are proposed in `docs/validation_findings.md` and `docs/spec_changes.md`. Production code has not been started.
 """)
 
 nb = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},

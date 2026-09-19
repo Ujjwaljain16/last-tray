@@ -281,7 +281,7 @@
     "formula": "100 * COUNT(weather_matched) / COUNT(C)",
     "grain": "one session key (session_id|registered_export)",
     "interpretation": "Coverage of the contextual weather join (next full UTC hour after the first weighing; r_1h is the hour ending at its timestamp).",
-    "limitation": "context only; regional station roughly 6 km away; the Phase 2 dry run matched all 1,697 core-ready sessions and expected the two quarantined sessions to be joined too, which the model deliberately does not do.",
+    "limitation": "context only; regional station roughly 6 km away; the profiling dry run matched all 1,697 core-ready sessions and expected the two quarantined sessions to be joined too, which the model deliberately does not do.",
     "lineage": "metric -> fact_dining_session rows (population filter) -> session_key -> fact_weighing_event rows (event_id = source_file#row) -> stg_weighing_event -> raw source file and row; weather join -> fact_weather (station x UTC hour) -> stg_weather_observation",
     "metric_id": "S1",
     "metric_name": "Weather Context Coverage",

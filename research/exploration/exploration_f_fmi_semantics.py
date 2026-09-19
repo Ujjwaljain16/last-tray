@@ -1,4 +1,4 @@
-"""Phase 2 section L1: does FMI `r_1h` at time t cover the hour ENDING at t or the hour STARTING at t?
+"""Profile report section L1: does FMI `r_1h` at time t cover the hour ENDING at t or the hour STARTING at t?
 
 Reproduces the empirical test from the preserved raw evidence (no network):
   * hourly `r_1h`      <- data/raw/weather/fmi_100949_*.xml
@@ -6,14 +6,14 @@ Reproduces the empirical test from the preserved raw evidence (no network):
 
 Method: for each full hour t with six 10-minute slots on both sides, compare r_1h(t) with the rain accumulated in
 (t-60min, t] (hour ending) and in [t, t+60min) (hour starting). ri_10min is an intensity in mm/h, so a 10-minute
-slot contributes ri/6 mm. Result reported in docs/phase2_profile_report.md section 12. One rainy day only.
+slot contributes ri/6 mm. Result reported in docs/profile_report.md section 12. One rainy day only.
 """
 import glob
 import re
 
 import pandas as pd
 
-from phase2_common import ROOT
+from exploration_common import ROOT
 
 PAT = r"<BsWfs:Time>([^<]*)</BsWfs:Time>\s*<BsWfs:ParameterName>([^<]*)</BsWfs:ParameterName>\s*<BsWfs:ParameterValue>([^<]*)<"
 

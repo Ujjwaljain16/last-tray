@@ -1,6 +1,6 @@
 # Source Map
 
-The course principle is applied in this order: **Problem → Questions → Information → Fields → Sources.** "Relevant does not mean authoritative."
+Sources are mapped in this order: **Problem → Questions → Information → Fields → Sources.** "Relevant does not mean authoritative."
 
 **Problem.** Can we reconstruct a trustworthy operational view of dining measurements from the available source data, and is that evidence sufficient to support future food-waste decisions? (`business_question.md`)
 
@@ -42,7 +42,7 @@ Other documented systems (Cash Register, Building Data, MyFlavoria, Surveys) are
 
 | Conflict | Resolution |
 |---|---|
-| The plan assumed the meal total came from Weigh & Dine | Wrong system. The public CSV is the lunch line: component weights, no total (D2, D3) |
+| An early assumption was that the meal total came from Weigh & Dine | Wrong system. The public CSV is the lunch line: component weights, no total (D2, D3) |
 | The same `session_id` appears in both exports (`session2266`, `session3222`) | No authority chosen; both quarantined (D6) |
 | Same scale, same time, different component name across exports | The scale is the stable key; the name is a lookup. Component identity is LIMITED in 2020-10-05..16; no alias table (D18) |
 | One file's clock differs by exactly 3 h from the other export's copy of the same session | +3h normalisation, evidence-backed, not source-confirmed (D4) |

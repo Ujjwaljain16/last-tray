@@ -256,16 +256,16 @@ class TestReproductionGateCanFail:
     def test_a_reference_that_no_longer_reproduces_is_reported_not_tuned(self, monkeypatch):
         r = {s.scenario_id: engine.ScenarioResult(s.scenario_id, 1, 1.0, 1.0, 1, 5.0, 1, 1) for s in SCENARIOS}
         r["S23"] = engine.ScenarioResult("S23", 1, 505.0, 977.0, 1312, 5.0)
-        wrong = tuple(dataclasses.replace(s, phase2=(505.0, 990.0, 1312, 5.0, None, None)) if s.scenario_id == "S23" else dataclasses.replace(s, phase2=None) for s in SCENARIOS)
+        wrong = tuple(dataclasses.replace(s, reference=(505.0, 990.0, 1312, 5.0, None, None)) if s.scenario_id == "S23" else dataclasses.replace(s, reference=None) for s in SCENARIOS)
         monkeypatch.setattr(evidence, "SCENARIOS", wrong)
-        problems = evidence.phase2_mismatches(r)
+        problems = evidence.reference_mismatches(r)
         assert problems == ["S23: M2 977.000 vs 990.0"]
 
     def test_a_matching_reference_reports_nothing(self, monkeypatch):
         r = {"S23": engine.ScenarioResult("S23", 1, 505.0, 977.0, 1312, 5.0)}
-        ok = tuple(dataclasses.replace(s, phase2=(505.0, 977.02, 1312, 5.0, None, None)) if s.scenario_id == "S23" else dataclasses.replace(s, phase2=None) for s in SCENARIOS)
+        ok = tuple(dataclasses.replace(s, reference=(505.0, 977.02, 1312, 5.0, None, None)) if s.scenario_id == "S23" else dataclasses.replace(s, reference=None) for s in SCENARIOS)
         monkeypatch.setattr(evidence, "SCENARIOS", ok)
-        assert evidence.phase2_mismatches(r) == []
+        assert evidence.reference_mismatches(r) == []
 
 
 class TestServiceHoursUpperBound:
@@ -290,4 +290,4 @@ class TestBaselineIsRecomputedIndependently:
 
         monkeypatch.setattr(evidence, "compute_all", nudged)
         problems = evidence.run_analysis(inp, cfg).baseline_problems
-        assert problems and all("differs from the WP6 computation" in p for p in problems) and not any("approved 1039.6" in p for p in problems)
+        assert problems and all("differs from the metrics computation" in p for p in problems) and not any("approved 1039.6" in p for p in problems)

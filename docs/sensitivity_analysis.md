@@ -1,4 +1,4 @@
-# Sensitivity Analysis and Evidence Robustness (WP7)
+# Sensitivity Analysis and Evidence Robustness
 
 **Purpose.** Answer one question with evidence: *would the important conclusions materially change if reasonable, explicitly documented assumptions changed?*
 Every scenario changes one assumption of the approved baseline and recomputes the affected metrics. The baseline is frozen (M1 499 g, M2 1,039.6 g, M3 1,697,
@@ -8,9 +8,9 @@ is chosen because it gives a better number. This is not a leaderboard.
 **How it runs.** `python -m src.pipeline.run` (stage `sensitivity`) reads only the verified canonical model tables (never staging or raw files), runs the scenarios
 declared in `src/sensitivity/registry.py`, and writes `outputs/evidence/`: `scenario_registry.json` and `.csv` (the declarations), `sensitivity_results.csv` (one row per scenario),
 `metric_sensitivity.csv` (one row per metric and scenario), `timezone_evidence.csv`, `evidence_matrix.csv`, `uncertainty_register.csv`, `sensitivity_summary.json`,
-`sensitivity_controls.csv` and four figures. It **fails** (exit 10) if the baseline moves or an approved Phase 2 reference stops reproducing, and reports the difference instead of adjusting anything.
+`sensitivity_controls.csv` and four figures. It **fails** (exit 10) if the baseline moves or an approved reference stops reproducing, and reports the difference instead of adjusting anything.
 
-**Phase 2 provenance.** The 25 approved Phase 2 scenarios (S00-S40) were produced by `research/phase2/phase2_e_sensitivity.py`; all 25 are reproduced here from the canonical model
+**Reference provenance.** The 25 approved reference scenarios (S00-S40) were produced by `research/exploration/exploration_e_sensitivity.py`; all 25 are reproduced here from the canonical model
 (M1 and M2 within 0.05 g, counts exact), including the weather consequences of each timezone hypothesis. One scenario is new: **G01**, a forbidden guardrail.
 
 **Guardrails.** Population pooling is not a candidate interpretation (G01 demonstrates why). The crossover what-ifs (S01-S03) never weaken the quarantine, and a 100% M5 in S01 is an artifact of lifting it.
@@ -30,7 +30,7 @@ No scenario produces a consumption or food-waste estimate, band or proxy.
 
 ## 1. Baseline definition (frozen)
 
-The approved baseline is recomputed from the canonical model as scenario S00 and must equal the approved package and the independent WP6 computation. It is never overwritten and no scenario is chosen because it gives a nicer number.
+The approved baseline is recomputed from the canonical model as scenario S00 and must equal the approved package and the independent metrics computation. It is never overwritten and no scenario is chosen because it gives a nicer number.
 
 | Metric | Baseline | Population |
 |---|---:|---|
@@ -44,16 +44,16 @@ The approved baseline is recomputed from the canonical model as scenario S00 and
 
 ## 2. Scenario methodology
 
-Each scenario changes exactly one documented assumption, is declared as data in `src/sensitivity/registry.py` (exported as `outputs/evidence/scenario_registry.json`), and is run by a generic engine on the verified canonical tables; no canonical table, threshold or configuration value is modified. 26 scenarios are registered: the 25 approved Phase 2 scenarios (every one reproduced) and one forbidden guardrail (G01). M5 and S2 are computed only where a scenario varies eligibility or quarantine, always over the fixed denominator of 1,699; an analytic exclusion does not redefine readiness.
+Each scenario changes exactly one documented assumption, is declared as data in `src/sensitivity/registry.py` (exported as `outputs/evidence/scenario_registry.json`), and is run by a generic engine on the verified canonical tables; no canonical table, threshold or configuration value is modified. 26 scenarios are registered: the 25 approved reference scenarios (every one reproduced) and one forbidden guardrail (G01). M5 and S2 are computed only where a scenario varies eligibility or quarantine, always over the fixed denominator of 1,699; an analytic exclusion does not redefine readiness.
 
 **Robustness classes** (one rule set for every metric and scenario; |change| against the frozen baseline):
 
 | Metric | STABLE below | SENSITIVE below | CONDITIONAL at or above | Basis |
 |---|---:|---:|---:|---|
-| M1 | 10 g | 20 g | 20 g | Phase 2 materiality convention |dM1| >= 10 g; sensitive band = 2x |
-| M2 | 25 g | 75 g | 75 g | Phase 2 materiality convention |dM2| >= 25 g; sensitive band = 3x |
+| M1 | 10 g | 20 g | 20 g | profiling materiality convention |dM1| >= 10 g; sensitive band = 2x |
+| M2 | 25 g | 75 g | 75 g | profiling materiality convention |dM2| >= 25 g; sensitive band = 3x |
 | M3 | 5% | 20% | 20% | 5% and 20% of the 1,697 baseline sessions |
-| M4 | 0.5 components | 1.5 components | 1.5 components | Phase 2 convention: any change in M4 is material; one component is sensitive |
+| M4 | 0.5 components | 1.5 components | 1.5 components | profiling convention: any change in M4 is material; one component is sensitive |
 | M5 | 0.5 percentage points | 5 percentage points | 5 percentage points | readiness moved by half a point is stable; five points is the sensitive limit |
 | S2 | 0.5 percentage points | 5 percentage points | 5 percentage points | as M5 |
 
@@ -61,7 +61,7 @@ BLOCKED means no defensible conclusion can be produced because the required evid
 
 ## 3. Scenario table
 
-Deltas are against the baseline. `class` is the worst class over the metrics the scenario recomputes. **M3 falls by construction when sessions are excluded**, so for an exclusion scenario the class can reflect the session-count effect alone (S23 is CONDITIONAL because it leaves out 385 sessions, while its effect on M2 is SENSITIVE); the conclusion classes in sections 5-8 therefore use M1, M2 and M4 for exclusion tests and use M3 and M5 only for the timezone and crossover scenarios. `ref` = Phase 2 reference reproduced.
+Deltas are against the baseline. `class` is the worst class over the metrics the scenario recomputes. **M3 falls by construction when sessions are excluded**, so for an exclusion scenario the class can reflect the session-count effect alone (S23 is CONDITIONAL because it leaves out 385 sessions, while its effect on M2 is SENSITIVE); the conclusion classes in sections 5-8 therefore use M1, M2 and M4 for exclusion tests and use M3 and M5 only for the timezone and crossover scenarios. `ref` = profiling reference reproduced.
 
 | ID | Scenario | Group | M1 g | M2 g | M3 | M4 | M5 % | S2 % | ΔM1 | ΔM2 | class | ref |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|

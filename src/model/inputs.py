@@ -1,6 +1,6 @@
-"""Inputs of the canonical model: verified staging tables plus verified WP4 validation outputs. Nothing else.
+"""Inputs of the canonical model: verified staging tables plus verified validation outputs. Nothing else.
 
-The model never opens data/raw. It trusts a WP4 file only after (1) the file matches the SHA-256 the validation summary recorded,
+The model never opens data/raw. It trusts a validation file only after (1) the file matches the SHA-256 the validation summary recorded,
 (2) the validation summary says it was computed on exactly these staging tables, and (3) the files agree with each other and with
 staging. Any failure stops the model: a canonical table built on unverified evidence would be worse than no table.
 """
@@ -29,8 +29,8 @@ class ModelInputError(Exception):
 class ModelInputs:
     staged: StagedInputs
     validation_summary: dict[str, Any]
-    event_status: dict[str, dict[str, str]]       # event_id -> WP4 row
-    session_status: dict[str, dict[str, str]]     # session_key -> WP4 row
+    event_status: dict[str, dict[str, str]]       # event_id -> validation row
+    session_status: dict[str, dict[str, str]]     # session_key -> validation row
     quarantined_keys: list[str]
     issues: list[dict[str, str]]
     service_days: list[dict[str, str]]

@@ -167,7 +167,7 @@ class TestControlFailureStopsAndReports:
         assert res.core_status == "BLOCKED" and "M10" in res.error
         ctrl = {r["session_key"]: r for r in rows(model_copy / OUT_SUBDIR / SESSION_CONTROL_CSV)}
         bad = ctrl["session1006|non_registered_export"]
-        assert bad["weight_control"] == "MISMATCH" and int(bad["wp4_rule_weight_sum_g"]) == int(original) + 1 and int(bad["canonical_weight_g"]) == int(original)
+        assert bad["weight_control"] == "MISMATCH" and int(bad["validation_rule_weight_sum_g"]) == int(original) + 1 and int(bad["canonical_weight_g"]) == int(original)
         assert [r["session_key"] for r in ctrl.values() if r["weight_control"] == "MISMATCH"] == ["session1006|non_registered_export"], "exactly the tampered session"
         assert not any((model_copy / OUT_SUBDIR / TABLE_FILES[t.name]).exists() for t in schema.TABLES), "a blocked model publishes no canonical rows"
         assert (model_copy / OUT_SUBDIR / CONTROL_CSV).exists() and (model_copy / OUT_SUBDIR / MANIFEST_JSON).exists()
