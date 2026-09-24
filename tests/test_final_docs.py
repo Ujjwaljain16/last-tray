@@ -260,7 +260,7 @@ def test_no_personal_identifier_email_or_local_path_is_tracked():
     path = re.compile(r"[A-Za-z]:[\/]Users[\/]|OneDrive|/c/Users/|/home/[a-z]+/|AppData[\/]", re.I)
     problems = []
     for f in _tracked_files():
-        if f.startswith("data/raw/") or f.endswith((".png", ".tar")) or f == "tests/test_final_docs.py":   # this file holds the patterns
+        if f.startswith("data/raw/") or f.endswith((".png", ".tar", ".webm")) or f == "tests/test_final_docs.py":   # this file holds the patterns; binary files are not text
             continue
         body = (REPO / f).read_text(encoding="utf-8", errors="ignore")
         problems += [(f, m.group(0)) for m in email.finditer(body) if not m.group(0).endswith("@users.noreply.github.com")]
@@ -273,7 +273,7 @@ def test_no_build_phase_vocabulary_appears_anywhere_in_the_repository():
     pattern = re.compile(r"\b[Pp]hase[ -]?[0-9]|phase2|\bWP ?[0-9]+\b|\bwp[0-9]|[Ww]ork packages?|\bMVP\b|vs plan")
     problems = []
     for f in _tracked_files():
-        if f.startswith("data/raw/") or f.endswith((".png", ".tar", ".svg")) or f == "tests/test_final_docs.py":
+        if f.startswith("data/raw/") or f.endswith((".png", ".tar", ".svg", ".webm")) or f == "tests/test_final_docs.py":   # binary files are not text
             continue
         p = REPO / f
         if not p.is_file():

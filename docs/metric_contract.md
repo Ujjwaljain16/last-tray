@@ -47,6 +47,8 @@ Diagnostic fields carried on the tables but never used in a metric filter: `comp
 
 **Never used in any metric filter:** `weather_matched`, `low_observed_volume_day`, `volume_irregularity`, `has_session_warn` (except in S2), `has_event_warn`, `distinct_component_count_status`, `quality_status`. Invariant I-6: volume flags appear in no WHERE clause of any metric query.
 
+**This SQL is executed, not illustrative.** `python -m src.sql_verify` loads the committed `fact_dining_session.csv` and `fact_weather.csv` into a real SQLite database and recomputes M1-M5 and the weather join with real SQL (window-function linear-interpolation percentiles, a `JOIN` on `(fmisid, obs_time_utc)`), independently of the pandas pipeline. It is a second engine agreeing with the first, in the same spirit as D50's independent reconstruction check; see `tests/test_sql_verify.py`.
+
 ## 4. Lineage: how any number is traced to raw rows
 
 ```sql

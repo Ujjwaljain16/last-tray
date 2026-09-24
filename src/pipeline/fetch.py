@@ -20,7 +20,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from src.config import DEFAULT_CONFIG_DIR, ConfigError, load_config
+from src.config import DEFAULT_CONFIG_DIR, ConfigError, env_path, load_config
 from src.ingest.requests_client import RequestsClient
 from src.ingest.retrieval import FetchOutcome, fetch_flavoria, fetch_weather, pin_snippet
 
@@ -33,8 +33,9 @@ def build_parser() -> argparse.ArgumentParser:
                                 description="Explicit, network-using retrieval of one source. Never edits pins; never overwrites raw files.")
     p.add_argument("--source", required=True, choices=("flavoria", "weather"), help="which source to retrieve")
     p.add_argument("--refresh", action="store_true", help="retrieve a NEW snapshot even if the pinned file exists (flavoria only; weather always does)")
-    p.add_argument("--dest", type=Path, default=REPO_ROOT / "data" / "raw", help="raw data root (default: ./data/raw)")
-    p.add_argument("--config-dir", type=Path, default=DEFAULT_CONFIG_DIR)
+    p.add_argument("--dest", type=Path, default=env_path("LAST_TRAY_RAW_DIR", REPO_ROOT / "data" / "raw"),
+                   help="raw data root (default: ./data/raw, or $LAST_TRAY_RAW_DIR)")
+    p.add_argument("--config-dir", type=Path, default=env_path("LAST_TRAY_CONFIG_DIR", DEFAULT_CONFIG_DIR))
     p.add_argument("--print-pins", action="store_true", help="print the YAML pin lines for the retrieved files (for a human to review)")
     return p
 

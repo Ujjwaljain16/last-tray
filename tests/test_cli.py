@@ -1,6 +1,7 @@
 """The command line must never report success for work it has not done, and must never touch the network."""
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -9,8 +10,8 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 
 
-def run(*args: str, cwd=REPO, module="src.pipeline.run"):
-    return subprocess.run([sys.executable, "-m", module, *args], cwd=cwd, capture_output=True, text=True, timeout=120)
+def run(*args: str, cwd=REPO, module="src.pipeline.run", env=None):
+    return subprocess.run([sys.executable, "-m", module, *args], cwd=cwd, capture_output=True, text=True, timeout=120, env=env)
 
 
 def fake_repo(tmp_path: Path, *, drop: tuple[str, ...] = ()) -> Path:
@@ -112,6 +113,29 @@ def test_bad_configuration_exits_2_with_a_useful_message(tmp_path):
     r = run("--config-dir", str(tmp_path))         # empty directory: every file missing
     assert r.returncode == 2
     assert "FAILED: configuration" in r.stderr and ".yml" in r.stderr
+
+
+def test_an_explicit_flag_always_wins_over_the_environment_variable(tmp_path):
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    env = {**os.environ, "LAST_TRAY_CONFIG_DIR": str(empty)}
+    r = run("--config-dir", str(REPO / "config"), "--check-config", env=env)
+    assert r.returncode == 0 and "Configuration OK" in r.stdout, "the --config-dir flag must override the environment variable, not the other way round"
+
+
+def test_config_dir_and_out_dir_can_be_set_by_environment_variable_when_no_flag_is_given(tmp_path):
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    env = {**os.environ, "LAST_TRAY_CONFIG_DIR": str(empty)}
+    r = run("--check-config", env=env)
+    assert r.returncode == 2 and ".yml" in r.stderr, "with no --config-dir flag, the environment variable must be the default that gets used"
+
+    out = tmp_path / "env_out"
+    root = fake_repo(tmp_path)
+    env2 = {**os.environ, "LAST_TRAY_OUT_DIR": str(out), "LAST_TRAY_REPO_ROOT": str(root)}
+    r2 = run("--stages", "ingest", env=env2)
+    assert r2.returncode == 0, r2.stderr
+    assert (out / "ingestion" / "staging_handoff.json").is_file(), "LAST_TRAY_OUT_DIR must be honoured when --out is not passed"
 
 
 def test_fetch_command_exists_and_documents_that_it_is_the_only_network_command():

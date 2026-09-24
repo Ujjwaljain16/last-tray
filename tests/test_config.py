@@ -3,10 +3,11 @@ from __future__ import annotations
 
 import re
 from datetime import datetime, timedelta
+from pathlib import Path
 
 import pytest
 
-from src.config import ConfigError, load_config
+from src.config import ConfigError, env_path, load_config
 from src.vocab import Handling, Population, Severity, TimezoneNormalization
 
 MANDATED_TZ_STATEMENT = (
@@ -17,6 +18,20 @@ MANDATED_TZ_STATEMENT = (
 
 def flat(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
+
+
+class TestEnvPath:
+    def test_the_environment_variable_is_used_when_set(self, monkeypatch):
+        monkeypatch.setenv("LAST_TRAY_TEST_VAR", "/somewhere/else")
+        assert env_path("LAST_TRAY_TEST_VAR", Path("/default")) == Path("/somewhere/else")
+
+    def test_the_default_is_used_when_the_variable_is_unset(self, monkeypatch):
+        monkeypatch.delenv("LAST_TRAY_TEST_VAR", raising=False)
+        assert env_path("LAST_TRAY_TEST_VAR", Path("/default")) == Path("/default")
+
+    def test_an_empty_environment_variable_is_treated_as_unset(self, monkeypatch):
+        monkeypatch.setenv("LAST_TRAY_TEST_VAR", "")
+        assert env_path("LAST_TRAY_TEST_VAR", Path("/default")) == Path("/default")
 
 
 # ---- thresholds: the approved values, exactly ----------------------------------------------------------------------

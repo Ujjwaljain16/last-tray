@@ -29,7 +29,7 @@ import csv
 import sys
 from pathlib import Path
 
-from src.config import DEFAULT_CONFIG_DIR, ConfigError, load_config
+from src.config import DEFAULT_CONFIG_DIR, ConfigError, env_path, load_config
 from src.pipeline.describe import (describe, describe_metrics, describe_model, describe_sensitivity, describe_staging, describe_validation, summarise)  # noqa: F401
 from src.pipeline.exit_codes import ExitCode
 from src.pipeline.orchestrate import OrchestrationError, RunLogger, run_pipeline
@@ -52,9 +52,12 @@ def build_parser() -> argparse.ArgumentParser:
         "Selected weight is not consumption, and consumption is not waste. "
         "Runs OFFLINE: it never downloads. Use python -m src.pipeline.fetch to retrieve a source explicitly.",
     )
-    p.add_argument("--config-dir", type=Path, default=DEFAULT_CONFIG_DIR, help="directory holding config/*.yml (default: ./config)")
-    p.add_argument("--out", type=Path, default=REPO_ROOT / "outputs", help="directory for outputs (default: ./outputs)")
-    p.add_argument("--repo-root", type=Path, default=REPO_ROOT, help="repository root containing data/raw (default: this repository)")
+    p.add_argument("--config-dir", type=Path, default=env_path("LAST_TRAY_CONFIG_DIR", DEFAULT_CONFIG_DIR),
+                   help="directory holding config/*.yml (default: ./config, or $LAST_TRAY_CONFIG_DIR)")
+    p.add_argument("--out", type=Path, default=env_path("LAST_TRAY_OUT_DIR", REPO_ROOT / "outputs"),
+                   help="directory for outputs (default: ./outputs, or $LAST_TRAY_OUT_DIR)")
+    p.add_argument("--repo-root", type=Path, default=env_path("LAST_TRAY_REPO_ROOT", REPO_ROOT),
+                   help="repository root containing data/raw (default: this repository, or $LAST_TRAY_REPO_ROOT)")
     p.add_argument("--stages", choices=(*STAGE_ORDER, "all"), default="all",
                    help="run the stages up to and including this one, in order, behind the gates ('all' = through sensitivity; default). Exits 0 only if every stage run passed")
     p.add_argument("--resume-from", choices=STAGE_ORDER, default=None,

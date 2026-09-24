@@ -8,6 +8,7 @@ Every failure raises ConfigError with the file and the reason, so a bad edit is 
 """
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -20,6 +21,14 @@ from src.vocab import Handling, Population, Severity, TimezoneNormalization
 DEFAULT_CONFIG_DIR = Path(__file__).resolve().parents[1] / "config"
 WEEKDAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 OPERATORS = {">", ">=", "<", "<="}
+
+
+def env_path(var: str, default: Path) -> Path:
+    """A CLI argument default that honours an environment-variable override; an explicit flag on the command line
+    always wins over both. Used for `--config-dir`, `--out`, `--repo-root` and `--dest` so the pipeline can run
+    inside a container or CI job that sets paths through the environment rather than editing a command line."""
+    value = os.environ.get(var)
+    return Path(value) if value else default
 GAP_STATUSES = {"BLOCKED", "NOT_RETRIEVABLE", "RESTRICTED"}
 
 

@@ -53,6 +53,24 @@ What additional data would most reduce uncertainty, in priority order:
 4. **Source confirmation of the timestamp semantics of the one suspect export**, which currently rests on evidence rather than confirmation.
 5. **Stable operational event definitions**: what starts and ends a tray pass, and how scales are tared.
 
+### The concrete request (item 1, ready to send)
+
+What we would ask the source owner for, so it can be evaluated the moment it exists rather than described in the abstract:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `tray_id` | string | the same identifier already present in the public lunch-line export, so it can be linked to `fact_weighing_event.tray_id` without a fuzzy match |
+| `waste_time` | timestamp | when the waste weighing happened, in the same convention (stated timezone) the source uses for its own clocks |
+| `waste_weight_g` | integer, grams | the weight measured at the waste point |
+| `waste_point` | string | which station or bin recorded it, analogous to `scale_identifier` on the selection side |
+| `imputed` | boolean | whether this row was filled in rather than measured (the catalogue's own documentation warns some days are imputed; without this flag, an imputed day would look identical to a measured one) |
+
+**Grain.** One row per waste-weighing event, the same grain as `fact_weighing_event` on the selection side.
+**Join key.** `tray_id`, restricted to a time window around the tray's session (its first and last weighing plus a bounded margin, since a tray is returned some time after the meal, not instantly).
+**Format.** Any structured export (CSV, JSON or a REST endpoint) that preserves these five fields is sufficient; none of the pipeline's retrieval or validation code assumes a particular format beyond that.
+
+**What is not yet known, and what this cannot promise.** Whether `tray_id` in the waste system matches the public lunch-line export's `tray_id` one-to-one, or whether the waste system uses a different identifier, is unverified — the waste schema itself is not public. If a request like this is fulfilled, the join and its consistency would need the same validation treatment already given to every other join in this project (checked, not assumed) before any waste number is trusted.
+
 ## 7. Why that evidence changes the future decision
 
 The documented waste record is a per-tray weight returned at a waste station, so it is the natural counterpart of the selected side. This project already produces the selected side reproducibly and keeps `tray_id` and time on every session. If waste records with a tray identifier and time become available, the two sides could be compared as observations instead of guesses, and a waste decision would rest on measurement. Whether the two sources join cleanly is **not yet verified**, because the waste schema is not public. Without that source, any waste figure would be an assumption presented as a result, which is why none is produced.

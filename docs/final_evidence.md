@@ -25,6 +25,10 @@ Population for M1-M4: `core_ready_registered_export_sessions` (1,697 session key
 
 Other supporting diagnostics (S1 weather coverage 99.88%, the S2D reconciliation variant 97.70%) are in `outputs/metrics/metrics.csv` and are deliberately not in the headline table.
 
+### Portioning consistency by scale (diagnostic, not a metric)
+
+`outputs/evidence/portioning_by_scale.csv` (`python -m src.portioning_report`) breaks the same approved measurement population down by the 30 physical scales (`scale_identifier`, an observed field already in the schema): events, median and P90 weight, and the share carrying a B02 "unusually heavy" flag. It changes no metric and introduces no new business definition — it is an operational lens on data already validated, for a question M1-M4 cannot answer on their own: *which scale is inconsistent.* Highest B02 rate in this run: `koti2-vasen-lammin2` (0.55% of 182 events); most scales show 0%.
+
 ## Evidence interpretation
 
 The evidence separates five kinds of statement, and never mixes them.

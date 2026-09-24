@@ -108,6 +108,8 @@ python -m src.pipeline.run --stages all      # same as: python -m src.pipeline.r
 
 Six gated stages (ingest, stage, validate, model, metrics, sensitivity) run in about ten seconds and exit 0 on success. The run is **offline**: it never downloads. A missing raw source fails with exit 4 and names the explicit retrieval command, `python -m src.pipeline.fetch --source <flavoria|weather>`. A failed stage blocks every later stage and removes its stale outputs; exit codes name the failed layer (4 source, 6 weather only, 7 validation, 8 model, 9 metrics, 10 sensitivity, 11 orchestration). Stages, gates, outputs and resume: [`docs/pipeline.md`](docs/pipeline.md).
 
+`--config-dir`, `--out`, `--repo-root` (and `fetch`'s `--dest`) can also be set by environment variable (`LAST_TRAY_CONFIG_DIR`, `LAST_TRAY_OUT_DIR`, `LAST_TRAY_REPO_ROOT`, `LAST_TRAY_RAW_DIR`) when no flag is passed — useful in a container or CI job. An explicit flag always wins.
+
 Setup (Python 3.11; run every command from the repository root):
 
 ```
@@ -117,6 +119,11 @@ pip install -r requirements.txt
 python -m src.pipeline.run
 python -m pytest
 ```
+
+Two supporting, read-only tools over the same committed outputs — neither changes a metric, both are tested:
+
+- `python -m src.sql_verify` — recomputes M1-M5 and the weather join independently, in real SQL against a real SQLite database built only from the canonical tables (window-function percentiles, an explicit `JOIN`), and checks the result against `outputs/metrics/metrics.csv`.
+- `python -m src.portioning_report` — a diagnostic breakdown of the same measurement population by physical scale (`outputs/evidence/portioning_by_scale.csv`), for a question M1-M4 alone cannot answer: which scale is portioning inconsistently.
 
 Diagrams: [source map](diagrams/source-map.png), [pipeline](diagrams/pipeline.png), [workflow](diagrams/workflow.png), [data model](diagrams/data-model.png).
 
