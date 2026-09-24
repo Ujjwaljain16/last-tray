@@ -160,7 +160,7 @@ The evidence supports **measurement reconstruction and readiness assessment**, n
 
 ## 16. Demo
 
-A 3-5 minute script: [`docs/demo_script.md`](docs/demo_script.md).
+A 3-5 minute script: [`docs/demo_script.md`](docs/demo_script.md). A recorded walkthrough following it: [`demo/last_tray_demo.webm`](demo/last_tray_demo.webm) (silent, on-screen captions, generated from this repository's own outputs; see [`demo/README.md`](demo/README.md) to regenerate it).
 
 ## Licence and attribution
 

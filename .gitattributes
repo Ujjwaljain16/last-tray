@@ -7,3 +7,4 @@ data/raw/** -text -diff
 # Binary files
 *.png binary
 *.tar binary
+*.webm binary
