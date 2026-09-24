@@ -1,6 +1,6 @@
 # Per-file timezone registry. Default for every file NOT listed here: naive wall time is Europe/Helsinki.
 #
-# DECISION (docs/timezone_decision.md, decision_log D4/D36):
+# DECISION (docs/source_truth_decisions.md, decision_log D4/D36):
 #   A +3 hour normalization is the strongest-supported engineering decision based on cross-export temporal
 #   consistency checks; the original source does not explicitly confirm the timezone metadata.
 #
@@ -31,7 +31,7 @@ overrides:
       raw_median_first_event_hour_band: [7.0, 8.5]   # the shift must still be visible in the raw times
       # after applying the offset the median first-event hour must fall inside thresholds.yml T07 band [10, 11)
     residual_uncertainty: "1-hour resolution scan cannot separate +3h from +3h +/- 30 min; KPIs cannot distinguish +2h/+3h/+4h; source owner has not confirmed (Q3)."
-    evidence_ref: docs/timezone_decision.md
+    evidence_ref: docs/source_truth_decisions.md
 
 statement: >-
   A +3 hour normalization is the strongest-supported engineering decision based on cross-export temporal

@@ -1,6 +1,6 @@
 """Shared vocabulary. One place for every enumerated value the documentation defines.
 
-The values here mirror docs/data_dictionary.md section 9 and docs/canonical_schema.md. A test compares them with
+The values here mirror docs/data_dictionary.md section 9. A test compares them with
 the documentation, so the code cannot drift from the specification unnoticed.
 """
 from __future__ import annotations

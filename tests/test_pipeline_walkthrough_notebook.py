@@ -32,7 +32,8 @@ def source(cell) -> str:
 
 def test_the_notebook_exists_and_is_a_concise_walkthrough_with_the_required_sections(nb):
     assert NOTEBOOK.is_file() and 15 <= len(nb["cells"]) <= 21
-    headings = [line.strip() for c in nb["cells"] if c["cell_type"] == "markdown" for line in c["source"] if line.startswith("## ")]
+    # nbformat allows a cell's "source" to be either a list of lines or one string; normalise before splitting.
+    headings = [line.strip() for c in nb["cells"] if c["cell_type"] == "markdown" for line in "".join(c["source"]).splitlines() if line.startswith("## ")]
     expected = ["Project question", "Source map summary", "Pipeline stages", "Validation summary", "Canonical business model summary", "Final evidence", "Sensitivity summary",
                 "Known vs unknown", "Selected weight is not consumption, and consumption is not waste", "Where to look next"]
     assert len(headings) == len(expected) and all(e in h for h, e in zip(headings, expected)), headings

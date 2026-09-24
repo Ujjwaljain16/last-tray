@@ -17,7 +17,7 @@ OUT = ROOT / "outputs" / "exploration"
 # Labels are inherited from the source FILENAMES. The public source does not define their meaning.
 POP_LABEL = {"registered_export": "registered-export population",
              "non_registered_export": "non-registered-export population"}
-# Initial timezone decision: +3h normalisation for this file (see docs/timezone_decision.md).
+# Initial timezone decision: +3h normalisation for this file (see docs/source_truth_decisions.md).
 UTC_FILES = {"registered_2020_10_05-2020_10_18.csv"}
 REQUIRED = ["session_id", "weighing_event_time", "scale_identifier", "weight_of_a_component",
             "component_name", "tray_id", "user_identification_time"]

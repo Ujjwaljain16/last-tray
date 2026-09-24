@@ -250,7 +250,7 @@ def _tracked_files() -> list[str]:
 def test_drafting_and_course_material_is_not_part_of_the_public_repository():
     tracked = _tracked_files()
     assert "plan.md" not in tracked and "assignment.md" not in tracked
-    for doc in ("README.md", "docs/PRD.md", "docs/decision_log.md"):
+    for doc in ("README.md", "docs/source_map.md", "docs/decision_log.md"):
         assert "`plan.md`" not in text(doc) and "`assignment.md`" not in text(doc), doc
 
 

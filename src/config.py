@@ -335,7 +335,7 @@ def load_timezone(path: Path) -> TimezoneConfig:
         if o.get("source_confirmed") is not False:
             raise ConfigError(
                 f"{where}: source_confirmed must be false. The +3h normalisation is an evidence-backed engineering decision; "
-                "the source does not confirm its timezone. Update docs/timezone_decision.md before changing this."
+                "the source does not confirm its timezone. Update docs/source_truth_decisions.md before changing this."
             )
         if o.get("scope") != "file_specific":
             raise ConfigError(f"{where}: scope must be 'file_specific'. A timezone normalization is never applied generally")

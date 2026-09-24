@@ -158,7 +158,7 @@ print(kpi[["scenario", "sessions", "M1_median_g", "M2_p90_g", "M4_median_compone
 """)
 md("""
 ## What comes next
-Thresholds and specification changes are proposed in `docs/validation_findings.md` and `docs/spec_changes.md`. Production code has not been started.
+Thresholds are documented in `docs/validation_rules.md`; the decisions taken from these findings are in `docs/decision_log.md`.
 """)
 
 nb = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},

@@ -58,13 +58,13 @@ HTTP response headers.
 
 ### 1.4 Not used
 
-The Flavoria waste, Weigh & Dine, cash-register, building, MyFlavoria and survey data are documented but not publicly retrievable and are **not** part of this project (`source_gap_register.md`). The 2025 forecasting paper cited in the original plan was not ingested and its claims were not verified.
+The Flavoria waste, Weigh & Dine, cash-register, building, MyFlavoria and survey data are documented but not publicly retrievable and are **not** part of this project (`source_map.md` section 6). The 2025 forecasting paper cited in the original plan was not ingested and its claims were not verified.
 
 ## 2. What we did to the data
 
 - **Raw files are unmodified.** The archive and the seven XML files are byte-for-byte what was retrieved. The pipeline reads them read-only and proves after every run that they are unchanged.
 - **Derived data is ours.** Sessions, derived selected meal weights, component counts, flags, metrics and the sensitivity analysis are our reconstruction and are labelled DERIVED. They are not published by the data providers.
-- **Indication of changes (CC BY 4.0).** No provider data was altered. Analytical transformations (session reconstruction, a file-specific +3 hour timestamp normalization for one file, string normalisation of component names) happen in downstream tables and are documented in `data_dictionary.md` and `timezone_decision.md`. The +3h normalization is an evidence-backed engineering decision; the source does not confirm its timezone.
+- **Indication of changes (CC BY 4.0).** No provider data was altered. Analytical transformations (session reconstruction, a file-specific +3 hour timestamp normalization for one file, string normalisation of component names) happen in downstream tables and are documented in `data_dictionary.md` and `source_truth_decisions.md`. The +3h normalization is an evidence-backed engineering decision; the source does not confirm its timezone.
 - **No fabricated data.** No waste, consumption or customer value was created or estimated.
 
 ## 3. Snapshot register
@@ -153,7 +153,7 @@ content-identical or not (this was checked by a real explicit retrieval on 2026-
 ## 6. Ownership and public-accessibility limits
 
 - **No ownership is claimed** over FlavoriaFoodWeight1700 or the FMI observations. They belong to their providers, are licensed CC BY 4.0, and are redistributed unmodified with attribution (`NOTICE`).
-- **Accessibility limits.** The waste, checkout (Weigh & Dine), cash-register, building, MyFlavoria and survey data are documented but not publicly accessible in a usable form. None of it is held or reproduced; the consequence is the permanent source gap in `source_gap_register.md`.
+- **Accessibility limits.** The waste, checkout (Weigh & Dine), cash-register, building, MyFlavoria and survey data are documented but not publicly accessible in a usable form. None of it is held or reproduced; the consequence is the permanent source gap in `source_map.md` section 6.
 - **Catalogue terms unknown.** The Flavoria Data Catalog states no licence or terms on the pages reviewed. We do not assume any: pages are read as documentation, quoted briefly with links, and not redistributed.
 - **Redistribution of raw data.** The 1.28 MB archive and the seven weather XML files (about 4 MB in total) are committed unmodified because CC BY 4.0 permits it and because it lets a fresh clone run offline. This is a deliberate decision by the project owner (D69): the raw data stays in the public repository. Removing it was considered and rejected because the weather bytes cannot be re-retrieved identically (FMI stamps each response), so a fresh clone could not reproduce the pinned state.
 - **Scope statement.** The project is an FDE-style reconstruction using public research data. It is not an analysis of Flavoria's operational systems and does not represent all current dining operations.

@@ -77,10 +77,10 @@ class TestDataProvenanceMatchesThePins:
 
 class TestTimezoneDocumentation:
     def test_the_mandated_sentence_appears_verbatim_in_the_decision_record(self):
-        assert TZ_STATEMENT in flat((REPO / "docs" / "timezone_decision.md").read_text(encoding="utf-8"))
+        assert TZ_STATEMENT in flat((REPO / "docs" / "source_truth_decisions.md").read_text(encoding="utf-8"))
 
     def test_the_decision_record_says_file_specific_and_defines_t10(self):
-        t = flat((REPO / "docs" / "timezone_decision.md").read_text(encoding="utf-8"))
+        t = flat((REPO / "docs" / "source_truth_decisions.md").read_text(encoding="utf-8"))
         assert "file-specific" in t.lower() and "T10" in t
 
     @pytest.mark.parametrize("path", ["config/timezone_overrides.yml", "src/config.py", "src/ingest/tz_scope.py", "src/ingest/ingest.py"])

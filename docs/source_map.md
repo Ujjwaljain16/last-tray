@@ -2,9 +2,20 @@
 
 Sources are mapped in this order: **Problem → Questions → Information → Fields → Sources.** "Relevant does not mean authoritative."
 
-**Problem.** Can we reconstruct a trustworthy operational view of dining measurements from the available source data, and is that evidence sufficient to support future food-waste decisions? (`business_question.md`)
+**Problem.** Can we reconstruct a trustworthy operational view of dining measurements from the available source data, and is that evidence sufficient to support future food-waste decisions? This is deliberately a question about measurement, not about waste: the initial review established that waste data is not publicly retrievable, so the honest deliverable is a dependable reconstruction of what *is* measured, plus a precise statement of what is not.
 
 This is an FDE-style reconstruction using publicly available Flavoria research data and public weather data. It is not an analysis of Flavoria's proprietary operational systems. Visual: `diagrams/source-map.png`. Source availability was re-verified against primary sources on 2026-09-18 and 2026-09-19.
+
+**Stakeholders and the decision this map supports.**
+
+| Stakeholder | What they need to know | What they must not be told |
+|---|---|---|
+| Restaurant operations manager | What is selected at the line and how variable it is | That volume counts are demand |
+| Kitchen manager | Whether the median tray load is stable enough to discuss | That derived weight equals consumption |
+| Sustainability / waste lead | Which data to procure to link selection to waste | Any waste number |
+| Data / engineering team | That results reproduce and how fragile they are | That an assumption was safe because it was convenient |
+
+**Decision this can support now:** do not launch a waste-reduction measurement programme on this data; use the derived selected-weight evidence for portioning conversations, for the registered-export population only, and request the waste extract named in section 6 below.
 
 ## 1. Questions → information → fields
 
@@ -28,7 +39,7 @@ This is an FDE-style reconstruction using publicly available Flavoria research d
 | **Flavoria Weigh & Dine documentation** | contextual documentation; source-gap evidence | independent check of plate weight | checkout plate total (±5 g) | one checkout transaction | Flavoria | authoritative for checkout weight | n/a | documentation only; no sample | no data access | n/a | no sample; no component weights; a different system from the public CSV | no (no data) |
 | **Flavoria Lunch Line Waste documentation** | source-gap documentation | waste weight per tray | waste weight, time, waste point | one tray total | Flavoria | authoritative for waste | live since 2019 according to the page | none: sample section reads "TODO, Ask!"; detail in a restricted repository; MQTT for authorised users | restricted; no public download, API, schema or contact | the page warns of imputed days and about 3 g napkin error | everything: there is no public data | **it would be authoritative for waste, but it is not accessible: SOURCE GAP** |
 
-Other documented systems (Cash Register, Building Data, MyFlavoria, Surveys) are restricted or unspecified and were not attempted.
+Other documented systems (Cash Register, Building Data, MyFlavoria, Surveys) are restricted or unspecified and were not attempted; the full register is section 6.
 
 ## 3. Reading the map
 
@@ -57,4 +68,20 @@ Other documented systems (Cash Register, Building Data, MyFlavoria, Surveys) are
 | Flavoria Data Catalog | source definitions, the gap register | data values |
 | Weigh & Dine and Lunch Line Waste documentation | the source-gap register | any figure |
 
-The complete gap register is `source_gap_register.md`; the machine-readable pins are `config/sources.yml`; provenance and licences are in `data_provenance.md` and `NOTICE`.
+The machine-readable pins are `config/sources.yml`; provenance and licences are in `data_provenance.md` and `NOTICE`.
+
+## 6. Full gap register
+
+Verified 2026-09-18 against primary sources. "Not ingested" is not "forgotten": each row is a client data gap. The three that decide the business question are waste, consumption, and the meaning of the population labels.
+
+| Required business fact | Expected source | Publicly accessible? | Actual access status (evidence) | Why it matters | Impact on this project | Future integration required |
+|---|---|---|---|---|---|---|
+| Plate waste per tray | Flavoria Lunch Line Waste | **No** | Doc page: sample section reads "TODO, Ask!"; detail in a restricted repository; MQTT feed for authorised users only. No public download, API, schema or contact address. | Waste = selected minus returned. Without it, no waste KPI can exist. | Waste KPI = `SOURCE GAP`; `waste_weight_g` stays NULL, never 0 | Request extract (tray_id, waste_time, waste_g, waste_point, imputed flag); join on tray_id + time window |
+| Total plate weight at checkout | Weigh & Dine (cash register scale) | No sample | Doc describes it; no data link | Independent check on the sum of component weights | Not available; selected weight is derived by summing component events | Extract of Weigh & Dine transactions; reconcile against derived selected weight |
+| Consumption | (none) | n/a | Never measured directly anywhere; only derivable as selected minus waste | The real business quantity | UNKNOWN | Needs waste plus a reconciliation rule |
+| Transaction / cash register link | Cash Register | Restricted | Catalogue: restricted, operator approval | Confirms a tray became a paid meal | Not available | Operator approval |
+| Building occupancy / footfall | Building Data | Unspecified | Not documented publicly | Denominator for demand | Not available | Request access |
+| Person-level identity | MyFlavoria | Research-controlled | Registered-export files carry no user id | Repeat-visit behaviour | Not needed; a session is not a person | n/a |
+| Weather | FMI open data | Yes | Retrieved, no API key | Context | Available | none |
+| Images for meals | Zenodo image archive (2.4 GiB) | Yes | Not downloaded | Not needed for any core metric | Out of scope | optional |
+| Menu / component metadata (diet, allergens) | Kitchen Menu | Unspecified | Not in the CSV archive | Component grouping, dietary breakdown | Component names only | Menu extract |

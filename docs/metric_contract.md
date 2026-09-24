@@ -1,10 +1,27 @@
 # Metric Contract
 
-`metric_definitions.md` explains what each metric means. **This document is the contract the code must satisfy**: the exact expression over the canonical tables, the population, the denominator, the lineage, the validation each metric depends on, and the golden value the test suite asserts (`tests/golden/golden_values.yml`). If code and this contract disagree, the code is wrong until a decision-log entry says otherwise.
+**This document is the contract the code must satisfy**: what each metric means and to whom, the exact expression over the canonical tables, the population, the denominator, the lineage, the validation each metric depends on, and the golden value the test suite asserts (`tests/golden/golden_values.yml`). If code and this contract disagree, the code is wrong until a decision-log entry says otherwise.
 
 Population labels (`registered_export`, `non_registered_export`) are inherited from source filenames and are not interpreted. Thresholds are diagnostic, not physical.
 
-## 1. Vocabulary
+## 1. What each metric is for
+
+| Metric | Purpose |
+|---|---|
+| M1 | What a typical tray held at the lunch line, in grams |
+| M2 | How heavy a large selection is |
+| M3 | How many sessions the registered-export population contributes to the KPIs, in total and per service date |
+| M4 | How broad a selection is |
+| M5 | What share of the registered-export sessions in the source can be reconstructed and used |
+| S1 | Coverage of the weather context join |
+| S2 | Share of eligible sessions with no session-level warning |
+| S3 (portion spread) | `P90 − P10` of `derived_selected_meal_weight_g` over canonical sessions; optional context, baseline 1,039.6 − 314 = 725.6 g |
+| S4 (population diagnostics) | The non-registered-export population profile, labelled DIAGNOSTIC and never a KPI source: 1,644 sessions, median derived weight 192 g, 37.7% single-event sessions |
+| W1 | Whether direct food waste can be measured from the accessible data (it cannot) |
+
+Diagnostic fields carried on the tables but never used in a metric filter: `component_weighing_event_count`, `session_span_s`, the same-scale-repeat rate (222 sessions), `low_observed_volume_day` (16 of 35 days), `volume_irregularity` (6 days), the 2,097 g event, exact-duplicate rows (2), the crossover sessions (2), the weather-unmatched count, and the precipitation NULL counts.
+
+## 2. Vocabulary
 
 | Term | Meaning |
 |---|---|
@@ -13,7 +30,7 @@ Population labels (`registered_export`, `non_registered_export`) are inherited f
 | **core_ready** | primary population, no ERROR-level violation, no identity conflict. Weather, WARN/INFO rules and volume flags never enter it |
 | **lineage** | metric → table → field → filter → session key → `fact_weighing_event.event_id` → raw `source_file#row` |
 
-## 2. Contract
+## 3. Contract
 
 | ID | Expression (SQLite over the canonical tables) | Population | Denominator | Golden |
 |---|---|---|---|---|
@@ -30,7 +47,7 @@ Population labels (`registered_export`, `non_registered_export`) are inherited f
 
 **Never used in any metric filter:** `weather_matched`, `low_observed_volume_day`, `volume_irregularity`, `has_session_warn` (except in S2), `has_event_warn`, `distinct_component_count_status`, `quality_status`. Invariant I-6: volume flags appear in no WHERE clause of any metric query.
 
-## 3. Lineage: how any number is traced to raw rows
+## 4. Lineage: how any number is traced to raw rows
 
 ```sql
 -- 1. which sessions produced a value (example: M1's population)
@@ -51,7 +68,7 @@ JOIN (SELECT session_id, population, SUM(component_weight_g) AS w
 WHERE s.derived_selected_meal_weight_g <> e.w;      -- must return no rows
 ```
 
-## 4. Validation each metric depends on
+## 5. Validation each metric depends on
 
 | Metric | Must pass for a session to count | Never removes a session |
 |---|---|---|
@@ -59,7 +76,7 @@ WHERE s.derived_selected_meal_weight_g <> e.w;      -- must return no rows
 | S1 | none (context) | everything |
 | S2 | none for the denominator; numerator requires `core_ready = 1` and no session-level WARN | n/a |
 
-## 5. Warn-free rate: canonical figure and explicit reconciliation
+## 6. Warn-free rate: canonical figure and explicit reconciliation
 
 **Canonical (S2):** eligible registered-export sessions with **no session-level WARN** (B04, B07, T04, T05, I06), over the fixed eligible denominator.
 
@@ -83,7 +100,7 @@ WHERE s.derived_selected_meal_weight_g <> e.w;      -- must return no rows
 
 **Reason for the difference:** B02 (an event at or above 1,500 g) and I02 (an exact duplicate row) attach to events, not sessions; the canonical definition counts session-level rules only. The choice of which WARN rules belong in "warn-free" is a definition; the canonical one was approved and the variant is disclosed. See `decision_log.md` D28. The figure is never replaced without this reconciliation and a decision-log entry.
 
-## 6. Evidence-row contract (`outputs/evidence/final_evidence.csv`)
+## 7. Evidence-row contract (`outputs/evidence/final_evidence.csv`)
 
 `metric, value, population, definition, source, records_used, records_excluded, evidence_status, limitation`
 
@@ -100,11 +117,11 @@ WHERE s.derived_selected_meal_weight_g <> e.w;      -- must return no rows
 
 `records_excluded` is measured **against the fixed eligible population**, so a reader can see the denominator was not shrunk. For S2 it is 1,699 − 1,663 = 36 (34 with a session-level WARN + 2 quarantined).
 
-## 7. Sensitivity contract
+## 8. Sensitivity contract
 
 The sensitivity analysis (`outputs/evidence/`, `docs/sensitivity_analysis.md`) reproduces the 25 approved reference scenarios in `outputs/validation/sensitivity_analysis.csv` (frozen in `tests/golden/`) and adds one forbidden guardrail; the frozen baseline is never overwritten. The baseline row (S00) must equal the rows above. Scenarios S20-S22 (volume) are **analysis only**: they measure the effect of excluding days that the pipeline never excludes. The timezone is **not** selected by the KPIs: TZ2, TZ3 and TZ4 are identical on every KPI, so cross-export evidence, not KPI sensitivity, selects +3h.
 
-## 8. Metrics implementation (metrics and evidence)
+## 9. Metrics implementation (metrics and evidence)
 
 Implemented in `src/metrics/` and run by `python -m src.pipeline.run --stages metrics`. Outputs in `outputs/metrics/`: `metrics.csv`,
 `metric_evidence.csv`, `metric_summary.json`, `metric_contracts.json` (each contract with its computed value, tolerance and pass/fail),

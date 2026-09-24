@@ -48,8 +48,8 @@ selected weight  ≠  consumption  ≠  waste
 **Truth needed.** Which records the headline numbers describe.
 **Source used.** The **registered-export population**. The **non-registered-export population** is diagnostic only. The two labels are **inherited from source file names**; the public documentation does not define them, and they are never read as customer-registration status.
 **Why.** The two exports differ sharply (1.0% versus 37.7% single-event sessions; median derived weight 499 g versus 192 g), so pooling would report the population mix, not a measurement.
-**Rejected or secondary.** Pooling (kept only as the forbidden guardrail G01 in the sensitivity analysis).
-**Uncertainty.** What the labels mean is a question for the source owner (Q1).
+**Rejected or secondary.** Pooling (kept only as the forbidden guardrail G01 in the sensitivity analysis); dropping the non-registered-export population entirely (rejected: it is the clearest evidence of a capture-behaviour difference, so it is kept, labelled DIAGNOSTIC, and never mixed into a KPI).
+**Uncertainty.** What the labels mean is a question for the source owner (Q1). Registered-export daily volume is weekday-patterned (Mon-Wed 41-107 sessions, Thu-Fri 2-18) in a way the other export is not, so M3 is read as observed sessions, never as demand, diners, customers or traffic.
 
 ## What is a food component? (D18)
 
@@ -66,6 +66,12 @@ selected weight  ≠  consumption  ≠  waste
 **Why.** The same session appears in that file exactly 10,800 s earlier than in the other export; after +3h its hour-of-day profile matches the other registered-export files (distance 0.046 versus 1.994).
 **Rejected or secondary.** A global offset; +2h and +4h are tested as sensitivity scenarios and give identical M1-M5, while +0h and +1h quarantine 303 and 103 sessions.
 **Uncertainty.** **+3h is an evidence-backed engineering decision, not a source-confirmed timezone.** Weights and service dates do not depend on it; time of day, the service-hours rule and the weather join do.
+
+> A +3 hour normalization is the strongest-supported engineering decision based on cross-export temporal consistency checks; the original source does not explicitly confirm the timezone metadata.
+
+**What depends on this decision, and what does not.** Unaffected: `derived_selected_meal_weight_g`, session volume per service day, component count, and core measurement readiness — weights and calendar dates stay on the same day whichever way the file is read. Affected: time-of-day patterns and the weather join, for the 385 registered-export sessions (about 23% of the primary population) inside the overridden file. This is why weather sits outside the core metric set: a timezone uncertainty must never be able to invalidate a weight.
+
+**How it is kept file-specific.** The override applies only to `registered_2020_10_05-2020_10_18.csv`, is disabled by default for every other file, and is re-checked at ingestion time (rule T10): the named file, its validated date range, and the raw and post-shift hour bands must all still match, or the core lane fails outright rather than silently mis-applying the shift. Details: `decision_log.md` D4, D36.
 
 ## What is a weather observation? (D8, D21)
 

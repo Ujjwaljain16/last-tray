@@ -1,4 +1,4 @@
 """Canonical model and session reconstruction. Implemented in model.
 
-See docs/canonical_schema.md for every table and its grain.
+See docs/data_dictionary.md section 12 for every table and its grain.
 """

@@ -1,6 +1,6 @@
 # Data Dictionary (final)
 
-Structure and grains are fixed in `canonical_schema.md`; this document gives every field's meaning, origin and transformation. Population labels (`registered_export`, `non_registered_export`) are inherited from source filenames and are not interpreted. Thresholds cited here are diagnostic, not physical.
+Structure and grains are fixed in section 12 of this document; the sections that follow give every field's meaning, origin and transformation. Population labels (`registered_export`, `non_registered_export`) are inherited from source filenames and are not interpreted. Thresholds cited here are diagnostic, not physical.
 
 Written after inspecting the real files. Columns in the raw section are exactly what the archive contains. Nothing is renamed or reinterpreted without a row in the "Transformation" column. Classes: OBSERVED / DERIVED / UNKNOWN / SOURCE GAP.
 

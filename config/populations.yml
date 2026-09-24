@@ -1,6 +1,6 @@
 # Population labels are INHERITED FROM SOURCE FILENAMES. The public source documentation does not define what
 # "registered" and "non-registered" mean, so they are used only as labels. They are never interpreted as
-# customer-registration status. (docs/population_decision.md, decision_log D5)
+# customer-registration status. (docs/source_truth_decisions.md, decision_log D5)
 
 statement: >-
   These labels are inherited from source filenames. The public documentation reviewed for this project does not

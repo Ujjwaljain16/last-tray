@@ -304,7 +304,7 @@ See D23. *vs initial design: NEW* · 2026-09-19. Recorded separately so the word
 - **Chosen approach.** Keep them, move them, prove they still reproduce (hash comparison before and after; the only differences were three intended ones, listed in `research/exploration/README.md`).
 - **Why.** The production pipeline must be checkable against an independent investigation.
 - **Business impact.** A reviewer can see how each design decision was reached and re-run it.
-- **Residual uncertainty.** The initial review source discovery was interactive and has no script; it is documented in `source_inventory.md` and the committed raw artefacts.
+- **Residual uncertainty.** The initial review source discovery was interactive and has no script; it is documented in `docs/source_map.md` and the committed raw artefacts.
 
 ## D33. The project lives in its own git repository, outside the home-directory repository
 *vs initial design: NEW* · 2026-09-19

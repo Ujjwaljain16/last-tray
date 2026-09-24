@@ -110,7 +110,7 @@ def source_map():
     box(ax, 41, 79, 25, 9, "Client decision:\ncan we support waste\ndecisions yet?", "pipe", 12, True)
     arrow(ax, 53, 72.6, 53, 78.6, "pipe")
     box(ax, 71, 79, 27.5, 9, "UNKNOWN: food consumed\n(no source measures it)", "unk", 11.5, True)
-    ax.text(2, 80, "Gap register: docs/source_gap_register.md", fontsize=11, color="#6b7280", va="center")
+    ax.text(2, 80, "Gap register: docs/source_map.md section 6", fontsize=11, color="#6b7280", va="center")
     legend(ax, 2.5)
     save(fig, "source-map.png")
 

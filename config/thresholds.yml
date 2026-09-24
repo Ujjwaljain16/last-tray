@@ -1,5 +1,4 @@
-# Approved 2026-09-19 (profiling review). Values and rationale: docs/validation_findings.md section 3,
-# docs/validation_rules.md, docs/decision_log.md D23/D29.
+# Approved 2026-09-19 (profiling review). Values and rationale: docs/validation_rules.md, docs/decision_log.md D23/D29.
 #
 # THESE ARE DIAGNOSTIC VALIDATION THRESHOLDS derived from the observed structure of this dataset.
 # They are NOT claims of physical impossibility or universal abnormality. A flagged record is not evidence of

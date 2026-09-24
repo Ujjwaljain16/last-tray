@@ -21,7 +21,7 @@ def add(rule, cat, sev, etype, eid, pop, src, msg, handling, cons):
                        source_file=src, message=msg, handling=handling, business_consequence=cons))
 
 
-# Proposed thresholds. Evidence for each is in docs/profile_report.md section 9.
+# Proposed thresholds. Evidence for each is in docs/validation_rules.md.
 TH = dict(event_warn_g=1500, trace_g=3, session_low_g=50, session_high_g=2200, span_warn_s=600, gap_warn_s=300,
           hour_lo=9, hour_hi=15, t07_lo=10.0, t07_hi=11.0, low_volume_sessions=30)
 

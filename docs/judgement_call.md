@@ -19,7 +19,7 @@ The decision at stake is whether to commit to a food-waste measurement or reduct
 | Typical derived selected meal weight | M1 499 g; upper end M2 1,039.6 g | `outputs/metrics/metrics.csv` |
 | Robustness of the median | M1 stays within 493-505 g across the comparable scenarios | `outputs/evidence/`, `docs/sensitivity_analysis.md` |
 | Robustness of the upper end | M2 ranges 977-1,066 g; it is SENSITIVE to the study period | same |
-| Waste | W1 BLOCKED / SOURCE GAP; no scenario produces a waste estimate, band or proxy | `docs/source_gap_register.md`, `outputs/evidence/evidence_matrix.csv` |
+| Waste | W1 BLOCKED / SOURCE GAP; no scenario produces a waste estimate, band or proxy | `docs/source_map.md` section 6, `outputs/evidence/evidence_matrix.csv` |
 | Consumption | UNKNOWN; classified BLOCKED in the evidence matrix | same |
 | Dependability | six gated stages, offline, byte-identical reruns, failure injection, clean-clone reproduction | `docs/pipeline.md`, `outputs/pipeline/` |
 

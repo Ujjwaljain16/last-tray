@@ -35,7 +35,7 @@ Outputs go to `outputs/exploration/` and `outputs/validation/`. Two runs under d
 
 ## What is NOT reproduced by a script here (honest limits)
 
-- **Initial source validation** (Zenodo API, Flavoria catalogue pages, FMI endpoint discovery, the original station lookup) was interactive. Its results are recorded in `docs/source_inventory.md`, `outputs/source_inventory.csv` and `docs/source_gap_register.md`. The raw artefacts it produced are committed under `data/raw/`.
+- **Initial source validation** (Zenodo API, Flavoria catalogue pages, FMI endpoint discovery, the original station lookup) was interactive. Its results are recorded in `docs/source_map.md` and `outputs/source_inventory.csv`. The raw artefacts it produced are committed under `data/raw/`.
 - The FMI weather XML in `data/raw/weather/` was retrieved on 2026-09-18 and is preserved as retrieved; these scripts read it rather than re-downloading.
 
 ## Known differences from the originals (recorded, not hidden)
