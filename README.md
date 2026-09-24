@@ -1,6 +1,8 @@
 # LAST TRAY — Flavoria DiningOps Truth
 
-*A dependable measurement-reconstruction pipeline for meal measurement, dining behavior, and food-waste readiness.*
+*Reconstructs and validates the dining measurement chain from public Flavoria lunch-line data and FMI weather context, so portioning and food-waste decisions can rest on evidence instead of assumption.*
+
+**Read this in five minutes:** [the problem](#1-problem) → [source map](#4-source-map) → [run the pipeline](#11-pipeline) → [the numbers](#6-final-evidence) → [the judgement call](#15-fde-judgement) → [demo](#16-demo).
 
 ## 1. Problem
 
@@ -60,6 +62,8 @@ Population for M1-M4: core-ready registered-export sessions (1,697). Population 
 | M3 — Observed Valid Sessions — Registered-Export Population | 1,697 | how many registered-export sessions were observed and are valid | restaurant volume or how many people came |
 | M4 — Median Distinct Normalized Components per Session | 5 | how many named components a typical session selected | dish identity across days or exports |
 | M5 — Core Measurement Readiness | 99.88% (1,697 / 1,699) | the share of eligible sessions meeting the approved readiness criteria | that the data is error-free |
+
+> **Read before acting on these numbers:** every figure above is an observed or derived *selection* measurement. **It is not consumption, and it is not food waste.** See the source gap below and [the judgement call](#15-fde-judgement) for what that means for a decision.
 
 ### Supporting evidence
 
