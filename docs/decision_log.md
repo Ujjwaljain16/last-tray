@@ -1,8 +1,10 @@
-# Decision Log
+# Decision log
 
-Every material decision has the same seven parts: **Decision, Evidence, Alternatives tested, Chosen approach, Why, Business impact, Residual uncertainty.** "vs initial design" says whether the initial design was confirmed, changed, or silent on the point. Sensitivity scenario IDs (S00, TZ0 ...) refer to `outputs/validation/sensitivity_analysis.csv`.
+This is my running record of every material decision I made on this project, in the order I made them. I did not write it after the fact to look tidy, it's the actual trail: what I decided, what evidence I had, what else I tried first, and what I still don't know. If you want to understand why the pipeline works the way it does rather than just what it does, this is where that reasoning actually lives.
 
-Population labels are inherited from source filenames and are not interpreted semantically. Diagnostic thresholds in this log are derived from observed data structure and are not claims of physical impossibility.
+Every entry has the same seven parts: **Decision, Evidence, Alternatives tested, Chosen approach, Why, Business impact, Residual uncertainty.** "vs initial design" says whether my initial design was confirmed, changed, or just silent on the point. Sensitivity scenario IDs (S00, TZ0, and so on) refer to `outputs/validation/sensitivity_analysis.csv`.
+
+Population labels are inherited from source filenames, and I never interpret them semantically. Every diagnostic threshold in this log comes from the observed structure of this data, not from a claim of physical impossibility.
 
 ---
 
