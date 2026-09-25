@@ -1,14 +1,14 @@
-# The FDE Judgement
+# The FDE judgement
 
-**One judgement.** Treat the reconstructed selected-meal measurement layer as ready to describe what was selected at the lunch line, and do not base a food-waste decision on it. The next thing to obtain is tray-linked waste evidence, not a waste estimate built from selection.
+**My one judgement.** I trust the reconstructed selected-meal measurement layer to describe what was selected at the lunch line, and I would not base a food-waste decision on it. The next thing worth going after is tray-linked waste evidence, not a waste estimate built from selection.
 
-This is an FDE-style reconstruction using publicly available Flavoria research data and public weather data. The judgement is about what that public evidence can and cannot support; it says nothing about Flavoria's internal systems.
+This is an FDE-style reconstruction using publicly available Flavoria research data and public weather data. The judgement below is about what that public evidence can and cannot support. It says nothing about Flavoria's actual internal systems, which I have never seen.
 
 ## 1. Decision / question
 
-*Can we reconstruct a trustworthy operational view of dining measurements from the available source data, and is that evidence sufficient to support future food-waste decisions?*
+*Can I reconstruct a trustworthy operational view of dining measurements from the available source data, and is that evidence sufficient to support a future food-waste decision?*
 
-The decision at stake is whether to commit to a food-waste measurement or reduction programme on this evidence, or to obtain more data first.
+The decision on the table is whether to commit to a food-waste measurement or reduction programme on this evidence, or to go get more data first. I land on the second.
 
 ## 2. Evidence
 
@@ -23,29 +23,29 @@ The decision at stake is whether to commit to a food-waste measurement or reduct
 | Consumption | UNKNOWN; classified BLOCKED in the evidence matrix | same |
 | Dependability | six gated stages, offline, byte-identical reruns, failure injection, clean-clone reproduction | `docs/pipeline.md`, `outputs/pipeline/` |
 
-The central pattern: the scales weigh what is placed on the tray, so a selected-meal layer can be reconstructed reproducibly. But **selected meal weight is not actual consumption, and actual consumption is not food waste.** The only quantity that would measure waste sits in a source that is documented but not publicly accessible in the required usable form.
+The pattern here is simple: the scales weigh what is placed on the tray, so I can reconstruct a selected-meal layer reproducibly. But **selected meal weight is not actual consumption, and actual consumption is not food waste.** The one quantity that would actually measure waste sits in a source that is documented but not publicly accessible in the required usable form.
 
 ## 3. What the evidence supports
 
 - Describing what was selected at the lunch line for the registered-export population, with a stated range: a median of 499 g and a P90 of 1,039.6 g over 1,697 sessions.
-- Assessing readiness: the measurement chain is dependable enough to extend, with 99.88% of eligible sessions core-ready and every number traceable to a checksummed raw file.
-- Prioritising data acquisition, because the evidence shows precisely what is missing.
+- Trusting the pipeline's readiness: it is dependable enough to extend, with 99.88% of eligible sessions core-ready and every number I show traceable back to a checksummed raw file.
+- Prioritising what data to go get next, because the evidence shows precisely what is missing.
 
 ## 4. What the evidence does not support
 
 - Any statement about what was consumed, left over or wasted.
 - A waste-reduction target, saving or impact figure.
 - Treating selected weight as a proxy for waste: nothing in the data links selection to what was returned.
-- Conclusions about all operations, other periods or other capture systems: the data is five weeks of research capture in autumn 2020, and the non-registered export has a different profile.
+- Conclusions about all operations, other periods or other capture systems. The data is five weeks of research capture in autumn 2020, and the non-registered export has a different profile.
 - Causal statements about weather, which is context only.
 
 ## 5. Critical missing evidence
 
-**Tray-linked waste weight.** Flavoria's waste documentation describes a per-tray waste total, but its sample section reads "TODO, Ask!", the detail is in a restricted repository, and there is no public download, API, schema or contact. Until that record exists in an accessible form, W1 stays BLOCKED and consumption stays UNKNOWN.
+**Tray-linked waste weight.** Flavoria's waste documentation describes a per-tray waste total, but its sample section reads "TODO, Ask!", the detail sits in a restricted repository, and there is no public download, API, schema or contact. Until that record exists in an accessible form, W1 stays BLOCKED and consumption stays UNKNOWN.
 
 ## 6. What we would ask for next
 
-What additional data would most reduce uncertainty, in priority order:
+The additional data that would most reduce my uncertainty, in priority order:
 
 1. **Accessible waste-point event records with tray-linked waste weights** (tray identifier, waste time, weight, waste point, and any imputed-value flag). This is the only item that changes the business answer.
 2. **Reliable consumption or leftover semantics, if the source defines them**: what a waste reading includes, and how missing days are handled (the catalogue itself warns of imputed days).
@@ -55,7 +55,7 @@ What additional data would most reduce uncertainty, in priority order:
 
 ### The concrete request (item 1, ready to send)
 
-What we would ask the source owner for, so it can be evaluated the moment it exists rather than described in the abstract:
+This is what I would actually ask the source owner for, so it can be evaluated the moment it exists instead of staying a description in the abstract:
 
 | Field | Type | Meaning |
 |---|---|---|
@@ -69,12 +69,12 @@ What we would ask the source owner for, so it can be evaluated the moment it exi
 **Join key.** `tray_id`, restricted to a time window around the tray's session (its first and last weighing plus a bounded margin, since a tray is returned some time after the meal, not instantly).
 **Format.** Any structured export (CSV, JSON or a REST endpoint) that preserves these five fields is sufficient; none of the pipeline's retrieval or validation code assumes a particular format beyond that.
 
-**What is not yet known, and what this cannot promise.** Whether `tray_id` in the waste system matches the public lunch-line export's `tray_id` one-to-one, or whether the waste system uses a different identifier, is unverified — the waste schema itself is not public. If a request like this is fulfilled, the join and its consistency would need the same validation treatment already given to every other join in this project (checked, not assumed) before any waste number is trusted.
+**What I don't know yet, and what this cannot promise.** Whether `tray_id` in the waste system matches the public lunch-line export's `tray_id` one-to-one, or whether the waste system uses a different identifier entirely, is unverified: the waste schema itself is not public. If a request like this gets fulfilled, the join and its consistency would still need the same validation treatment I already give every other join in this project, checked, not assumed, before I would trust any waste number that came out of it.
 
 ## 7. Why that evidence changes the future decision
 
-The documented waste record is a per-tray weight returned at a waste station, so it is the natural counterpart of the selected side. This project already produces the selected side reproducibly and keeps `tray_id` and time on every session. If waste records with a tray identifier and time become available, the two sides could be compared as observations instead of guesses, and a waste decision would rest on measurement. Whether the two sources join cleanly is **not yet verified**, because the waste schema is not public. Without that source, any waste figure would be an assumption presented as a result, which is why none is produced.
+The documented waste record is a per-tray weight returned at a waste station, so it is the natural counterpart of the selected side I already have. This project already produces the selected side reproducibly and keeps `tray_id` and time on every session. If waste records with a tray identifier and time become available, I could finally compare the two sides as observations instead of guesses, and a waste decision would rest on measurement instead of assumption. Whether the two sources actually join cleanly is **not yet verified**, because the waste schema is not public. Without that source, any waste figure I produced would be an assumption dressed up as a result, which is exactly why I don't produce one.
 
 ## How this is shown in the demo
 
-The demo shows the weight distribution with M1 and M2 (what was selected), then the source-gap evidence (what was not observed), and ends on this judgement: we can measure what was selected with reasonable reproducibility, but the current evidence cannot tell us what was consumed or wasted, so the next data requirement is direct waste-linked evidence rather than a waste proxy. See `demo_script.md`.
+The demo shows the weight distribution with M1 and M2 (what was selected), then the source-gap evidence (what was not observed), and ends on this judgement: I can measure what was selected with reasonable reproducibility, but the current evidence cannot tell me what was consumed or wasted, so the next thing worth getting is direct waste-linked evidence, not a waste proxy. See `demo_script.md`.

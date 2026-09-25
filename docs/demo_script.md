@@ -1,16 +1,16 @@
-# Demo Script (3 to 5 minutes)
+# Demo script (3 to 5 minutes)
 
-The demo explains one FDE judgement: **we can measure what was selected at the lunch line with reasonable reproducibility, but the current evidence cannot tell us what was consumed or wasted, so the next data requirement is direct waste-linked evidence rather than a waste proxy.** Engineering is shown only where it proves dependability. No Python classes are explained.
+This is the script I follow when I record the walkthrough. It makes one point and only one point: **I can measure what was selected at the lunch line with reasonable reproducibility, but the current evidence cannot tell me what was consumed or wasted, so the next thing worth getting is direct waste-linked evidence, not a waste proxy.** I only show engineering where it proves the pipeline is dependable; nobody watching needs a tour of my Python classes.
 
-Framing to say once, early: this is an FDE-style reconstruction using publicly available Flavoria research data and public weather data, not an analysis of Flavoria's operational systems.
+One thing I say out loud early, every time: this is an FDE-style reconstruction using publicly available Flavoria research data and public weather data, not an analysis of Flavoria's own operational systems.
 
-## Before recording
+## Before I hit record
 
 ```
 python -m src.pipeline.run                 # about 10 seconds; regenerates outputs/
 ```
 
-Have open: `README.md`, `docs/source_map.md`, `docs/final_evidence.md`, `diagrams/workflow.png`, `diagrams/weight-distribution.png`, `outputs/evidence/evidence_matrix.csv`, `docs/judgement_call.md`, and a terminal at the repository root.
+I keep these open: `README.md`, `docs/source_map.md`, `docs/final_evidence.md`, `diagrams/workflow.png`, `diagrams/weight-distribution.png`, `outputs/evidence/evidence_matrix.csv`, `docs/judgement_call.md`, and a terminal at the repository root.
 
 ## Timeline
 
@@ -24,7 +24,7 @@ Have open: `README.md`, `docs/source_map.md`, `docs/final_evidence.md`, `diagram
 | 3:30-4:15 | `diagrams/workflow.png` (lower half) and the W1 row of `docs/final_evidence.md` | "Selected weight is not consumption, and consumption is not waste. Waste is BLOCKED: the sample section of the waste documentation reads 'TODO, Ask!' and there is no public download. I did not build a proxy." |
 | 4:15-5:00 | `docs/judgement_call.md` | "The judgement: we can measure what was selected, reproducibly, but the current evidence cannot tell us what was consumed or wasted. The next data requirement is tray-linked waste records, not a waste estimate. If that source becomes available, selection and return can be compared as observations." |
 
-## Optional 30-second dependability proof (if time allows, inside the 1:15-2:00 slot)
+## An optional 30 second dependability proof (if there's time, inside the 1:15-2:00 slot)
 
 ```
 python -m src.pipeline.run --out ../demo_out
@@ -32,17 +32,17 @@ echo tampered >> ../demo_out/model/fact_dining_session.csv
 python -m src.pipeline.run --out ../demo_out --resume-from metrics
 ```
 
-Expected: the model stage fails (exit code 8), metrics and sensitivity are BLOCKED, and their stale outputs are removed. "Nothing is trusted because a file exists." Delete `../demo_out` afterwards.
+Expected: the model stage fails (exit code 8), metrics and sensitivity are BLOCKED, and their stale outputs get removed. "Nothing is trusted because a file exists." I delete `../demo_out` afterwards.
 
-## What not to say
+## What I never say
 
-- Do not make any statement about intake, consumption or waste, or say that anything caused anything.
-- Do not describe M3 as demand or as how many people came.
-- Do not call the +3h timezone confirmed.
-- Do not describe the scenarios as alternative truths: they are sensitivity tests.
+- No statement about intake, consumption or waste, and nothing gets described as causing anything.
+- M3 is never demand, and never how many people came in.
+- The +3h timezone reading is never called confirmed.
+- The scenarios are sensitivity tests, never alternative truths.
 
-## Checklist
+## Checklist before I call it done
 
 - [ ] `python -m src.pipeline.run` exits 0 and prints `6 PASSED`
-- [ ] the numbers on screen equal `docs/final_evidence.md`
-- [ ] the judgement is stated as conditional, once, at the end
+- [ ] the numbers on screen match `docs/final_evidence.md`
+- [ ] the judgement is stated once, at the end, as conditional
