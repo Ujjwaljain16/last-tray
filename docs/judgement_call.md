@@ -77,4 +77,4 @@ The documented waste record is a per-tray weight returned at a waste station, so
 
 ## How this is shown in the demo
 
-The demo shows the weight distribution with M1 and M2 (what was selected), then the source-gap evidence (what was not observed), and ends on this judgement: I can measure what was selected with reasonable reproducibility, but the current evidence cannot tell me what was consumed or wasted, so the next thing worth getting is direct waste-linked evidence, not a waste proxy. See `demo_script.md`.
+The demo shows the weight distribution with M1 and M2 (what was selected), then the source-gap evidence (what was not observed), and ends on this judgement: I can measure what was selected with reasonable reproducibility, but the current evidence cannot tell me what was consumed or wasted, so the next thing worth getting is direct waste-linked evidence, not a waste proxy.

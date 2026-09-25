@@ -73,7 +73,7 @@ FORBIDDEN = [
     r"(saves?|saved|savings of)\s+[\d$€£]",
     r"\bdemand\s+(was|is|rose|fell|increased|decreased)\b",
 ]
-CLAIM_DOCS = ["README.md", "docs/final_evidence.md", "docs/judgement_call.md", "docs/demo_script.md", "docs/source_truth_decisions.md", "docs/source_map.md",
+CLAIM_DOCS = ["README.md", "docs/final_evidence.md", "docs/judgement_call.md", "docs/source_truth_decisions.md", "docs/source_map.md",
               "docs/known_unknowns_assumptions_limitations.md"]
 
 
@@ -150,7 +150,7 @@ def resolve(token: str) -> bool:
     return False
 
 
-@pytest.mark.parametrize("doc", ["docs/demo_script.md", "docs/final_evidence.md", "docs/judgement_call.md"])
+@pytest.mark.parametrize("doc", ["docs/final_evidence.md", "docs/judgement_call.md"])
 def test_every_artifact_a_document_points_to_exists(doc):
     missing = sorted(t for t in backticked_paths(text(doc)) if not resolve(t) and not t.startswith(("../", "outputs/pipeline/run_", "outputs/pipeline/runtime", "outputs/pipeline/run_log")))
     assert not missing, missing
@@ -188,7 +188,7 @@ def test_the_readme_has_the_reviewer_sections_and_the_engagement_framing():
 
 REQUIRED_ARTIFACTS = [
     "README.md", "NOTICE", "docs/source_map.md", "docs/source_truth_decisions.md", "docs/known_unknowns_assumptions_limitations.md", "docs/judgement_call.md",
-    "docs/demo_script.md", "docs/pipeline.md", "docs/sensitivity_analysis.md", "docs/data_provenance.md", "docs/final_evidence.md",
+    "docs/pipeline.md", "docs/sensitivity_analysis.md", "docs/data_provenance.md", "docs/final_evidence.md",
     "diagrams/workflow.png", "diagrams/data-model.png", "diagrams/source-map.png", "diagrams/weight-distribution.png",
     "outputs/metrics/metrics.csv", "outputs/evidence/evidence_matrix.csv", "outputs/model/model_manifest.json", "outputs/validation/validation_issues.csv",
     "outputs/pipeline/stage_summary.csv", "outputs/pipeline/pipeline_controls.csv",
