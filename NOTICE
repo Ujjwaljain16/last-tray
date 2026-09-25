@@ -52,7 +52,7 @@ licence or terms, so only short factual phrases are quoted, with links.
 LICENCES IN THIS REPOSITORY
 ---------------------------
 
-Project code and documentation (src/, tests/, config/, diagrams/build_diagrams.py, docs/, README.md and this project's own
+Project code and documentation (src/, tests/, config/, diagrams/, docs/, README.md and this project's own
 analysis): MIT Licence, see the LICENSE file. Copyright (c) 2026 Ujjwaljain16.
 
 The MIT Licence does NOT apply to third-party material. It does not apply to:

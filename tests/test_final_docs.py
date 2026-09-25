@@ -74,7 +74,7 @@ FORBIDDEN = [
     r"\bdemand\s+(was|is|rose|fell|increased|decreased)\b",
 ]
 CLAIM_DOCS = ["README.md", "docs/final_evidence.md", "docs/judgement_call.md", "docs/demo_script.md", "docs/source_truth_decisions.md", "docs/source_map.md",
-              "docs/known_unknowns_assumptions_limitations.md", "docs/assignment_traceability.md"]
+              "docs/known_unknowns_assumptions_limitations.md"]
 
 
 @pytest.mark.parametrize("doc", CLAIM_DOCS)
@@ -150,18 +150,10 @@ def resolve(token: str) -> bool:
     return False
 
 
-@pytest.mark.parametrize("doc", ["docs/assignment_traceability.md", "docs/demo_script.md", "docs/final_evidence.md", "docs/judgement_call.md"])
+@pytest.mark.parametrize("doc", ["docs/demo_script.md", "docs/final_evidence.md", "docs/judgement_call.md"])
 def test_every_artifact_a_document_points_to_exists(doc):
     missing = sorted(t for t in backticked_paths(text(doc)) if not resolve(t) and not t.startswith(("../", "outputs/pipeline/run_", "outputs/pipeline/runtime", "outputs/pipeline/run_log")))
     assert not missing, missing
-
-
-def test_the_traceability_page_covers_the_five_graded_areas_with_all_four_fields():
-    body = text("docs/assignment_traceability.md")
-    for area in ("Source reasoning", "Retrieval", "Profiling and validation", "Workflow and metrics", "Dependable pipeline"):
-        assert re.search(rf"^## \d\. {area}", body, re.M), area
-    for field in ("Assignment expectation", "Repository evidence", "Key artifacts", "Show in 3-5 minutes"):
-        assert body.count(f"**{field}**") == 5, field
 
 
 def test_the_readme_links_and_images_resolve():
@@ -196,8 +188,8 @@ def test_the_readme_has_the_reviewer_sections_and_the_engagement_framing():
 
 REQUIRED_ARTIFACTS = [
     "README.md", "NOTICE", "docs/source_map.md", "docs/source_truth_decisions.md", "docs/known_unknowns_assumptions_limitations.md", "docs/judgement_call.md",
-    "docs/assignment_traceability.md", "docs/demo_script.md", "docs/pipeline.md", "docs/sensitivity_analysis.md", "docs/data_provenance.md", "docs/final_evidence.md",
-    "diagrams/workflow.png", "diagrams/data-model.png", "diagrams/source-map.png", "diagrams/weight-distribution.png", "diagrams/build_diagrams.py",
+    "docs/demo_script.md", "docs/pipeline.md", "docs/sensitivity_analysis.md", "docs/data_provenance.md", "docs/final_evidence.md",
+    "diagrams/workflow.png", "diagrams/data-model.png", "diagrams/source-map.png", "diagrams/weight-distribution.png",
     "outputs/metrics/metrics.csv", "outputs/evidence/evidence_matrix.csv", "outputs/model/model_manifest.json", "outputs/validation/validation_issues.csv",
     "outputs/pipeline/stage_summary.csv", "outputs/pipeline/pipeline_controls.csv",
 ]
@@ -217,14 +209,6 @@ def test_notice_and_provenance_state_sources_licences_and_the_open_items_without
     assert "state no\nlicence or terms" in notice or "states no licence" in notice or "state no licence" in notice.replace("\n", " ")
     assert "MIT Licence" in notice and "does NOT apply to third-party material" in notice
     assert "no licence or terms statement was found" in prov and "Ownership and public-accessibility limits" in prov
-
-
-def test_the_diagram_build_script_is_the_editable_source_of_every_diagram():
-    script = text("diagrams/build_diagrams.py")
-    for name in ("workflow", "data_model", "pipeline", "source_map", "weight_distribution"):
-        assert f"def {name}(" in script, name
-    for svg in ("workflow.svg", "data-model.svg", "pipeline.svg", "source-map.svg", "weight-distribution.svg"):
-        assert (REPO / "diagrams" / svg).is_file(), svg
 
 
 def test_the_licence_is_mit_and_is_fenced_off_from_the_third_party_data():

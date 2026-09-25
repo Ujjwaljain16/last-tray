@@ -165,12 +165,12 @@ src/               ingest, stage, validate, model, metrics, sensitivity, and the
 tests/             unit tests, real-data tests, failure-injection tests, and tests that check the documentation itself
 outputs/           everything the pipeline generates: ingestion, staging, validation, model, metrics, evidence, pipeline records
 docs/              the assignment writeup: source reasoning, decisions, evidence, sensitivity, the judgement call
-diagrams/          source map, workflow, data model, pipeline, and distribution figures (PNG, plus the script that builds them)
+diagrams/          source map, workflow, data model, pipeline, and distribution figures (PNG)
 research/          the exploration scripts that produced the numbers I cite as evidence
-notebooks/         a read-only walkthrough of the pipeline's own committed outputs, for anyone grading this
+notebooks/         01 the exploratory profiling; 02 reruns the pipeline live and displays its output, for anyone grading this
 ```
 
-If you want the full paper trail behind a claim in this README, here is where it lives: `docs/assignment_traceability.md` maps every graded area to its artifacts, `docs/source_map.md` and `docs/source_truth_decisions.md` cover sourcing in full, `docs/final_evidence.md` and `docs/sensitivity_analysis.md` cover the numbers, `docs/known_unknowns_assumptions_limitations.md` and `docs/judgement_call.md` cover what I am and am not claiming, and `docs/pipeline.md` covers how the pipeline itself is built. You should not need to open any of them to understand what I did and why; this README is meant to stand on its own.
+If you want the full paper trail behind a claim in this README, here is where it lives: `docs/source_map.md` and `docs/source_truth_decisions.md` cover sourcing in full, `docs/final_evidence.md` and `docs/sensitivity_analysis.md` cover the numbers, `docs/known_unknowns_assumptions_limitations.md` and `docs/judgement_call.md` cover what I am and am not claiming, and `docs/pipeline.md` covers how the pipeline itself is built. You should not need to open any of them to understand what I did and why; this README is meant to stand on its own.
 
 ## 14. Known / Unknown / Assumptions / Limitations
 
