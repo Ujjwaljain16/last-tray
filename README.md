@@ -14,9 +14,9 @@ The scenario I picked is a self-service restaurant, Flavoria, that wants to cut 
 
 | Aspect | Detail |
 |---|---|
-| **Who this is for** | the operations manager (what gets selected at the line), the kitchen manager (is the daily load stable), the sustainability lead (what data is still missing), and anyone checking whether this pipeline is solid enough to build on |
-| **What I'm actually measuring** | the size and makeup of the selected meal, not a waste number. There is no waste KPI in this project, because the data to build one honestly does not exist yet |
-| **What the output supports** | describing portions for the population I can measure, and making a specific, concrete case for what extra data would be needed before anyone commits to a waste-reduction program |
+| **Stakeholders** | the operations manager (what gets selected at the line), the kitchen manager (is the daily load stable), the sustainability lead (what data is still missing), and anyone checking whether this pipeline is solid enough to build on |
+| **Project KPI** | the size and makeup of the selected meal, not a waste number. There is no waste KPI in this project, because the data to build one honestly does not exist yet |
+| **Decision the output supports** | describing portions for the population I can measure, and making a specific, concrete case for what extra data would be needed before anyone commits to a waste-reduction program |
 
 ## 2. Scope and engagement framing
 
@@ -132,7 +132,7 @@ It runs six gated stages, ingest, stage, validate, model, metrics, sensitivity, 
 
 `--config-dir`, `--out`, and `--repo-root` (plus `fetch`'s `--dest`) can also come from an environment variable instead of a flag, which is handy in a container or CI job. A flag you actually pass always wins over the environment variable.
 
-Setup, run every command from the repository root, Python 3.11:
+**Setup and run.** Run every command from the repository root, Python 3.11:
 
 ```
 python -m venv .venv
@@ -191,11 +191,7 @@ The next thing worth spending effort on is not a smarter model or a proxy metric
 
 ## 16. Demo
 
-A three to five minute walkthrough script is in `docs/demo_script.md`. I recorded myself following it: [`demo/last_tray_demo.webm`](demo/last_tray_demo.webm), silent with on-screen captions, generated straight from this repository's own committed outputs.
-
 ![LAST TRAY demo preview, sped up 6x](demo/preview.gif)
-
-That is a 6x-speed, roughly 52 second preview of the full video above, just to show the shape of it without downloading the whole file. Watch the actual video for real pacing and the captions.
 
 ## Licence and attribution
 
