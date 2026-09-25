@@ -1,10 +1,10 @@
-# Validation Specification (final)
+# Validation specification (final)
 
-Rules come from business meaning: *can this record honestly support a statement about what a diner selected?* No rule deletes data. Handling: **FLAG** (kept, counted), **QUARANTINE** (kept in the model, excluded from primary metrics, listed), **BLOCK** (stop the affected stage).
+I built every rule here around one question: *can this record honestly support a statement about what a diner selected?* No rule I write ever deletes data. Handling is always one of three things: **FLAG** (kept, counted), **QUARANTINE** (kept in the model, excluded from primary metrics, but listed), or **BLOCK** (stop the affected stage outright).
 
-Severity: **ERROR** breaks `core_ready`. **WARN** is kept and visible. **INFO** records a fact.
+Severity works the same way everywhere: **ERROR** breaks `core_ready`. **WARN** stays kept and visible. **INFO** just records a fact, nothing more.
 
-"Observed" counts in the tables below come from the exploration run (frozen in `tests/golden/`); the production counts and their differences are in "validation implementation" at the end. Rationale for every threshold: `docs/decision_log.md` D23, D29. Thresholds are declared in `config/thresholds.yml`. **Status: approved 2026-09-19; implemented in validation.**
+"Observed" counts in the tables below come from my exploration run (frozen in `tests/golden/`); the production counts and their differences are in "validation implementation" at the end. Rationale for every threshold lives in `docs/decision_log.md` D23, D29. Thresholds are declared in `config/thresholds.yml`. **Status: approved 2026-09-19, implemented in validation.**
 
 > **These are diagnostic validation thresholds derived from the observed structure of this data. They are not claims of physical impossibility or universal abnormality.** A flagged record is not evidence of error, and a WARN or INFO flag never removes a record from the KPI population. Only ERROR-level rules do.
 

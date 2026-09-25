@@ -1,8 +1,8 @@
-# Metric Contract
+# Metric contract
 
-**This document is the contract the code must satisfy**: what each metric means and to whom, the exact expression over the canonical tables, the population, the denominator, the lineage, the validation each metric depends on, and the golden value the test suite asserts (`tests/golden/golden_values.yml`). If code and this contract disagree, the code is wrong until a decision-log entry says otherwise.
+**This is the contract my code has to satisfy**: what each metric means and to whom, the exact expression over the canonical tables, the population, the denominator, the lineage, the validation each metric depends on, and the golden value my test suite asserts (`tests/golden/golden_values.yml`). If the code and this contract ever disagree, I treat the code as wrong until a decision-log entry says otherwise, not the other way around.
 
-Population labels (`registered_export`, `non_registered_export`) are inherited from source filenames and are not interpreted. Thresholds are diagnostic, not physical.
+Population labels (`registered_export`, `non_registered_export`) are inherited straight from source filenames, and I don't interpret them beyond that. Every threshold in here is diagnostic, never a claim of physical impossibility.
 
 ## 1. What each metric is for
 
@@ -47,7 +47,7 @@ Diagnostic fields carried on the tables but never used in a metric filter: `comp
 
 **Never used in any metric filter:** `weather_matched`, `low_observed_volume_day`, `volume_irregularity`, `has_session_warn` (except in S2), `has_event_warn`, `distinct_component_count_status`, `quality_status`. Invariant I-6: volume flags appear in no WHERE clause of any metric query.
 
-**This SQL is executed, not illustrative.** `python -m src.sql_verify` loads the committed `fact_dining_session.csv` and `fact_weather.csv` into a real SQLite database and recomputes M1-M5 and the weather join with real SQL (window-function linear-interpolation percentiles, a `JOIN` on `(fmisid, obs_time_utc)`), independently of the pandas pipeline. It is a second engine agreeing with the first, in the same spirit as D50's independent reconstruction check; see `tests/test_sql_verify.py`.
+**This SQL is executed, not illustrative.** I built `python -m src.sql_verify` specifically so I wouldn't have to just trust my own pandas code: it loads the committed `fact_dining_session.csv` and `fact_weather.csv` into a real SQLite database and recomputes M1-M5 and the weather join with real SQL (window-function linear-interpolation percentiles, a `JOIN` on `(fmisid, obs_time_utc)`), independently of the pipeline. It's a second engine agreeing with the first, in the same spirit as D50's independent reconstruction check; see `tests/test_sql_verify.py`.
 
 ## 4. Lineage: how any number is traced to raw rows
 

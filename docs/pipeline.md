@@ -9,7 +9,7 @@ python -m src.pipeline.run --resume-from model --stages sensitivity
 python -m src.pipeline.run --profile-memory   # also record peak Python allocation per stage
 ```
 
-The orchestration adds no business logic. It calls the stage runners that already exist, in order, behind explicit gates, and records what happened. M1-M5, S2, the populations, the timezone decision, the quarantine treatment, the aliases and every table grain are exactly as approved.
+The orchestration itself adds no business logic. It just calls the stage runners that already exist, in order, behind explicit gates, and records what happened at each step. M1-M5, S2, the populations, the timezone decision, the quarantine treatment, the aliases, and every table grain stay exactly as approved elsewhere in this project, this file doesn't redefine any of them.
 
 ## 1. Stage order and contract
 
@@ -109,4 +109,4 @@ Seconds are from a normal run. Memory comes from a separate `--profile-memory` r
 
 ## 11. What this does not do
 
-It does not decide anything new: it cannot make a failing metric pass, retry a failed stage, download a missing file or hide a weather problem. It reports; the stage that owns the rule decides.
+The orchestrator doesn't decide anything new. It can't make a failing metric pass, retry a failed stage, download a missing file, or quietly hide a weather problem. It reports what happened; the stage that actually owns a rule is the only thing that gets to decide.
