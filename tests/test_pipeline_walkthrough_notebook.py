@@ -1,4 +1,4 @@
-"""The evaluator walkthrough notebook is read-only: it displays committed pipeline outputs and computes nothing of its own."""
+"""The evaluator walkthrough notebook runs the real pipeline once (section 2), then only displays that run's own output; it never reimplements pipeline logic."""
 from __future__ import annotations
 
 import ast
@@ -14,7 +14,7 @@ import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 NOTEBOOK = REPO / "notebooks" / "02_pipeline_walkthrough.ipynb"
-NOTE = "This notebook is an evaluator walkthrough only; the canonical computations live in `src/` and are executed by `python -m src.pipeline.run --stages all`."
+NOTE = "Section 2 above is the only place this notebook executes anything; it runs `python -m src.pipeline.run --stages all` as a subprocess against the raw archive in this repository. Every other cell only reads and displays that run's own output; nothing here reimplements the pipeline's logic."
 
 
 @pytest.fixture(scope="module")
@@ -31,11 +31,11 @@ def source(cell) -> str:
 
 
 def test_the_notebook_exists_and_is_a_concise_walkthrough_with_the_required_sections(nb):
-    assert NOTEBOOK.is_file() and 15 <= len(nb["cells"]) <= 21
+    assert NOTEBOOK.is_file() and 15 <= len(nb["cells"]) <= 23
     # nbformat allows a cell's "source" to be either a list of lines or one string; normalise before splitting.
     headings = [line.strip() for c in nb["cells"] if c["cell_type"] == "markdown" for line in "".join(c["source"]).splitlines() if line.startswith("## ")]
-    expected = ["Project question", "Source map summary", "Pipeline stages", "Validation summary", "Canonical business model summary", "Final evidence", "Sensitivity summary",
-                "Known vs unknown", "Selected weight is not consumption, and consumption is not waste", "Where to look next"]
+    expected = ["Project question", "Run the pipeline live, from raw inputs", "Source map summary", "Pipeline stages", "Validation summary", "Canonical business model summary",
+                "Final evidence", "Sensitivity summary", "Known vs unknown", "Selected weight is not consumption, and consumption is not waste", "Where to look next"]
     assert len(headings) == len(expected) and all(e in h for h, e in zip(headings, expected)), headings
 
 
