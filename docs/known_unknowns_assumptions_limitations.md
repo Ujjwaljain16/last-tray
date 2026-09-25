@@ -1,10 +1,10 @@
 # Known / Unknown / Assumptions / Limitations
 
-Four buckets, kept separate on purpose. Each item cites where the evidence lives. Sensitivity results come from `outputs/evidence/uncertainty_register.csv` and `docs/sensitivity_analysis.md`.
+I keep four buckets here, and I keep them separate on purpose: what I know for a fact, what nobody has ever measured, what I assumed and why, and where this whole project stops working. Every item below cites where the evidence actually lives, so nothing here is just my word for it. Sensitivity results come from `outputs/evidence/uncertainty_register.csv` and `docs/sensitivity_analysis.md`.
 
-**Population labels** ("registered-export population", "non-registered-export population") are **inherited from source file names**. The public documentation reviewed for this project does not define their business meaning, so we use them only as population labels.
+**Population labels** ("registered-export population", "non-registered-export population") are **inherited from source file names**. The public documentation I reviewed for this project never defines their business meaning, so I use them only as population labels, nothing more.
 
-## KNOWN (verified from primary sources or the raw files)
+## KNOWN (things I verified from primary sources or the raw files myself)
 
 | # | Statement | Evidence |
 |---|---|---|
@@ -26,7 +26,7 @@ Four buckets, kept separate on purpose. Each item cites where the evidence lives
 | K16 | The M4 median is 5 under raw names, normalised names, scales and event counts | `research/exploration/exploration_b_sessions_components_volume.py`, `outputs/evidence/` |
 | K17 | Across the registered scenarios (the forbidden pooling guardrail G01 and the diagnostic population contrast are excluded from every range) M1 stays within 493-505 g and M4 is 5; M2 ranges 977-1,066 g | `docs/sensitivity_analysis.md` |
 
-## UNKNOWN (no source available to us)
+## UNKNOWN (nothing I have a source for)
 
 | # | Statement | Consequence |
 |---|---|---|
@@ -39,7 +39,7 @@ Four buckets, kept separate on purpose. Each item cites where the evidence lives
 | U7 | Whether the public research capture reflects all operational behaviour; whether the 11 files are the complete export for those weeks | results describe this capture only |
 | U8 | What the two population labels mean | KPIs limited to one export |
 
-Open questions for the source owner:
+Here's what I'd actually ask the source owner, if I could:
 
 | # | Question | Effect if unresolved |
 |---|---|---|
@@ -54,7 +54,7 @@ Open questions for the source owner:
 | Q12 | Do the 7 sessions over 600 s merge two tray passes? | 7 flagged sessions (0.4%) |
 | Q13 | Are single-event registered-export sessions genuine or partial captures? | 17 flagged sessions (1.0%), effect on M1 +2 g |
 
-## ASSUMPTION (each isolated so it can change in one place)
+## ASSUMPTION (each one isolated so I can change it in a single place)
 
 | # | Assumption | Why it matters | Evidence supporting it | Sensitivity result | Where isolated |
 |---|---|---|---|---|---|
@@ -70,6 +70,8 @@ Open questions for the source owner:
 | A10 | The five study weeks represent the measurement profile | the width of M2's range | the only public window | excluding the first two weeks moves M2 by -62.6 g (-6.0%); M1 by +6 g | full window kept; M2 quoted with its range |
 
 ## LIMITATION
+
+These are the boundaries of what this project can honestly say, no matter how the pipeline is run.
 
 1. **Waste and consumption.** The public waste detail is unavailable, so no waste, consumption or waste-reduction figure appears anywhere in this project.
 2. **Population.** KPIs describe the registered-export population only. The non-registered-export population has different capture characteristics (1.0% versus 37.7% single-event sessions) and is diagnostic, never pooled.

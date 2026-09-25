@@ -1,12 +1,12 @@
-# Source Map
+# Source map
 
-Sources are mapped in this order: **Problem → Questions → Information → Fields → Sources.** "Relevant does not mean authoritative."
+I mapped my sources in this order: **Problem → Questions → Information → Fields → Sources.** Something being relevant doesn't make it authoritative, so I kept those two ideas apart the whole way through.
 
-**Problem.** Can we reconstruct a trustworthy operational view of dining measurements from the available source data, and is that evidence sufficient to support future food-waste decisions? This is deliberately a question about measurement, not about waste: the initial review established that waste data is not publicly retrievable, so the honest deliverable is a dependable reconstruction of what *is* measured, plus a precise statement of what is not.
+**Problem.** Can I reconstruct a trustworthy operational view of dining measurements from the available source data, and is that evidence enough to support a future food-waste decision? This is deliberately a question about measurement, not about waste. My initial review established that waste data isn't publicly retrievable, so the honest thing I can actually deliver is a dependable reconstruction of what *is* measured, plus a precise statement of what isn't.
 
-This is an FDE-style reconstruction using publicly available Flavoria research data and public weather data. It is not an analysis of Flavoria's proprietary operational systems. Visual: `diagrams/source-map.png`. Source availability was re-verified against primary sources on 2026-09-18 and 2026-09-19.
+This is an FDE-style reconstruction using publicly available Flavoria research data and public weather data. It is not an analysis of Flavoria's proprietary operational systems. Visual: `diagrams/source-map.png`. I re-verified source availability against primary sources on 2026-09-18 and 2026-09-19.
 
-**Stakeholders and the decision this map supports.**
+**Stakeholders, and the decision this map supports.**
 
 | Stakeholder | What they need to know | What they must not be told |
 |---|---|---|
@@ -15,7 +15,7 @@ This is an FDE-style reconstruction using publicly available Flavoria research d
 | Sustainability / waste lead | Which data to procure to link selection to waste | Any waste number |
 | Data / engineering team | That results reproduce and how fragile they are | That an assumption was safe because it was convenient |
 
-**Decision this can support now:** do not launch a waste-reduction measurement programme on this data; use the derived selected-weight evidence for portioning conversations, for the registered-export population only, and request the waste extract named in section 6 below.
+**The decision this can support right now:** don't launch a waste-reduction measurement programme on this data. Use the derived selected-weight evidence for portioning conversations, for the registered-export population only, and go request the waste extract named in section 6 below.
 
 ## 1. Questions → information → fields
 
@@ -39,15 +39,15 @@ This is an FDE-style reconstruction using publicly available Flavoria research d
 | **Flavoria Weigh & Dine documentation** | contextual documentation; source-gap evidence | independent check of plate weight | checkout plate total (±5 g) | one checkout transaction | Flavoria | authoritative for checkout weight | n/a | documentation only; no sample | no data access | n/a | no sample; no component weights; a different system from the public CSV | no (no data) |
 | **Flavoria Lunch Line Waste documentation** | source-gap documentation | waste weight per tray | waste weight, time, waste point | one tray total | Flavoria | authoritative for waste | live since 2019 according to the page | none: sample section reads "TODO, Ask!"; detail in a restricted repository; MQTT for authorised users | restricted; no public download, API, schema or contact | the page warns of imputed days and about 3 g napkin error | everything: there is no public data | **it would be authoritative for waste, but it is not accessible: SOURCE GAP** |
 
-Other documented systems (Cash Register, Building Data, MyFlavoria, Surveys) are restricted or unspecified and were not attempted; the full register is section 6.
+Other documented systems (Cash Register, Building Data, MyFlavoria, Surveys) are restricted or unspecified, and I didn't attempt them; the full register is section 6.
 
 ## 3. Reading the map
 
-- **Retrieved:** FlavoriaFoodWeight1700 and FMI weather (plus catalogue pages read as documentation).
-- **Derived by us:** the meal-level weight, always labelled `derived_selected_meal_weight_g`.
-- **Labels only:** the population labels are filename prefixes, not business facts.
-- **SOURCE GAP:** waste (decides the business question), checkout total, cash register, occupancy, person identity.
-- **UNKNOWN:** consumption. It is not a missing file but a quantity nobody measures.
+- **Retrieved:** FlavoriaFoodWeight1700 and FMI weather (plus catalogue pages, which I read as documentation only).
+- **Derived by me:** the meal-level weight, always labelled `derived_selected_meal_weight_g`.
+- **Labels only:** the population labels are filename prefixes, not business facts I get to interpret.
+- **SOURCE GAP:** waste (this is the one that actually decides the business question), checkout total, cash register, occupancy, person identity.
+- **UNKNOWN:** consumption. This isn't a missing file, it's a quantity nobody measures anywhere I can see.
 
 ## 4. Authority conflicts and how they were resolved
 
@@ -68,11 +68,11 @@ Other documented systems (Cash Register, Building Data, MyFlavoria, Surveys) are
 | Flavoria Data Catalog | source definitions, the gap register | data values |
 | Weigh & Dine and Lunch Line Waste documentation | the source-gap register | any figure |
 
-The machine-readable pins are `config/sources.yml`; provenance and licences are in `data_provenance.md` and `NOTICE`.
+The machine-readable pins live in `config/sources.yml`; provenance and licences are in `data_provenance.md` and `NOTICE`.
 
 ## 6. Full gap register
 
-Verified 2026-09-18 against primary sources. "Not ingested" is not "forgotten": each row is a client data gap. The three that decide the business question are waste, consumption, and the meaning of the population labels.
+I verified this on 2026-09-18 against primary sources. "Not ingested" doesn't mean "forgotten", each row here is a real data gap I know about. Three of them are the ones that actually decide the business question: waste, consumption, and what the population labels mean.
 
 | Required business fact | Expected source | Publicly accessible? | Actual access status (evidence) | Why it matters | Impact on this project | Future integration required |
 |---|---|---|---|---|---|---|
