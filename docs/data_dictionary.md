@@ -1,8 +1,8 @@
-# Data Dictionary (final)
+# Data dictionary (final)
 
-Structure and grains are fixed in section 12 of this document; the sections that follow give every field's meaning, origin and transformation. Population labels (`registered_export`, `non_registered_export`) are inherited from source filenames and are not interpreted. Thresholds cited here are diagnostic, not physical.
+Section 12 fixes the structure and grains; everything before and after it explains what each field actually means, where it came from, and what happened to it along the way. Population labels (`registered_export`, `non_registered_export`) are inherited from source filenames, and I don't interpret them. Every threshold I cite here is diagnostic, never a claim of physical impossibility.
 
-Written after inspecting the real files. Columns in the raw section are exactly what the archive contains. Nothing is renamed or reinterpreted without a row in the "Transformation" column. Classes: OBSERVED / DERIVED / UNKNOWN / SOURCE GAP.
+I wrote this after inspecting the real files myself, not from a spec someone handed me. Columns in the raw section are exactly what the archive contains. I never rename or reinterpret anything without a row in the "Transformation" column saying so. Classes: OBSERVED / DERIVED / UNKNOWN / SOURCE GAP.
 
 ## 1. Raw source: FlavoriaFoodWeight1700 CSV (grain: one component weighing event)
 
@@ -143,9 +143,9 @@ XML `wfs:FeatureCollection`, one `BsWfs:BsWfsElement` per (time, parameter). Tim
 
 ## 10. Staging tables
 
-Staging sits between the verified raw files and the canonical model. It **preserves and normalises; it does not judge**: every source
-row is kept (duplicates, odd weights, odd timestamps), raw text is stored beside every normalised value, and every row carries its
-lineage. Written to `outputs/staging/` (tables are regenerable and ignored by git; the summary and reconciliation are tracked).
+Staging sits between the verified raw files and the canonical model. It **preserves and normalises; it never judges**: every source
+row stays in (duplicates, odd weights, odd timestamps included), raw text sits beside every normalised value, and every row carries its
+own lineage. Written to `outputs/staging/` (the tables themselves are regenerable and ignored by git; the summary and reconciliation are tracked).
 
 ### 10.1 `stg_weighing_event` (grain: one source data row = one component weighing event)
 
@@ -183,9 +183,9 @@ date range that reproduces the raw time read as UTC.
 
 ## 11. Validation tables
 
-Written to `outputs/validation/` from the verified staging tables. They are evidence about staging: they add findings, dispositions and
-reconciliation, and they change no staged value. Field meanings for the issue table, the severity / handling / quarantine distinction
-and the lineage bases are in `validation_rules.md` ("validation implementation").
+Written to `outputs/validation/` from the verified staging tables. These are evidence about staging, they add findings, dispositions, and
+reconciliation, and they never change a staged value. Field meanings for the issue table, the severity, handling and quarantine distinction,
+and the lineage bases all live in `validation_rules.md` ("validation implementation").
 
 | Table | Grain | Key fields |
 |---|---|---|
@@ -206,14 +206,13 @@ The canonical business-facing model, built from the verified staging tables and 
 `outputs/model/`. This section is **generated from `src/model/schema.py`** (`python -m src.model.schema`) and a test fails if it drifts.
 It governs where it differs from the original model in sections 4-6, which record the original design.
 
-**Semantic classes.** OBSERVED: written by a source system and carried through unchanged. DERIVED: computed by this pipeline by a stated
-rule. VALIDATION: consumed unchanged from validation (dispositions, rule ids). PROVENANCE: says where a value came from. Two things have
-**no column anywhere**: the amount actually consumed (UNKNOWN) and food waste (SOURCE GAP).
+**Semantic classes.** OBSERVED means a source system wrote it and I carry it through unchanged. DERIVED means I computed it, by a rule I stated up front. VALIDATION means it's consumed unchanged from validation (dispositions, rule ids). PROVENANCE says where a value came from. Two things have
+**no column anywhere in this model**: the amount actually consumed (UNKNOWN) and food waste (SOURCE GAP).
 
-**`derived_selected_meal_weight_g` is DERIVED.** It is the sum of the weights a session's MODELLABLE weighing events recorded at the
-lunch line. It is NOT consumed quantity, NOT food waste, NOT actual intake, and nothing in the model infers waste from it. It is
-reconstructed from `fact_weighing_event` and then compared with validation's `rule_weight_sum_g`, a validation/reconciliation working value
-that is used only as a reconciliation control and is not a canonical field (`session_weight_control.csv`).
+**`derived_selected_meal_weight_g` is DERIVED.** It's the sum of the weights a session's MODELLABLE weighing events recorded at the
+lunch line. It is NOT consumed quantity, NOT food waste, NOT actual intake, and nothing in this model infers waste from it. I
+reconstruct it from `fact_weighing_event` and then compare it with validation's `rule_weight_sum_g`, a validation and reconciliation working value
+that I use only as a reconciliation control, never as a canonical field (`session_weight_control.csv`).
 
 **Event dispositions** (from validation, one per event): MODELLABLE (feeds the business fields), DUPLICATE_EXCLUDED (an exact repeat of an earlier
 row of the same file: kept as a row, left out of sums), QUARANTINED (its session key is quarantined: kept as a row, no selected weight).
@@ -427,7 +426,7 @@ Written to `outputs/pipeline/` by every `python -m src.pipeline.run`. Definition
 
 ## 16. Glossary (plain English)
 
-The terms below are used in the README and the evidence table. Each states what it means, its grain, whether it is observed or derived, and what it does **not** mean.
+These are the terms I use in the README and the evidence table. Each one states what it means, its grain, whether it's observed or derived, and, just as importantly, what it does **not** mean.
 
 | Term | Meaning | Grain | Observed / derived | Does NOT mean |
 |---|---|---|---|---|
@@ -436,7 +435,7 @@ The terms below are used in the README and the evidence table. Each states what 
 | **Session** | The weighing events that share one `session_id` within one population: one tray pass through the weighed line | one row of `fact_dining_session` (3,345) | DERIVED (the source never states it) | a person, a whole visit, a purchase or a meal eaten |
 | **Session key** | `(session_id, population)`. `session_id` alone is not enough because two IDs (`session2266`, `session3222`) occur in both exports | one session | DERIVED | a person identifier |
 | **Population** | Which export a record came from, taken from the file-name prefix: registered-export (primary, the measurement population) or non-registered-export (diagnostic, never pooled) | one session | label inherited from file names | customer-registration status, or a business segment (the source does not define the labels) |
-| **Derived selected meal weight** (`derived_selected_meal_weight_g`) | The sum of the observed component weighing events of a session, in grams, under our rule | one session | DERIVED from observed events | **consumed quantity, actual intake, food waste or leftover food** |
+| **Derived selected meal weight** (`derived_selected_meal_weight_g`) | The sum of the observed component weighing events of a session, in grams, under a rule I stated up front | one session | DERIVED from observed events | **consumed quantity, actual intake, food waste or leftover food** |
 | **Core-ready** | A registered-export session that is not quarantined, has at least one valid event, no ERROR-level finding, valid weights and parsed times. The measurement population (1,697 of 1,699) | one session | DERIVED status | that the data is error-free, or that the session is typical |
 | **Warn-free** | A core-ready session with no session-level WARN finding (S2, 1,663 of 1,699) | one session | DERIVED status | a second readiness score, or a claim that flagged sessions are wrong |
 | **Quarantine** | A record kept in the model, flagged and listed, but excluded from the measurement population until the source owner resolves it (the two crossover sessions) | one session key | DERIVED status | deletion: quarantined records are never removed |

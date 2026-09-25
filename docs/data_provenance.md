@@ -1,12 +1,12 @@
-# Data Provenance
+# Data provenance
 
 Every number in this project comes from real, public data. This document records exactly where that data came from, under
-what terms, when it was retrieved, how it is identified, and what we did and did not do to it. It is the human-readable
+what terms, when I retrieved it, how it's identified, and what I did and did not do to it. It's the human-readable
 twin of `config/sources.yml` (the machine pins) and `NOTICE` (the attribution). A test checks that the checksums and
 snapshot identifiers below equal the pins and the ingestion output.
 
 > The client scenario is **simulated for educational purposes**. The data and documentation are real and public.
-> We are not affiliated with the University of Turku, the University of Helsinki, Flavoria, or the Finnish Meteorological
+> I am not affiliated with the University of Turku, the University of Helsinki, Flavoria, or the Finnish Meteorological
 > Institute, and none of them endorses this project.
 
 **Date convention.** Calendar dates in this project are the operator's local date. The exact UTC time of each explicit retrieval is
@@ -26,7 +26,7 @@ HTTP response headers.
 | Version / date | 1.0.0, published 2022-06-10 |
 | Licence | **Creative Commons Attribution 4.0 International (CC BY 4.0)**, https://creativecommons.org/licenses/by/4.0/ . Recorded in the Zenodo API record (`license.id = cc-by-4.0`, `access_right = open`), read 2026-09-18 |
 | Retrieved | **2026-09-18**, one explicit HTTP GET of `https://zenodo.org/api/records/5850856/files/dataset_csv.tar/content`, no authentication |
-| What we hold | the CSV-only archive `dataset_csv.tar`. The 2.4 GiB image archive is **not** used and **not** held |
+| What I hold | the CSV-only archive `dataset_csv.tar`. The 2.4 GiB image archive is **not** used and **not** held |
 | Attribution required | CC BY 4.0: credit the creators, give the title and source link, name the licence, and indicate changes. See `NOTICE` |
 | Redistribution | permitted under CC BY 4.0 with attribution; the archive is committed **unmodified** so the pipeline runs offline |
 | Snapshot | `flavoria-1b68c194acc5` |
@@ -39,8 +39,8 @@ HTTP response headers.
 | Service | FMI open data web feature service, https://opendata.fmi.fi/wfs ; stored query `fmi::observations::weather::simple` ; station Turku Artukainen (FMISID 100949) |
 | Documentation | https://en.ilmatieteenlaitos.fi/open-data-manual-time-series-data |
 | Licence | **Creative Commons Attribution 4.0 International (CC BY 4.0)**. Verified on the official FMI licence page https://en.ilmatieteenlaitos.fi/open-data-licence on **2026-09-19**, which states "Creative Commons Attribution 4.0 International license (CC BY 4.0)" and links https://creativecommons.org/licenses/by/4.0/ |
-| Scope of that licence | FMI datasets, Radiation and Nuclear Safety Authority datasets and air-quality datasets in the open data web service. Air-quality data has an appendix of licensors; we do not use air-quality data |
-| Attribution wording | **the licence page does not prescribe attribution wording** beyond referencing CC BY 4.0. The statement in `NOTICE` is ours and is labelled as such |
+| Scope of that licence | FMI datasets, Radiation and Nuclear Safety Authority datasets and air-quality datasets in the open data web service. Air-quality data has an appendix of licensors; I don't use air-quality data |
+| Attribution wording | **the licence page does not prescribe attribution wording** beyond referencing CC BY 4.0. The statement in `NOTICE` is mine, and it's labelled as such |
 | Retrieved | **2026-09-18**, seven chunked HTTP GET requests, no authentication (the server rejects spans over 168 hours) |
 | Service limits (published) | 20,000 requests per day; 600 per 5 minutes |
 | Redistribution | permitted under CC BY 4.0 with attribution; the retrieved XML is committed unmodified |
@@ -53,17 +53,17 @@ HTTP response headers.
 | Provider | Flavoria Research Infrastructure, University of Turku |
 | URLs | https://flavoriadatacatalog.tt.utu.fi/ and the Lunch Line, Weigh & Dine and Lunch Line Waste pages under `/docs/lunch-line/` |
 | Use | source-definition evidence only. **No data is taken from it.** Short factual phrases are quoted with the URL (for example that the waste sample section reads "TODO, Ask!") |
-| Terms | **no licence or terms statement was found on the pages reviewed** (2026-09-18 and 2026-09-19). We therefore quote briefly, link, and do not copy or redistribute the pages. The catalogue itself warns that it is being reconstructed in 2026 and may contain missing or incorrect data |
+| Terms | **no licence or terms statement was found on the pages reviewed** (2026-09-18 and 2026-09-19). I therefore quote briefly, link, and don't copy or redistribute the pages. The catalogue itself warns that it is being reconstructed in 2026 and may contain missing or incorrect data |
 | Retrieved | 2026-09-18 (pages last updated 2026-04-09 according to the pages) |
 
 ### 1.4 Not used
 
 The Flavoria waste, Weigh & Dine, cash-register, building, MyFlavoria and survey data are documented but not publicly retrievable and are **not** part of this project (`source_map.md` section 6). The 2025 forecasting paper cited in the original plan was not ingested and its claims were not verified.
 
-## 2. What we did to the data
+## 2. What I did to the data
 
-- **Raw files are unmodified.** The archive and the seven XML files are byte-for-byte what was retrieved. The pipeline reads them read-only and proves after every run that they are unchanged.
-- **Derived data is ours.** Sessions, derived selected meal weights, component counts, flags, metrics and the sensitivity analysis are our reconstruction and are labelled DERIVED. They are not published by the data providers.
+- **Raw files are unmodified.** The archive and the seven XML files are byte-for-byte what I retrieved. The pipeline reads them read-only and proves after every run that they're unchanged.
+- **Derived data is mine.** Sessions, derived selected meal weights, component counts, flags, metrics, and the sensitivity analysis are my own reconstruction, labelled DERIVED. None of it is published by the data providers.
 - **Indication of changes (CC BY 4.0).** No provider data was altered. Analytical transformations (session reconstruction, a file-specific +3 hour timestamp normalization for one file, string normalisation of component names) happen in downstream tables and are documented in `data_dictionary.md` and `source_truth_decisions.md`. The +3h normalization is an evidence-backed engineering decision; the source does not confirm its timezone.
 - **No fabricated data.** No waste, consumption or customer value was created or estimated.
 
@@ -154,6 +154,6 @@ content-identical or not (this was checked by a real explicit retrieval on 2026-
 
 - **No ownership is claimed** over FlavoriaFoodWeight1700 or the FMI observations. They belong to their providers, are licensed CC BY 4.0, and are redistributed unmodified with attribution (`NOTICE`).
 - **Accessibility limits.** The waste, checkout (Weigh & Dine), cash-register, building, MyFlavoria and survey data are documented but not publicly accessible in a usable form. None of it is held or reproduced; the consequence is the permanent source gap in `source_map.md` section 6.
-- **Catalogue terms unknown.** The Flavoria Data Catalog states no licence or terms on the pages reviewed. We do not assume any: pages are read as documentation, quoted briefly with links, and not redistributed.
+- **Catalogue terms unknown.** The Flavoria Data Catalog states no licence or terms on the pages reviewed. I don't assume any: pages are read as documentation, quoted briefly with links, and never redistributed.
 - **Redistribution of raw data.** The 1.28 MB archive and the seven weather XML files (about 4 MB in total) are committed unmodified because CC BY 4.0 permits it and because it lets a fresh clone run offline. This is a deliberate decision by the project owner (D69): the raw data stays in the public repository. Removing it was considered and rejected because the weather bytes cannot be re-retrieved identically (FMI stamps each response), so a fresh clone could not reproduce the pinned state.
 - **Scope statement.** The project is an FDE-style reconstruction using public research data. It is not an analysis of Flavoria's operational systems and does not represent all current dining operations.
